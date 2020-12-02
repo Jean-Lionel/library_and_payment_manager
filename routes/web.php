@@ -28,3 +28,4 @@ Route::get('/home', function () {
 
 
 Route::resource('sections', 'SectionController');
+Route::resource('classes', 'ClasseController');

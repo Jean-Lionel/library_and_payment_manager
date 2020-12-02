@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-md-6">
-			<h4>Sections</h4>
+			<h4>classes</h4>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
@@ -15,30 +15,31 @@
 		</div>
 
 		<div class="col-md-12">
-			<a href="{{ route('sections.create') }}" class="btn btn-primary">+</a>
+			<a href="{{ route('classes.create') }}" class="btn btn-primary">+</a>
 			<table class="table table-sm table-bordered">
 				<thead>
 					<tr>
 						<th>#</th>
 						<th>DESCRIPTION</th>
+						<th>SECTION</th>
 						<th>ACTION</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					@foreach($sections as $section)
+					@foreach($classes as $classe)
 					<tr>
-						<td>{{ $section->id }}</td>
-						<td><a href="{{ route('sections.show',$section) }}">{{ $section->name }}</a></td>
+						<td>{{ $classe->id }}</td>
+						<td><a href="">{{ $classe->name }}</a></td>
+						<td><a href="">{{ $classe->section->name }}</a></td>
 
 						<td class="">
 
 							<div class="d-flex justify-content-around">
-								<a href="{{ route('sections.show',$section) }}" class="btn btn-info">Afficher</a>
+								<a href="{{ route('classes.edit',$classe) }}" class="btn btn-info">Modifier</a>
 
-								<a href="{{ route('sections.edit',$section) }}" class="btn btn-info">Modifier</a>
 
-								<form action="{{ route('sections.destroy',$section) }}" method="post">
+								<form action="{{ route('classes.destroy',$classe) }}" method="post">
 									@csrf
 									@method('DELETE')
 
@@ -63,7 +64,7 @@
 
 
 		<div class="col-md-12" style="height: 20px; overflow: hidden;">
-			{{ $sections->links()}}
+			{{ $classes->links()}}
 		</div>
 	</div>
 

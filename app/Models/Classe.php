@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Section extends Model
+class Classe extends Model
 {
+   
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','section_id'];
 
-    public function classes(){
-    	return $this->hasMany('App\Models\Classe');
+    public function section()
+    {
+    	return $this->belongsTo('App\Models\Section'); 	
     }
 }

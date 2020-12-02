@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classe;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-class SectionController extends Controller
+class ClasseController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $sections = Section::latest()->paginate(5);
+        $classes = Classe::latest()->paginate(20);
 
-        // return $sections;
+        // return $Classes;
 
-        return view('sections.index', compact('sections'));
+        return view('classes.index', compact('classes'));
     }
 
     /**
@@ -28,7 +29,13 @@ class SectionController extends Controller
      */
     public function create()
     {
-        return view('sections.create');
+        $id = \Request::get('id');
+        $section = Section::find($id);
+       
+        if(!$section){
+            return $this->index();
+        }
+        return view('classes.create',compact('section'));
     }
 
     /**
@@ -40,11 +47,15 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'section_id' => 'required|numeric'
 
         ]);
 
-        Section::create($request->all());
+
+       Classe::create($request->all());
+
+
 
         return back();
     }
@@ -52,40 +63,40 @@ class SectionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Section  $section
+     * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show(Classe $classe)
     {
-       return view('sections.show',compact('section'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Section  $section
+     * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit(Classe $classe)
     {
-        return view('sections.edit', compact('section'));
+        return view('classes.edit', compact('classe'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Section  $section
+     * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, Classe $classe)
     {
         //
         $request->validate([
             'name' => 'required'
 
         ]);
-        $section->update($request->all());
+        $classe->update($request->all());
 
         return $this->index();
     }
@@ -93,18 +104,15 @@ class SectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Section  $section
+     * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy( $value)
     {
-        //
+        
+         Classe::find($value)->delete();
 
-        $section->delete();
 
         return $this->index();
     }
-
-
-
 }
