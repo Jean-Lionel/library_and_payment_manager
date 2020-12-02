@@ -14,7 +14,11 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        $sections = Section::latest()->paginate(5);
+
+        // return $sections;
+
+        return view('sections.index', compact('sections'));
     }
 
     /**
@@ -24,7 +28,7 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('sections.create');
     }
 
     /**
@@ -35,7 +39,14 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+
+        ]);
+
+        Section::create($request->all());
+
+        return back();
     }
 
     /**
@@ -57,7 +68,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
+        return view('sections.edit', compact('section'));
     }
 
     /**
@@ -70,6 +81,13 @@ class SectionController extends Controller
     public function update(Request $request, Section $section)
     {
         //
+        $request->validate([
+            'name' => 'required'
+
+        ]);
+        $section->update($request->all());
+
+        return $this->index();
     }
 
     /**
@@ -81,5 +99,12 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         //
+
+        $section->delete();
+
+        return $this->index();
     }
+
+
+
 }
