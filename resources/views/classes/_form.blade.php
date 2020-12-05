@@ -17,4 +17,9 @@
 
 	<button type="submit" class="btn btn-primary">{{ $btn_name }}</button>
 
+	<a href="{{ route('sections.show',$section) }}" class="btn btn-warning">Retour</a>
+
+
+
+
 </div>

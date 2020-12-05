@@ -28,22 +28,22 @@
 	            <a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>
 	          </li>
 	          <li>
-	              <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+	              <a href="#"><span class="fa fa-user mr-3"></span> Eleve</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> Works</a>
+              <a href="#"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
+              <a href="#"><span class="fa fa-sticky-note mr-3"></span> 1</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-suitcase mr-3"></span> Gallery</a>
+              <a href="#"><span class="fa fa-suitcase mr-3"></span> 2</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-cogs mr-3"></span> Services</a>
+              <a href="#"><span class="fa fa-cogs mr-3"></span> 3</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
+              <a href="#"><span class="fa fa-paper-plane mr-3"></span> 4</a>
 	          </li>
 	        </ul>
 

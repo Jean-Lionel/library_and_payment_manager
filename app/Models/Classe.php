@@ -18,4 +18,8 @@ class Classe extends Model
     {
     	return $this->belongsTo('App\Models\Section'); 	
     }
+
+    public function eleves(){
+    	return $this->hasMany('App\Models\Eleve');
+    }
 }

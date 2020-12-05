@@ -13,14 +13,14 @@ class ClasseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $classes = Classe::latest()->paginate(20);
+   public function index()
+   {
+    $classes = Classe::latest()->paginate(20);
 
         // return $Classes;
 
-        return view('classes.index', compact('classes'));
-    }
+    return view('classes.index', compact('classes'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +31,7 @@ class ClasseController extends Controller
     {
         $id = \Request::get('id');
         $section = Section::find($id);
-       
+
         if(!$section){
             return $this->index();
         }
@@ -53,7 +53,7 @@ class ClasseController extends Controller
         ]);
 
 
-       Classe::create($request->all());
+        Classe::create($request->all());
 
 
 
@@ -66,9 +66,10 @@ class ClasseController extends Controller
      * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function show(Classe $classe)
+    public function show($id)
     {
-        //
+        $classe = Classe::find($id);
+        return view('classes.view', compact('classe'));
     }
 
     /**
@@ -109,10 +110,33 @@ class ClasseController extends Controller
      */
     public function destroy( $value)
     {
-        
-         Classe::find($value)->delete();
 
 
-        return $this->index();
+       try {
+
+        DB::beginTransaction();
+        $classe = Classe::find($value);
+
+
+        foreach ($classe->eleves as $eleve) {
+            $eleve->delete();
+        }
+
+
+        $classe->delete();
+
+        DB::commit();
+
+
+
+    } catch (\Exception $e) {
+
+        DB::rollback();
+        Session::flash('error' , 'Erreur la suppression echoué');
+
     }
+
+
+    return $this->index();
+}
 }

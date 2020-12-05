@@ -100,6 +100,14 @@ class SectionController extends Controller
     {
         //
 
+        foreach ($section->classes as $classe) {
+
+            foreach ($classe->eleves as $eleve) {
+                $eleve->delete();
+            }
+            $classe->delete();
+        }
+
         $section->delete();
 
         return $this->index();
