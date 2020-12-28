@@ -22,7 +22,7 @@
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="/" class="logo">LYCEE SAINT  <span>ESPRIT</span></a></h1>
+		  		<h1><a href="/" class="logo">L. DU SAINT ESPRIT</a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li class="active">
 	            <a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>

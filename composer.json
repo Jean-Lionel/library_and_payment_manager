@@ -40,6 +40,7 @@
         }
     },
     "autoload-dev": {
+        "files":["app/helpers/helpers.php"],
         "psr-4": {
             "Tests\\": "tests/"
         }

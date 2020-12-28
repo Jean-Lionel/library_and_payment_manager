@@ -15,12 +15,13 @@ class ClasseController extends Controller
      */
    public function index()
    {
+
     $classes = Classe::latest()->paginate(20);
 
         // return $Classes;
 
     return view('classes.index', compact('classes'));
-}
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -112,7 +113,7 @@ class ClasseController extends Controller
     {
 
 
-       try {
+     try {
 
         DB::beginTransaction();
         $classe = Classe::find($value);
