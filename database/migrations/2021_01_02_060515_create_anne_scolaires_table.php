@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaimentsTable extends Migration
+class CreateAnneScolairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatePaimentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paiments', function (Blueprint $table) {
+        Schema::create('anne_scolaires', function (Blueprint $table) {
             $table->id();
-            $table->double('amount',60,2);
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('eleve');
+            $table->string('name');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +27,6 @@ class CreatePaimentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiments');
+        Schema::dropIfExists('anne_scolaires');
     }
 }

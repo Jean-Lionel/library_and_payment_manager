@@ -14,6 +14,7 @@
 		<table class="table table-bordered table-sm">
 			<tr>
 				<th>#</th>
+				<th>COMPTE</th>
 				<th>NOM</th>
 				<th>PRENOM</th>
 				<th>Action</th>
@@ -22,6 +23,7 @@
 			@foreach($classe->eleves as $eleve)
 			<tr>
 				<td>{{ $eleve->id }}</td>
+				<td>{{ $eleve->compte->name ?? "" }}</td>
 				<td>{{ $eleve->first_name }}</td>
 				<td>{{ $eleve->last_name }}</td>
 				<td class="d-flex ">

@@ -13,6 +13,6 @@ class SectionSeeder extends Seeder
      */
     public function run()
     {
-        //
+       
     }
 }

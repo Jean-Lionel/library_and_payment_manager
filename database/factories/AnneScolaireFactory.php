@@ -1,18 +1,18 @@
 <?php
+
 namespace Database\Factories;
 
-use App\Models\Classe;
-use App\Models\Eleve;
+use App\Models\AnneScolaire;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EleveFactory extends Factory
+class AnneScolaireFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Eleve::class;
+    protected $model = AnneScolaire::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,7 @@ class EleveFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->name,
-            'last_name' => $this->faker->name,
-            'description' => $this->faker->name,
-            'classe_id' => Classe::all()->map->id->random(),
-
+            //
         ];
     }
 }
