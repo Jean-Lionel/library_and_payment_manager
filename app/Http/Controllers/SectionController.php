@@ -14,7 +14,7 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $sections = Section::latest()->paginate(5);
+        $sections = Section::latest()->paginate(10);
 
         // return $sections;
 

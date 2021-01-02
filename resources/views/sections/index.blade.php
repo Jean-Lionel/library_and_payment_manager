@@ -34,15 +34,15 @@
 						<td class="">
 
 							<div class="d-flex justify-content-around">
-								<a href="{{ route('sections.show',$section) }}" class="btn btn-info">Afficher</a>
+								<a href="{{ route('sections.show',$section) }}" class="btn btn-sm btn-info">Afficher</a>
 
-								<a href="{{ route('sections.edit',$section) }}" class="btn btn-info">Modifier</a>
+								<a href="{{ route('sections.edit',$section) }}" class="btn btn-sm btn-info">Modifier</a>
 
 								<form action="{{ route('sections.destroy',$section) }}" method="post">
 									@csrf
 									@method('DELETE')
 
-									<button type="submit" onclick="return confirm('Vous êtez sûr ?')" class="btn btn-danger">Supprimer</button>
+									<button type="submit" onclick="return confirm('Vous êtez sûr ?')" class="btn btn-sm btn-danger">Supprimer</button>
 								</form>
 								
 							</div>

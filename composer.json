@@ -15,7 +15,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
-        "kyslik/column-sortable": "^6.0",
+        "kyslik/column-sortable": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

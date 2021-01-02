@@ -14,11 +14,11 @@ class PaimentController extends Controller
      */
     public function index()
     {
-        $paiments = Paiment::sortable()->latest()->paginate();
+        //$paiments = Paiment::sortable()->latest()->paginate();
 
-        return $paiments;
+   
 
-        //return view('paiements.index', compact('paiments'));
+        return view('paiements.index');
     }
 
     /**

@@ -16,9 +16,9 @@ class CreatePaimentsTable extends Migration
         Schema::create('paiments', function (Blueprint $table) {
             $table->id();
             $table->double('amount',60,2);
-
+            $table->string('bordereau');
             $table->foreignId('compte_id');
-          
+            $table->string('compte_name');
             $table->foreignId('eleve_id');
             $table->foreignId('user_id');
             $table->string('trimestre');

@@ -10,4 +10,8 @@ class Compte extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function eleve(){
+    	return $this->belongsTo('App\Models\Eleve');
+    }
 }
