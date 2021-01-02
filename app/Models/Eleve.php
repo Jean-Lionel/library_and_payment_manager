@@ -19,4 +19,9 @@ class Eleve extends Model
     	return $this->belongsTo('App\Models\Classe');
     }
 
+    public function compte(){
+    	return $this->belongsTo('App\Models\Compte','id','eleve_id');
+
+    }
+
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classe;
+use App\Models\Compte;
 use App\Models\Eleve;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class EleveController extends Controller
@@ -17,6 +19,11 @@ class EleveController extends Controller
      */
     public function index()
     {
+        $eleves = Eleve::paginate();
+
+        //dd($eleves);
+
+        return view('eleves.eleve', compact('eleves'));
         
     }
 
@@ -48,9 +55,29 @@ class EleveController extends Controller
             'classe_id' => 'required',
         ]);
 
-        Eleve::create($request->all());
+        $compte = null;
 
-        Session::flash('success', 'Enregistrement réussi');
+       
+
+        DB::transaction(function() use ($request, $compte) {
+             $eleve = Eleve::create($request->all());
+             $compte = Compte::create([
+                'name' => 'SE-'.$eleve->id,
+                'eleve_id' => $eleve->id,
+                'montant' => 0,
+
+             ]);
+
+            Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
+
+        });
+
+      
+
+
+
+        
+  
 
         return back();
     }
