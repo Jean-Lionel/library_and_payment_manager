@@ -9,4 +9,11 @@ use Kyslik\ColumnSortable\Sortable;
 class Paiment extends Model
 {
     use HasFactory,Sortable;
+
+    protected $guarded=[];
+
+
+    public function eleve(){
+    	return $this->belongsTo('App\Models\Eleve', 'eleve_id', 'id');
+    }
 }

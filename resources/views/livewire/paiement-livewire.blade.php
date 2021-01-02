@@ -47,7 +47,9 @@
 									<div class="form-group row">
 										<label for="montant" class="col-sm-4 col-form-label">Montant</label>
 										<div class="col-sm-8">
-											<input type="number" class="form-control" id="montant" placeholder="Montant">
+											<input type="number" wire:model="montant" class="form-control" id="montant" placeholder="Montant">
+
+											@error('montant') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>
 									</div>
 
@@ -57,7 +59,9 @@
 									<div class="form-group row">
 										<label for="montant" class="col-sm-4 col-form-label">Bordereau N°</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="montant" placeholder="Montant">
+											<input wire:model="bordereau" type="text" class="form-control" id="bordereau" placeholder="">
+
+											@error('bordereau') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>
 									</div>
 									
@@ -67,7 +71,7 @@
 									<div class="form-group row">
 										<label  class="col-sm-4 col-form-label" for="">Periode</label>
 
-										<select  name="" id="" class="form-control col-sm-8">
+										<select  wire:model="trimestre" name="" id="" class="form-control col-sm-8">
 											<option value="">Choisissez ici le trimestre</option>
 
 											<option value="PREMIER TRIMESTRE">
@@ -82,6 +86,8 @@
 
 											
 										</select>
+
+										@error('trimestre') <span class="error text-danger">{{ $message }}</span> @enderror
 									</div>
 								</div>
 
@@ -89,15 +95,17 @@
 									<div class="d-flex justify-content-between">
 										<label  for="">ANNE SCOLAIRE</label>
 										<label for=""> <b>{{ $anneScolaire->name }}</b> </label>
-									
+
 									</div>
 								</div>
 
-								@if($eleve and $compteName)
+								<div class="col-md-6">
+									@if($eleve and $compteName)
 
-								 <button type="submit">Enregistrer</button>
+									<button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
 
-								@endif
+									@endif
+								</div>
 							</div>
 
 						</div>
@@ -126,15 +134,23 @@
 			</thead>
 
 			<tbody>
-			{{-- @foreach($paiements as $paiment)
+			@foreach($paiements as $paiment)
 			<tr>
-				<td></td>
+				<td>{{ $paiment->compte_name }}</td>
+				<td>{{ $paiment->eleve->fullName }}</td>
+				<td>{{ $paiment->amount }}</td>
+				<td>{{ $paiment->trimestre }}</td>
+				<td>{{ $paiment->bordereau }}</td>
+				<td>{{ $paiment->created_at }}</td>
 			</tr>
 
-			@endforeach --}}
+			@endforeach
 		</tbody>
 		
 	</table>
+<div>
+	{{ $paiements->links() }}
+</div>
 
 
 </div>
