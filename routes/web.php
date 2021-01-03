@@ -31,3 +31,7 @@ Route::resource('sections', 'SectionController');
 Route::resource('classes', 'ClasseController');
 Route::resource('eleves', 'EleveController');
 Route::resource('paiements', 'PaimentController');
+Route::resource('patrimoines', 'PatrimoineController');
+Route::resource('products', 'ProductController');
+Route::resource('stoks', 'StockController');
+Route::resource('categories', 'CategoryController');

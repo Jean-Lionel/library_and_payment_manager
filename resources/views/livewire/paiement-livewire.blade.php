@@ -99,6 +99,19 @@
 									</div>
 								</div>
 
+
+								<div class="col-md-6"> 
+									<div class="form-group row form-control">
+								
+
+										<select class="form-control" wire:model="type_paiement" id="">
+											<option value="">CHOISISSEZ ....</option>
+											<option value="MINERVAL">MINERVAL</option>
+											<option value="CONTRIBUTION">CONTRIBUTION</option>
+										</select>
+									</div>
+								</div>
+
 								<div class="col-md-6">
 									@if($eleve and $compteName)
 
@@ -123,12 +136,14 @@
 
 			<thead>
 				<tr>
+					<th>@sortablelink('id','ID')</th>
 					<th>COMPTE</th>
 					<th>NOM ET PRENOM</th>
-					<th>MONTANT </th>
-					<th>PERIODE </th>
+					<th>CLASSE</th>
+					<th>@sortablelink('amount','MONTANT') </th>
+					<th>@sortablelink('trimestre','PERIODE') </th>
 					<th>BORDEREAU N° </th>
-					<th>DATE</th>
+					<th>@sortablelink('created_at','DATE')</th>
 
 				</tr>
 			</thead>
@@ -136,8 +151,10 @@
 			<tbody>
 			@foreach($paiements as $paiment)
 			<tr>
+				<td>{{ $paiment->id }}</td>
 				<td>{{ $paiment->compte_name }}</td>
 				<td>{{ $paiment->eleve->fullName }}</td>
+				<td>{{ $paiment->eleve->classe->name }}</td>
 				<td>{{ $paiment->amount }}</td>
 				<td>{{ $paiment->trimestre }}</td>
 				<td>{{ $paiment->bordereau }}</td>

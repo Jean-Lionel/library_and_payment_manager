@@ -17,6 +17,7 @@ class CreatePaimentsTable extends Migration
             $table->id();
             $table->double('amount',60,2);
             $table->string('bordereau');
+            $table->string('type_paiement');
             $table->foreignId('compte_id');
             $table->string('compte_name');
             $table->foreignId('eleve_id');

@@ -21,18 +21,20 @@ class PaiementLivewire extends Component
 	public $anneScolaire;
 	public $bordereau;
 	public $trimestre;
+	public $type_paiement;
 
 
 	public function mount()
 	{
-		// $this->paiements = Paiment::sortable()->latest()->paginate();
-		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
+		 $this->paiements = Paiment::sortable()->latest()->paginate();
+		
 	}
 
 	
 	public function render()
 	{
 		$this->paiements = Paiment::sortable()->latest()->paginate(20);
+		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
 		return view('livewire.paiement-livewire',
 			[
 				'paiements' => $this->paiements
@@ -60,6 +62,7 @@ class PaiementLivewire extends Component
 	public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+        $this->paiements = Paiment::sortable()->latest()->paginate();
         $this->render();
     }
 
@@ -68,6 +71,7 @@ class PaiementLivewire extends Component
         'bordereau' => 'required|min:2',
         'trimestre' => 'required|min:2',
         'compteName' => 'required',
+        'type_paiement' => 'required',
         
     ];
 
@@ -84,6 +88,7 @@ class PaiementLivewire extends Component
 				'compte_name' => $this->eleve->compte->name,
 				'eleve_id' => $this->eleve->id,
 				'user_id' => 1,
+				'type_paiement' => $this->type_paiement,
 				'trimestre' => $this->trimestre,
 				'annee_scolaire' => $this->anneScolaire->name,
 			]);
@@ -110,11 +115,12 @@ class PaiementLivewire extends Component
 
 
 	private function resetInput(){
-
 		 $this->eleve = null;
 		 $this->montant = null;
 		 $this->bordereau = null;
 		 $this->compteName = null;
-
 	}
+
+
+	
 }

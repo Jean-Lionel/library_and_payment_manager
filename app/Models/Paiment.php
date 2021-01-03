@@ -12,6 +12,13 @@ class Paiment extends Model
 
     protected $guarded=[];
 
+    protected $sortable =[
+    	'id',
+    	'amount',
+    	'trimestre',
+    	'created_at'
+    ];
+
 
     public function eleve(){
     	return $this->belongsTo('App\Models\Eleve', 'eleve_id', 'id');
