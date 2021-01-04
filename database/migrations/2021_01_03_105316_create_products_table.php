@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
 
             $table->foreignId('category_id');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

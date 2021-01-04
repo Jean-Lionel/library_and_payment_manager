@@ -10,10 +10,12 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-//     name
-// marque
-// quantite
-// price
 
+    protected $guarded = [];
+
+    public function category()
+    {
+    	return $this->belongsTo('App\Model\Category');
+    }
     
 }

@@ -9,11 +9,18 @@ class StockLivewire extends Component
 {
 	public $identifiant;
 	public $name;
+	private $stocks;
 	
 
 	public function render()
 	{
-		return view('livewire.stock-livewire');
+		$this->stocks = Stock::paginate();
+		return view('livewire.stock-livewire', [
+
+			'stocks' => $this->stocks
+
+
+		]);
 	}
 
 	protected $rules =[
@@ -36,13 +43,28 @@ class StockLivewire extends Component
 		}else{
 
 			$stock = Stock::find($this->identifiant);
-
 			$stock->update([
 				'name' => $this->name
 
 			]);
 
 		}
+
+		$this->name = "";
+
+	}
+
+	public function destroy($id){
+
+		Stock::find($id)->delete();
+	}
+
+
+	public function edit($id){
+		$stock = Stock::find($id);
+
+		$this->identifiant = $stock->id;
+		$this->name = $stock->name;
 
 	}
 }

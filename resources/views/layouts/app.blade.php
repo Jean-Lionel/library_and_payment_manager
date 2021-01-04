@@ -38,7 +38,7 @@
 						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
 					</li>
 					<li>
-						<a href="#"><span class="fa fa-suitcase mr-3"></span> 2</a>
+						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
 					</li>
 					<li>
 						<a href="#"><span class="fa fa-cogs mr-3"></span> 3</a>
