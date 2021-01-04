@@ -36,3 +36,10 @@ Route::resource('products', 'ProductController');
 Route::resource('stoks', 'StockController');
 Route::resource('categories', 'CategoryController');
 Route::resource('ventes', 'VenteController');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
