@@ -12,4 +12,9 @@ class Category extends Model
     use SoftDeletes;
 
     protected $guarded =[];
+
+
+    public function stock(){
+    	return $this->belongsTo('App\Models\Stock');
+    }
 }

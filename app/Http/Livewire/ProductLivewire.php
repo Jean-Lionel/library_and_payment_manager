@@ -5,9 +5,15 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductLivewire extends Component
 {
+
+	    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
 
 	public $name;
 	public $identifiant;
@@ -16,6 +22,9 @@ class ProductLivewire extends Component
 	public $price;
 	public $category_id;
 	public $categories;
+
+	public $searchTerm;
+	public $showForm = true;
 
 
 	protected $rules = [
@@ -67,6 +76,12 @@ class ProductLivewire extends Component
 
 		$this->resetInput();
 
+		 session()->flash('message', 'Opération réussi');
+
+		 return $this->render();
+
+		// return redirect()->to('/stoks');
+
 	}
 
 
@@ -79,8 +94,39 @@ class ProductLivewire extends Component
 	}
 
 
+	public function edit($id){
+		$product = Product::find($id);
+
+		$this->identifiant = $product->id;
+		$this->name = $product->name;
+		$this->marque = $product->marque;
+		$this->quantite = $product->quantite;
+		$this->price = $product->price;
+		$this->category_id = $product->category_id;
+
+		if($this->showForm == false)
+			$this->showForm = true;
+
+	}
+
+
 	public function render()
 	{
-		return view('livewire.product-livewire');
+		$search = '%'.$this->searchTerm.'%';
+		$products = Product::latest()
+							->where('marque','like',$search)
+							->orWhere('name','like',$search)
+							->orWhere('price','like',$search)
+							->paginate();
+		return view('livewire.product-livewire',
+			[
+				'products' => $products
+			]
+
+		);
+	}
+
+	public function toogleShowForm(){
+		$this->showForm = !$this->showForm;
 	}
 }

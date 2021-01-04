@@ -9,6 +9,8 @@
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<link rel="stylesheet" href="{{ asset('style.css')}}">
 	@livewireStyles
 </head>
@@ -41,7 +43,7 @@
 						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
 					</li>
 					<li>
-						<a href="#"><span class="fa fa-cogs mr-3"></span> 3</a>
+						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Vente</a>
 					</li>
 					<li>
 						<a href="#"><span class="fa fa-paper-plane mr-3"></span> 4</a>

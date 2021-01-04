@@ -35,3 +35,4 @@ Route::resource('patrimoines', 'PatrimoineController');
 Route::resource('products', 'ProductController');
 Route::resource('stoks', 'StockController');
 Route::resource('categories', 'CategoryController');
+Route::resource('ventes', 'VenteController');

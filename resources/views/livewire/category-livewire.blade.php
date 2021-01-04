@@ -49,7 +49,7 @@
     				@foreach($categories as $category)
     				<tr>
     					<td>{{ $category->id }}</td>
-    					<td>{{ $category->stock_id }}</td>
+    					<td>{{ $category->stock->name }}</td>
     					<td>{{ $category->name }}</td>
     					<td>
     						<button wire:click="edit({{ $category->id  }})" class="btn btn-sm btn-warning">Modifier</button>
