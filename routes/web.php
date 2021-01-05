@@ -14,20 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
        
     return view('welcome');
 });
 
-Route::get('/home', function () {
-       
-    return view('welcome');
-});
 
 
 
-Route::resource('sections', 'SectionController');
+Route::middleware('auth')->group(function(){
+
+	Route::resource('sections', 'SectionController');
 Route::resource('classes', 'ClasseController');
 Route::resource('eleves', 'EleveController');
 Route::resource('paiements', 'PaimentController');
@@ -36,10 +33,12 @@ Route::resource('products', 'ProductController');
 Route::resource('stoks', 'StockController');
 Route::resource('categories', 'CategoryController');
 Route::resource('ventes', 'VenteController');
+
+
+});
+
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

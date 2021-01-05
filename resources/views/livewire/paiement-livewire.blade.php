@@ -6,6 +6,66 @@
 			<button wire:click="showForm" class="btn btn-primary"> Nouveau Paiment</button>
 		</div>
 
+		{{-- Impression du recu --}}
+
+		@if($facture and $showFacture)
+			<div>
+					<!DOCTYPE html>
+					<html lang="en">
+					<head>
+						<meta charset="UTF-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1.0">
+						<title>Bordereau</title>
+						<link rel="stylesheet" href="style.css">
+					</head>
+					<body>
+						<div>
+							<button onclick="clickButton()">Imprimer</button>
+							<button wire:click="closeBill">Fermer</button>
+						</div>
+						<div class="main-content" id="main-content">
+							<header>
+								<h4>LYCEE DU SAINT ESPRIT</h4>
+								<h4>A\S : {{ $facture->annee_scolaire }}</h4>
+								<h4 style="text-align: center;">RECU N° {{ $facture->id }}</h4>
+								<hr>
+							</header>
+							<section>
+								<p>Bordereau N° : {{ $facture->bordereau }} </p>
+								<p>SECTION : {{ $facture->eleve->classe->section->name }}</p>
+								<p>Classe : {{ $facture->eleve->classe->name }}</p>
+								<p>Date : {{ $facture->created_at }}</p>
+								<p>Compte de l'élève : {{ $facture->compte_name }} </p>
+								<p>Nom et prénom : {{ $facture->eleve->fullName }}</p>
+								<p>Montant Payé : {{ $facture->amount }}</p>
+								<p>Motif : {{ $facture->type_paiement }} DU {{ $facture->trimestre }}</p>
+
+								<div style="display: flex;justify-content: space-between;">
+									<p>Signature de l'élève</p>
+									<p>Signature du caissier</p>
+									
+								</div>
+
+								<p style="text-align: center;">
+									le {{ date('d - M - Y') }}
+								</p>
+							</section>
+						</div>
+
+						
+					</body>
+					</html>
+
+
+
+
+			</div>
+
+		@endif
+
+
+		{{-- Apres l'Impression du recu --}}
+
 		@if($showFormulaire)
 		<div class="col-md-12">
 			
@@ -101,10 +161,11 @@
 
 
 								<div class="col-md-6"> 
-									<div class="form-group row form-control">
-								
+									<div class="form-group row">
 
-										<select class="form-control" wire:model="type_paiement" id="">
+										<label for="" class="col-sm-6">TYPE DE PAIMENT</label>
+
+										<select class="col-md-6 form-control" wire:model="type_paiement" id="">
 											<option value="">CHOISISSEZ ....</option>
 											<option value="MINERVAL">MINERVAL</option>
 											<option value="CONTRIBUTION">CONTRIBUTION</option>
@@ -136,14 +197,15 @@
 
 			<thead>
 				<tr>
-					<th>@sortablelink('id','ID')</th>
+					<th>ID</th>
 					<th>COMPTE</th>
 					<th>NOM ET PRENOM</th>
 					<th>CLASSE</th>
-					<th>@sortablelink('amount','MONTANT') </th>
-					<th>@sortablelink('trimestre','PERIODE') </th>
+					<th>MONTANT</th>
+					<th>PERIODE</th>
 					<th>BORDEREAU N° </th>
-					<th>@sortablelink('created_at','DATE')</th>
+					<th>DATE</th>
+					<th>Action</th>
 
 				</tr>
 			</thead>
@@ -159,6 +221,10 @@
 				<td>{{ $paiment->trimestre }}</td>
 				<td>{{ $paiment->bordereau }}</td>
 				<td>{{ $paiment->created_at }}</td>
+				<td>
+					
+					<button  class="btn btn-sm btn-info" wire:click="printBill({{ $paiment->id  }})">Imprimer</button>
+				</td>
 			</tr>
 
 			@endforeach
@@ -171,3 +237,18 @@
 
 
 </div>
+
+
+@push('scripts')
+<script type="text/javascript">				
+
+function clickButton(){
+		printJS({
+			printable: 'main-content',
+			css : "",
+			type : 'html'
+		});
+}
+</script>
+
+@endpush

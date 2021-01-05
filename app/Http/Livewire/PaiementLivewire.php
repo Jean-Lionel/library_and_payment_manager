@@ -7,9 +7,14 @@ use App\Models\Compte;
 use App\Models\Paiment;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PaiementLivewire extends Component
 {
+	use WithPagination;
+
+	protected $paginationTheme ='bootstrap';
+
 	private $paiements;
 	public $showFormulaire = false ;
 	public $compteName;
@@ -17,16 +22,21 @@ class PaiementLivewire extends Component
 
 	//Les attributs 
 
+
+
 	public $montant;
 	public $anneScolaire;
 	public $bordereau;
 	public $trimestre;
 	public $type_paiement;
 
+	public $facture;
+
+	public $showFacture = false;
 
 	public function mount()
 	{
-		 $this->paiements = Paiment::sortable()->latest()->paginate();
+		 $this->paiements = Paiment::sortable()->latest()->paginate(20);
 		
 	}
 
@@ -121,6 +131,14 @@ class PaiementLivewire extends Component
 		 $this->compteName = null;
 	}
 
+	public function closeBill(){
+		$this->showFacture = false;
+	}
+
+	public function printBill($id){
+		$this->facture = Paiment::find($id);
+		$this->showFacture= true;
+	}
 
 	
 }
