@@ -1,6 +1,19 @@
 <div>
     {{-- Do your work, then step back. --}}
 
+    @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+    @endif
+
+     @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+    @endif
+
+
 
     <div class="row">
         <div class="col-md-12">
@@ -43,7 +56,7 @@
                         <td>{{ $product->marque }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->quantite }}</td>
-                        <td>{{ $product->price }}</td>
+                        <td>{{  getPrice($product->price) }}</td>
 
                         <td>
 
@@ -87,12 +100,9 @@
                              @foreach(Cart::content() as $cartItem)
                              <tr>
                                 <td>
-                                    <div class="media">
-                                        <div class="media-body">
-                                        <h5 class="mt-0 mb-1">{{ $cartItem->model->name }}</h5>
+                                   
+                                    <p class="text-dark">{{ $cartItem->model->name }}</p>
                                         
-                                         </div>
-                                    </div>
                                 </td>
 
                                 <td>
@@ -102,13 +112,13 @@
                                 </td>
 
                                 <td>
-                                    {{ $cartItem->model->price }}
+                                    {{ getPrice($cartItem->model->price, "") }}
                                 </td>
                                 <td>
-                                    {{ $cartItem->subtotal() }}
+                                    {{ getPrice($cartItem->subtotal(), "") }}
                                 </td>
                                 <td>
-                                    <button wire:click="removeItem('{{ $cartItem->rowId }}')">Remove</button>
+                                    <button wire:click="removeItem('{{ $cartItem->rowId }}')">Supprimer</button>
                                 </td>
                             
                             </tr>
@@ -129,25 +139,99 @@
                 <h5>DESCRIPTION</h5>
                 <div class="d-flex justify-content-between">
                     <span>PHTVA </span>
-                    <span>{{ Cart::subtotal() }}</span>
+                    <span>{{ getPrice(Cart::subtotal()) }}</span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <span>TVA </span>
-                    <span>{{ Cart::tax() }}</span>
+                    <span>{{ getPrice(Cart::tax()) }}</span>
                 </div>
                 <hr>
 
                 <div class="d-flex justify-content-between">
                     <span>TOTAL </span>
-                    <span>{{ Cart::total() }} </span>
+                    <span>{{ getPrice(Cart::total()) }} </span>
                 </div>
                 <hr>
+                <input type="text" wire:model="client_name" placeholder="Nom du client">
 
-                  <button type="button" class="btn btn-primary btn-block">go to checkout</button>
+                <hr>
+
+                  <button wire:click="storeInvoice()" type="button" class="btn btn-primary btn-block">Payement</button>
             </div>
             
             
+        </div>
+
+        <div class="col-md-12">
+            
+
+            @if ($printOrder)
+               <div id="facture">
+                   <div class="header-facture">
+                       <h2>LYCEE DU SAINT ESPRIT</h2>
+                       <hr>
+                       <h4>FACTURE </h4>
+                   </div>
+
+                   <div>
+                    <table class="table-sm table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>DESCRIPTION</th>
+                                <th>Qté</th>
+                                <th>P U</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach($order->detailsOrders as $product)
+                            <tr>
+                                <td>2</td>
+                                <td>{{ $product->product->name }}</td>
+                                <td>{{ $product->quantite }}</td>
+                                <td>{{ $product->price_unitaire }}</td>
+                                <td>{{ $product->montant }}</td>
+                            </tr>
+
+                            @endforeach
+                        </tbody>
+                    </table>
+                       
+                   </div>
+               </div>
+            @endif
+            
+            @if($order)
+            <table class="table-sm table table-striped">
+                <thead class="badge-info">
+                    <tr>
+                        <th>CLIENT</th>
+                        <th>PHTVA</th>
+                        <th>TVA</th>
+                        <th>TOTAL</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $order->client }}</td>
+                        <td>{{ getPrice($order->amount_tax) }}</td>
+                        <td>{{ getPrice($order->tax) }}</td>
+                        <td>{{ getPrice($order->montant) }}</td>
+                        <td>
+                            <button wire:click="$set('printOrder','{{ !$printOrder  }}')">Imprimer</button>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+
+            @endif
         </div>
 
 

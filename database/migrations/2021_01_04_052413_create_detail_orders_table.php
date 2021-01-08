@@ -11,6 +11,8 @@ class CreateDetailOrdersTable extends Migration
      *
      * @return void
      */
+
+
     public function up()
     {
         Schema::create('detail_orders', function (Blueprint $table) {
@@ -19,6 +21,7 @@ class CreateDetailOrdersTable extends Migration
             $table->foreignId('order_id');
             $table->double('quantite');
             $table->double('price',60,2);
+            $table->double('price_unitaire',60,2);
             $table->double('montant',60,2);
             $table->timestamps();
             $table->softDeletes();

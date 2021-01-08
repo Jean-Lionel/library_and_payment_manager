@@ -28,6 +28,10 @@ function searchProduct($id)
 	return false;
 }
 
-function addwarnig(){
+
+function getPrice($price, $type="FBU")
+{
 	
+	$price = floatval($price);
+	return number_format($price, 2,',',' . ') ." ". $type;
 }

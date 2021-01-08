@@ -18,6 +18,7 @@ class CreateFollowProductsTable extends Migration
             
             $table->enum('action',['ENTRE','SORTIE']);
             $table->text('products');
+            $table->double('quantite');
             $table->foreignId('product_id');
             $table->timestamps();
             $table->softDeletes();

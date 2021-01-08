@@ -47,6 +47,10 @@
 					<li>
 						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Vente</a>
 					</li>
+
+					<li>
+						<a href="{{ route('rapport') }}"><span class="fa fa-cogs mr-3"></span> Rapport</a>
+					</li>
 					<li>
 						
 

@@ -45,6 +45,7 @@
     			<th>#</th>
                 <th>Section</th>
                 <th>Classe</th>
+                <th>Numéro de compte</th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Action</th>
@@ -55,7 +56,9 @@
           <tr>
              <td>{{ $eleve->id }}</td>
              <td>{{ $eleve->classe->section->name }}</td>
-             <td>{{ $eleve->classe->name }}</td>
+              <td>{{ $eleve->classe->name }}</td>
+             <td>{{ $eleve->compte->name ?? "" }}</td>
+            
              <td>{{ $eleve->first_name }}</td>
              <td>{{ $eleve->last_name }}</td>
              <td></td>
