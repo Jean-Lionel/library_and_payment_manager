@@ -9,6 +9,8 @@
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
+
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<link rel="stylesheet" href="{{ asset('style.css')}}">
@@ -49,7 +51,7 @@
 					</li>
 
 					<li>
-						<a href="{{ route('rapport') }}"><span class="fa fa-cogs mr-3"></span> Rapport</a>
+						<a href="{{ route('rapport') }}"><span class="fa fa-bar-chart mr-3"></span> Rapport</a>
 					</li>
 					<li>
 						
@@ -98,6 +100,8 @@
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/print.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
 	
 	@livewireScripts
 

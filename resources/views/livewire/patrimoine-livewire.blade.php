@@ -6,12 +6,14 @@
 	public float $quantite_total;
 	public float $qte_en_mauvaise_etat;
 	public float $quantite_en_bonne_etat; --}}
-	<h4 class="text-center">Enregistrement des Patrimoines</h4>
 
+	@if($open)
+	<div>
+		<h4 class="text-center">Enregistrement des Patrimoines</h4>
+		<button wire:click="$set('open',false)">Fermer <i class="fa fa-close"> </i></button>
 	<form wire:submit.prevent="savePatrimoine" class="row col-md-12">
-
-
 		<div class="col-md-6">
+
 
 			<div class="form-group row">
 				<label for="" class="col-sm-4">DESIGNATION</label>
@@ -69,7 +71,13 @@
 		</div>
 	</form>
 
+	</div>
+
+	@endif
+
+
 	<div class="col-md-12">
+		<h1 class="text-center">Liste des biens</h1>
 		<table class="table table-bordered table-sm">
 			<thead>
 				<tr>
