@@ -35,7 +35,7 @@
 					<tr>
 						<td>{{ $key +1 }}</td>
 						<td>{{ $classe->name }}</td>
-						<td><a href="{{ route('classes.show',$classe) }}">Afficher</a></td>
+						<td><a href="{{ route('classes.show',$classe) }}">Afficher les classes</a></td>
 					</tr>
 
 					@endforeach

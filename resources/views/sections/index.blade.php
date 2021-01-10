@@ -19,22 +19,22 @@
 			<table class="table table-sm table-bordered">
 				<thead>
 					<tr>
-						<th>#</th>
+						<th>Numéro</th>
 						<th>DESCRIPTION</th>
 						<th>ACTION</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					@foreach($sections as $section)
+					@foreach($sections as $key =>$section)
 					<tr>
-						<td>{{ $section->id }}</td>
+						<td>{{ $key+1 }}</td>
 						<td><a href="{{ route('sections.show',$section) }}">{{ $section->name }}</a></td>
 
 						<td class="">
 
 							<div class="d-flex justify-content-around">
-								<a href="{{ route('sections.show',$section) }}" class="btn btn-sm btn-info">Afficher</a>
+								<a href="{{ route('sections.show',$section) }}" class="btn btn-sm btn-info">Afficher les élèves</a>
 
 								<a href="{{ route('sections.edit',$section) }}" class="btn btn-sm btn-info">Modifier</a>
 
@@ -42,7 +42,7 @@
 									@csrf
 									@method('DELETE')
 
-									<button type="submit" onclick="return confirm('Vous êtez sûr ?')" class="btn btn-sm btn-danger">Supprimer</button>
+									<button type="submit" onclick="return confirm('Voulez-vous  supprimer ?')" class="btn btn-sm btn-danger">Supprimer</button>
 								</form>
 								
 							</div>

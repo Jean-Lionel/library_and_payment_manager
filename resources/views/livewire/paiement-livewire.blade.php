@@ -26,19 +26,18 @@
 						<div class="main-content" id="main-content">
 							<header>
 								<h4>LYCEE DU SAINT ESPRIT</h4>
-								<h4>A\S : {{ $facture->annee_scolaire }}</h4>
+								<h4>A/S : {{ $facture->annee_scolaire }}</h4>
 								<h4 style="text-align: center;">RECU N° {{ $facture->id }}</h4>
 								<hr>
 							</header>
 							<section>
 								<p>Bordereau N° : {{ $facture->bordereau }} </p>
-								<p>SECTION : {{ $facture->eleve->classe->section->name }}</p>
 								<p>Classe : {{ $facture->eleve->classe->name }}</p>
-								<p>Date : {{ $facture->created_at }}</p>
+								
 								<p>Compte de l'élève : {{ $facture->compte_name }} </p>
 								<p>Nom et prénom : {{ $facture->eleve->fullName }}</p>
 								<p>Montant Payé : {{ $facture->amount }}</p>
-								<p>Motif : {{ $facture->type_paiement }} DU {{ $facture->trimestre }}</p>
+								<p>FRAIS : {{ $facture->type_paiement }} DU {{ $facture->trimestre }}</p>
 
 								<div style="display: flex;justify-content: space-between;">
 									<p>Signature de l'élève</p>
@@ -47,7 +46,7 @@
 								</div>
 
 								<p style="text-align: center;">
-									le {{ date('d - M - Y') }}
+									Date : {{ $facture->created_at }}
 								</p>
 							</section>
 						</div>
@@ -193,6 +192,8 @@
 			@endif
 		</div>
 
+		@if($paiements->count() >0)
+
 		<table class="table table-sm">
 
 			<thead>
@@ -231,6 +232,8 @@
 		</tbody>
 		
 	</table>
+
+	@endif
 <div>
 	{{ $paiements->links() }}
 </div>

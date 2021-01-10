@@ -46,7 +46,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="" class="col-sm-4">QTE EN BONNE ETAT</label>
+				<label for="" class="col-sm-4">QTE EN BON ETAT</label>
 				<input type="number" wire:model="qte_en_mauvaise_etat" class="col-sm-8 form-control">
 				@error('qte_en_mauvaise_etat')
 				<span class="error text-danger">{{ $message }}</span>

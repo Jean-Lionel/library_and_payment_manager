@@ -17,6 +17,13 @@
 	<link rel="stylesheet" href="{{ asset('css/print.min.css')}}">
 	@livewireStyles
 
+	<style type="text/css">
+		body{
+			background: #abc;
+			color: #000;
+		}
+	</style>
+
 </head>
 <body>
 	

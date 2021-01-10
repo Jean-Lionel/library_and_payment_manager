@@ -163,32 +163,33 @@ body.modal-open {
 
 <div class="row">
     <div class="col-md-6">
-     <h4>Liste de ceux qui ont déjà payé</h4>
+     <h4>Liste de ceux qui ont déjà payé {{ $selectedSection }} </h4>
      <div class="row">
          <div class="col">
-          <select name="" wire:model="selectedSection" id="" class="form-control">
-            <option value="">Choisissez une section</option>
+          <select name="" id="" class="form-control">
+                <option value="">Section</option>
 
-            @foreach($sections as $section)
+                @foreach($sections as $section)
 
-            <option value="{{ $section->id }}">{{ $section->name }}</option>
-            @endforeach
-        </select>
+                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                @endforeach
+            </select>
+          
         
-    </div>
+         </div>
     <div class="col">
-     <div class="form-group">
+    
 
         <select name="" wire:model="selectedClasse" id="" class="form-control">
-            <option value="">Choisissez une classe</option>
+                    <option value="">Classe</option>
 
-            @foreach($classes as $classe)
+                    @foreach($classes as $classe)
 
-            <option value="{{ $classe->id }}">{{ $classe->name }}</option>
-            @endforeach
-        </select>
+                    <option value="{{ $classe->id }}">{{ $classe->name }}</option>
+                    @endforeach
+          </select>
+    
     </div>
-</div>
 <div class="col">
  3
 </div>
@@ -215,9 +216,11 @@ body.modal-open {
 @push('scripts')
 
 <script>
+    var chartTyp = ['bar','line','pie','scatter'];
+
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: chartTyp[  Math.floor(Math.random() * chartTyp.length) ],
         data: {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{

@@ -32,7 +32,7 @@
 
         @if($selectedClasse)
         <div class="col-md-3">
-            <a class="btn-primary btn btn-block" href="{{ route('eleves.create', ['id' => $selectedClasse]) }}">Nouveau Elève</a>
+            <a class="btn-primary btn btn-block" href="{{ route('eleves.create', ['id' => $selectedClasse]) }}">Nouveau</a>
         </div>
         @endif
 
@@ -42,7 +42,7 @@
     <table class="table table-bordered table-sm">
     	<thead>
     		<tr>
-    			<th>#</th>
+    			      <th>Numéro</th>
                 <th>Section</th>
                 <th>Classe</th>
                 <th>Numéro de compte</th>
@@ -52,9 +52,9 @@
             </tr>
         </thead>
         <tbody>
-          @foreach($eleves as $eleve)
+          @foreach($eleves as $key =>$eleve)
           <tr>
-             <td>{{ $eleve->id }}</td>
+             <td>{{ ++$key }}</td>
              <td>{{ $eleve->classe->section->name }}</td>
               <td>{{ $eleve->classe->name }}</td>
              <td>{{ $eleve->compte->name ?? "" }}</td>

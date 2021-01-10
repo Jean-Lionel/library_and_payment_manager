@@ -36,7 +36,7 @@
     					<td>{{ $stock->name }}</td>
     					<td>
     						<button class="btn btn-sm btn-warning" wire:click="edit({{ $stock->id }})">modifier</button>
-    						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Supprimer</button>
+    						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Annuler</button>
     					</td>
     				</tr>
 
