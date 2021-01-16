@@ -9,6 +9,7 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 
 class EleveController extends Controller
 {
@@ -51,7 +52,12 @@ class EleveController extends Controller
 
         $request->validate([
             'first_name' => 'required|min:2',
-            'last_name' => 'required|min:2',
+            'last_name' => [
+                             'required', 
+                             Rule::unique('eleves')
+                                    ->where('first_name', $request->first_name)
+                                    ->where('classe_id', $request->classe_id)
+                            ],
             'classe_id' => 'required',
         ]);
 
