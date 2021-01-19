@@ -60,7 +60,7 @@
 						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
 					</li>
 					<li class="{{ setActiveRoute('ventes.index') }}">
-						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Vente</a>
+						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Cantine</a>
 					</li>
 
 					<li class="{{ setActiveRoute('expenses.index') }}">
