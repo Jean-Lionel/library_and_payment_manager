@@ -22,6 +22,12 @@
 			background: #abc;
 			color: #000;
 		}
+		.active{
+			background: #123;
+			border-radius: 6px;
+			padding-left: 5px;
+			
+		}
 	</style>
 
 </head>
@@ -38,26 +44,30 @@
 			<div class="p-4">
 				<h1><a href="/" class="logo">L. DU SAINT ESPRIT</a></h1>
 				<ul class="list-unstyled components mb-5">
-					<li class="active">
+					<li class=" {{ setActiveRoute('sections.index') }}">
 						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>
 					</li>
-					<li>
+					<li class="{{ setActiveRoute('eleves.index') }}">
 						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3"></span> Eleve</a>
 					</li>
-					<li>
+					<li  class="{{ setActiveRoute('paiements.index') }}">
 						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
 					</li>
-					<li>
+					<li class="{{ setActiveRoute('patrimoines.index') }}">
 						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
 					</li>
-					<li>
+					<li class="{{ setActiveRoute('stoks.index') }}">
 						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
 					</li>
-					<li>
+					<li class="{{ setActiveRoute('ventes.index') }}">
 						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Vente</a>
 					</li>
 
-					<li>
+					<li class="{{ setActiveRoute('expenses.index') }}">
+						<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3"></span> Depense</a>
+					</li>
+
+					<li class="{{ setActiveRoute('rapport') }}">
 						<a href="{{ route('rapport') }}"><span class="fa fa-bar-chart mr-3"></span> Rapport</a>
 					</li>
 					<li>

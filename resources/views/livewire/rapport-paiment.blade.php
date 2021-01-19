@@ -1,6 +1,5 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-
     <div class="row">
         <div class="col-md-3">
             <select name="" wire:model="selectedSection" id="" class="form-control">
@@ -26,15 +25,17 @@
             </div>
         </div>
         <div class="col-md-3">
+        
+        	<select wire:model="type_paiement" id="" class="form-control">
+        		<option value="">Choisissez ...</option>
+        		<option value="PAYE">Ceux qui ont payé</option>
+        		<option value="NON PAYE">Ceux qui n'ont pas payé</option>
+        		
+        	</select>
+        </div>
+        <div class="col-md-3">
             <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control">
         </div>
-
-
-        @if($selectedClasse)
-        <div class="col-md-3">
-            <a class="btn-primary btn btn-block" href="{{ route('eleves.create', ['id' => $selectedClasse]) }}">Nouveau</a>
-        </div>
-        @endif
 
     </div>
 
@@ -42,26 +43,22 @@
     <table class="table table-bordered table-sm">
     	<thead>
     		<tr>
-    			      <th>Numéro</th>
-                <th>Section</th>
+    			<th>Numéro</th>
                 <th>Classe</th>
-                <th>Numéro de compte</th>
-                <th>Nom</th>
-                <th>Prénom</th>
+                <th>Nom et prénom</th>
+                <th>Montant</th>
+               
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-          @foreach($eleves as $key =>$eleve)
+          @foreach($eleves as $key =>$paeiment)
           <tr>
              <td>{{ ++$key }}</td>
-             <td>{{ $eleve->classe->section->name }}</td>
-              <td>{{ $eleve->classe->name }}</td>
-             <td>{{ $eleve->compte->name ?? "" }}</td>
-            
-             <td>{{ $eleve->first_name }}</td>
-             <td>{{ $eleve->last_name }}</td>
-             <td></td>
+             <td>{{ $paeiment->eleve->classe->name }}</td>
+             <td>{{ $paeiment->eleve->first_name }} {{ $paeiment->eleve->last_name }}</td>
+             <td>{{ $paeiment->amount }}</td>
+           
          </tr>
 
          @endforeach

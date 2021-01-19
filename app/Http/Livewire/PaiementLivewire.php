@@ -22,8 +22,6 @@ class PaiementLivewire extends Component
 
 	//Les attributs 
 
-
-
 	public $montant;
 	public $anneScolaire;
 	public $bordereau;
@@ -36,7 +34,7 @@ class PaiementLivewire extends Component
 
 	public function mount()
 	{
-		 $this->paiements = Paiment::sortable()->latest()->paginate(20);
+		 // $this->paiements = Paiment::sortable()->latest()->paginate(20);
 		
 	}
 
@@ -71,13 +69,13 @@ class PaiementLivewire extends Component
 
 	public function updated($propertyName)
     {
-        $this->validateOnly($propertyName);
-        $this->paiements = Paiment::sortable()->latest()->paginate();
-        $this->render();
+        // $this->validateOnly($propertyName);
+        // // $this->paiements = Paiment::sortable()->latest()->paginate();
+        // $this->render();
     }
 
-	 protected $rules = [
-        'montant' => 'required|numeric|min:0',
+	protected $rules = [
+        'montant' => 'required',
         'bordereau' => 'required|min:2',
         'trimestre' => 'required|min:2',
         'compteName' => 'required',
@@ -86,8 +84,16 @@ class PaiementLivewire extends Component
     ];
 
 	public function savePaiement(){
-		$validatedData = $this->validate();
 
+		if($this->type_paiement == 'MINERVAL'){
+			$this->rules['montant'] =  [
+        	'required',
+        	'size:7000',
+        	'numeric'];
+		}
+
+
+		$validatedData = $this->validate();
 		try {
 			DB::beginTransaction();
 

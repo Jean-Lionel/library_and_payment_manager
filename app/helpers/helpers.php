@@ -10,7 +10,7 @@ if(!function_exists('dire_bonjour')){
 
 function setActiveRoute(string $route): string
 {
-	return $route=="lion" ? "active" : "";
+	return Route::is($route) ? "active" : "";
 }
 
 //Cart function 

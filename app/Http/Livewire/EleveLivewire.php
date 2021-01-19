@@ -12,25 +12,39 @@ class EleveLivewire extends Component
 	private $eleves;
     public $sections;
     public $classes;
+    public $searchKey ="";
     public $selectedSection=null;
-    public $selectedClasse="";
+    public $selectedClasse=null;
 
 	public function mount(){
-		$this->eleves = Eleve::paginate();
+		
         $this->sections = Section::all();
-           $this->classes = collect();
+        $this->classes = collect();
 	}
 
     public function updated(){
-        $this->eleves = Eleve::paginate();
+        //$this->eleves = Eleve::paginate();
     }
 
     public function render()
     {
+        $q = $this->searchKey;
+        $eleves = Eleve::where('classe_id','=',$this->selectedClasse)
+                        ->where(function($query) use($q){
+                            if($q){
+                                $query->where('first_name','LIKE','%'.$q.'%')
+                                      ->orWhere('last_name','like', '%'.$q.'%')
+                                   ; 
+                            }
+
+                           
+
+                        })
+                        ->paginate();
 
         return view('livewire.eleve-livewire',
         	[
-        		'eleves'=> $this->eleves
+        		'eleves'=>  $eleves
 
         	]
     );
@@ -41,16 +55,11 @@ class EleveLivewire extends Component
     {
         $section = Section::find($section_id);
         $this->classes = $section->classes ?? collect();
-        // $this->eleves = Eleve::paginate();
+        
         $this->render();
 
     }
 
-    public function updatedSelectedClasse($class_id)
-    {
-        $this->eleves = Classe::find($class_id)->eleves ?? collect();
-
-         $this->render();
-
-    }
+   
+   
 }

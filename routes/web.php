@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\PatrimoineController;
@@ -42,6 +43,8 @@ Route::resource('products', ProductController::class);
 Route::resource('stoks', StockController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('ventes', VenteController::class);
+Route::resource('expenses', DepenseController::class);
+
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
 
