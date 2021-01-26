@@ -26,7 +26,7 @@
 						<div class="main-content" id="main-content">
 							<header>
 								<h4>LYCEE DU SAINT ESPRIT</h4>
-								<h4>A/S : {{ $facture->annee_scolaire }}</h4>
+								<h4>A/S : {{ $facture->annee_scolaire ?? "" }}</h4>
 								<h4 style="text-align: center;">RECU N° {{ $facture->id }}</h4>
 								<hr>
 							</header>
@@ -153,7 +153,7 @@
 								<div class="col-md-6">
 									<div class="d-flex justify-content-between">
 										<label  for="">ANNE SCOLAIRE</label>
-										<label for=""> <b>{{ $anneScolaire->name }}</b> </label>
+										<label for=""> <b>{{ $anneScolaire->name ?? "" }}</b> </label>
 
 									</div>
 								</div>

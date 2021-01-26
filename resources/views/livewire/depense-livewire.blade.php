@@ -73,7 +73,7 @@
 			<h4 class="col-md-1">Liste</h4>
 			<div class="col-md-6">
 				Du <input type="date" wire:model="debut">
-				Au <input type="date" wire:model="fin">
+				Aux <input type="date" wire:model="fin">
 			</div>
 			<div class="col-md-3">
 				

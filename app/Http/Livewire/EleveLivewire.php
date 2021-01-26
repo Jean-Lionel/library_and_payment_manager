@@ -35,9 +35,7 @@ class EleveLivewire extends Component
                                 $query->where('first_name','LIKE','%'.$q.'%')
                                       ->orWhere('last_name','like', '%'.$q.'%')
                                    ; 
-                            }
-
-                           
+                            } 
 
                         })
                         ->paginate();

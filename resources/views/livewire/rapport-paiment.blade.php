@@ -5,7 +5,7 @@
             <select name="" wire:model="selectedSection" id="" class="form-control">
                 <option value="">Choisissez une section</option>
 
-                @foreach($sections as $section)
+               @foreach($sections as $section)
 
                 <option value="{{ $section->id }}">{{ $section->name }}</option>
                 @endforeach
@@ -52,7 +52,7 @@
             </tr>
         </thead>
         <tbody>
-          @foreach($eleves as $key =>$paeiment)
+        {{--   @foreach($eleves as $key =>$paeiment)
           <tr>
              <td>{{ ++$key }}</td>
              <td>{{ $paeiment->eleve->classe->name }}</td>
@@ -61,7 +61,7 @@
            
          </tr>
 
-         @endforeach
+         @endforeach --}}
      </tbody>
  </table>
 </div>

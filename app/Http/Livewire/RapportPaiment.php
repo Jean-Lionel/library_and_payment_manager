@@ -29,42 +29,45 @@ class RapportPaiment extends Component
     public function render()
     {
 
-    	$q = $this->searchKey;
-		$students = Eleve::where('classe_id','=',$this->selectedClasse)
-		->where(function($query) use($q){
-			if($q){
-				$query->where('first_name','LIKE','%'.$q.'%')
-				->orWhere('last_name','like', '%'.$q.'%')
-				; 
-			}	
+    	$q =  '%'.$this->searchKey.'%';
+		// $students = Eleve::where('classe_id','=',$this->selectedClasse)
+		// ->where(function($query) use($q){
+		// 	if($q){
+		// 		$query->where('first_name','LIKE','%'.$q.'%')
+		// 		->orWhere('last_name','like', '%'.$q.'%')
+		// 		; 
+		// 	}	
 
-		})
-		->get();
+		// })
+		// ->get();
 
-	   $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	   					->where('type_paiement','MINERVAL')
-	   					->where('amount' , '>=','7000')
-	   					->get();
+	 //   $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
+	 //   		git 			->where('type_paiement','MINERVAL')
+	 //   					->where('amount' , '>=','7000')
+	 //   					->get();
 
-	   if($this->type_paiement == 'PAYE'){
-	   	  $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	   					->where('type_paiement','MINERVAL')
-	   					->where('amount' , '>=','7000')
-	   					->get();
+	 //   if($this->type_paiement == 'PAYE'){
+	 //   	  $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
+	 //   					->where('type_paiement','MINERVAL')
+	 //   					->where('amount' , '>=','7000')
+	 //   					->get();
 
-	   }else if($this->type_paiement == 'NON PAYE'){
-	   	 $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	   					->where('type_paiement','MINERVAL')
-	   					->where('amount' , '<','7000')
-	   					->get();
-	   }
+	 //   }else if($this->type_paiement == 'NON PAYE'){
+	 //   	 $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
+	 //   					->where('type_paiement','MINERVAL')
+	 //   					->where('amount' , '<','7000')
+	 //   					->get();
+	 //   }
+
+
+    	$eleves = Eleve::all();
 
 
         return view('livewire.rapport-paiment',
 
         	[
 				// 'eleves'=> $students,
-				'eleves' => $eleves
+				'eleves' => null
 			]
 
     );

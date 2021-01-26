@@ -63,6 +63,12 @@
 						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Cantine</a>
 					</li>
 
+					<li class="{{ setActiveRoute('configurations.index') }}">
+						<a href="{{ route('configurations.index') }}"><span class="fa fa-cogs mr-3"></span> Configuration</a>
+					</li>
+
+
+
 					<li class="{{ setActiveRoute('expenses.index') }}">
 						<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3"></span> Depense</a>
 					</li>
@@ -81,8 +87,6 @@
 					</li>
 				</ul>
 
-
-				
 
 			</div>
 		</nav>
