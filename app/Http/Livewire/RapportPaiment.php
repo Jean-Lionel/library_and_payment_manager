@@ -40,19 +40,21 @@ class RapportPaiment extends Component
     {
 
     	$q =  '%'.$this->searchKey.'%';
-		$class_id = $this->selectedClasse;
+		$class_id = $this->classes->map->id;
 
-		
+		if($this->selectedClasse)
+			$class_id = [$this->selectedClasse];
+
 
     	$eleves = DB::table('eleves')
     				->leftJoin('paiments', function($join){
     					$join->on('eleves.id', '=', 'paiments.eleve_id')
     						 ->where('paiments.type_paiement','=','MINERVAL');
-    				})->where('eleves.classe_id','=' ,$class_id)
+    				})->whereIn('eleves.classe_id' ,$class_id)
     				  ->where(function($query) use ($q){
     				  	$query->where('eleves.first_name', 'LIKE', $q)
     				  		  ->orWhere('eleves.last_name', 'LIKE', $q);
-    				 })->paginate();
+    				 })->get();
 
 
         return view('livewire.rapport-paiment',
@@ -62,6 +64,7 @@ class RapportPaiment extends Component
 				'eleves' => $eleves
 			]
 
+			
     );
     }
 
