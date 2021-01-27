@@ -83,6 +83,7 @@
 
     </div>
 
+    @if($eleves->count() > 0)
     <div> <button onclick="clickButton()">Imprimer</button></div>
 <div id="impression">
 
@@ -167,6 +168,8 @@
         </table>
 
     </div>
+
+    @endif
 
 </div>
 

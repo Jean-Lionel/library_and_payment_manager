@@ -34,7 +34,7 @@
 						<td class="">
 
 							<div class="d-flex justify-content-around">
-								<a href="{{ route('sections.show',$section) }}" class="btn btn-sm btn-info">Afficher les élèves</a>
+								<a href="{{ route('sections.show',$section) }}" class="btn btn-sm btn-info">Afficher les classes</a>
 
 								<a href="{{ route('sections.edit',$section) }}" class="btn btn-sm btn-info">Modifier</a>
 

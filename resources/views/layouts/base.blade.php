@@ -64,7 +64,7 @@
 					</li>
 
 					<li class="{{ setActiveRoute('configurations.index') }}">
-						<a href="{{ route('configurations.index') }}"><span class="fa fa-cogs mr-3"></span> Configuration</a>
+						<a href="{{ route('configurations.index') }}"><span class="fa  	fa fa-cog mr-3"></span> Configuration</a>
 					</li>
 
 
@@ -74,7 +74,7 @@
 					</li>
 
 					<li class="{{ setActiveRoute('rapport') }}">
-						<a href="{{ route('rapport') }}"><span class="fa fa-bar-chart mr-3"></span> Rapport</a>
+						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3"></span> Rapport</a>
 					</li>
 					<li>
 						
@@ -82,7 +82,7 @@
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                         @csrf
 
-                                        <button type="submit"><span class="fa fa-paper-plane mr-3"></span> Se deconnecter</button>
+                                        <button type="submit"><span class="fa fa-lock mr-3"></span> Se deconnecter</button>
                            </form>
 					</li>
 				</ul>
