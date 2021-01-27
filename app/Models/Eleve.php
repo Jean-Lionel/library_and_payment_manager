@@ -12,7 +12,7 @@ class Eleve extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['first_name','last_name','description','classe_id'];
+    protected $fillable = ['first_name','last_name','description','classe_id','anne_scolaire'];
     
 
     public function classe(){

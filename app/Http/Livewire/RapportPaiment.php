@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\AnneScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Paiment;
@@ -21,6 +22,10 @@ class RapportPaiment extends Component
 	public $type_paiement ;
 	public $eleve;
 	public $classe;
+	public $annee_scolaire;
+	public $anneScolaire;
+	public $trimestre = "PREMIER TRIMESTRE";
+    public $category_paiement = "MINERVAL";
 
 	/**
 	 * 
@@ -31,6 +36,8 @@ class RapportPaiment extends Component
 
 		// dd($this->sections->map->id);
 		$this->classes = collect();
+		$this->anneScolaire = AnneScolaire::latest()->get();
+		$this->annee_scolaire = AnneScolaire::latest()->first()->name ?? "";
 
 	    $this->eleve = new Eleve;
 	    $this->classe = new Classe;
@@ -40,21 +47,51 @@ class RapportPaiment extends Component
     {
 
     	$q =  '%'.$this->searchKey.'%';
-		$class_id = $this->classes->map->id;
+		$class_id = $this->classes->map->id ?? 1;
+		$type_paiement =  $this->type_paiement;
+        $annee_scolaire =  $this->annee_scolaire;
+        $trimestre =  $this->trimestre;
+        $category_paiement =  $this->category_paiement; // MINERVAL OU CONTRIBUTION
 
+        
+
+		// dump($type_paiement);
 		if($this->selectedClasse)
 			$class_id = [$this->selectedClasse];
 
 
     	$eleves = DB::table('eleves')
-    				->leftJoin('paiments', function($join){
+    				->leftJoin('paiments', function($join) use( $annee_scolaire,  $trimestre, $category_paiement){
     					$join->on('eleves.id', '=', 'paiments.eleve_id')
-    						 ->where('paiments.type_paiement','=','MINERVAL');
-    				})->whereIn('eleves.classe_id' ,$class_id)
-    				  ->where(function($query) use ($q){
-    				  	$query->where('eleves.first_name', 'LIKE', $q)
+
+    					->where('paiments.type_paiement','=',$category_paiement)
+    					->where('paiments.annee_scolaire', '=', $annee_scolaire)
+    					 ->where('paiments.trimestre','=', $trimestre)
+
+    					;
+
+    					})->whereIn('eleves.classe_id' ,$class_id)
+    					  ->where(function($query) use ($type_paiement){
+
+    					  	if($type_paiement == 'PAYE'){
+    					  		$query->where('paiments.amount', '>=', 7000);
+    					  	}
+
+    					  	if($type_paiement == 'NON PAYE')
+    					  	{
+    					  		 $query->where('paiments.amount', '<', 7000)
+    					  		 		->orWhere('paiments.amount', '=', NULL);
+    					  	}
+    					  	
+    					  })
+    				  	 ->where(function($query) use ($q){
+    				  		$query->where('eleves.first_name', 'LIKE', $q)
     				  		  ->orWhere('eleves.last_name', 'LIKE', $q);
-    				 })->get();
+    				 })
+    				  	 ->where('eleves.anne_scolaire','=',$this->annee_scolaire)
+    				  	 // ->where('paiments.annee_scolaire', '=', $this->annee_scolaire)
+
+    				  	 ->get();
 
 
         return view('livewire.rapport-paiment',
@@ -64,7 +101,7 @@ class RapportPaiment extends Component
 				'eleves' => $eleves
 			]
 
-			
+
     );
     }
 

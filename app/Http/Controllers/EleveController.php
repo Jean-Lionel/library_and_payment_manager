@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnneScolaire;
 use App\Models\Classe;
 use App\Models\Compte;
 use App\Models\Eleve;
@@ -59,6 +60,7 @@ class EleveController extends Controller
                                     ->where('classe_id', $request->classe_id)
                             ],
             'classe_id' => 'required',
+            
         ]);
 
         $compte = null;
@@ -66,7 +68,11 @@ class EleveController extends Controller
        
 
         DB::transaction(function() use ($request, $compte) {
-             $eleve = Eleve::create($request->all());
+
+            $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
+
+
+             $eleve = Eleve::create(array_merge($request->all(), ['anne_scolaire' =>  $anne_scolaire ]));
              $compte = Compte::create([
                 'name' => 'SE-'.$eleve->id,
                 'eleve_id' => $eleve->id,
