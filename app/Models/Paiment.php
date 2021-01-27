@@ -19,8 +19,9 @@ class Paiment extends Model
     	'created_at'
     ];
 
-
     public function eleve(){
     	return $this->belongsTo('App\Models\Eleve', 'eleve_id', 'id');
     }
+
+    
 }

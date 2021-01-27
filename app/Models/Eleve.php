@@ -28,4 +28,9 @@ class Eleve extends Model
     	return $this->first_name .'  '. $this->last_name;
     }
 
+    public static function getEleveById($id)
+    {
+        return self::find($id);
+    }
+
 }

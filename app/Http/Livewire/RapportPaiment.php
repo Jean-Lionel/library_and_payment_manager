@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Paiment;
 use App\Models\Section;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class RapportPaiment extends Component
@@ -17,57 +19,47 @@ class RapportPaiment extends Component
 	public $selectedSection=null;
 	public $selectedClasse=null;
 	public $type_paiement ;
+	public $eleve;
+	public $classe;
 
+	/**
+	 * 
+	 */
 	public function mount(){
 		
 		$this->sections = Section::all();
 
 		// dd($this->sections->map->id);
 		$this->classes = collect();
+
+	    $this->eleve = new Eleve;
+	    $this->classe = new Classe;
 	}
 
     public function render()
     {
 
     	$q =  '%'.$this->searchKey.'%';
-		// $students = Eleve::where('classe_id','=',$this->selectedClasse)
-		// ->where(function($query) use($q){
-		// 	if($q){
-		// 		$query->where('first_name','LIKE','%'.$q.'%')
-		// 		->orWhere('last_name','like', '%'.$q.'%')
-		// 		; 
-		// 	}	
+		$class_id = $this->selectedClasse;
 
-		// })
-		// ->get();
+		
 
-	 //   $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	 //   		git 			->where('type_paiement','MINERVAL')
-	 //   					->where('amount' , '>=','7000')
-	 //   					->get();
-
-	 //   if($this->type_paiement == 'PAYE'){
-	 //   	  $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	 //   					->where('type_paiement','MINERVAL')
-	 //   					->where('amount' , '>=','7000')
-	 //   					->get();
-
-	 //   }else if($this->type_paiement == 'NON PAYE'){
-	 //   	 $eleves = Paiment::whereIn('eleve_id',  $students->map->id)
-	 //   					->where('type_paiement','MINERVAL')
-	 //   					->where('amount' , '<','7000')
-	 //   					->get();
-	 //   }
-
-
-    	$eleves = Eleve::all();
+    	$eleves = DB::table('eleves')
+    				->leftJoin('paiments', function($join){
+    					$join->on('eleves.id', '=', 'paiments.eleve_id')
+    						 ->where('paiments.type_paiement','=','MINERVAL');
+    				})->where('eleves.classe_id','=' ,$class_id)
+    				  ->where(function($query) use ($q){
+    				  	$query->where('eleves.first_name', 'LIKE', $q)
+    				  		  ->orWhere('eleves.last_name', 'LIKE', $q);
+    				 })->paginate();
 
 
         return view('livewire.rapport-paiment',
 
         	[
 				// 'eleves'=> $students,
-				'eleves' => null
+				'eleves' => $eleves
 			]
 
     );

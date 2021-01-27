@@ -22,4 +22,8 @@ class Classe extends Model
     public function eleves(){
     	return $this->hasMany('App\Models\Eleve');
     }
+
+    public function getClasseById($id){
+        return self::find($id);
+    }
 }

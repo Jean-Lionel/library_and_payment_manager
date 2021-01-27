@@ -52,16 +52,19 @@
             </tr>
         </thead>
         <tbody>
-        {{--   @foreach($eleves as $key =>$paeiment)
+          @foreach($eleves as $key =>$paiement)
           <tr>
-             <td>{{ ++$key }}</td>
-             <td>{{ $paeiment->eleve->classe->name }}</td>
-             <td>{{ $paeiment->eleve->first_name }} {{ $paeiment->eleve->last_name }}</td>
-             <td>{{ $paeiment->amount }}</td>
+            <td>{{ ++$key}}</td>
+
+           
+
+            <td>{{ $classe->getClasseById($paiement->classe_id)->name}}</td>
+            <td>{{ $paiement->first_name .'  '. $paiement->last_name }}</td>
+            <td>{{ $paiement->amount }}</td>
            
          </tr>
 
-         @endforeach --}}
+         @endforeach
      </tbody>
  </table>
 </div>
