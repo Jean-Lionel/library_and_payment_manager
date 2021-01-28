@@ -4,16 +4,27 @@ namespace App\Http\Livewire;
 
 use App\Models\Etagere;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EtagereLivewire extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	public $name;
 	public $description;
 
 
     public function render()
     {
-        return view('livewire.etagere-livewire');
+        $etageres = Etagere::latest()->paginate();
+
+        return view('livewire.etagere-livewire',
+            [
+                'etageres' => $etageres
+            ]
+
+    );
     }
 
     protected $rules = [
@@ -29,7 +40,9 @@ class EtagereLivewire extends Component
     		'name' => $this->name,
     		'description' => $this->description
     	]);
+        session()->flash('message', 'Réussi');
 
-    	session()->flash('message', 'Réussi');
+        $this->render();
+
     }
 }

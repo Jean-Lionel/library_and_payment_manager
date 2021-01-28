@@ -16,4 +16,9 @@ class BibliothequeController extends Controller
 	{
 		return view('bibliotheque.etageres');
 	}
+
+	public function books()
+	{
+		return view('bibliotheque.books');
+	}
 }

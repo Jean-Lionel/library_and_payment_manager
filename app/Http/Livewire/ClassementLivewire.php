@@ -4,9 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Classement;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ClassementLivewire extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	public $name;
 	public $etagere_id;
 

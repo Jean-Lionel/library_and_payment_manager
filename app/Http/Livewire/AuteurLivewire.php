@@ -4,11 +4,18 @@ namespace App\Http\Livewire;
 
 use App\Models\Auteur;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AuteurLivewire extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	public $name;
 	public $pay_orgine;
+
+
+
 
     public function render()
     {

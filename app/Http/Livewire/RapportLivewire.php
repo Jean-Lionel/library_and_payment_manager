@@ -7,9 +7,13 @@ use App\Models\Order;
 use App\Models\Paiment;
 use App\Models\Section;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class RapportLivewire extends Component
 { 
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 
 
     public function mount(){

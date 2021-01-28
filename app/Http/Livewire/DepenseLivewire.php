@@ -4,9 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Depense;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DepenseLivewire extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	public $action;
 	public $montant;
 	public $description;

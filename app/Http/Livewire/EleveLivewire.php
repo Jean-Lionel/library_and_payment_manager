@@ -6,9 +6,13 @@ use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Section;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EleveLivewire extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	private $eleves;
     public $sections;
     public $classes;

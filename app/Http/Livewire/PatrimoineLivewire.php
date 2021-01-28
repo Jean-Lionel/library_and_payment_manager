@@ -4,9 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Patrimoine;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PatrimoineLivewire extends Component
 {
+	use WithPagination;
+
+	protected $paginationTheme ='bootstrap';
 
 	public  $identifiant=null;
 	public  $name;

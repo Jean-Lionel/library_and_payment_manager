@@ -67,6 +67,8 @@
     				@endforelse
     			</tbody>
     		</table>
+
+            {{ $auteurs->links() }}
     		
     	</div>
     </div>

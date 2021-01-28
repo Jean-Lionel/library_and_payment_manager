@@ -4,9 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Stock;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class StockLivewire extends Component
 {
+	use WithPagination;
+
+	protected $paginationTheme ='bootstrap';
 	public $identifiant;
 	public $name;
 	private $stocks;

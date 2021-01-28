@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BibliothequeController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ConfigurationController;
@@ -51,6 +52,8 @@ Route::resource('configurations', ConfigurationController::class);
 Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
 Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
+
+Route::get('books', [BibliothequeController::class, 'books'])->name('books');
 
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
