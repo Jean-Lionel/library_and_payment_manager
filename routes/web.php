@@ -55,6 +55,10 @@ Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etage
 
 Route::get('books', [BibliothequeController::class, 'books'])->name('books');
 
+Route::get('etagers', [BibliothequeController::class, 'etagers'])->name('etagers');
+
+Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
+
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
 

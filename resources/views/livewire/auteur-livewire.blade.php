@@ -25,6 +25,10 @@
     			<div class="form-group">
     				<label>Nom de l'auteur</label>
     				<input class="form-control" type="text" wire:model="name" name="">
+
+                    @error('name')
+                            <span class="error text-danger">{{ $message }}</span>
+                            @enderror
     			</div>
 
 

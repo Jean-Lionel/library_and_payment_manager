@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Classement;
+use App\Models\Etagere;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,10 +14,20 @@ class ClassementLivewire extends Component
     protected $paginationTheme ='bootstrap';
 	public $name;
 	public $etagere_id;
+    public $etageres;
+
+    public function mount()
+    {
+        $this->etageres = Etagere::all();
+    }
 
     public function render()
     {
-        return view('livewire.classement-livewire');
+        $classements = Classement::all();
+        return view('livewire.classement-livewire', [
+
+            'classements' => $classements
+        ]);
     }
 
     public $rules = [
@@ -35,5 +46,7 @@ class ClassementLivewire extends Component
     	]);
 
     	session()->flash('message', "Réussi");
+
+        $this->reset();
     }
 }

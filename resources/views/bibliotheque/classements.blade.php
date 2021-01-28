@@ -3,7 +3,7 @@
 @section('content')
 @include('bibliotheque.navbar')
 
-<livewire:book-livewire/>
+<livewire:classement-livewire/>
 
 
 @stop

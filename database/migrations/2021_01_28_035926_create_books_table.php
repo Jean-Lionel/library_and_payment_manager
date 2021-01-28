@@ -19,6 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('isbn')->nullable();
             $table->string('edition')->nullable();
             $table->float('nombre_exemplaire')->nullable();
+            $table->float('nombre_livre_retire')->nullable();
             $table->foreignId('auteur_id');
             $table->foreignId('classement_id');
             $table->timestamps();
