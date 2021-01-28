@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BibliothequeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ConfigurationController;
@@ -46,6 +47,10 @@ Route::resource('categories', CategoryController::class);
 Route::resource('ventes', VenteController::class);
 Route::resource('expenses', DepenseController::class);
 Route::resource('configurations', ConfigurationController::class);
+
+Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
+
+Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
 
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 

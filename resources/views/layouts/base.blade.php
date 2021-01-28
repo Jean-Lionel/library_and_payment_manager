@@ -44,6 +44,8 @@
 			<div class="p-4">
 				<h1><a href="/" class="logo">L. DU SAINT ESPRIT</a></h1>
 				<ul class="list-unstyled components mb-5">
+
+
 					<li class=" {{ setActiveRoute('sections.index') }}">
 						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>
 					</li>
@@ -53,6 +55,12 @@
 					<li  class="{{ setActiveRoute('paiements.index') }}">
 						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
 					</li>
+
+
+					<li class="{{ setActiveRoute('bibliotheque') }}">
+						<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3"></span> Bibliothèque</a>
+					</li>
+
 					<li class="{{ setActiveRoute('patrimoines.index') }}">
 						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
 					</li>

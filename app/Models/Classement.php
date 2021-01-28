@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classement extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    protected $guarded = [];
 }
