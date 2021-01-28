@@ -56,6 +56,11 @@ Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etage
 Route::get('books', [BibliothequeController::class, 'books'])->name('books');
 
 Route::get('etagers', [BibliothequeController::class, 'etagers'])->name('etagers');
+Route::get('professeurs', [BibliothequeController::class, 'professeurs'])->name('professeurs');
+
+Route::get('lecteurs', [BibliothequeController::class, 'lecteurs'])->name('lecteurs');
+Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts');
+
 
 Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
 

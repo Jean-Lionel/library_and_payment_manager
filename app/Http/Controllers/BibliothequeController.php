@@ -31,4 +31,18 @@ class BibliothequeController extends Controller
 	{
 		return view('bibliotheque.etagers');
 	}
+
+	public function professeurs(){
+		return view('bibliotheque.professeurs');
+	}
+
+	public function lecteurs()
+	{
+		return view('bibliotheque.lecteurs');
+	}
+
+	public function empruts()
+	{
+		return view('bibliotheque.empruts');
+	}
 }
