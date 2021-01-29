@@ -23,6 +23,7 @@ class ClassementLivewire extends Component
 
     public function render()
     {
+        $this->etageres = Etagere::all();
         $classements = Classement::all();
         return view('livewire.classement-livewire', [
 

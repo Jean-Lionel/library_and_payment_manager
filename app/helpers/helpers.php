@@ -15,7 +15,6 @@ function setActiveRoute(string $route): string
 
 //Cart function 
 
-
 function searchProduct($id)
 {
 

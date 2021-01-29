@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateElevesTable extends Migration
 {
     /**
+     * 
      * Run the migrations.
      *
      * @return void

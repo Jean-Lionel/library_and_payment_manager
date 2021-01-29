@@ -12,6 +12,7 @@ class BookLivewire extends Component
 
 	public $title;
 	public $isbn;
+	public $identification;
 	public $nombre_exemplaire;
 	public $edition;
 	public $auteur_id;
@@ -39,6 +40,9 @@ class BookLivewire extends Component
     {
     	$books = Book::latest()->paginate();
 
+    	$this->classements = Classement::all();
+		$this->authors = Auteur::all();
+
         return view('livewire.book-livewire',['books'=>$books]);
     }
 
@@ -46,8 +50,7 @@ class BookLivewire extends Component
     {
     	$this->validate();
 
-    	Book::create([
-    		
+    	$data = [
     		'title' => $this->title,
     		'nombre_exemplaire' => $this->nombre_exemplaire,
     		'auteur_id' => $this->auteur_id,
@@ -55,9 +58,34 @@ class BookLivewire extends Component
     		'edition' => $this->edition,
     		'isbn' => $this->isbn
 
-    	]);
+    	];
+
+    	if($this->identification){
+    		$book = Book::where('id', $this->identification)->firstOrFail();
+
+    		$book->update($data);
+
+    	}else{
+    		Book::create($data);
+    	}
+
+    	
 
     	$this->reset();
+
+    }
+
+    public function updateBook($id)
+    {
+    	$book = Book::find($id);
+
+    	$this->identification = $book->id;
+    	$this->title = $book->title;
+    	$this->nombre_exemplaire = $book->nombre_exemplaire;
+    	$this->classement_id = $book->classement_id;
+    	$this->edition = $book->edition;
+    	$this->isbn = $book->isbn;
+    	$this->auteur_id = $book->auteur_id;
 
     }
 }

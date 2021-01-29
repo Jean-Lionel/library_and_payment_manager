@@ -63,14 +63,24 @@ class EleveController extends Controller
             
         ]);
 
-        $compte = null;
+        // $compte = null;
+        // 
+        
+        // dd($request->all());
 
        
 
-        DB::transaction(function() use ($request, $compte) {
+        // DB::transaction(function() use ($request) {
 
-            $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
+           
 
+        // });
+
+
+        try {
+            DB::beginTransaction();
+
+             $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
 
              $eleve = Eleve::create(array_merge($request->all(), ['anne_scolaire' =>  $anne_scolaire ]));
              $compte = Compte::create([
@@ -82,12 +92,18 @@ class EleveController extends Controller
 
             Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
 
-        });
 
-      
+            DB::commit();
+            
+        } catch (\Exception $e) {
 
+            dump($e->getMessage());
 
+            DB::rollback();
+            
+        }
 
+    
         
   
 

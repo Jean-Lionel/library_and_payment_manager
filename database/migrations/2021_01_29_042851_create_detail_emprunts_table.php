@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmprutsTable extends Migration
+class CreateDetailEmpruntsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateEmprutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('empruts', function (Blueprint $table) {
+        Schema::create('detail_emprunts', function (Blueprint $table) {
             $table->id();
-            $table->integer('eleve_id')->nullable();
-            $table->integer('professeur_id')->nullable();
-            $table->integer('lecteur_id')->nullable();
-            $table->string('type_lecteur')->nullable();
-            $table->date('date_retrait');
-            $table->date('date_retour');
+            $table->foreignId('emprut_id');
+            $table->foreignId('book_id');
             $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +30,6 @@ class CreateEmprutsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empruts');
+        Schema::dropIfExists('detail_emprunts');
     }
 }
