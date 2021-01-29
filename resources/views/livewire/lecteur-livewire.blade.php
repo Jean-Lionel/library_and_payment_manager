@@ -70,8 +70,11 @@
 
                 @endforelse
             </tbody>
+
+
 		</table>
-    		
+
+    		  {{  $lecteurs->links() }}
     	</div>
     </div>
 </div>

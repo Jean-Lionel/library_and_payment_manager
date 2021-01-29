@@ -18,7 +18,8 @@ class ProfesseurLivewire extends Component
 	
     public function render()
     {
-    	$proffesseurs = Professeur::latest()->paginate();
+    	$proffesseurs = Professeur::latest()
+        ->where('name' , 'like', '%'.$this->search.'%')->paginate();
 
         return view(
             'livewire.professeur-livewire',

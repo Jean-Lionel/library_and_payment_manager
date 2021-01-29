@@ -4,9 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Lecteur;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LecteurLivewire extends Component
 {
+
+    use WithPagination;
+
+    protected $paginationTheme ='bootstrap';
 	public $name;
 	public $telephone;
 	public $description;
