@@ -18,7 +18,6 @@ nombre_exemplaire
 edition
 auteur_id
 classement_id --}}
-
     <div class="row">
     	<div class="col-md-4">
     		<h4>Ajouter un livre</h4>
@@ -119,8 +118,10 @@ classement_id --}}
                             <td>{{ $book->nombre_livre_retire ?? 0 }}</td>
                             <td>{{ $book->nombre_livre_retire ?? 0 }}</td>
 
-                            <td>
+                            <td class="d-flex">
                                 <button class="btn btn-warning" wire:click="updateBook({{ $book->id }})" title="Modifier"> <i class="fa fa-edit"></i> </button>
+
+                                <button wire:click="supprimerLivre({{ $book->id }})" class="ml-3"> <i class="fa fa-trash"></i> </button>
                             </td>
     					</tr>
     				@empty

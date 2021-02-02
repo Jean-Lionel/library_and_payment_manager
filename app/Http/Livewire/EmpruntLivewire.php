@@ -24,6 +24,7 @@ class EmpruntLivewire extends Component
     public $empreteur;
     public $book_title;
     public $choosedBook;
+    public $nbre_jour;
 
     //Trois type de personnes peuvent empruter les livres
     //Proffesseur , Les eleves , Les particuliers
@@ -55,9 +56,7 @@ class EmpruntLivewire extends Component
 
         }
        
-
         $books =  Book::where('title', 'like', '%'. $this->book_title.'%')->latest()->paginate();
-
 
         return view('livewire.emprunt-livewire',
             [
@@ -100,6 +99,20 @@ class EmpruntLivewire extends Component
         //dump("Je suis cool");
     }
 
+    protected $rules = [
+        'nbre_jour' => 'required|min:0|max:100'
+
+    ];
+
+    // public function updatedNbreJour($val){
+    //     $this->validateOnly($val);
+    // }
+
+
+    public function updated($propertyName){
+        $this->validateOnly($propertyName);
+    }
+
     public function validerRetrait()
     {
         //Voir le commandeur des livres
@@ -108,7 +121,12 @@ class EmpruntLivewire extends Component
         //Enlever le livre dans le bibliotheque
         //Enregistre les information
         
-      
+
+       if($this->nbre_jour > 100 or $this->nbre_jour <0)
+       {
+        session()->flash('error',"Le nombre de jour doit être  entre 1 et 100 ");
+        return;
+       }
 
         if(!$this->empreteur )
         {
@@ -125,30 +143,45 @@ class EmpruntLivewire extends Component
         }
 
         // eleve_id`, `professeur_id`, `lecteur_id`, `type_lecteur`, `date_retrait`, `date_retour`, `user_id`, `created_at`, `updated_at`
-        // 
-    
-
+        //  
         
 
+        if($this->noLongerStock()){
+              session()->flash('error',"Tout les livres choisissent ne sont pas disponible dans la bibliotheque ");
+              return;  
+        }
+
+ 
         try {
 
             DB::beginTransaction();
 
+            $dateRetrait = Carbon::now();
+            $dateRetour = $dateRetrait->addDays($this->nbre_jour);
+
             $emprut = Emprut::create([
-                'eleve_id' => 1,
+                'eleve_id' => $this->empreteur->id,
                 'professeur_id' => 1,
                 'lecteur_id' => 1,
-                'type_lecteur' => 1,
-                'date_retrait' => Carbon::now(),
-                'date_retour' => Carbon::now(),
+                'type_lecteur' => $this->type_lecteur,
+                'detail_emprunt' => json_encode($this->extractCart()),
+                'date_retrait' =>  Carbon::now() ,
+                'date_retour' => $dateRetour,
 
             ]);
 
-            DetailEmprunt::create([
-                'emprut_id' => $emprut->id,
-                'book_id' => 1
-            ]);
-            
+             $this->storeDetailBook( $emprut->id);
+             //Mise a jour du stock
+              $this->stockUpdated();
+
+              $this->resetinput();
+
+              session()->flash('message',"
+                Opération réussi avec succès
+
+
+                ");
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -156,4 +189,82 @@ class EmpruntLivewire extends Component
             
         }
     }
+
+
+    private function storeDetailBook($emprut_id)
+    {
+
+        foreach (Cart::content() as $item) {
+
+            DetailEmprunt::create([
+                'emprut_id' => $emprut_id,
+                'book_id' => $item->id,
+                'quantite' => $item->qty,
+            ]);
+
+        }
+
+    }
+
+    private function extractCart(){
+
+        $products = [];
+        foreach (Cart::content() as $item) {
+            // dump($item);
+
+            $products[] = [
+                'id' => $item->id,
+                'name' => $item->name,
+                'quantite' => $item->qty,
+                
+            ];
+          
+        }
+
+        $products['lecteur'] = $this->empreteur->toArray();
+
+        return $products;
+    }
+
+
+    private function resetinput(){
+        Cart::destroy();
+        $this->empreteur = null;
+        $this->nbre_jour = "";
+        $this->searchKey = "";
+    }
+
+
+
+    private function noLongerStock()
+    {
+        foreach (Cart::content() as $item) {
+            $product = Book::find($item->id);
+            
+            $qty = $product->nombre_livre_retire + $item->qty;
+            if( $qty > $product->nombre_exemplaire  )
+                return true;
+        }
+        return false;
+    }
+
+    private function stockUpdated()
+    {
+        foreach (Cart::content() as $item) {
+            $book = Book::find($item->id);
+            $book->update(
+                ['nombre_livre_retire' => $book->nombre_livre_retire + $item->qty]);
+        }
+    }
+
+    //Retrait du livre
+    //Rechercher le livre
+    //Trouver le livre 
+    //Verfier si le livre est disponible
+    //Si le livre existe Accepter le retrait 
+    //Si non Rrefus du retrait
+    //Diminuer la quantite en stock
+    //
+
+
 }

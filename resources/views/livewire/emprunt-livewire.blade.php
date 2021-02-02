@@ -49,7 +49,7 @@
 							</div>
 						</div>
 						@empty
-						<p>Rechercher La haut</p>
+						<p>Rechercher</p>
 						@endforelse
 				
 				</div>
@@ -64,6 +64,7 @@
 				<li class="list-group-item d-flex justify-content-between">
 					
 					<span>{{ $selectBook->name }}</span>
+					<span>Nombre de livre :  <b>{{ $selectBook->qty }}</b></span>
 					<span>
 						 <button wire:click="removeItem('{{ $selectBook->rowId }}')" class="btn-danger">-</button>
 					</span>
@@ -73,6 +74,11 @@
 				@endforelse
 				</ul>
 
+				<input type="number" min="0" max="60" wire:model="nbre_jour">
+				@error('nbre_jour')
+				<span class="error text-danger"> {{ $message }}</span>
+
+				@enderror
 				<button wire:click="validerRetrait()" class="btn btn-info">Valider le retrait</button>
 			</div>
 		</div>

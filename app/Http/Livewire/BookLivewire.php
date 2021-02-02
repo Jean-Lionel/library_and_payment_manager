@@ -69,8 +69,6 @@ class BookLivewire extends Component
     		Book::create($data);
     	}
 
-    	
-
     	$this->reset();
 
     }
@@ -78,7 +76,7 @@ class BookLivewire extends Component
     public function updateBook($id)
     {
     	$book = Book::find($id);
-
+        
     	$this->identification = $book->id;
     	$this->title = $book->title;
     	$this->nombre_exemplaire = $book->nombre_exemplaire;
@@ -86,6 +84,12 @@ class BookLivewire extends Component
     	$this->edition = $book->edition;
     	$this->isbn = $book->isbn;
     	$this->auteur_id = $book->auteur_id;
+
+    }
+
+    public function supprimerLivre($id)
+    {
+        $book = Book::find($id)->delete();
 
     }
 }

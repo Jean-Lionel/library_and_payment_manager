@@ -18,6 +18,7 @@ class CreateDetailEmpruntsTable extends Migration
             $table->foreignId('emprut_id');
             $table->foreignId('book_id');
             $table->foreignId('user_id');
+            $table->float('quantite');
             $table->timestamps();
             $table->softDeletes();
         });
