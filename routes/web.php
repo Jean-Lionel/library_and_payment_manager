@@ -52,6 +52,7 @@ Route::resource('configurations', ConfigurationController::class);
 Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
 Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
+Route::get('history', [BibliothequeController::class, 'history'])->name('history');
 
 Route::get('books', [BibliothequeController::class, 'books'])->name('books');
 

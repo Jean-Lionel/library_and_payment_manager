@@ -45,4 +45,9 @@ class BibliothequeController extends Controller
 	{
 		return view('bibliotheque.empruts');
 	}
+
+	public function history()
+	{
+		return view('bibliotheque.history');
+	}
 }

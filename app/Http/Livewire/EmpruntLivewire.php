@@ -212,7 +212,7 @@ class EmpruntLivewire extends Component
         foreach (Cart::content() as $item) {
             // dump($item);
 
-            $products[] = [
+            $products['books'][] = [
                 'id' => $item->id,
                 'name' => $item->name,
                 'quantite' => $item->qty,
@@ -240,7 +240,7 @@ class EmpruntLivewire extends Component
     {
         foreach (Cart::content() as $item) {
             $product = Book::find($item->id);
-            
+
             $qty = $product->nombre_livre_retire + $item->qty;
             if( $qty > $product->nombre_exemplaire  )
                 return true;

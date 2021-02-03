@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,5 +21,9 @@ class DetailEmprunt extends Model
     	self::creating(function($model){
     		$model->user_id = Auth::user()->id ?? 0;
     	});
+    }
+
+    public function book(){
+    	return $this->belongsTo(Book::class);
     }
 }

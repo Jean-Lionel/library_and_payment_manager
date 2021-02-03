@@ -116,7 +116,7 @@ classement_id --}}
     						<td>{{ $book->edition }}</td>
                             <td>{{ $book->nombre_exemplaire }}</td>
                             <td>{{ $book->nombre_livre_retire ?? 0 }}</td>
-                            <td>{{ $book->nombre_livre_retire ?? 0 }}</td>
+                            <td>{{($book->nombre_exemplaire - $book->nombre_livre_retire) ?? 0 }}</td>
 
                             <td class="d-flex">
                                 <button class="btn btn-warning" wire:click="updateBook({{ $book->id }})" title="Modifier"> <i class="fa fa-edit"></i> </button>
