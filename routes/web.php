@@ -65,6 +65,8 @@ Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts
 
 Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
 
+Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
+
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
 

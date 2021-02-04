@@ -22,8 +22,12 @@ class EleveController extends Controller
     public function index()
     {
         $eleves = Eleve::paginate();
+        //$eleves = Eleve::all();
 
         //dd($eleves);
+        
+
+       
 
         return view('eleves.eleve', compact('eleves'));
         
@@ -92,20 +96,12 @@ class EleveController extends Controller
 
             Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
 
-
             DB::commit();
             
         } catch (\Exception $e) {
-
             dump($e->getMessage());
-
-            DB::rollback();
-            
+            DB::rollback();  
         }
-
-    
-        
-  
 
         return back();
     }

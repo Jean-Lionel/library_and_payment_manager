@@ -50,4 +50,9 @@ class BibliothequeController extends Controller
 	{
 		return view('bibliotheque.history');
 	}
+
+	public function retourlivre()
+	{
+		return view('bibliotheque.retourlivre');
+	}
 }

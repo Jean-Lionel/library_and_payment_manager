@@ -1,14 +1,11 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
-
-    <div class="row">
-    	
+    <div class="row"> 	
     	<table class="table table-bordered">
     		<thead>
     			<tr>
     				<th>Lecteur</th>
     				<th>Livre Retirer</th>
-                    <th>Nombre d'ex</th>
     				<th>date de retrait</th>
     				<th>Date de retour</th>
     			</tr>
@@ -17,7 +14,10 @@
     		<tbody>
     			@forelse($empruts as $emprut)
     			<tr>
-    				<td>23</td>
+    				<td>
+                        {{ $emprut->eleve->fullName }} <br>
+                        Classe : {{ $emprut->eleve->classe->name }}
+                    </td>
     				<td>
     					<ul>
                             @foreach($emprut->detailsBooks as $value)
@@ -28,9 +28,7 @@
                                     {{ $value->quantite }}</span>
                             </li>
                             <hr>
-
-                            @endforeach
-                            
+                            @endforeach 
                         </ul>
     				</td>
     				<td>{{ $emprut->date_retrait }}</td>

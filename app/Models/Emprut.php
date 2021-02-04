@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\DetailEmprunt;
+use App\Models\Eleve;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,5 +27,9 @@ class Emprut extends Model
     public function detailsBooks()
     {
     	return $this->hasMany(DetailEmprunt::class);
+    }
+
+    public function eleve(){
+        return $this->belongsTo(Eleve::class);
     }
 }

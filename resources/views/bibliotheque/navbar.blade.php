@@ -30,7 +30,7 @@
 	<div class="col">
 		<ul class="list-inline">
 			<li class="list-group-item {{ setActiveRoute('classements') }}"><a href="{{ route('classements') }}"> <i class=" 	fa fa-database mr-2"></i> Classement</a></li>
-			<li class="list-group-item "><a href=""><i class="fa fa-mail-reply-all mr-2"></i>Remise des livres</a></li>
+			<li class="list-group-item {{ setActiveRoute('retourlivre') }} "><a href="{{ route('retourlivre') }}"><i class="fa fa-mail-reply-all mr-2"></i>Remise des livres</a></li>
 		</ul>
 	</div>
 
