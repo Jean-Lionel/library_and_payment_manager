@@ -18,6 +18,8 @@ class CreateRetourLivresTable extends Migration
             $table->string('livre_title');
             $table->float('quantite');
             $table->foreignId('livre_id');
+            $table->foreignId('user_id');
+            $table->foreignId('detail_emprunt_id');
             $table->date('date_retour');
             $table->timestamps();
             $table->softDeletes();

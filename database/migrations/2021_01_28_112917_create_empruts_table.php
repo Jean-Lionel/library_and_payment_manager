@@ -19,6 +19,7 @@ class CreateEmprutsTable extends Migration
             $table->integer('professeur_id')->nullable();
             $table->integer('lecteur_id')->nullable();
             $table->string('type_lecteur')->nullable();
+            $table->string('etat')->nullable();
             $table->date('date_retrait');
             $table->date('date_retour');
             $table->foreignId('user_id');

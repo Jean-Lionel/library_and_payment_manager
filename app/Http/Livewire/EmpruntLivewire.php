@@ -167,6 +167,7 @@ class EmpruntLivewire extends Component
                 'detail_emprunt' => json_encode($this->extractCart()),
                 'date_retrait' =>  Carbon::now() ,
                 'date_retour' => $dateRetour,
+                'etat' => 'NON REMIS',
 
             ]);
 
@@ -200,6 +201,8 @@ class EmpruntLivewire extends Component
                 'emprut_id' => $emprut_id,
                 'book_id' => $item->id,
                 'quantite' => $item->qty,
+                'etat' => 'NON REMIS',
+                'livreRemet' => 0
             ]);
 
         }

@@ -19,7 +19,7 @@
         "laravel/ui": "^3.1",
         "livewire/livewire": "^2.3"
     },
-    "require-dev": {
+    "require-dev":  {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",

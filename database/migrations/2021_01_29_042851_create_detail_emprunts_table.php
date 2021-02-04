@@ -19,6 +19,8 @@ class CreateDetailEmpruntsTable extends Migration
             $table->foreignId('book_id');
             $table->foreignId('user_id');
             $table->float('quantite');
+            $table->float('livreRemet')->default(0);
+            $table->string('etat');
             $table->timestamps();
             $table->softDeletes();
         });

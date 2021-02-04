@@ -15,6 +15,10 @@ class CreateRetraitLivresTable extends Migration
     {
         Schema::create('retrait_livres', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('book_id');
+            $table->string('isbn')->nullable();
+            $table->float('quantite');
+            $table->string('status'); //RETIRE OU NON
             $table->timestamps();
         });
     }
