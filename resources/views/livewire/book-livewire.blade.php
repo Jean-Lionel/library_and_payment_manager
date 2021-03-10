@@ -121,7 +121,7 @@ classement_id --}}
                             <td class="d-flex">
                                 <button class="btn btn-warning" wire:click="updateBook({{ $book->id }})" title="Modifier"> <i class="fa fa-edit"></i> </button>
 
-                                <button wire:click="supprimerLivre({{ $book->id }})" class="ml-3"> <i class="fa fa-trash"></i> </button>
+                                <button wire:click="$emit('triggerDelete', {{$book->id}})" class="ml-3 btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
     					</tr>
     				@empty
@@ -137,3 +137,42 @@ classement_id --}}
     </div>
 
 </div>
+
+
+@push('scripts')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+        @this.on('triggerDelete', bookId =>{
+             Swal.fire({
+                title: 'Are You Sure?',
+                text: 'Order record will be deleted!',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: 'var(--success)',
+                cancelButtonColor: 'var(--primary)',
+                confirmButtonText: 'Delete!'
+            }).then((result) => {
+        //if user clicks on delete
+                if (result.value) {
+             // calling destroy method to delete
+                    @this.call('supprimerLivre',bookId)
+            // success response
+                    responseAlert({title: session('message'), type: 'success'});
+                    
+                } else {
+                    responseAlert({
+                        title: 'Operation Cancelled!',
+                        type: 'success'
+                    });
+                }
+            });
+
+        });
+
+    });
+    
+</script>
+
+@endpush
