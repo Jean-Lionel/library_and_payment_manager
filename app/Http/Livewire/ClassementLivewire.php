@@ -15,6 +15,8 @@ class ClassementLivewire extends Component
 	public $name;
 	public $etagere_id;
     public $etageres;
+    public $identification;
+    public $search;
 
     public function mount()
     {
@@ -24,7 +26,7 @@ class ClassementLivewire extends Component
     public function render()
     {
         $this->etageres = Etagere::all();
-        $classements = Classement::all();
+        $classements = Classement::where('name', 'like', '%'.$this->search.'%')->paginate();
         return view('livewire.classement-livewire', [
 
             'classements' => $classements
@@ -40,14 +42,35 @@ class ClassementLivewire extends Component
     {
     	$this->validate();
 
-    	Classement::create([
-    		'name' => $this->name,
-    		'etagere_id' => $this->etagere_id,
+        if($this->identification){
+            Classement::find($this->identification)->update([
+            'name' => $this->name,
+            'etagere_id' => $this->etagere_id,
 
-    	]);
+        ]);
+
+        }else{
+
+        Classement::create([
+            'name' => $this->name,
+            'etagere_id' => $this->etagere_id,
+
+        ]);
+
+        }
+
+    	
 
     	session()->flash('message', "Réussi");
 
         $this->reset();
+    }
+
+    public function updateClassement($id)
+    {
+        $classement = Classement::find($id);
+        $this->name = $classement->name;
+        $this->etagere_id = $classement->etagere_id;
+        $this->identification = $classement->id;
     }
 }

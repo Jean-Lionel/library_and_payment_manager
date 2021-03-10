@@ -37,6 +37,7 @@
 
     	<div class="col-md-8">
     		<h3 class="text-center">Liste des classements</h3>
+            <input type="text" wire:model="search" class="form-control">
 
     		<table class="table">
     			<thead>
@@ -55,6 +56,9 @@
     					<td>{{ $classement->name }}</td>
     					<td>{{ $classement->etager->name }}</td>
     					<td>{{ $classement->description }}</td>
+                        <td>
+                            <button class="btn-info" wire:click="updateClassement({{ $classement->id}})">Modifier</button>
+                        </td>
     				
     				</tr>
 
