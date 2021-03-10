@@ -15,7 +15,7 @@
 
 				<div class="form-group">
 					<label for="">Téléphone</label>
-					<input class="form-control" type="phone" wire:model="telephone" name="">
+					<input class="form-control" type="text" wire:model="telephone" name="">
 				</div>
 
 				<div class="form-group">
@@ -42,6 +42,7 @@
 						<th>NUMERO</th>
 						<th>NOM ET PRENOM</th>
 						<th>TELEPHONE</th>
+						<th>ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,6 +51,9 @@
 						<td>{{ ++$key }}</td>
 						<td>{{ $proffesseur->name }}</td>
 						<td>{{ $proffesseur->telephone }}</td>
+						<td>
+							<button class="btn-info" wire:click="updateProfesseur({{$proffesseur->id}})">Modifier</button>
+						</td>
 					</tr>
 
 					@empty
