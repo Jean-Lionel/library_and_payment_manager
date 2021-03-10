@@ -49,7 +49,7 @@
                     <h3>Liste des auteurs</h3>
                 </div>
                 <div class="col">
-                     <input type="text" class="" wire:model="search">
+                     <input type="text" class="form-control" wire:model="search">
                 </div>
             </div>
     		

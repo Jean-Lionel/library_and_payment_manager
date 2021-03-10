@@ -16,12 +16,11 @@ class AuteurLivewire extends Component
     public $identification;
     public $search;
 
-
-
-
     public function render()
     {
-    	$auteurs = Auteur::latest()->paginate();
+
+    	$auteurs = Auteur::where('name','like', '%'.$this->search.'%')
+                        ->orWhere('pay_orgine', 'like' , '%'.$this->search.'%')->latest()->paginate();
         return view('livewire.auteur-livewire' ,[
 
         	'auteurs' => $auteurs
@@ -40,7 +39,7 @@ class AuteurLivewire extends Component
         if($this->identification){
             $auteur = Auteur::find($this->identification);
              $auteur->update([
-                
+
                 'name' => $this->name,
                 'pay_orgine' => $this->pay_orgine
 
