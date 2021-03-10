@@ -51,6 +51,7 @@
 					<th>NOM ET PRENOM</th>
 					<th>TELEPHONE</th>
                     <th>DATE</th>
+                    <th>Action</th>
 				</tr>
 			</thead>
 
@@ -61,6 +62,7 @@
                     <td>{{ $lecteur->name }}</td>
                     <td>{{ $lecteur->telephone }}</td>
                     <td>{{ $lecteur->created_at }}</td>
+                    <td><button class="btn-info" wire:click="updateLecteur({{$lecteur->id}})">Modifier</button></td>
                 </tr>
 
                 @empty
