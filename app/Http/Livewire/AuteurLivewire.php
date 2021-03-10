@@ -13,6 +13,8 @@ class AuteurLivewire extends Component
     protected $paginationTheme ='bootstrap';
 	public $name;
 	public $pay_orgine;
+    public $identification;
+    public $search;
 
 
 
@@ -35,17 +37,43 @@ class AuteurLivewire extends Component
     {
     	$this->validate();
 
+        if($this->identification){
+            $auteur = Auteur::find($this->identification);
+             $auteur->update([
+                
+                'name' => $this->name,
+                'pay_orgine' => $this->pay_orgine
 
-    	Auteur::create(
-    		[
-    			'name' => $this->name,
-    			'pay_orgine' => $this->pay_orgine
-    		]
+             ]);
 
-    	);
+             session()->flash('message', 'Modification réussi');
+
+        }else{
+            Auteur::create(
+            [
+                'name' => $this->name,
+                'pay_orgine' => $this->pay_orgine
+            ]
+
+             );
+
+             session()->flash('message', 'Enregistrement réussi');
+
+        }
+
+    	
 
     	$this->reset();
 
-    	 session()->flash('message', 'Enregistrement réussi');
+    	
+    }
+
+    public function updateAuteur($id)
+    {
+        $auteur = Auteur::find($id);
+        $this->name = $auteur->name;
+        $this->pay_orgine = $auteur->pay_orgine;
+        $this->identification = $auteur->id;
+
     }
 }

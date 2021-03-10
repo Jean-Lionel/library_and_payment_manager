@@ -44,7 +44,15 @@
     	</div>
 
     	<div class="col-md-8">
-    		<h3>Liste des auteurs</h3>
+            <div class="row">
+                <div class="col">
+                    <h3>Liste des auteurs</h3>
+                </div>
+                <div class="col">
+                     <input type="text" class="" wire:model="search">
+                </div>
+            </div>
+    		
 
     		<table class="table">
     			<thead>
@@ -63,6 +71,9 @@
     					<td>{{ $auteur->id }}</td>
     					<td>{{ $auteur->name }}</td>
     					<td>{{ $auteur->pay_orgine }}</td>
+                        <td>
+                            <button class="btn-info" wire:click="updateAuteur({{$auteur->id}})">Modifier</button>
+                        </td>
     				</tr>
 
     				@empty
