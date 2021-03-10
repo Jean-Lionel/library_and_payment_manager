@@ -23,7 +23,7 @@ class BookLivewire extends Component
 	protected $rules =
 	[
 		'title' => 'required',
-		'nombre_exemplaire' => 'required',
+		'nombre_exemplaire' => 'required|numeric|min:0',
 		'auteur_id' => 'required',
 		'edition' => 'required',
 		'classement_id' => 'required',

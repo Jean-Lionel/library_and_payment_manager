@@ -33,7 +33,7 @@
 
 
     			<div class="form-group">
-    				<label>Pay d'orgine</label>
+    				<label>Pays d'orgine</label>
     				<input class="form-control" type="text" wire:model="pay_orgine" name="">
     			</div>
 
