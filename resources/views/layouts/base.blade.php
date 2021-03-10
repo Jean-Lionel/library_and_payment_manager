@@ -15,6 +15,7 @@
 
 	<link rel="stylesheet" href="{{ asset('style.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/print.min.css')}}">
+	<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
 	@livewireStyles
 
 	<style type="text/css">
@@ -129,6 +130,8 @@
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/print.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
+
+	<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
 	
