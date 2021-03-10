@@ -52,16 +52,16 @@
 					<li class="{{ setActiveRoute('eleves.index') }}">
 						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3"></span> Eleve</a>
 					</li>
-					{{-- <li  class="{{ setActiveRoute('paiements.index') }}">
+					<li  class="{{ setActiveRoute('paiements.index') }}">
 						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
-					</li> --}}
+					</li>
 
 
 					<li class="{{ setActiveRoute('bibliotheque') }}">
 						<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3"></span> Bibliothèque</a>
 					</li>
 
-					{{-- <li class="{{ setActiveRoute('patrimoines.index') }}">
+					<li class="{{ setActiveRoute('patrimoines.index') }}">
 						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
 					</li>
 					<li class="{{ setActiveRoute('stoks.index') }}">
@@ -83,7 +83,7 @@
 
 					<li class="{{ setActiveRoute('rapport') }}">
 						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3"></span> Rapport</a>
-					</li> --}}
+					</li>
 					<li>
 						
 
