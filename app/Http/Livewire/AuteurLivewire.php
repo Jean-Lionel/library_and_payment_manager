@@ -59,9 +59,6 @@ class AuteurLivewire extends Component
              session()->flash('message', 'Enregistrement réussi');
 
         }
-
-    	
-
     	$this->reset();
 
     	

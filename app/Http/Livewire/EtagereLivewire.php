@@ -13,6 +13,7 @@ class EtagereLivewire extends Component
     protected $paginationTheme ='bootstrap';
 	public $name;
 	public $description;
+    public $identification;
 
 
     public function render()
@@ -35,14 +36,32 @@ class EtagereLivewire extends Component
     {
     	$this->validate();
 
-    	Etagere::create([
+        if($this->identification){
 
-    		'name' => $this->name,
-    		'description' => $this->description
-    	]);
+         Etagere::find($this->identification)->update([
+                    'name' => $this->name,
+                    'description' => $this->description
+                ]);
+
+        }else{
+            Etagere::create([
+            'name' => $this->name,
+            'description' => $this->description
+        ]);
+
+        }
         session()->flash('message', 'Réussi');
 
-        $this->render();
+        $this->reset();
+
+    }
+
+    public function modifierEtager($id){
+        $etagere = Etagere::find($id);
+
+        $this->name = $etagere->name;
+        $this->description = $etagere->description;
+        $this->identification = $etagere->id;
 
     }
 }

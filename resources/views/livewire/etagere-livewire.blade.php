@@ -29,6 +29,7 @@
                     <th>No</th>
                     <th>DESIGNATION</th>
                     <th>DESCRIPTION</th>
+                    <th>Action</th>
                 </thead>
 
                 <tbody>
@@ -37,6 +38,8 @@
                         <td>{{ ++$key }}</td>
                         <td>{{ $etagere->name }}</td>
                         <td>{{ $etagere->description }}</td>
+                        <td><button class="btn-info" wire:click="modifierEtager({{$etagere->id}})">Modifier</button></td>
+
                     </tr>
 
                     @empty
