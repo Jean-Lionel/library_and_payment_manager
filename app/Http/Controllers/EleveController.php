@@ -10,6 +10,7 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class EleveController extends Controller
@@ -67,19 +68,6 @@ class EleveController extends Controller
             
         ]);
 
-        // $compte = null;
-        // 
-        
-        // dd($request->all());
-
-       
-
-        // DB::transaction(function() use ($request) {
-
-           
-
-        // });
-
 
         try {
             DB::beginTransaction();
@@ -115,6 +103,59 @@ class EleveController extends Controller
     public function show(Classe $classe)
     {
         dd($classe->eleves());
+    }
+
+    public function SaveList(Request $request){
+
+        $data = $request->all();
+
+        try {
+
+           
+             $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
+
+             foreach ($data['data'] as $key => $value) {
+                   $result =  Validator::validate($value, [
+                        'first_name' => 'required|min:2',
+                        'last_name' => ['required'],
+                        'classe_id' => 'required',
+                    
+                     ]);
+
+                   try {
+                      DB::beginTransaction();
+
+                       $eleve = Eleve::create(array_merge($result, ['anne_scolaire' =>  $anne_scolaire ]));
+                         $compte = Compte::create([
+                            'name' => 'SE-'.$eleve->id,
+                            'eleve_id' => $eleve->id,
+                            'montant' => 0,
+
+                         ]);
+
+                      DB::commit();
+                       
+                   } catch (\Exception $e) {
+
+                    dump($e->getMessage());
+                       
+                   }
+                
+
+                    
+              }
+
+           
+            
+        } catch (\Exception $e) {
+           
+
+            dd($e->getMessage());
+            
+        }
+
+       
+
     }
 
     /**
