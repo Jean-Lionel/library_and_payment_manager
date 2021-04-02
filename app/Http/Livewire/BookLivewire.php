@@ -62,13 +62,10 @@ class BookLivewire extends Component
 
     	if($this->identification){
     		$book = Book::where('id', $this->identification)->firstOrFail();
-
     		$book->update($data);
-
     	}else{
     		Book::create($data);
     	}
-
     	$this->reset();
 
     }

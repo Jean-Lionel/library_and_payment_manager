@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classe;
+use App\Models\Eleve;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -70,7 +71,9 @@ class ClasseController extends Controller
     public function show($id)
     {
         $classe = Classe::find($id);
-        return view('classes.view', compact('classe'));
+
+        $eleves = Eleve::where('classe_id','=',$id)->paginate();
+        return view('classes.view', compact('classe','eleves'));
     }
 
     /**

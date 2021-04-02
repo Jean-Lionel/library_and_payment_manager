@@ -20,20 +20,20 @@
 				<th>Action</th>
 			</tr>
 
-			@foreach($classe->eleves as $eleve)
+			@foreach($eleves as $eleve)
 			<tr>
 				<td>{{ $eleve->id }}</td>
 				<td>{{ $eleve->compte->name ?? "" }}</td>
 				<td>{{ $eleve->first_name }}</td>
 				<td>{{ $eleve->last_name }}</td>
 				<td class="d-flex ">
-					<a href="{{ route('eleves.edit', $eleve) }}" class="btn-sm btn btn-info mr-2">Modifier</a>
+					<a href="{{ route('eleves.edit', $eleve) }}" class="btn-sm btn-info mr-2">Modifier</a>
 
 					<form action="{{ route('eleves.destroy', $eleve) }}" method="POST">
 						@csrf
 						@method('DELETE')
 
-						<button class="btn btn-danger" onclick="return confirm('Etez-vous sûr ?')">Supprimer</button>
+						<button class="btn-sm btn-danger" onclick="return confirm('Etez-vous sûr ?')">Supprimer</button>
 					</form>
 				</td>
 			</tr>
@@ -41,6 +41,8 @@
 			@endforeach
 			
 		</table>
+
+		{{ $eleves->links()}}
 	</div>
 </div>
 
