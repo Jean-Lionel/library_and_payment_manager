@@ -54,6 +54,10 @@
 					<li class="{{ setActiveRoute('eleves.index') }}">
 						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3"></span> Eleve</a>
 					</li>
+
+					<li class="{{ setActiveRoute('cours.index') }}">
+						<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3"></span> Cours</a>
+					</li>
 					<li  class="{{ setActiveRoute('paiements.index') }}">
 						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
 					</li>

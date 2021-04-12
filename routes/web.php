@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\CourController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\PaimentController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function(){
 
 Route::resource('sections', SectionController::class);
 Route::resource('classes', ClasseController::class);
+Route::resource('cours', CourController::class);
 Route::resource('eleves', EleveController::class);
 Route::resource('paiements', PaimentController::class);
 Route::resource('patrimoines', PatrimoineController::class);
