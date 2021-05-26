@@ -56,6 +56,7 @@
 
 
     <div class="col-md-8">
+        <h4 class="text-center">Liste des cours</h4>
         <table class="table tab-content table-hover">
             <thead>
                 <tr>

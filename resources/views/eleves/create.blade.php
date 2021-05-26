@@ -16,13 +16,20 @@
 			1. Télécharger le Modèl <button onclick="downloadModel({{$classe->id}},'{{$classe->name  }}')" class="ml-4"><i class="fa fa-arrow-down" style="font-size:24px"></i></button>
 			</p>
 
-			<p>
+			<p class="d-flex">
 				2. Charger le Modèl 
 				<form action="">
 					<input type="file" id="input_file" accept=".csv">
 					<button id="save"> <i class="fa fa-upload" style="font-size:24px"></i></button>
+					<img src="{{ asset('images/loader.gif') }}" width="200" alt="" id="loader" style="display: none;" >
 				</form>
+				
 			</p>
+			<p id="responseGet">
+				
+			</p>
+
+	
 		</div>
 	</div>
 </div>
@@ -30,6 +37,7 @@
 @push('scripts')
 <script>
 let liste_eleve = []
+
 function downloadModel(id, classe_name){
 	const rows = [
 		['CLASSE','NOM','PRENOM'],
@@ -93,6 +101,8 @@ function readFile(file) {
 $("#save").on('click', function(event) {
 	event.preventDefault();
 	/* Act on the event */
+
+	$("#loader").show()
 	$.ajax({
 	  url: '{{ route('save_student') }}',
 	  type: 'POST',
@@ -101,10 +111,14 @@ $("#save").on('click', function(event) {
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
+	  	$("#input_file").val("")
 	    //called when successful
+	     $("#loader").hide();
+	    $("#responseGet").html(`<span class="text-primary display-3"> Importation réussi de ${liste_eleve.length}  élèves  </span>`)
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    //called when there is an error
+	    $("#responseGet").html(`<span class="text-danger"> Erreur ${textStatus}  élèves</span>`)
 	  }
 	});
 	

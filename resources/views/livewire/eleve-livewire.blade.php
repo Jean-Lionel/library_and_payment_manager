@@ -61,7 +61,16 @@
             
              <td>{{ $eleve->first_name }}</td>
              <td>{{ $eleve->last_name }}</td>
-             <td></td>
+             <td class="d-flex ">
+                <a href="{{ route('eleves.edit', $eleve) }}" class="btn-sm btn-info mr-2">Modifier</a>
+
+                <form action="{{ route('eleves.destroy', $eleve) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+
+                  <button class="btn-sm btn-danger" onclick="return confirm('Etez-vous sûr ?')">Supprimer</button>
+                </form>
+        </td>
          </tr>
 
          @endforeach
