@@ -8223,12 +8223,12 @@ h1, h2, h3, h4, h5,
       #sidebar ul li > ul li {
         font-size: 14px; }
     #sidebar ul li a {
-      padding: 10px 0;
+      padding: 5px 0;
       display: block;
       color: rgba(255, 255, 255, 0.6);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       #sidebar ul li a span {
-        color: #44bef1; }
+        color: #44bef2; }
       #sidebar ul li a:hover {
         color: #fff; }
     #sidebar ul li.active > a {

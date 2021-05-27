@@ -64,15 +64,14 @@ Route::get('professeurs', [BibliothequeController::class, 'professeurs'])->name(
 Route::get('lecteurs', [BibliothequeController::class, 'lecteurs'])->name('lecteurs');
 Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts');
 
-
 Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
 
 Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
 
+Route::view("evaluations","courses.evaluation")->name("evaluations");
+
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
-
-
 });
 
 

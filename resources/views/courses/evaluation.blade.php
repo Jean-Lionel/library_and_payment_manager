@@ -4,7 +4,7 @@
 
 <div>
 	@include('courses.header')
-	<livewire:course-livewire />
+	<livewire:evaluation-component />
 </div>
 
 

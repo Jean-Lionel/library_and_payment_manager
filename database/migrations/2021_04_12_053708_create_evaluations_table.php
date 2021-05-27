@@ -18,8 +18,10 @@ class CreateEvaluationsTable extends Migration
             $table->float("ponderation");
             $table->string("trimestre");
             $table->string("type_evaluation");
-            $table->foreign_id("anne_scolaire_id");
-            $table->foreign_id("cour_id");
+            $table->foreignId("anne_scolaire_id");
+            $table->foreignId("cour_id");
+            $table->foreignId("classe_id");
+            $table->foreignId("user_id");
             $table->date("date_evaluation")->nullable();
             $table->text("description")->nullable();
             $table->timestamps();
