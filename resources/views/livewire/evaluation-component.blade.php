@@ -133,9 +133,10 @@
     						<button wire:click="modifierEvaluation({{$evaluation->id }})">
     							<i class="fa fa-edit"></i>
     						</button>
-    						<button title="Ajout des points des élèves" wire:click="ajoutPoint({{$evaluation->id }})">
+    						<a href="{{ route('add_point',$evaluation->id ) }}" class="btn btn-primary" title="Ajout des points des élèves">
     							<i class="fa fa-plus"></i>
-    						</button>
+    						</a>
+    						
     						
     					</td>
     				</tr>

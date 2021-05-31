@@ -28,6 +28,10 @@ class Evaluation extends Model
     public function classe(){
         return $this->belongsTo('App\Models\Classe');
     } 
+
+    public function eleves(){
+       
+    }
     public function cour(){
         return $this->belongsTo('App\Models\Cour');
     }

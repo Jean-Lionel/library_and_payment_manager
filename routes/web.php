@@ -69,9 +69,11 @@ Route::get('classements', [BibliothequeController::class, 'classements'])->name(
 Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
 
 Route::view("evaluations","courses.evaluation")->name("evaluations");
+Route::view('evaluations/{id}','courses.points')->name('add_point');
 
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
+
 });
 
 
