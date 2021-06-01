@@ -142,6 +142,8 @@
 	
 	@livewireScripts
 
+	
+
 	@stack('scripts')
 
 </body>

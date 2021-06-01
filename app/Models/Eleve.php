@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Emprut;
+use App\Models\PointEvaluation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,6 +43,16 @@ class Eleve extends Model
     public function listeEmprutNonRemis()
     {
         return "JE suis cool";
+    }
+
+    // LES POINTS OBTENUES DANS UN EVALUATION
+
+
+    public function point_obentu_evaluation($evaluation_id){
+
+        $check = PointEvaluation::where('evaluation_id', '=',$evaluation_id)->where('eleve_id' ,'=',$this->id)->first();
+
+        return  $check ?? new PointEvaluation;
     }
 
 }
