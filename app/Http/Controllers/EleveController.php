@@ -26,10 +26,6 @@ class EleveController extends Controller
         //$eleves = Eleve::all();
 
         //dd($eleves);
-        
-
-       
-
         return view('eleves.eleve', compact('eleves'));
         
     }
@@ -54,8 +50,6 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         $request->validate([
             'first_name' => 'required|min:2',
             'last_name' => [
@@ -64,17 +58,16 @@ class EleveController extends Controller
                                     ->where('first_name', $request->first_name)
                                     ->where('classe_id', $request->classe_id)
                             ],
-            'classe_id' => 'required',
-            
+            'classe_id' => 'required'
         ]);
-
-
         try {
             DB::beginTransaction();
+             $anne_scolaire = AnneScolaire::latest()->firstOrFail();
+           //  dd($anne_scolaire);
+             $eleve = Eleve::create(array_merge($request->all(), 
+                ['anne_scolaire' =>  $anne_scolaire->name , 
+                'anne_scolaire_id' => $anne_scolaire->id ]));
 
-             $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
-
-             $eleve = Eleve::create(array_merge($request->all(), ['anne_scolaire' =>  $anne_scolaire ]));
              $compte = Compte::create([
                 'name' => 'SE-'.$eleve->id,
                 'eleve_id' => $eleve->id,
@@ -87,7 +80,7 @@ class EleveController extends Controller
             DB::commit();
             
         } catch (\Exception $e) {
-            dump($e->getMessage());
+            dd($e->getMessage());
             DB::rollback();  
         }
 
@@ -112,20 +105,22 @@ class EleveController extends Controller
         try {
 
            
-             $anne_scolaire = AnneScolaire::latest()->firstOrFail()->name;
+             $anne_scolaire = AnneScolaire::latest()->firstOrFail();
 
              foreach ($data['data'] as $key => $value) {
                    $result =  Validator::validate($value, [
                         'first_name' => 'required|min:2',
                         'last_name' => ['required'],
                         'classe_id' => 'required',
+                        'anne_scolaire_id' =>  $anne_scolaire->id,
+                        'anne_scolaire' =>  $anne_scolaire->name,
                     
                      ]);
 
                    try {
                       DB::beginTransaction();
 
-                       $eleve = Eleve::create(array_merge($result, ['anne_scolaire' =>  $anne_scolaire ]));
+                       $eleve = Eleve::create($result);
                          $compte = Compte::create([
                             'name' => 'SE-'.$eleve->id,
                             'eleve_id' => $eleve->id,
@@ -137,16 +132,11 @@ class EleveController extends Controller
                        
                    } catch (\Exception $e) {
 
-                    dump($e->getMessage());
+                    dd($e->getMessage());
                        
                    }
-                
-
                     
-              }
-
-           
-            
+              } 
         } catch (\Exception $e) {
            
 
