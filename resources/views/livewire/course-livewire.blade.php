@@ -99,7 +99,8 @@
                 <td>{{ $course->ponderation }}</td>
                 <td>{{ $course->classe->name }}</td>
                 <td>{{ $course->professeur->name }}</td>
-                <td><button wire:click="updateCourse({{ $course->id }})">Modifier</button></td>
+                <td><button wire:click="updateCourse({{ $course->id }})">
+                     Modifier</button></td>
             </tr>
             @endforeach 
             </tbody>
