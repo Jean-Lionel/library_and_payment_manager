@@ -74,6 +74,8 @@ Route::view('evaluations/{id}','courses.points')->name('add_point');
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
 
+Route::view('course_categories','courses.categories')->name('course_categories');
+
 });
 
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Classe;
+use App\Models\CourseCategory;
 use App\Models\Professeur;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,5 +21,9 @@ class Cour extends Model
     } 
     public function professeur(){
     	return $this->belongsTo(Professeur::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(CourseCategory::class,  'category_id','id');
     }
 }

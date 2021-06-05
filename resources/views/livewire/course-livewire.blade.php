@@ -11,6 +11,21 @@
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
+
+             <div class="form-group">
+                <label for="">CATEGORIE</label>
+                <select name="" id="" wire:model="category_id" class="form-control">
+                    <option value="">...........</option>
+                    @foreach ($categories as $category)
+                        {{-- expr --}}
+                    <option value="{{$category->id}}">{{$category->name}}  </option>
+                    @endforeach
+                </select>
+                @error('classe_id')
+                <p class="category_id-danger text-center"> {{ $message }}</p>
+                @enderror
+            </div>
+
     		<div class="form-group">
     			<label for="">PODERATION TRIMESTRIELLE</label>
     			<input type="number" wire:model="ponderation" class="form-control">
@@ -47,6 +62,10 @@
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
+
+           
+
+            
     		<div class="form-group mt-3">
     			<button type="submit" class="btn btn-info btn-block">Enregistrer</button>
     		</div>
@@ -57,10 +76,12 @@
 
     <div class="col-md-8">
         <h4 class="text-center">Liste des cours</h4>
+        <input type="text" wire:model="search" placeholder="Rechercher">
         <table class="table tab-content table-hover">
             <thead>
                 <tr>
                     <th>NOM DU COURS</th>
+                    <th>CATEGORIE</th>
                     <th>PONDERATION</th>
                     <th>CLASSE</th>
                     <th>PROFESSEUR</th>
@@ -74,6 +95,7 @@
             {{-- expr --}}
             <tr>
                 <td>{{ $course->name }}</td>
+                <td>{{ $course->category->name ?? "" }}</td>
                 <td>{{ $course->ponderation }}</td>
                 <td>{{ $course->classe->name }}</td>
                 <td>{{ $course->professeur->name }}</td>
@@ -83,6 +105,7 @@
             </tbody>
         </table>
 
+        {{ $courses->links()}}
 
        
     </div>
