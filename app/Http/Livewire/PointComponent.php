@@ -57,6 +57,7 @@ class PointComponent extends Component
 								  ->where('eleve_id' ,'=',$this->editId)
 								  ->first();
 
+
 		if($this->point_obentu < $this->evaluation->ponderation){
 			//dd($this->point_obentu);
 
@@ -64,6 +65,9 @@ class PointComponent extends Component
 					'evaluation_id' => $this->evaluation_id,
 					'eleve_id' => $this->editId,
 					'point_obtenu' => $this->point_obentu,
+					'cour_id' => $this->evaluation->cour_id,
+					'trimestre_id' => $this->evaluation->trimestre,
+					'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
 				]); 
 
 			if($check){
@@ -118,6 +122,12 @@ class PointComponent extends Component
 			if(isset($entry['evaluation_id']) and isset($entry['eleve_id'])){
 				$check = PointEvaluation::where('evaluation_id', '=',
 				 $entry['evaluation_id'])->where('eleve_id' ,'=',$entry['eleve_id'])->first();
+
+				$entry = array_merge($entry, [
+					'cour_id' => $this->evaluation->cour_id,
+					'trimestre_id' => $this->evaluation->trimestre,
+					'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
+				]);
 				if($check){
 					$check->update($entry);
 				}else{

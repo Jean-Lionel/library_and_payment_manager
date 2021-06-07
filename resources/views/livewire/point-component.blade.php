@@ -9,6 +9,7 @@
         <input type="file"  id="file_doc"  accept=".csv">
         <button id="save_btn">Charger les données<i class="fa fa-upload"></i></button>
     </p>
+    <h4> Classe :  {{ $evaluation->classe->name}}</h4>
     <table class="table table-sm">
     	<thead>
     		<tr>

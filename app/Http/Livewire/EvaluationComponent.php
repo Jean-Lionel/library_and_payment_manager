@@ -28,7 +28,7 @@ class EvaluationComponent extends Component
 
 	public function mount(){
 		$this->classes = Classe::all();
-		$this->cours = collect();
+		$this->cours = [];
 		$this->trimestres = Trimestre::all();
 		$this->currentAnneScolaire =  AnneScolaire::latest()->first();
 	}
@@ -43,7 +43,7 @@ class EvaluationComponent extends Component
     }
 
     public function updatedClasseId($classe_id){
-    	$this->cours = Classe::find($classe_id)->cours;
+    	$this->cours = Classe::find($classe_id)->courses ?? [];
     	
     }
     public function toogleForm(){
