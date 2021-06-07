@@ -7,7 +7,7 @@
 
         <button id="telecharger"> Télécharger le model <i class="fa fa-download"></i></button>
         <input type="file"  id="file_doc"  accept=".csv">
-        <button>Charger les données<i class="fa fa-upload"></i></button>
+        <button id="save_btn">Charger les données<i class="fa fa-upload"></i></button>
     </p>
     <table class="table table-sm">
     	<thead>
@@ -65,7 +65,10 @@
     {{$eleves->links()}}
 </div>
 @push("scripts")
-<script>
+<script> 
+    const evaluation_id = "{{ $evaluation->id }}"
+
+    let list_points = []
     const a = document.getElementById("telecharger")
     a.addEventListener('click', function(e){
         e.preventDefault();
@@ -93,6 +96,50 @@
         link.setAttribute("download", "evaluation_"+classe_name+".csv");
         document.body.appendChild(link); // Required for FF
         link.click(); // This will download the data file named "my_data.csv".
+
+    })
+
+    let file_doc = document.getElementById("file_doc")
+
+    file_doc.addEventListener("change", function(e){
+
+        e.preventDefault()
+        const fileList = event.target.files[0];
+        
+        readFile(fileList);
+    })
+
+    function readFile(file){
+        const reader = new FileReader()
+
+        reader.addEventListener('load',function(e){
+            const result = e.target.result
+            const data = result.split('\r\n')
+
+            const headers = data[0].split(',')
+
+            for(let i = 1; i<data.length; i++){
+                let line = data[i].split(',')
+                list_points.push({
+                    evaluation_id : evaluation_id,
+                    eleve_id  : line[1],
+                    point_obtenu : line[4],
+
+                });
+
+            }
+            
+        })
+        reader.readAsText(file,'UTF-8');
+    }
+
+    const save_btn = document.getElementById("save_btn")
+
+    save_btn.addEventListener("click", function(e){
+        e.preventDefault() 
+        console.log(list_points)
+
+        @this.testExemple(list_points)
 
     })
 </script>

@@ -109,4 +109,24 @@ class PointComponent extends Component
     public function closeForm(){
     	$this->editId = 0;
     }
+
+    public function testExemple($data){
+
+		foreach($data as $entry){
+			//VERFICATION QUE LA LIGNE N'EXISTE PAS 
+
+			if(isset($entry['evaluation_id']) and isset($entry['eleve_id'])){
+				$check = PointEvaluation::where('evaluation_id', '=',
+				 $entry['evaluation_id'])->where('eleve_id' ,'=',$entry['eleve_id'])->first();
+				if($check){
+					$check->update($entry);
+				}else{
+					PointEvaluation::create($entry);
+				}
+
+			}
+			
+
+		}
+    }
 }
