@@ -15,6 +15,7 @@ class CourseLivewire extends Component
     protected $paginationTheme = "bootstrap";
 	public $name;
 	public $ponderation;
+    public $credit;
 	public $classe_id;
     public $category_id;
 	public $professeur_id;
@@ -41,7 +42,8 @@ class CourseLivewire extends Component
         "ponderation" => "required|numeric|min:0",
         "professeur_id" => "required",
         "classe_id" => "required",
-        "category_id" => "required",
+        "credit" => "required",
+        "category_id" => "required|numeric|min:0",
 
     ];
     public function saveCourse(){
@@ -50,6 +52,7 @@ class CourseLivewire extends Component
         $data= [
             "name" => $this->name,
             "ponderation" => $this->ponderation,
+            "credit" => $this->credit,
             "professeur_id" => $this->professeur_id,
             "classe_id" => $this->classe_id,
             "category_id" => $this->category_id,
@@ -75,6 +78,7 @@ class CourseLivewire extends Component
         $this->classe_id = $course->classe_id;
         $this->category_id = $course->category_id;
         $this->ponderation = $course->ponderation;
+        $this->credit = $course->credit;
       
 
     }

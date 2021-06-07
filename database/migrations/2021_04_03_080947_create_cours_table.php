@@ -17,6 +17,7 @@ class CreateCoursTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('ponderation');
+            $table->double('credit')->nullable();
             $table->foreignId('classe_id');
             $table->foreignId('category_id')->nullabale();
             $table->foreignId('professeur_id')->nullable();

@@ -34,6 +34,13 @@
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
+            <div class="form-group">
+                <label for="credit">CREDIT / HS</label>
+                <input type="number" id="credit" wire:model="credit" value="0" class="form-control">
+                @error('credit')
+                <p class="text-danger text-center"> {{ $message }}</p>
+                @enderror
+            </div>
 
     		<div class="form-group">
     			<label for="">PROFESSEUR</label>
@@ -83,6 +90,7 @@
                     <th>NOM DU COURS</th>
                     <th>CATEGORIE</th>
                     <th>PONDERATION</th>
+                    <th>CREDIT / HS</th>
                     <th>CLASSE</th>
                     <th>PROFESSEUR</th>
                     <th>ACTION</th>
@@ -97,6 +105,7 @@
                 <td>{{ $course->name }}</td>
                 <td>{{ $course->category->name ?? "" }}</td>
                 <td>{{ $course->ponderation }}</td>
+                <td>{{ $course->credit }}</td>
                 <td>{{ $course->classe->name }}</td>
                 <td>{{ $course->professeur->name }}</td>
                 <td><button wire:click="updateCourse({{ $course->id }})">

@@ -75,6 +75,7 @@ Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
 
 Route::view('course_categories','courses.categories')->name('course_categories');
+Route::view('bullettin','courses.bullettin')->name('bullettin');
 
 });
 

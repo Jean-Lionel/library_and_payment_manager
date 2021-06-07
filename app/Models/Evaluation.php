@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PointEvaluation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,8 +30,8 @@ class Evaluation extends Model
         return $this->belongsTo('App\Models\Classe');
     } 
 
-    public function eleves(){
-       
+    public function point_obentu(){
+         return $this->hasMany(PointEvaluation::class, 'evaluation_id','id');
     }
     public function cour(){
         return $this->belongsTo('App\Models\Cour');
