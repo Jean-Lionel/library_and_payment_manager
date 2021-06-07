@@ -55,4 +55,17 @@ class Eleve extends Model
         return  $check ?? new PointEvaluation;
     }
 
+    // LA FONCTION POUR RECUPERER LES POINTS D'UN ELEVE
+    // ELEVE 
+    // COURS 
+    // TRIMESTRE 
+    // ANNEE SCOLAIRE 
+    // TYPE D'EVALUATION 
+
+    public function recuperer_point(int $cour_id, int $trimestre, int $anne_scolaire_id, string $type_evaluation ){
+
+        
+
+    }
+
 }

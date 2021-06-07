@@ -13,5 +13,7 @@ class CourseCategory extends Model
 
     protected $guarded;
 
-    
+    public function courses(){
+        return $this->hasMany('App\Models\Cour', 'category_id','id');
+    }
 }

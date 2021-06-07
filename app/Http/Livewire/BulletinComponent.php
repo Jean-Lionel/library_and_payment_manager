@@ -4,12 +4,18 @@ namespace App\Http\Livewire;
 
 use App\Models\Classe;
 use App\Models\Evaluation;
+use App\Models\Section;
 use Livewire\Component;
 
 class BulletinComponent extends Component
 {
     public $anneScolaire = 3;
-    public $classe = 2;
+    public $classe;
+    public $sections;
+
+    public function mount(){
+        $this->sections = Section::all();
+    }
 
     public function render()
     {
@@ -19,21 +25,12 @@ class BulletinComponent extends Component
                     ->where('classe_id','=', $classe_id)->get();
 
 
-        $courses = Classe::findOrFail($classe_id);
+        $courseCategories = Classe::find($classe_id) ? Classe::find($classe_id)->courseCategories() : [];
 
-
-        // foreach($evaluations as $evaluation){
-
-        //     dd($evaluation->cour->ponderation);
-
-        //     // foreach($evaluation->point_obentu as $point_obentu){
-        //     //     dd($point_obentu->eleve);
-        //     // }
-        // }
-        
         return view('livewire.bulletin-component',[
             'evaluations' => $evaluations,
-            'courses' => $courses
+            'courseCategories' => array_reverse($courseCategories),
+            'selectClasse' => Classe::find($classe_id),
 
         ]);
     }
