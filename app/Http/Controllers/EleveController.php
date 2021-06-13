@@ -58,15 +58,26 @@ class EleveController extends Controller
                                     ->where('first_name', $request->first_name)
                                     ->where('classe_id', $request->classe_id)
                             ],
-            'classe_id' => 'required'
+            'classe_id' => 'required',
+            'date_naissance' => 'date',
+            'sexe' => 'required',
+            'address' => 'required',
         ]);
         try {
             DB::beginTransaction();
              $anne_scolaire = AnneScolaire::latest()->firstOrFail();
            //  dd($anne_scolaire);
-             $eleve = Eleve::create(array_merge($request->all(), 
-                ['anne_scolaire' =>  $anne_scolaire->name , 
-                'anne_scolaire_id' => $anne_scolaire->id ]));
+             $eleve = Eleve::create(
+                [
+                'anne_scolaire' =>  $anne_scolaire->name, 
+                'anne_scolaire_id' => $anne_scolaire->id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'classe_id' => $request->classe_id,
+                'date_naissance' => $request->date_naissance,
+                'sexe' => $request->sexe,
+                'address' => $request->address,
+                ]);
 
              $compte = Compte::create([
                 'name' => 'SE-'.$eleve->id,
@@ -90,61 +101,45 @@ class EleveController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Classe  $eleve
+     * @param  \App\Models\Eleve  $eleve
      * @return \Illuminate\Http\Response
      */
-    public function show(Classe $classe)
+    public function show(Eleve $eleve)
     {
-        dd($classe->eleves());
+        //dd($classe->eleves());
+        return $eleve;
     }
 
     public function SaveList(Request $request){
-
         $data = $request->all();
-
         try {
-
-           
+             DB::beginTransaction();
              $anne_scolaire = AnneScolaire::latest()->firstOrFail();
-
              foreach ($data['data'] as $key => $value) {
-                   $result =  Validator::validate($value, [
-                        'first_name' => 'required|min:2',
-                        'last_name' => ['required'],
-                        'classe_id' => 'required',
+                  
+                   $result = array_merge($value, [
                         'anne_scolaire_id' =>  $anne_scolaire->id,
                         'anne_scolaire' =>  $anne_scolaire->name,
-                    
-                     ]);
 
-                   try {
-                      DB::beginTransaction();
-
-                       $eleve = Eleve::create($result);
-                         $compte = Compte::create([
+                   ]);
+                 
+                    $eleve = Eleve::create($result);
+                    $compte = Compte::create([
                             'name' => 'SE-'.$eleve->id,
                             'eleve_id' => $eleve->id,
                             'montant' => 0,
-
-                         ]);
-
-                      DB::commit();
-                       
-                   } catch (\Exception $e) {
-
-                    dd($e->getMessage());
-                       
-                   }
-                    
+                     ]);
+                
               } 
+
+            DB::commit();
         } catch (\Exception $e) {
            
-
-            dd($e->getMessage());
+           return $e->getMessage();
             
         }
 
-       
+       return $data;
 
     }
 
@@ -170,9 +165,11 @@ class EleveController extends Controller
      * @param  \App\Models\Eleve  $eleve
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Eleve $eleve)
+    public function update(Request $request,$id)
     {
         //
+
+        $eleve = Eleve::findOrFail($id);
 
         $request->validate([
             'first_name' => 'required|min:2',
@@ -180,9 +177,17 @@ class EleveController extends Controller
             'classe_id' => 'required',
         ]);
 
-        $eleve->update($request->all());
+        $eleve->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'classe_id' => $request->classe_id,
+                'date_naissance' => $request->date_naissance,
+                'sexe' => $request->sexe,
+                'address' => $request->address,
 
-        Session::flash('success', 'Enregistrement réussi');
+        ]);
+
+        Session::flash('success', 'Modification réussi');
 
         return back();
     }

@@ -21,6 +21,7 @@ class CreateElevesTable extends Migration
             $table->string('sexe');
             $table->date('date_naissance')->nullable();
             $table->string('nationalite')->nullable();
+            $table->string('address')->nullable();
             $table->string('anne_scolaire');
             $table->foreign_id('anne_scolaire_id');
             $table->text('description')->nullable();

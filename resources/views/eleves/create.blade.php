@@ -40,8 +40,8 @@ let liste_eleve = []
 
 function downloadModel(id, classe_name){
 	const rows = [
-		['CLASSE','NOM','PRENOM'],
-		[classe_name,'NINININAHAZWE','JEAN LIONEL'],
+		['CLASSE','NOM','PRENOM','DATE DE NAISSANCE','SEXE','ADRESSE'],
+		[classe_name,'NINININAHAZWE','JEAN LIONEL','1996-02-18','H','KIGOBE-NTAHARWA-BUJUMBURA'],
 	]
 	let csvContent = "data:text/csv;charset=utf-8,";
 	rows.forEach((rowArray) =>{
@@ -79,6 +79,9 @@ function readFile(file) {
     		classe_id : classe_id,
     		first_name : line[1],
     		last_name: line[2],
+    		date_naissance: formateDate(line[3]),
+    		sexe: line[4],
+    		address: line[5],
     	}
     	liste_eleve.push(eleve)
     }
@@ -123,6 +126,14 @@ $("#save").on('click', function(event) {
 	});
 	
 });
+
+function formateDate(date){
+
+	const givenDate = new Date(date);
+
+	return givenDate.getFullYear() +"-"+(givenDate.getMonth() + 1)+"-"+givenDate.getDate();
+
+}
 
 </script>
 
