@@ -1,21 +1,15 @@
 <style type="text/css">
-
-
   .test-element {
    /* color: #9ca1b2;*/ /*  2b2d3c */
    background: #2a2c3b; /* 2f3242  */
    /* overflow-x: hidden; */
-
    color: #FFF;
  }
-
-
  body,
  html {
   height: 100%;
 }
 /* workaround modal-open padding issue */
-
 body.modal-open {
   padding-right: 0 !important;
 }
@@ -93,7 +87,7 @@ body.modal-open {
 }
 </style>
 
-<div >
+<div class="">
   <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
@@ -102,10 +96,10 @@ body.modal-open {
   </div>
 
   <div class="div">
-    <a href="{{ route('paiements.create') }}">Rapport des paimement par classe</a>
+    <a href="{{ route('paiements.create') }}">Rapport des paimements par classe</a>
   </div>
 
-  <div class="row mb-3">
+  <div class="row mb-3 text-center">
     <div class="col-xl-3 col-lg-6">
       <div class="card card-inverse card-success">
         <div class="card-block bg-success">
@@ -114,7 +108,7 @@ body.modal-open {
           </div>
           <h6 class="text-uppercase">MINERVAL</h6>
 
-          <h5>{{ $minerval }}</h5>
+          <h5>{{ getPrice($minerval) }}</h5>
         </div>
       </div>
     </div>
@@ -125,7 +119,7 @@ body.modal-open {
             <i class="fa fa-list fa-4x"></i>
           </div>
           <h6 class="text-uppercase">  CONTRIBUTION </h6>
-          <h5>{{ $contribution }}</h5>
+          <h5>{{ getPrice($contribution) }}</h5>
         </div>
       </div>
     </div>
@@ -136,7 +130,7 @@ body.modal-open {
             <i class="fa fa-shopping-cart fa-5x"></i>
           </div>
           <h6 class="text-uppercase">VENTE</h6>
-          <h6>{{ $vente }}</h6>
+          <h6>{{ getPrice($vente) }}</h6>
         </div>
       </div>
     </div>
@@ -148,20 +142,68 @@ body.modal-open {
           </div>
           <h6 class="text-uppercase">MONTANT TOTAL</h6>
 
-          <h5>{{ $vente + $contribution + $minerval }}</h5>
+          <h5>{{ getPrice($vente + $contribution + $minerval) }}</h5>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-6">
+    <canvas id="graphique1" width="200" height="100">
+      Ooops !!! votre navigateur n'est pas à jour essayer de chercher les derniers mise à jour
+    </canvas>
+    </div>
+    <div class="col-6">
+      <canvas id="graphique2" width="200" height="100">
+      Ooops !!! votre navigateur n'est pas à jour essayer de chercher les derniers mise à jour
+    </canvas>
+    </div>
+    <div class="col-4">
+      FIRST CHART
+    </div>
+  </div>
 </div>
 
-</div>
+@push('scripts')
+<script type="text/javascript">
+  let content = {
+      labels: ['DEPENSES', 'RETRAIT', 'VERSEMENT', 'PLACEMENT', 'DECOUVERT', 'COMPTE PRINCIPAL','TENUE DE COMPTE','REMBOURSEMENT'],
+      datasets: [{
+        label: 'Valeur actuel en FBU #',
+        backgroundColor: [
+        '#d14130',
+        '#99c93d',
+        'rgba(255, 99, 139,0.5)',
+        'rgba(25, 99, 12,0.5)',
+        'rgba(255, 99, 132,0.5)',
+        'rgba(10,80,255,0.5)',
+        'rgba(10,80,10,0.5)',
 
-<div class="row">
-  
-</div>
+        ],
+        borderColor: '#000',
+        data: [2000, 800, 150, 1260, 152, 200,1450,485],
+      }]
+    };
+  var ctx1 = document.getElementById('graphique1').getContext('2d');
+  //var ctx2 = document.getElementById('graphique2').getContext('2d');
+  var char1 = new Chart(ctx1,{
+    type:'bar',
+    data:content,
+    responsive: true
+  })
+
+  var ctx2 = document.getElementById('graphique2').getContext('2d');
+
+  var char2 = new Chart(ctx2,{
+    type:'pie',
+    data:content,
+    responsive: true
+  })
+
+</script>
+@endpush
 
 
 
-</div>
 

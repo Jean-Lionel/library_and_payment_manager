@@ -27,6 +27,7 @@ class PaiementLivewire extends Component
 	public $bordereau;
 	public $trimestre;
 	public $type_paiement;
+	public $number_letter  = "";
 
 	public $facture;
 
@@ -141,9 +142,11 @@ class PaiementLivewire extends Component
 		$this->showFacture = false;
 	}
 
-	public function printBill($id){
+	public function printBill($id, $number_letter = null){
+
 		$this->facture = Paiment::find($id);
 		$this->showFacture= true;
+		$this->number_letter = $number_letter . " FBU";
 	}
 
 	

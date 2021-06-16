@@ -10,15 +10,7 @@
 
 		@if($facture and $showFacture)
 			<div>
-					<!DOCTYPE html>
-					<html lang="en">
-					<head>
-						<meta charset="UTF-8">
-						<meta name="viewport" content="width=device-width, initial-scale=1.0">
-						<title>Bordereau</title>
-						<link rel="stylesheet" href="style.css">
-					</head>
-					<body>
+					
 						<div>
 							<button onclick="clickButton()">Imprimer</button>
 							<button wire:click="closeBill">Fermer</button>
@@ -36,7 +28,11 @@
 								
 								<p>Compte de l'élève : {{ $facture->compte_name }} </p>
 								<p>Nom et prénom : {{ $facture->eleve->fullName }}</p>
-								<p>Montant Payé : {{ $facture->amount }}</p>
+								<p>Montant Payé : {{ $facture->amount }} <br>
+									Nous disons :  <span id="montant_lettre">
+										{{$number_letter}} 
+									</span>
+								</p>
 								<p>FRAIS : {{ $facture->type_paiement }} DU {{ $facture->trimestre }}</p>
 
 								<div style="display: flex;justify-content: space-between;">
@@ -49,14 +45,7 @@
 									Date : {{ $facture->created_at }}
 								</p>
 							</section>
-						</div>
-
-						
-					</body>
-					</html>
-
-
-
+						</div>			
 
 			</div>
 
@@ -217,7 +206,13 @@
 				<td>{{ $paiment->created_at }}</td>
 				<td>
 					
-					<button  class="btn btn-sm btn-info" wire:click="printBill({{ $paiment->id  }})">Imprimer</button>
+				<button  class="btn btn-sm btn-info" 
+				wire:click="printBill({{ $paiment->id  }})">Imprimer</button>
+
+				<button  class="btn btn-sm btn-info" 
+				wire:click="$emit('printBill',{{ $paiment  }})">Imprimer</button>
+
+				
 				</td>
 			</tr>
 
@@ -236,8 +231,19 @@
 
 
 @push('scripts')
-<script type="text/javascript">				
+<script type="text/javascript">		
+//montant_lettre.innerHTML = "HELLO JE SUIS UN FUTURE MILLIARDAIRE"		
+document.addEventListener('DOMContentLoaded', function () {
 
+
+ @this.on('printBill', paiement =>{
+ 	let number_letter = NumberToLetter(paiement.amount);
+
+ 	@this.call('printBill',paiement.id,number_letter)
+ 	
+ })
+
+});
 function clickButton(){
 		printJS({
 			printable: 'main-content',
