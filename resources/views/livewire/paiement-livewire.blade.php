@@ -67,26 +67,19 @@
 
 		@if($showFormulaire)
 		<div class="col-md-12">
-			
 			<form wire:submit.prevent="savePaiement">
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group row">
 							<label for="compte_name" class="col-sm-4 col-form-label">COMPTE</label>
 							<input class="col-sm-8 form-control form-control-sm" type="text" wire:model="compteName">
-
 							@if($eleve and $compteName)
-
-							<div class="col-md-12">
-								
-								
+							<div class="col-md-12">	
 								<ul class="list-group">
 									<li class="list-group-item">
 										Nom et Prénom : <b>{{ $eleve->first_name.' '. $eleve->last_name}} </b></li>
 										<li class="list-group-item">
-
 											COMPTE : <b>{{ $eleve->compte->name  }}</b>
-
 										</li>
 										<li class="list-group-item">
 											<span>CLASSE : {{ $eleve->classe->name }}</span>

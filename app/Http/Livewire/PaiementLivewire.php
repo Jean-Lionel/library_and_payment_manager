@@ -88,7 +88,7 @@ class PaiementLivewire extends Component
 		if($this->type_paiement == 'MINERVAL'){
 			$this->rules['montant'] =  [
         	'required',
-        	'size:7000',
+        	//'size:7000',
         	'numeric'];
 		}
 

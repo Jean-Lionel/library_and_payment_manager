@@ -42,8 +42,9 @@
         <div class="all_bullettin">
 
         @if($selectClasse)
+            <div><button onclick="printAllBilletin()"><i class="fa fa-print" ></i>Imprimer</button></div>
             @foreach($selectClasse->eleves as $eleve )
-            <div class="bullettin_eleve">
+            <div class="bullettin_eleve" id="print_bullitin">
                  <table>
                 <thead>
                     <tr>
@@ -122,7 +123,19 @@
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation * 2 }}</td>
-                            <td colspan="13"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                      @else
                         <tr>
@@ -131,7 +144,19 @@
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation *2 }}</td>
-                            <td colspan="13"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                   
                       @endif
@@ -185,17 +210,26 @@
             <div>
                 <p style="text-align:center;">Signature du Recteur et Sceau de l'école</p>
             </div>
-
-
             </div>
 
          @endforeach
          @endif
 
         </div>
-       
-
     </div>
-
-
 </div>
+
+@push('scripts')
+<script>
+    function printAllBilletin(){
+       // const a = document.getElementById("print_bullitin")
+        printJS({
+            printable: 'print_bullitin',
+            css : "",
+            type : 'html',
+        });
+    }
+</script>
+@endpush
+
+
