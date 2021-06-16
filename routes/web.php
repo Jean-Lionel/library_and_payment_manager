@@ -76,6 +76,7 @@ Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_s
 
 Route::view('course_categories','courses.categories')->name('course_categories');
 Route::view('bullettin','courses.bullettin')->name('bullettin');
+Route::view('utilisateur','users.utilisateur')->name('utilisateur');
 
 });
 
