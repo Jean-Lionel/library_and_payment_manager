@@ -53,7 +53,10 @@
     					<td>{{ $category->name }}</td>
     					<td>
     						<button wire:click="edit({{ $category->id  }})" class="btn btn-sm btn-warning">Modifier</button>
+                            @if($category->products->count() == 0)
     						<button wire:click="destroy({{  $category->id  }})" class="btn btn-sm btn-danger">Supprimer</button>
+
+                            @endif
     					</td>
     				</tr>
 

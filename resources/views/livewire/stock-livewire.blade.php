@@ -37,9 +37,9 @@
     					<td>{{ $stock->name }}</td>
     					<td>
     						<button class="btn btn-sm btn-warning" wire:click="edit({{ $stock->id }})">modifier</button>
-    						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Annuler</button>
-
-                            <button class="btn btn-sm btn-danger" wire:click="$emit('triggerDelete',{{ $stock->id }})">Annuler</button>
+                            @if($stock->categories->count() ==0)
+    						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Supprimer</button>
+                            @endif   
     					</td>
     				</tr>
 
@@ -57,4 +57,4 @@
     
 </script>
 
-@stop
+@endpush

@@ -22,7 +22,7 @@ class ProductLivewire extends Component
 	public $price;
 	public $category_id;
 	public $categories;
-	
+
 	public $searchTerm;
 	public $showForm = false;
 
@@ -117,7 +117,7 @@ class ProductLivewire extends Component
 							->where('marque','like',$search)
 							->orWhere('name','like',$search)
 							->orWhere('price','like',$search)
-							->paginate();
+							->paginate(10);
 		return view('livewire.product-livewire',
 			[
 				'products' => $products
@@ -128,5 +128,9 @@ class ProductLivewire extends Component
 
 	public function toogleShowForm(){
 		$this->showForm = !$this->showForm;
+	}
+
+	public function destroy($id){
+		$product = Product::find($id)->delete();
 	}
 }

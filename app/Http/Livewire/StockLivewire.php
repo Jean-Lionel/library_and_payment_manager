@@ -59,8 +59,14 @@ class StockLivewire extends Component
 	}
 
 	public function destroy($id){
-
-		Stock::find($id)->delete();
+		$stock = Stock::find($id);
+		foreach($stock->categories as $category){
+			foreach($category->products as $product){
+				$product->delete();
+			}
+			$category->delete();
+		}
+		$stock->delete();
 	}
 
 

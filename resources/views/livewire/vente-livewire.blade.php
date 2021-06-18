@@ -49,19 +49,17 @@
                 <tbody>
 
                     @foreach($products as $product)
-
-                    <tr>
+                    @if($product->quantite < 10)
+                    <tr class="bg-danger">
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->marque }}</td>
-                        <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->category->name ?? "" }}</td>
                         <td>{{ $product->quantite }}</td>
                         <td>{{  getPrice($product->price) }}</td>
-
                         <td>
-
-                            @if(!searchProduct( $product->id))
-                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info" style="font-size:15px"> <i class="material-icons">add</i></button>
+                            @if(!searchProduct( $product->id) and $product->quantite > 0 )
+                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info" style="font-size:15px"> <i class="fa fa-plus"></i></button>
                             @else
                                 <i class="fa fa-check"></i>
 
@@ -70,6 +68,27 @@
                         </td>
                     </tr>
 
+                    @else
+
+                    <tr class="">
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->marque }}</td>
+                        <td>{{ $product->category->name ?? "" }}</td>
+                        <td>{{ $product->quantite }}</td>
+                        <td>{{  getPrice($product->price) }}</td>
+                        <td>
+                            @if(!searchProduct( $product->id) and $product->quantite > 0 )
+                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info" style="font-size:15px"> <i class="fa fa-plus"></i></button>
+                            @else
+                                <i class="fa fa-check"></i>
+
+                            @endif
+                            
+                        </td>
+                    </tr>
+
+                    @endif
 
                     @endforeach
                     

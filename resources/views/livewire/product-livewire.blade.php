@@ -140,6 +140,7 @@
                 <thead class="badge-dark">
                     <tr>
                         <td>#</td>
+                        <td>DATE</td>
                         <td>DESIGNATION</td>
                         <td>MARQUE</td>
                         <td>CATEGORIE</td>
@@ -156,14 +157,16 @@
 
                     <tr>
                         <td>{{ $product->id }}</td>
+                        <td>{{ $product->created_at }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->marque }}</td>
-                        <td>{{ $product->category->name }}</td>
-                        <td>{{ $product->quantite }}</td>
+                        <td>{{ $product->category->name ?? "" }}</td>
+
+                        <td  @if( $product->quantite < 10) class="bg-danger" @endif>{{ $product->quantite }}</td>
                         <td>{{ $product->price }}</td>
                         <td>
                             <button class="btn btn-warning btn-sm" wire:click="edit({{  $product->id }})"><i class='fa fa-edit'></i>Modifier</button>
-                            <button class="btn btn-danger btn-sm" wire:click="edit({{  $product->id }})"><i class='fa fa-remove'></i>Supprimer</button>
+                            <button class="btn btn-danger btn-sm" wire:click="destroy({{  $product->id }})"><i class='fa fa-remove'></i>Supprimer</button>
                         </td>
                     </tr>
 
