@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-<livewire:stock-livewire></livewire:stock-livewire>
+<livewire:utilisateur-component>
 
 @stop

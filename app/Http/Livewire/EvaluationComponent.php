@@ -8,9 +8,13 @@ use App\Models\Cour;
 use App\Models\Evaluation;
 use App\Models\Trimestre;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EvaluationComponent extends Component
 {
+	use WithPagination;
+	protected $paginationTheme = 'bootstrap';
+
 	public $ponderation;
 	public $trimestre;
 	public $type_evaluation;
@@ -35,7 +39,7 @@ class EvaluationComponent extends Component
 
 	public function render()
     {
-    	$evaluations = Evaluation::latest()->paginate();
+    	$evaluations = Evaluation::latest()->paginate(10);
 
         return view('livewire.evaluation-component',[
         	'evaluations' => $evaluations

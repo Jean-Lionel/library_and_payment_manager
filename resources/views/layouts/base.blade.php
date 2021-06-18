@@ -44,7 +44,7 @@
 				</button>
 			</div>
 			<div class="p-4">
-				<h1><a href="/" class="logo">LYCEE D'EXCELLENCE</a></h1>
+				<h1><a href="/" class="logo">ECOLE </a></h1>
 				<ul class="list-unstyled components mb-5">
 
 
@@ -90,6 +90,10 @@
 					<li class="{{ setActiveRoute('rapport') }}">
 						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3"></span> Rapport</a>
 					</li>
+					<li class="{{ setActiveRoute('utilisateur') }}">
+						<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3"></span> Utilisateur</a>
+					</li>
+
 					<li>
 						
 
@@ -127,10 +131,9 @@
 		</div>
 	</div>
 	
-	{{-- <script src="{{asset('js/jquery.min.js')}}"></script> --}}
 
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
+	<script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
 	<script src="{{ asset('js/popper.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/print.min.js') }}"></script>

@@ -4,9 +4,10 @@
     <div class="row">
     	<div class="col-md-4">
     		 <form wire:submit.prevent="saveStock">
+                <h4 class="text-center">Ajout du Stock</h4>
     		 	<div class="form-group">
-    		 		<label for="">DESIGNATION</label>
-    		 		<input required="" type="text" wire:model="name">
+    		 		<label for="">NOM DU STOCK</label>
+    		 		<input required="" class="form-control" type="text" wire:model="name">
     		 		<p>
     		 			@error('name')
     		 			<span class="error text-danger">{{ $message }}</span>
@@ -37,6 +38,8 @@
     					<td>
     						<button class="btn btn-sm btn-warning" wire:click="edit({{ $stock->id }})">modifier</button>
     						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Annuler</button>
+
+                            <button class="btn btn-sm btn-danger" wire:click="$emit('triggerDelete',{{ $stock->id }})">Annuler</button>
     					</td>
     				</tr>
 
@@ -46,6 +49,12 @@
     		</table>
     	</div>
     </div>
-
-   
 </div>
+
+@push('scripts')
+
+<script>
+    
+</script>
+
+@stop

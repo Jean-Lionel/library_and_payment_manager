@@ -143,6 +143,10 @@
     			@endforeach
     		</tbody>
     	</table>
+
+    	<div>
+    		{{$evaluations->links()}}
+    	</div>
     	
     </div>
     @endif

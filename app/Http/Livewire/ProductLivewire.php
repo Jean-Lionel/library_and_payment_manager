@@ -22,9 +22,9 @@ class ProductLivewire extends Component
 	public $price;
 	public $category_id;
 	public $categories;
-
+	
 	public $searchTerm;
-	public $showForm = true;
+	public $showForm = false;
 
 
 	protected $rules = [
