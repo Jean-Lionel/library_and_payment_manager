@@ -64,6 +64,7 @@
                 <th>NOM ET PRENOM</th>
                 <th>EMAIL</th>
                 <th>ROLES</th>
+                <th>ACTION</th>
             </tr>
             
         </thead>
@@ -76,6 +77,17 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
+                    <td></td>
+                    <td>
+                       <button wire:click="editeUser({{$user->id}})" title="Modifier">
+                            <i class="fa fa-edit"></i>
+                       </button>
+
+                       <button wire:click="addRoles({{$user->id}})" title="Add Role">
+                            <i class="fa fa-plus"></i>
+                       </button>
+
+                    </td>
                 </tr>
             @endforeach
             

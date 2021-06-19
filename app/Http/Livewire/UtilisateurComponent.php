@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Role;
 use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Component;
 
 class UtilisateurComponent extends Component
 {
@@ -24,14 +25,15 @@ class UtilisateurComponent extends Component
     public function render()
     {
         $users = User::latest()->paginate();
+        $roles = Role::all();
         return view('livewire.utilisateur-component',[
-            'users' => $users
+            'users' => $users,
+            'roles' => $roles,
             ]);
     }
 
     public function saveUser(){
         $this->validate();
-
         $data = [
             'name' => $this->name,
             'password' =>  Hash::make($this->password),
@@ -39,7 +41,15 @@ class UtilisateurComponent extends Component
             'email' => $this->email,
         ];
 
-        User::create( $data);
+        User::create($data);
         $this->reset();
+    }
+
+    public function editeUser($user_id){
+
+    }
+
+    public function addRoles($user_id){
+
     }
 }
