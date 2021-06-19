@@ -10,30 +10,40 @@
                 <label for="">NOM ET PRENOM</label>
                 <input type="text" wire:model="name" class="form-control">
                 @error('name')
-                <span class="text-danger">{{$name}}</span>
+                <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
              <div class="form-group">
                 <label for="">EMAIL</label>
                 <input type="text" placeholder="ex : nijeanlionel@gmail.com" wire:model="email" class="form-control">
                 @error('email')
-                <span class="text-danger">{{$name}}</span>
+                <span class="text-danger">{{$message}}</span>
                 @enderror
 
             </div>
             <div class="form-group">
+                <label for="">TELEPHONE</label>
+                <input type="text" placeholder="ex : +257 79 614 036" wire:model="telephone" class="form-control">
+                @error('telephone')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+
+            </div>
+
+
+            <div class="form-group">
                 <label for="">MOT DE PASSE</label>
-                <input type="password" placeholder="" wire:model="email" class="form-control">
+                <input type="password" placeholder="" wire:model="password" class="form-control">
                 @error('password')
-                <span class="text-danger">{{$name}}</span>
+                <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
 
              <div class="form-group">
                 <label for="">RETAPEZ VOTRE MOT DE PASSE</label>
-                <input type="password" placeholder="" wire:model="email" class="form-control">
+                <input type="password" placeholder="" wire:model="password_confirmation" class="form-control">
                 @error('password')
-                <span class="text-danger">{{$name}}</span>
+                <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
             <div class="form-group">
@@ -59,6 +69,15 @@
         </thead>
 
         <tbody>
+
+            @foreach ($users  as $user)
+                {{-- expr --}}
+
+                <tr>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                </tr>
+            @endforeach
             
         </tbody>
     </table>

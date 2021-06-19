@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'telephone',
     ];
 
     /**
@@ -40,4 +41,51 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
+    //Role OF MY USERS
+
+    public function isAdmin()
+    {
+        return $this->roles()->where('name','ADMINSTRATEUR')->first();
+    }
+
+     public function isPrefet()
+    {
+        return $this->roles()->where('name','PREFETS DES ETUDES')->first();
+    }
+
+     public function isProfesseur()
+    {
+        return $this->roles()->where('name','PROFESSEUR')->first();
+    }
+    public function isBibliothequaire()
+    {
+        return $this->roles()->where('name','BIBLIOTHEQUAIRE')->first();
+    }
+    public function isParent()
+    {
+        return $this->roles()->where('name','PARENT')->first();
+    }
+    public function isDirecteur()
+    {
+        return $this->roles()->where('name','DIRECTEUR')->first();
+    }
+    public function isComptable()
+    {
+        return $this->roles()->where('name','COMPTABLE')->first();
+    }
+    public function isSecretaire()
+    {
+        return $this->roles()->where('name','SECRETAIRE')->first();
+    }
+    public function isCantine()
+    {
+        return $this->roles()->where('name','GERANT QUANTINE')->first();
+    }
+
+    
 }

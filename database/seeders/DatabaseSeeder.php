@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use App\Models\Eleve;
 use Database\Seeders\AnneScolaireSeeder;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(1)->create();
+       // \App\Models\User::factory(1)->create();
         // \App\Models\Section::factory(10)->create();
         // \App\Models\Classe::factory(20)->create();
         // \App\Models\Eleve::factory(120)->create();
@@ -25,7 +26,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Product::factory(120)->create();
 
         $this->call([
-            AnneScolaireSeeder::class
+            //AnneScolaireSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }
