@@ -95,4 +95,8 @@
     </table>
 
     @endif
+
+    @if($addRoleToUser)
+        @dump($roles)
+    @endif
 </div>

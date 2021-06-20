@@ -15,6 +15,7 @@ class UtilisateurComponent extends Component
     public $email;
     public $password_confirmation;
     public $showForm = false;
+    public $addRoleToUser = true;
 
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
@@ -50,6 +51,6 @@ class UtilisateurComponent extends Component
     }
 
     public function addRoles($user_id){
-
+        $this->addRoleToUser = true;
     }
 }
