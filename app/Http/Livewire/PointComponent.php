@@ -17,6 +17,7 @@ class PointComponent extends Component
 	public $evaluation_id ;
 	public $evaluation;
 	public $point_obentu;
+	public $courId;
 
 	public $search;
 	public $points=[];
@@ -33,7 +34,8 @@ class PointComponent extends Component
 		'search' => ['except' => '']
 	];
 	protected $rules = [
-		"point_obentu" => 'required|min:0'
+		"point_obentu" => 'required|min:0',
+		
 	];
 	public function startId(int $id){
 		$this->editId = $id;
@@ -49,6 +51,7 @@ class PointComponent extends Component
 	public function mount(Request $request){
 		$this->evaluation_id = $request->id;
 		$this->evaluation = Evaluation::where('id','=',$request->id)->firstOrFail();
+		
 	}
 	public function savePoint(){
 
@@ -57,31 +60,26 @@ class PointComponent extends Component
 								  ->where('eleve_id' ,'=',$this->editId)
 								  ->first();
 
-
 		if($this->point_obentu < $this->evaluation->ponderation){
-			//dd($this->point_obentu);
+			//dd($this->evaluation->cour_id);
 
-			$res = PointEvaluation::create([
+			$data = [
 					'evaluation_id' => $this->evaluation_id,
 					'eleve_id' => $this->editId,
 					'point_obtenu' => $this->point_obentu,
-					'cour_id' => $this->evaluation->cour_id,
+					'cour_id' => $this->courId,
 					'trimestre_id' => $this->evaluation->trimestre,
 					'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
-				]); 
+				];
+
+			//$res = PointEvaluation::create(); 
+
+			// dd($data);
 
 			if($check){
-				$check->update([
-					'evaluation_id' => $this->evaluation_id,
-					'eleve_id' => $this->editId,
-					'point_obtenu' => $this->point_obentu,
-				]);
+				$check->update(	$data);
 			}else{
-				PointEvaluation::create([
-					'evaluation_id' => $this->evaluation_id,
-					'eleve_id' => $this->editId,
-					'point_obtenu' => $this->point_obentu,
-				]);
+				PointEvaluation::create($data);
 			}
 
 		}
@@ -90,6 +88,7 @@ class PointComponent extends Component
 	}
     public function render()
     {
+    	$this->courId = $this->evaluation->cour_id;
     	$eleves = Eleve::where('classe_id','=',$this->evaluation->classe_id )->where('anne_scolaire_id','=',$this->evaluation->anne_scolaire_id )
 		->where('first_name','LIKE','%'.$this->search.'%')
 		->orderBy($this->orderField, $this->orderDirection)->paginate();

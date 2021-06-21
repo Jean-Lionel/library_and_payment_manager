@@ -46,6 +46,7 @@
                             <form wire:submit.prevent="savePoint">
                                 <div class="form-group offset-9 col-md-3">
                                     <input type="text" wire:model="point_obentu" class="form-control ">
+                                   
 
                                     @error('point_obentu')
                                     <span class="error text-danger">{{ $message }}</span>

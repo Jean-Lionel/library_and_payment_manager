@@ -95,7 +95,7 @@ class EvaluationComponent extends Component
 			$this->showForm = false;
 		
 	}
-
+ 
 	public function modifierEvaluation($id){
 
 		$evalution = Evaluation::find($id);

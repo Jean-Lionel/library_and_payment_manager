@@ -206,8 +206,7 @@
 				<td>{{ $paiment->created_at }}</td>
 				<td>
 					
-				<button  class="btn btn-sm btn-info" 
-				wire:click="printBill({{ $paiment->id  }})">Imprimer</button>
+			
 
 				<button  class="btn btn-sm btn-info" 
 				wire:click="$emit('printBill',{{ $paiment  }})">Imprimer</button>
