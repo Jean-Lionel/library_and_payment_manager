@@ -2,6 +2,13 @@
     {{-- Do your work, then step back. --}}
     <h4>Liste des Utilisateurs</h4>
 
+    <style>
+        .inputs{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+
     @if($showForm)
     <div class="row">
         <div class="offset-3 col-md-5">
@@ -68,7 +75,7 @@
             </tr>
             
         </thead>
-
+ 
         <tbody>
 
             @foreach ($users  as $user)
@@ -77,18 +84,46 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td></td>
+                    <td>
+                        <ul>
+                            @foreach ($user->roles as $r)
+                                {{-- expr --}}
+                                <li>{{ $r->name }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
                     <td>
                        <button wire:click="editeUser({{$user->id}})" title="Modifier">
                             <i class="fa fa-edit"></i>
                        </button>
-
                        <button wire:click="addRoles({{$user->id}})" title="Add Role">
                             <i class="fa fa-plus"></i>
                        </button>
-
                     </td>
                 </tr>
+                @if($editId == $user->id)
+                <tr>   
+                    <td colspan="3">
+                    @if($addRoleToUser)
+                       @foreach ($roles as $role)
+                        {{-- expr --}}
+                        <input   type="checkbox" 
+                        value="{{$role->id}}"
+                        wire:model="choosedroles.{{$role->name}}"
+                         id="{{$role->id}}">
+
+                        <label class="inputs"  for="{{$role->id}}">{{$role->name}}</label>
+                        @endforeach
+                        <button wire:click="validerRule">Valider</button>
+                    @endif
+
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+
+                @endif
             @endforeach
             
         </tbody>
@@ -96,7 +131,5 @@
 
     @endif
 
-    @if($addRoleToUser)
-        @dump($roles)
-    @endif
+   
 </div>

@@ -16,6 +16,8 @@ class UtilisateurComponent extends Component
     public $password_confirmation;
     public $showForm = false;
     public $addRoleToUser = true;
+    public $editId = 0;
+    public $choosedroles = [];
 
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
@@ -27,6 +29,7 @@ class UtilisateurComponent extends Component
     {
         $users = User::latest()->paginate();
         $roles = Role::all();
+
         return view('livewire.utilisateur-component',[
             'users' => $users,
             'roles' => $roles,
@@ -47,10 +50,20 @@ class UtilisateurComponent extends Component
     }
 
     public function editeUser($user_id){
-
+        $user = User::findOrFail($user_id);
+        $user->roles()->sync($this->roles);
     }
 
     public function addRoles($user_id){
+        $this->editId = $user_id;
         $this->addRoleToUser = true;
+        $this->choosedroles = [];
+    }
+
+    public function validerRule(){
+        $user = User::findOrFail($this->editId);
+        $current_roles = array_values($this->choosedroles);
+        $user->roles()->sync($current_roles);
+        //dd($this->choosedroles);
     }
 }
