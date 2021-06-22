@@ -60,7 +60,7 @@ class PointComponent extends Component
 								  ->where('eleve_id' ,'=',$this->editId)
 								  ->first();
 
-		if($this->point_obentu < $this->evaluation->ponderation){
+		if($this->point_obentu <= $this->evaluation->ponderation){
 			//dd($this->evaluation->cour_id);
 
 			$data = [
@@ -68,6 +68,8 @@ class PointComponent extends Component
 					'eleve_id' => $this->editId,
 					'point_obtenu' => $this->point_obentu,
 					'cour_id' => $this->courId,
+					'type_evaluation' => $this->evaluation->type_evaluation,
+					'ponderation' => $this->evaluation->ponderation,
 					'trimestre_id' => $this->evaluation->trimestre,
 					'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
 				];
@@ -89,9 +91,11 @@ class PointComponent extends Component
     public function render()
     {
     	$this->courId = $this->evaluation->cour_id;
-    	$eleves = Eleve::where('classe_id','=',$this->evaluation->classe_id )->where('anne_scolaire_id','=',$this->evaluation->anne_scolaire_id )
-		->where('first_name','LIKE','%'.$this->search.'%')
-		->orderBy($this->orderField, $this->orderDirection)->paginate();
+    	$eleves = 
+    	Eleve::where('classe_id','=',$this->evaluation->classe_id )
+	    		->where('anne_scolaire_id','=',$this->evaluation->anne_scolaire_id )
+				->where('first_name','LIKE','%'.$this->search.'%')
+				->orderBy($this->orderField, $this->orderDirection)->paginate();
 
 		$tout_eleves = Eleve::where('classe_id','=',$this->evaluation->classe_id )->where('anne_scolaire_id','=',$this->evaluation->anne_scolaire_id )
 		->where('first_name','LIKE','%'.$this->search.'%')
@@ -104,6 +108,7 @@ class PointComponent extends Component
         		'classe_name' => $this->evaluation->classe->name,
         		'cour_name' => $this->evaluation->cour->name,
         		'date_evaluation' => $this->evaluation->date_evaluation,
+        		'ponderation' => $this->evaluation->ponderation,
         	]
 
         ]);
@@ -126,6 +131,8 @@ class PointComponent extends Component
 					'cour_id' => $this->evaluation->cour_id,
 					'trimestre_id' => $this->evaluation->trimestre,
 					'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
+					'type_evaluation' => $this->evaluation->type_evaluation,
+					'ponderation' => $this->evaluation->ponderation,
 				]);
 				if($check){
 					$check->update($entry);

@@ -114,6 +114,7 @@
     				<th>NUMERO</th>
     				<th>CLASSE</th>
     				<th>COURS</th>
+    				<th>TYPE</th>
     				<th>PONDERATION</th>
     				<th>DATE</th>
     				<th>ACTION</th>
@@ -127,6 +128,7 @@
     					<td>{{ $evaluation->id }}</td>
     					<td>{{ $evaluation->classe->name }}</td>
     					<td>{{ $evaluation->cour->name }}</td>
+    					<td>{{ $evaluation->type_evaluation }}</td>
     					<td>{{ $evaluation->ponderation }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>

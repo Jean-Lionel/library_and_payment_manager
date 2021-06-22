@@ -30,7 +30,7 @@ class Evaluation extends Model
         return $this->belongsTo('App\Models\Classe');
     } 
 
-    public function point_obentu(){
+    public function point_obentue(){ 
          return $this->hasMany(PointEvaluation::class, 'evaluation_id','id');
     }
     public function cour(){

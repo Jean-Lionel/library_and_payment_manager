@@ -18,9 +18,12 @@ class CreatePointEvaluationsTable extends Migration
             $table->foreignId("evaluation_id");
             $table->foreignId("eleve_id");
             $table->double("point_obtenu");
+            $table->double("ponderation")->nullable();
             $table->foreignId("cour_id");
+            $table->foreignId("classe_id")->nullable();
             $table->foreignId("trimestre_id");
             $table->foreignId("anne_scolaire_id");
+            $table->string("type_evaluation")->nullable();
             $table->text("description")->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cour;
 use App\Models\Emprut;
 use App\Models\PointEvaluation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,11 +63,34 @@ class Eleve extends Model
     // TRIMESTRE 
     // ANNEE SCOLAIRE 
     // TYPE D'EVALUATION 
+    // point_evaluations , cour_id , eleve_id , anne_scolaire_id  ,trimestre_id , type_evaluation
 
-    public function recuperer_point(int $cour_id, int $trimestre, int $anne_scolaire_id, string $type_evaluation ){
+    public function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
 
-        
+        $choosed_eleve =  $this->id;
+        $points = PointEvaluation::where('cour_id', '=', $cour_id)
+                                    ->where('eleve_id','=',$eleve_id ?? $choosed_eleve)
+                                    ->where('trimestre_id','=',$trimestre_id)
+                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
+                                    ->where('type_evaluation','=',$type_evaluation)
+                                    ->get();
+
+        //CALCULER LA MOYENNE SUR 
+
+        $ponderation = Cour::findOrFail($cour_id)->ponderation;
+
+        //POINT OBTENUE  MOYENNE DU COURS
+        if($points->sum('ponderation') != 0){
+             $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
+         }else{
+            $resultat  = 0;
+         }
+       
+
+        return $resultat;
 
     }
 
 }
+
+

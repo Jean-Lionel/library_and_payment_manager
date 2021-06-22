@@ -112,6 +112,20 @@
 
                     @foreach ($courseCategorie as $k => $course)
                         {{-- expr --}}
+
+                         @php
+                                $interr_trimestre_1 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 1, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'INTERROGATION' );
+                                $interr_trimestre_2 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 2, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'INTERROGATION' );
+                                $interr_trimestre_3 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 3, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'INTERROGATION' );
+
+                                $examen_trimestre_1 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 1, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'EXAMEN' );
+                                $examen_trimestre_2 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 2, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'EXAMEN' );
+                                $examen_trimestre_3 = recuperer_point($eleve_id = $eleve->id ,$cour_id = $course->id, $trimestre_id = 3, $anne_scolaire_id = $anneScolaire , $type_evaluation = 'EXAMEN' );
+
+                                $total_annuel = addTreeNumber(addTwoNumber($interr_trimestre_1, $examen_trimestre_1), addTwoNumber($interr_trimestre_2, $examen_trimestre_2),addTwoNumber($interr_trimestre_3 ,$examen_trimestre_3))
+
+                                @endphp
+
                      @if($k == 0)
                         <tr style="">
                             <td rowspan="{{count($courseCategorie) }}">{{ count($courseCategorie) }}</td>
@@ -123,19 +137,33 @@
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation * 2 }}</td>
+                            <td>{{ $interr_trimestre_1 }}</td>
+                            <td> {{$examen_trimestre_1 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_1, $examen_trimestre_1) }}  
+                            </td>
+                            <td>{{ $interr_trimestre_2 }}</td>
+                            <td> {{$examen_trimestre_2 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_2, $examen_trimestre_2) }}  
+                            </td>
+
+                            <td>{{ $interr_trimestre_3 }}</td>
+                            <td> {{$examen_trimestre_3 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_3 ,$examen_trimestre_3) }}  
+                            </td>
+                            <td>
+                                {{ $course->ponderation * 6}}
+                            </td>
+                            <td>
+                                {{$total_annuel }}
+                            </td>
+                            <td>
+                                {{ getPourcentage($total_annuel, ($course->ponderation * 6)) }}
+                            </td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            
                         </tr>
                      @else
                         <tr>
@@ -144,18 +172,32 @@
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation }}</td>
                             <td colspan="">{{ $course->ponderation *2 }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $interr_trimestre_1 }}</td>
+                            <td> {{$examen_trimestre_1 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_1, $examen_trimestre_1) }}  
+                            </td>
+                            <td>{{ $interr_trimestre_2 }}</td>
+                            <td> {{$examen_trimestre_2 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_2, $examen_trimestre_2) }}  
+                            </td>
+
+                            <td>{{ $interr_trimestre_3 }}</td>
+                            <td> {{$examen_trimestre_3 }}</td>
+                            <td> 
+                                {{ addTwoNumber($interr_trimestre_3 ,$examen_trimestre_3) }}  
+                            </td>
+                            <td> {{ $course->ponderation * 6}}</td>
+                            <td>
+                                
+                                {{
+                                  $total_annuel 
+                                }}
+                            </td>
+                            <td>
+                                {{ getPourcentage($total_annuel, ($course->ponderation * 6)) }}
+                            </td>
                             <td></td>
                         </tr>
                   
