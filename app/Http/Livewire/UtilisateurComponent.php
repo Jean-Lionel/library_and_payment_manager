@@ -51,7 +51,10 @@ class UtilisateurComponent extends Component
 
     public function editeUser($user_id){
         $user = User::findOrFail($user_id);
-        $user->roles()->sync($this->roles);
+        $this->name = $user->name;
+        $this->telephone = $user->telephone;
+        $this->email = $user->email;
+        $this->showForm = true;  
     }
 
     public function addRoles($user_id){

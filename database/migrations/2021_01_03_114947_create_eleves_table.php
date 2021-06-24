@@ -23,7 +23,7 @@ class CreateElevesTable extends Migration
             $table->string('nationalite')->nullable();
             $table->string('address')->nullable();
             $table->string('anne_scolaire');
-            $table->foreign_id('anne_scolaire_id');
+            $table->foreignId('anne_scolaire_id');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('classe_id');
             

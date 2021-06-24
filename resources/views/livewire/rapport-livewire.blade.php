@@ -167,12 +167,16 @@ body.modal-open {
 
 @push('scripts')
 <script type="text/javascript">
+
+  console.log()
   let content = {
-      labels: ['DEPENSES', 'RETRAIT', 'VERSEMENT', 'PLACEMENT', 'DECOUVERT', 'COMPTE PRINCIPAL','TENUE DE COMPTE','REMBOURSEMENT'],
+    //LISTE DES CLASSE
+
+      labels: @json($classes),
       datasets: [{
-        label: 'Valeur actuel en FBU #',
+        label: "Nombre d'élève #",
         backgroundColor: [
-        '#d14130',
+        '#d14160',
         '#99c93d',
         'rgba(255, 99, 139,0.5)',
         'rgba(25, 99, 12,0.5)',
@@ -182,7 +186,7 @@ body.modal-open {
 
         ],
         borderColor: '#000',
-        data: [2000, 800, 150, 1260, 152, 200,1450,485],
+        data: @json($nombre_eleves),
       }]
     };
   var ctx1 = document.getElementById('graphique1').getContext('2d');

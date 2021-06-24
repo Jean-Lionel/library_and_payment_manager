@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\AnneScolaire;
 use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Evaluation;
@@ -10,19 +11,20 @@ use Livewire\Component;
 
 class BulletinComponent extends Component
 {
-    public $anneScolaire = 3;
+    public $anneScolaire;
     public $classe;
     public $sections;
 
     public function mount(){
         $this->sections = Section::all();
+        $this->anneScolaire = AnneScolaire::latest()->first()->id; 
     }
 
     public function render()
     {
         $eleve = new Eleve;
 
-        $points = recuperer_point($eleve_id = 151 ,$cour_id = 16, $trimestre_id = 1, $anne_scolaire_id = $this->anneScolaire , $type_evaluation = 'INTERROGATION' );
+        // $points = recuperer_point($eleve_id = 151 ,$cour_id = 16, $trimestre_id = 1, $anne_scolaire_id = $this->anneScolaire , $type_evaluation = 'INTERROGATION' );
 
         //dump($points);
 

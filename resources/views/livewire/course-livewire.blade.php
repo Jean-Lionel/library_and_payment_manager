@@ -106,8 +106,8 @@
                 <td>{{ $course->category->name ?? "" }}</td>
                 <td>{{ $course->ponderation }}</td>
                 <td>{{ $course->credit }}</td>
-                <td>{{ $course->classe->name }}</td>
-                <td>{{ $course->professeur->name }}</td>
+                <td>{{ $course->classe->name ?? "" }}</td>
+                <td>{{ $course->professeur->name ?? "" }}</td>
                 <td><button wire:click="updateCourse({{ $course->id }})">
                      Modifier</button></td>
             </tr>

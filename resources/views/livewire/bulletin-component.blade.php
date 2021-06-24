@@ -4,7 +4,7 @@
    <div> 
 
         <style type="text/css">
-        
+         
         table{
             border-collapse: collapse;
             width: 100%;
@@ -106,11 +106,11 @@
                 </thead>
 
                 <tbody>
-                @foreach( $courseCategories as $key => $courseCategorie)
+                @foreach( $courseCategories ?? [] as $key => $courseCategorie)
 
                     @if($key)
 
-                    @foreach ($courseCategorie as $k => $course)
+                    @foreach ($courseCategorie ?? [] as $k => $course)
                         {{-- expr --}}
 
                          @php

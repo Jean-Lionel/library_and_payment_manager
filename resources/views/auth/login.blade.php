@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><style type="text/css" id="dark-mode-custom-style" lang="en"></style><head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>SAINT'ESPRIT</title>
+    <title>{{ config('app.name', 'ECOLE') }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

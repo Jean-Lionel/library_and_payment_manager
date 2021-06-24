@@ -15,17 +15,23 @@ class RapportLivewire extends Component
 
     protected $paginationTheme ='bootstrap';
 
-
     public function mount(){
         
     }
-
-
 
     public function render()
     { 	
     	$contribution = Paiment::where('type_paiement','=','CONTRIBUTION')->sum('amount');
     	$minerval  = Paiment::where('type_paiement','=','MINERVAL')->sum('amount'); 
+
+        $classes = Classe::all()->map->name;
+        // $nomsClasse = [];
+         $nombre_eleves = [];
+
+         foreach(Classe::all() as $c){
+            $nombre_eleves[] = $c->nombre_eleves();
+         }
+
 
         $vente = Order::all()->sum('montant');
 
@@ -33,6 +39,8 @@ class RapportLivewire extends Component
         	'contribution' => $contribution,
         	'minerval' => $minerval,
             'vente' => $vente,
+            'classes' => $classes,
+            'nombre_eleves' => $nombre_eleves,
         ]);
     }
 

@@ -40,11 +40,11 @@ function getPrice($price, $type="FBU")
 
 function addTwoNumber($a , $b){
 	$res = floatval($a) + floatval($b);
-	return $res != 0 ? $res :  "";
+	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
 }
 function addTreeNumber($a , $b,$c){
 	$res = floatval($a) + floatval($b) +floatval($c) ;
-	return $res != 0 ? $res :  "";
+	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
 }
 
 function getPourcentage($a , $b){
@@ -52,11 +52,13 @@ function getPourcentage($a , $b){
 	if(floatval($b) != 0)
 		$res = floatval($a) * 100 / floatval($b);
 
-	return $res != 0 ? number_format($res,2,'.', ' ') :  "";
+	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
 }
 
 
 function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
+
+		// echo ' ELEVE ID '.$eleve_id.' COUR ID '.$cour_id.'  TRIMESTRE '. $trimestre_id.' anne_scolaire ID '. $anne_scolaire_id.' TYPE Evaluation ID '. $type_evaluation . '<br>' ;
         $points = PointEvaluation::where('cour_id', '=', $cour_id)
                                     ->where('eleve_id','=',$eleve_id)
                                     ->where('trimestre_id','=',$trimestre_id)
@@ -70,6 +72,7 @@ function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire
 
         if($points->sum('ponderation') != 0){
         	 $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
+        	$resultat = number_format($resultat,1,'.', ' ');
         }else{
         		$resultat = ' ';
         }

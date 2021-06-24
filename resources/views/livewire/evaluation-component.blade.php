@@ -13,7 +13,7 @@
 	    						<option value=""></option>
 	    						@foreach ($classes as $classe)
 	    							{{-- expr --}}
-	    							<option value="{{ $classe->id }}">{{ $classe->name }}</option>
+	    							<option value="{{ $classe->id }}">{{ $classe->name ?? "" }}</option>
 	    						@endforeach
 	    					</select>
 	    					@error('classeId')
@@ -126,8 +126,8 @@
     				{{-- expr --}}
     				<tr>
     					<td>{{ $evaluation->id }}</td>
-    					<td>{{ $evaluation->classe->name }}</td>
-    					<td>{{ $evaluation->cour->name }}</td>
+    					<td>{{ $evaluation->classe->name ?? ""}}</td>
+    					<td>{{ $evaluation->cour->name  ?? ""}}</td>
     					<td>{{ $evaluation->type_evaluation }}</td>
     					<td>{{ $evaluation->ponderation }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>

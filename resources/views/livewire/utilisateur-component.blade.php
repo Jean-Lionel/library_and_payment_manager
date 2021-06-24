@@ -21,8 +21,8 @@
                 @enderror
             </div>
              <div class="form-group">
-                <label for="">EMAIL</label>
-                <input type="text" placeholder="ex : nijeanlionel@gmail.com" wire:model="email" class="form-control">
+                <label for="email">EMAIL</label>
+                <input id="email" type="email" placeholder="ex : nijeanlionel@gmail.com" wire:model="email" class="form-control">
                 @error('email')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -86,7 +86,7 @@
                     <td>{{$user->email}}</td>
                     <td>
                         <ul>
-                            @foreach ($user->roles as $r)
+                            @foreach ($user->roles  as $r)
                                 {{-- expr --}}
                                 <li>{{ $r->name }}</li>
                             @endforeach
