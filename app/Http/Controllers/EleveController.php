@@ -175,6 +175,7 @@ class EleveController extends Controller
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
             'classe_id' => 'required',
+            'sexe' => 'required',
         ]);
 
         $eleve->update([

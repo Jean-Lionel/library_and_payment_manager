@@ -21,7 +21,7 @@
 
 	<style type="text/css">
 		body{
-			background: #abc;
+			background: #fff;
 			color: #000;
 		}
 		.active{

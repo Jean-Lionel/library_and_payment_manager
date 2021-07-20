@@ -22,7 +22,7 @@
 	  </div>
 	  <div class="form-group col-6" style="font-size: 20px; cursor: pointer;">
 		<label for="sexe">SEXE</label> <br>
-		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "M") checked @endif name="sexe" id="homme" value="M" title="MASCULIN"> 
+		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "H") checked @endif name="sexe" id="homme" value="H" title="MASCULIN"> 
 		<label for="homme">MASCULIN</label>
 		
 		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "F") checked @endif id="femme" name="sexe" value="F">
