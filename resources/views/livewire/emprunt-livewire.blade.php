@@ -18,7 +18,7 @@
 		<div class="col-md-4">
 			<h3 class="text-center">Retrait du livre</h3>
 			{{-- <form action="" wire:submit.prevent="validerEmprut()"> --}}
-
+ 
 				<div class="form-group">
 					<label for="">TYPE DE LECTEUR</label>
 					<select wire:model="type_lecteur" class="form-control">

@@ -24,6 +24,7 @@ class EvaluationComponent extends Component
 	public $description;
 	public $date_evaluation;
 	public $classes;
+	public $start_date;
 	public $cours;
 	public $trimestres;
 	public $showForm = false;
@@ -33,6 +34,7 @@ class EvaluationComponent extends Component
 	public function mount(){
 		$this->classes = Classe::all();
 		$this->cours = [];
+		$this->start_date = now();
 		$this->trimestres = Trimestre::all();
 		$this->currentAnneScolaire =  AnneScolaire::latest()->first();
 	}
@@ -59,8 +61,10 @@ class EvaluationComponent extends Component
 		"trimestre" => "required",
 		"courId" => "required",
 		"classeId" => "required",
-		"date_evaluation" => "required|date",
+		// "date_evaluation" => "required|date|min:now()",
 		"type_evaluation" => "required",
+		'start_date'    => 'required|date',
+    	'date_evaluation'      => 'required|date|after_or_equal:start_date',
 
 	];
 

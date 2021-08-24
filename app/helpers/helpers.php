@@ -20,9 +20,9 @@ function setActiveRoute(string $route): string
 
 function searchProduct($id)
 {
-
+	
 	foreach (Cart::content() as $cartItem) {
-		if($cartItem->model->id === $id)
+		if($cartItem->model->id  === $id)
 			return true;
 
 	}

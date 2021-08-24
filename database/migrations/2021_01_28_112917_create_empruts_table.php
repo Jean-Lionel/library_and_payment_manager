@@ -20,6 +20,7 @@ class CreateEmprutsTable extends Migration
             $table->integer('lecteur_id')->nullable();
             $table->string('type_lecteur')->nullable();
             $table->string('etat')->nullable();
+            $table->text('detail_emprunt')->nullable();
             $table->date('date_retrait');
             $table->date('date_retour');
             $table->foreignId('user_id');

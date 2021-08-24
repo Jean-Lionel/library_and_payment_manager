@@ -14,8 +14,11 @@
 
     			<div class="form-group">
     				<label for="">Etagère</label>
+
+                    {{$etagere_id}}
     				
     				<select class="form-control" wire:model="etagere_id">
+                        <option value=""></option>
     					@foreach($etageres as $etager)
 
     					<option value="{{ $etager->id }}">{{ $etager->name }}</option>

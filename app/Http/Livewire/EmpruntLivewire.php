@@ -46,7 +46,7 @@ class EmpruntLivewire extends Component
         
         $search = $this->searchKey;
         $readers = collect();
-        if(strlen($search) > 2){
+        if(strlen($search) > 1){
         $readers = Eleve::where(function($query) use($search){
                 $query->where('first_name', 'like', '%'.$search.'%')
                       ->orWhere('last_name','like','%'.$search.'%' )
@@ -89,25 +89,21 @@ class EmpruntLivewire extends Component
     public function choisirEleve($lecteur)
     {
         $eleve = Eleve::find($lecteur['id']);
-
         $this->empreteur = $eleve;
     }
 
     public function removeItem($rowId){
         Cart::remove($rowId);
-
         //dump("Je suis cool");
     }
 
     protected $rules = [
         'nbre_jour' => 'required|min:0|max:100'
-
     ];
 
     // public function updatedNbreJour($val){
     //     $this->validateOnly($val);
     // }
-
 
     public function updated($propertyName){
         $this->validateOnly($propertyName);
@@ -120,8 +116,6 @@ class EmpruntLivewire extends Component
         //Demander qu'on va valider le retrait
         //Enlever le livre dans le bibliotheque
         //Enregistre les information
-        
-
        if($this->nbre_jour > 100 or $this->nbre_jour <0)
        {
         session()->flash('error',"Le nombre de jour doit être  entre 1 et 100 ");
@@ -131,14 +125,12 @@ class EmpruntLivewire extends Component
         if(!$this->empreteur )
         {
             session()->flash('error',"Choissisez l'empreteur ??");
-
             return;
         }
 
         if(Cart::content()->count() < 1)
         {
              session()->flash('error',"Aucun livre n'a été choisit");
-
             return;
         }
 
@@ -155,7 +147,6 @@ class EmpruntLivewire extends Component
         try {
 
             DB::beginTransaction();
-
             $dateRetrait = Carbon::now();
             $dateRetour = $dateRetrait->addDays($this->nbre_jour);
 
@@ -174,29 +165,18 @@ class EmpruntLivewire extends Component
              $this->storeDetailBook( $emprut->id);
              //Mise a jour du stock
               $this->stockUpdated();
-
               $this->resetinput();
-
-              session()->flash('message',"
-                Opération réussi avec succès
-
-
-                ");
-
+              session()->flash('message'," Opération réussi avec succès");
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            dump($e->getMessage());
-            
+            dump($e->getMessage()); 
         }
     }
 
-
     private function storeDetailBook($emprut_id)
     {
-
         foreach (Cart::content() as $item) {
-
             DetailEmprunt::create([
                 'emprut_id' => $emprut_id,
                 'book_id' => $item->id,
@@ -204,9 +184,7 @@ class EmpruntLivewire extends Component
                 'etat' => 'NON REMIS',
                 'livreRemet' => 0
             ]);
-
         }
-
     }
 
     private function extractCart(){
@@ -214,18 +192,14 @@ class EmpruntLivewire extends Component
         $products = [];
         foreach (Cart::content() as $item) {
             // dump($item);
-
             $products['books'][] = [
                 'id' => $item->id,
                 'name' => $item->name,
                 'quantite' => $item->qty,
                 
             ];
-          
         }
-
         $products['lecteur'] = $this->empreteur->toArray();
-
         return $products;
     }
 
@@ -259,15 +233,12 @@ class EmpruntLivewire extends Component
                 ['nombre_livre_retire' => $book->nombre_livre_retire + $item->qty]);
         }
     }
-
     //Retrait du livre
     //Rechercher le livre
     //Trouver le livre 
     //Verfier si le livre est disponible
     //Si le livre existe Accepter le retrait 
-    //Si non Rrefus du retrait
+    //Si non Refus du retrait
     //Diminuer la quantite en stock
     //
-
-
 }

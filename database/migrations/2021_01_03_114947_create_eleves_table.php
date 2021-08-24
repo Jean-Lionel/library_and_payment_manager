@@ -16,9 +16,9 @@ class CreateElevesTable extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('sexe');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('sexe')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('nationalite')->nullable();
             $table->string('address')->nullable();

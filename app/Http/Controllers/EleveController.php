@@ -30,6 +30,13 @@ class EleveController extends Controller
         
     }
 
+
+    public function apiEleve(){
+        $eleves = Eleve::paginate();
+
+        return  $eleves;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

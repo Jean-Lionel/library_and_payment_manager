@@ -47,7 +47,7 @@
 			<li class="list-group-item {{ setActiveRoute('history') }}"><a href="{{ route('history') }}"><i class="fa fa-history mr-2"></i>  Historique</a></li>
 
 			
-			<li class="list-group-item "><a href=""><i class="fa fa-bar-chart-o mr-2"></i>Statistique</a></li>
+			{{-- <li class="list-group-item "><a href="{{ route('history') }}"><i class="fa fa-bar-chart-o mr-2"></i>Statistique</a></li> --}}
 		</ul>
 	</div>
 

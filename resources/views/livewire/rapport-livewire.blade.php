@@ -141,7 +141,6 @@ body.modal-open {
             <i class="fa fa-share fa-5x"></i>
           </div>
           <h6 class="text-uppercase">MONTANT TOTAL</h6>
-
           <h5>{{ getPrice($vente + $contribution + $minerval) }}</h5>
         </div>
       </div>
@@ -149,26 +148,16 @@ body.modal-open {
   </div>
 
   <div class="row">
-    <div class="col-6">
-    <canvas id="graphique1" width="200" height="100">
-      Ooops !!! votre navigateur n'est pas à jour essayer de chercher les derniers mise à jour
-    </canvas>
-    </div>
-    <div class="col-6">
-      <canvas id="graphique2" width="200" height="100">
-      Ooops !!! votre navigateur n'est pas à jour essayer de chercher les derniers mise à jour
-    </canvas>
-    </div>
-    <div class="col-4">
-      FIRST CHART
+    <div class="col-10">
+      <canvas id="graphique1" width="200" height="100">
+        Ooops !!! votre navigateur n'est pas à jour essayer de chercher les derniers mise à jour
+      </canvas>
     </div>
   </div>
 </div>
 
 @push('scripts')
 <script type="text/javascript">
-
-  console.log()
   let content = {
     //LISTE DES CLASSE
 
@@ -230,13 +219,7 @@ body.modal-open {
     responsive: true
   })
 
-  var ctx2 = document.getElementById('graphique2').getContext('2d');
-
-  var char2 = new Chart(ctx2,{
-    type:'pie',
-    data:content,
-    responsive: true
-  })
+  
 
 </script>
 @endpush

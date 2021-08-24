@@ -32,6 +32,10 @@ Route::get('/', function () {
        
     return view('auth.login');
 });
+Route::get('/accueil', function () {
+       
+    return view('welcome');
+});
 
 
 

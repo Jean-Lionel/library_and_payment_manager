@@ -120,7 +120,7 @@
                              <tr>
                                 <td>
                                    
-                                    <p class="text-dark">{{ $cartItem->model->name }}</p>
+                                    <p class="text-dark">{{ $cartItem->model->name ?? "" }}</p>
                                         
                                 </td>
 
@@ -131,10 +131,10 @@
                                 </td>
 
                                 <td>
-                                    {{ getPrice($cartItem->model->price, "") }}
+                                    {{ getPrice($cartItem->model->price ?? 0, "") }}
                                 </td>
                                 <td>
-                                    {{ getPrice($cartItem->subtotal(), "") }}
+                                    {{ getPrice($cartItem->subtotal() ?? 0, "") }}
                                 </td>
                                 <td>
                                     <button wire:click="removeItem('{{ $cartItem->rowId }}')">Supprimer</button>
@@ -173,26 +173,17 @@
                 </div>
                 <hr>
                 <input type="text" wire:model="client_name" placeholder="Nom du client">
-
                 <hr>
-
                   <button wire:click="storeInvoice()" type="button" class="btn btn-primary btn-block">Payement</button>
             </div>
-            
-            
         </div>
 
         <div class="col-md-12">
-            
-
             @if ($printOrder)
                <div id="facture">
                    <div class="header-facture">
-                       <h2>LYCEE DU SAINT ESPRIT</h2>
-                       <hr>
                        <h4>FACTURE </h4>
                    </div>
-
                    <div>
                     <table class="table-sm table">
                         <thead>
@@ -204,9 +195,7 @@
                                 <th>TOTAL</th>
                             </tr>
                         </thead>
-
                         <tbody>
-
                             @foreach($order->detailsOrders as $product)
                             <tr>
                                 <td>2</td>
@@ -215,7 +204,6 @@
                                 <td>{{ $product->price_unitaire }}</td>
                                 <td>{{ $product->montant }}</td>
                             </tr>
-
                             @endforeach
                         </tbody>
                     </table>
@@ -243,16 +231,11 @@
                         <td>{{ getPrice($order->montant) }}</td>
                         <td>
                             <button wire:click="$set('printOrder','{{ !$printOrder  }}')">Imprimer</button>
-                        </td>
-                        
+                        </td>         
                     </tr>
                 </tbody>
             </table>
-
-
             @endif
         </div>
-
-
     </div>
 </div>

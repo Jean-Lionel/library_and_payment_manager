@@ -44,64 +44,81 @@
 				</button>
 			</div>
 			<div class="p-4">
-				<h1><a href="/" class="logo">ECOLE </a></h1>
+				<h1><a href="#" class="logo">ECOLE </a></h1>
 				<ul class="list-unstyled components mb-5">
 
 
+					@canany(['is-admin','is-prefet'])
 					<li class=" {{ setActiveRoute('sections.index') }}">
 						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>
 					</li>
+					@endcanany
+
+					@canany(['is-admin','is-prefet'])
 					<li class="{{ setActiveRoute('eleves.index') }}">
 						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3"></span> Eleve</a>
 					</li>
+					@endcanany
 
+					@canany(['is-admin','is-prefet'])
 					<li class="{{ setActiveRoute('cours.index') }}">
 						<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3"></span> Cours</a>
 					</li>
+					@endcanany
+
+					@canany(['is-admin','is-comptable'])
 					<li  class="{{ setActiveRoute('paiements.index') }}">
 						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
 					</li>
+					@endcanany
 
-
+					@canany(['is-admin','is-bibliothequaire'])
 					<li class="{{ setActiveRoute('bibliotheque') }}">
 						<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3"></span> Bibliothèque</a>
 					</li>
+					@endcanany
 
+					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('patrimoines.index') }}">
 						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
 					</li>
+					@endcanany
+					@canany(['is-admin','is-cantine','is-comptable'])
 					<li class="{{ setActiveRoute('stoks.index') }}">
 						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
 					</li>
+					@endcanany
+					@canany(['is-admin','is-cantine','is-comptable'])
 					<li class="{{ setActiveRoute('ventes.index') }}">
 						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Cantine</a>
 					</li>
+					@endcanany
 
+					@canany(['is-admin'])
 					<li class="{{ setActiveRoute('configurations.index') }}">
 						<a href="{{ route('configurations.index') }}"><span class="fa  	fa fa-cog mr-3"></span> Configuration</a>
 					</li>
+					@endcanany
 
-
-
+					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('expenses.index') }}">
 						<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3"></span> Depense</a>
 					</li>
-
+					@endcanany
+					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('rapport') }}">
 						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3"></span> Rapport</a>
 					</li>
+					@endcanany
+
+					@canany(['is-admin'])
 					<li class="{{ setActiveRoute('utilisateur') }}">
 						<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3"></span> Utilisateur</a>
 					</li>
+					@endcanany
 
 					<li>
-						
-
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" >
-                                        @csrf
-
-                                        <button type="submit"><span class="fa fa-lock mr-3"></span> Se deconnecter</button>
-                           </form>
+					
 					</li>
 				</ul>
 
@@ -110,8 +127,18 @@
 		</nav>
 
 		<!-- Page Content  -->
-		<div id="content" class="p-4 p-md-5 pt-5">
+		<div id="content">
+			<div class="row col-12 d-flex flex-row-reverse" >
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                                        @csrf
 
+                                    <button type="submit"><span class="fa fa-lock mr-3"></span> Se deconnecter</button>
+                           </form>
+
+                           <div class="mr-3 ">
+                           	 <h5> <i class="fa fa-user"></i> {{ Auth::user()->name}}</h5>
+                           </div>
+			</div>
 			@if(session()->has('success'))
 			<div class="alert alert-success">
 				{{ session()->get('success') }}
@@ -124,9 +151,11 @@
 			</div>
 			@endif
 
+			<div  class="p-4 p-md-5 pt-5"> 
+				@yield('content')
+			</div>
 
-
-			@yield('content')
+			
 			
 		</div>
 	</div>
@@ -141,7 +170,7 @@
 
 	<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+	<script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
 
 	<script src="{{ asset('js/convertToLetter.js') }}"></script>
 	@livewireScripts

@@ -13,6 +13,7 @@ class UtilisateurComponent extends Component
     public $password;
     public $telephone;
     public $email;
+    public $identifiant;
     public $password_confirmation;
     public $showForm = false;
     public $addRoleToUser = true;
@@ -21,7 +22,7 @@ class UtilisateurComponent extends Component
 
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
     ];
 
@@ -38,14 +39,26 @@ class UtilisateurComponent extends Component
 
     public function saveUser(){
         $this->validate();
-        $data = [
-            'name' => $this->name,
-            'password' =>  Hash::make($this->password),
-            'telephone' => $this->telephone,
-            'email' => $this->email,
-        ];
 
-        User::create($data);
+        $data = [
+                'name' => $this->name,
+                'password' =>  Hash::make($this->password),
+                'telephone' => $this->telephone,
+                'email' => $this->email,
+            ];
+
+        if(!$this->identifiant){
+            
+              User::create($data);
+        }else{
+
+            $user = User::find($this->identifiant);
+
+            $user->update($data );
+        }
+        
+
+      
         $this->reset();
     }
 
@@ -54,6 +67,7 @@ class UtilisateurComponent extends Component
         $this->name = $user->name;
         $this->telephone = $user->telephone;
         $this->email = $user->email;
+        $this->identifiant = $user->id;
         $this->showForm = true;  
     }
 

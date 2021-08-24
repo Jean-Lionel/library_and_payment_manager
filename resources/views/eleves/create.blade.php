@@ -96,7 +96,7 @@ function readFile(file) {
       console.log(`Progress: ${Math.round(percent)}`);
     }
   });
-  reader.readAsText(file,'UTF-8');
+  reader.readAsText(file,'ISO-8859-1');
 }
 
 //SAVING INFORMATION

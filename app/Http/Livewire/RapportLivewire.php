@@ -31,8 +31,6 @@ class RapportLivewire extends Component
          foreach(Classe::all() as $c){
             $nombre_eleves[] = $c->nombre_eleves();
          }
-
-
         $vente = Order::all()->sum('montant');
 
         return view('livewire.rapport-livewire',[

@@ -36,13 +36,17 @@
 
                 @endforeach
             </select>
+            @if($selectClasse)
+            <div><button onclick="printAllBilletin()"><i class="fa fa-print" ></i>Imprimer</button></div>
+
+            @endif
             
         </div>
 
         <div class="all_bullettin">
 
         @if($selectClasse)
-            <div><button onclick="printAllBilletin()"><i class="fa fa-print" ></i>Imprimer</button></div>
+            
             @foreach($selectClasse->eleves as $eleve )
             <div class="bullettin_eleve" id="print_bullitin">
                  <table>
