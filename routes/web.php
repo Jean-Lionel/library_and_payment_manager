@@ -38,8 +38,6 @@ Route::get('/accueil', function () {
 });
 
 
-
-
 Route::middleware('auth')->group(function(){
 
 Route::resource('sections', SectionController::class);

@@ -46,17 +46,16 @@ class EmpruntLivewire extends Component
         
         $search = $this->searchKey;
         $readers = collect();
-        if(strlen($search) > 1){
+        if(strlen($search) >= 1){
         $readers = Eleve::where(function($query) use($search){
                 $query->where('first_name', 'like', '%'.$search.'%')
                       ->orWhere('last_name','like','%'.$search.'%' )
                       ->orWhere('id', 'like', '%'.$search);
-
         })->get();
 
         }
        
-        $books =  Book::where('title', 'like', '%'. $this->book_title.'%')->latest()->paginate();
+        $books =  Book::where('title', 'like', '%'. $this->book_title.'%')->latest()->paginate(5);
 
         return view('livewire.emprunt-livewire',
             [
@@ -65,6 +64,14 @@ class EmpruntLivewire extends Component
 
             ]
         );
+    }
+
+    public function searchReader(){
+         dd(Cart::content());
+    }
+
+    public function closeSearch(){
+         $this->empreteur = null;
     }
 
 

@@ -16,7 +16,6 @@ class PaimentController extends Controller
     {
         //$paiments = Paiment::sortable()->latest()->paginate();
 
-   
 
         return view('paiements.index');
     }

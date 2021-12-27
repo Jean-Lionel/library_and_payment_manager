@@ -4,5 +4,4 @@
 
 <livewire:paiement-livewire></livewire:paiement-livewire>
 
-
 @stop

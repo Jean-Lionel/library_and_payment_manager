@@ -58,7 +58,7 @@ class User extends Authenticatable
         return $this->roles()->where('name','PREFETS DES ETUDES')->first();
     }
 
-     public function isProfesseur()
+    public function isProfesseur()
     {
         return $this->roles()->where('name','PROFESSEUR')->first();
     }

@@ -17,7 +17,7 @@
 						</div>
 						<div class="main-content" id="main-content">
 							<header>
-								<h4>LYCEE DU SAINT ESPRIT</h4>
+								<h4>ECOLE : XXXX XXXX</h4>
 								<h4>A/S : {{ $facture->annee_scolaire ?? "" }}</h4>
 								<h4 style="text-align: center;">RECU N° {{ $facture->id }}</h4>
 								<hr>

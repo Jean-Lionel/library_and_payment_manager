@@ -11,20 +11,16 @@
                 {{ session('error') }}
             </div>
     @endif
-{{-- 
-    title
-isbn
-nombre_exemplaire
-edition
-auteur_id
-classement_id --}}
+
     <div class="row">
-    	<div class="col-md-4">
+
+        @if($showForm)
+    	 <div class="col-md-4 offset-md-3">
     		<h4>Ajouter un livre</h4>
     		<form action="" wire:submit.prevent="saveBook()">
     			<div class="form-group">
     				<label for=""> TITLE </label>
-    				<input class="form-control" type="text" wire:model="title" name="">
+    				<input class="form-control form-control-sm" type="text" wire:model="title" name="">
     				@error('title')
     						<span class="error text-danger">{{ $message }}</span>
     						@enderror
@@ -32,7 +28,7 @@ classement_id --}}
 
     			<div class="form-group">
     				<label for="">CLASSEMENT</label>
-    				<select wire:model="classement_id" class="form-control">
+    				<select wire:model="classement_id" class="form-control form-control-sm">
     					<option value="">Choisissez ...</option>
 
     					@forelse($classements as $classement)
@@ -49,7 +45,7 @@ classement_id --}}
 
     			<div class="form-group">
     				<label for="">AUTEUR</label>
-    				<select wire:model="auteur_id" class="form-control">
+    				<select wire:model="auteur_id" class="form-control form-control-sm">
     					<option value="">Choisissez ...</option>
 
     					@forelse($authors as $author)
@@ -67,11 +63,11 @@ classement_id --}}
 
     			<div class="form-group">
     				<label for="">EDITION</label>
-    				<input type="" wire:model="edition" class="form-control" name="">
+    				<input type="" wire:model="edition" class="form-control form-control-sm" name="">
     			</div>
     			<div class="form-group">
     				    <label for=""> NOMBRE D'EXEMPLAIRE </label>
-    				<input class="form-control" type="text" wire:model="nombre_exemplaire" name="">
+    				<input class="form-control form-control-sm" type="number" wire:model="nombre_exemplaire" name="">
 
     				@error('nombre_exemplaire')
     						<span class="error text-danger">{{ $message }}</span>
@@ -85,23 +81,28 @@ classement_id --}}
 
 
     		</form>
-    	</div>
+    	</div> 
 
-    	<div class="col-md-8">
+        @else
+
+    	<div class="col-md-12">
             <h4 class="text-center">Liste des livres</h4>
-    		<table class="table">
+            <div class="text-right">
+                <input type="text" placeholder="Rechercher ici !!">
+                <button wire:click="$set('showForm',true)">Ajouter</button></div>
+    		<table class="table table-hover table-sm table-responsive">
     			<thead>
     				<tr>
-    					<td>No</td>
-    					<td>TITLE</td>
-    					<td>AUTEUR</td>
-    					<td>CLASSEMENT</td>
-    					<td>ETAGERE</td>
-                        <td>EDITION</td>
-                        <td>Qte</td>
-                        <td>Livre retire</td>
-                        <td>Livre restant</td>
-    					<td>ACTION</td>
+    					<th>No</th>
+    					<th>TITLE</th>
+    					<th>AUTEUR</th>
+    					<th>CLASSEMENT</th>
+    					<th>ETAGERE</th>
+                        <th>EDITION</th>
+                        <th>Qté</th>
+                        <th>Livre retire</th>
+                        <th>Livre restant</th>
+    					<th>ACTION</th>
     				</tr>
     			</thead>
 
@@ -132,7 +133,11 @@ classement_id --}}
     				@endforelse
     			</tbody>
     		</table>
+
+            {{ $books->links()}}
     	</div>
+
+        @endif
 
     </div>
 

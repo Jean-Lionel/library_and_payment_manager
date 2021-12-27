@@ -21,16 +21,19 @@
  
 				<div class="form-group">
 					<label for="">TYPE DE LECTEUR</label>
-					<select wire:model="type_lecteur" class="form-control">
+					<select wire:model="type_lecteur" class="form-control form-control-sm">
 						<option value="eleves">ELEVE</option>
 						<option value="professeurs">PROFESSEUR</option>
 						<option value="lecteurs">PARTICULIER</option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group ">
 					<label for=""> INDENTIFIANT</label>
-					<input type="text" wire:model="searchKey" class="form-control" placeholder="Rechercher ici !!!!">
-						
+					<div class="row container">
+						<input type="text" wire:model="searchKey" class="form-control form-control-sm col-md-12" placeholder="Rechercher ici !!!!">
+						<!-- <button class=" btn-info btn-sm ml-2 col-md-2" wire:click="searchReader">Ok</button> -->
+					</div>
+
 						@forelse($readers as $reader)
 					{{-- 	{{ $reader }} --}}
 						<div class="row p-2" >
@@ -45,7 +48,7 @@
 								
 							</div>
 							<div class="col-12">
-								<button wire:click="choisirEleve({{$reader  }})" class="btn btn-block btn-outline-success">Choisir</button>
+								<button wire:click="choisirEleve({{$reader  }})" class="btn btn-block btn-outline-success btn-sm">Choisir</button>
 							</div>
 						</div>
 						@empty
@@ -59,14 +62,14 @@
 
 			<div>
 				<ul class="list-group">
-					<li class="list-group-item text-center"><h6>Liste de livres choisit</h6></li>
+					<li class="list-group-item text-center"><h6>Liste des livres choisit</h6></li>
 				@forelse( Cart::content() as $selectBook)
 				<li class="list-group-item d-flex justify-content-between">
 					
 					<span>{{ $selectBook->name }}</span>
 					<span>Nombre de livre :  <b>{{ $selectBook->qty }}</b></span>
 					<span>
-						 <button wire:click="removeItem('{{ $selectBook->rowId }}')" class="btn-danger">-</button>
+						 <button wire:click="removeItem('{{ $selectBook->rowId }}')" class="btn-danger btn-sm">-</button>
 					</span>
 				</li>
 				@empty
@@ -89,6 +92,7 @@
 					<h6> NOM ET PRENOM : {{  $empreteur->first_name.' '.$empreteur->last_name  }}</h6>
 					<h6>SECTION : {{  $empreteur->classe->section->name  }}</h6>
 					<h6> CLASSE : {{  $empreteur->classe->name  }}</h6>
+					<button wire:click="closeSearch" class="btn-danger btn-block btn-sm">X</button>
 				</div>
 			@endif
 
@@ -97,7 +101,7 @@
 
 				<div class="row">
 					<div class="form-group col-12">
-						<input type="text" class="form-control" wire:model="book_title">
+						<input type="text" class="form-control form-control-sm" wire:model="book_title">
 					</div>
 
 					@forelse($livres as $livre)
@@ -107,7 +111,7 @@
 					 	</div>
 					 	<div class="card-body">
 					 		<div class="d-flex justify-content-between">
-					 			<button wire:click="afficherLivre({{ $livre->id }})" class="btn-info btn-sm">plus Info</button>
+					 			<button wire:click="afficherLivre({{ $livre->id }})" class=" btn-sm" title="plus d'info"> <i class="fa fa-info-circle" aria-hidden="true"></i></button>
 					 			<span>Auteur : {{  $livre->author->name  }}</span>
 					 			<button class="btn-sm btn-primary" wire:click="ajouterAuPanier({{ $livre->id }})">+</button>
 					 		</div>
@@ -129,7 +133,7 @@
 		<div class="col-md-4">
 
 			@if($choosedBook)
-			        <h4 class="text-center">Detail du livre </h4>
+			        <h4 class="text-center">Détail du livre </h4>
 
 					<ul  class="bg-info list-group" >
 						<li class="list-group-item"> Titre : {{ $choosedBook->title }}</li>

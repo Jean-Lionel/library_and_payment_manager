@@ -19,6 +19,7 @@ class BookLivewire extends Component
 	public $classement_id;
 	public $classements;
 	public $authors;
+	public $showForm = false;
 
 	protected $rules =
 	[
@@ -38,7 +39,7 @@ class BookLivewire extends Component
 	
     public function render()
     {
-    	$books = Book::latest()->paginate();
+    	$books = Book::latest()->paginate(10);
 
     	$this->classements = Classement::all();
 		$this->authors = Auteur::all();
@@ -73,7 +74,6 @@ class BookLivewire extends Component
     public function updateBook($id)
     {
     	$book = Book::find($id);
-        
     	$this->identification = $book->id;
     	$this->title = $book->title;
     	$this->nombre_exemplaire = $book->nombre_exemplaire;
