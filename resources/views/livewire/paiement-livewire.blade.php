@@ -59,10 +59,10 @@
 		<div class="col-md-12 mt-3">
 			<form wire:submit.prevent="savePaiement">
 				<div class="row jumbotron">
-					<div class="col-md-4">
-						<div class="form-group row">
+					<div class="col-md-3">
+						<div class="form-group ">
 							<label for="compte_name" class="col-sm-4 col-form-label">COMPTE</label>
-							<input class="col-sm-8 form-control form-control-sm border-dark" type="text" wire:model="compteName">
+							<input class="col-sm-6 form-control form-control-sm border-dark" type="text" wire:model="compteName">
 							@if($eleve and $compteName)
 							<div class="col-md-12 mt-2 ">	
 								<ul class="list-group">
@@ -83,10 +83,10 @@
 							</div>
 						</div>
 
-						<div class="col-md-8">
+						<div class="col-md-9">
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group row">
+									<div class="form-group ">
 										<label for="montant" class="col-sm-4 col-form-label">Montant</label>
 										<div class="col-sm-8">
 											<input type="number" wire:model="montant" class=" border-dark form-control" id="montant" placeholder="Montant">
@@ -98,8 +98,8 @@
 								</div>
 
 								<div class="col-md-6">
-									<div class="form-group row">
-										<label for="montant" class="col-sm-4 col-form-label">Bordereau N°</label>
+									<div class="form-group ">
+										<label for="montant" class="col-sm-5 col-form-label">Bordereau N°</label>
 										<div class="col-sm-8">
 											<input wire:model="bordereau" type="text" class="form-control border-dark" id="bordereau" placeholder="">
 
@@ -111,8 +111,8 @@
 								<div class="row">
 									
 								<div class="col-md-4">
-									<div class="form-group row">
-										<label  class="col-sm-4 col-form-label" for="">Periode</label>
+									<div class="form-group ">
+										<label  class="col-sm-12 col-form-label" for="">Periode</label>
 
 										<select  wire:model="trimestre" name="" id="" class="form-control col-sm-8 border-dark">
 											<option value="">Choisissez ici le trimestre</option>
@@ -134,10 +134,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4"> 
-									<div class="form-group row">
+								<div class="col-md-8"> 
+									<div class="form-group ">
 
-										<label for="" class="col-sm-6">PAIEMENT</label>
+										<label for="" class="col-sm-7">PAIEMENT</label>
 
 										<select class="col-md-6 form-control border-dark" wire:model="type_paiement" id="">
 											<option value="">CHOISISSEZ ....</option>
@@ -260,14 +260,6 @@ function clickButton(el){
             a.document.close();
             a.print();
 =======
-function clickButton(){
-	printPage('main-content');
-		// printJS({
-		// 	printable: 'main-content',
-		// 	css : "",
-		// 	type : 'html'
-		// });
->>>>>>> 417531339f12d04e0a0e0df8c2f89ec47a4215b9
 }
 </script>
 
