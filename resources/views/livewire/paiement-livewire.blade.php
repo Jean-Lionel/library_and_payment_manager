@@ -244,11 +244,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 function clickButton(){
-		printJS({
-			printable: 'main-content',
-			css : "",
-			type : 'html'
-		});
+	printPage('main-content');
+		// printJS({
+		// 	printable: 'main-content',
+		// 	css : "",
+		// 	type : 'html'
+		// });
 }
 </script>
 

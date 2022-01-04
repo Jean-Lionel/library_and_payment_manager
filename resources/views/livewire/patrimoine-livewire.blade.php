@@ -14,7 +14,6 @@
 	<form wire:submit.prevent="savePatrimoine" class="row col-md-12">
 		<div class="col-md-6">
 
-
 			<div class="form-group row">
 				<label for="" class="col-sm-4">DESIGNATION</label>
 				<input type="text" wire:model="name" class="col-sm-8 form-control">
@@ -30,12 +29,9 @@
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
-
-			
 		</div>
 
 		<div class="col-md-6">
-
 
 			<div class="form-group row">
 				<label for="" class="col-sm-4">QUANTITE TOTAL</label>
@@ -70,14 +66,15 @@
 			@endif
 		</div>
 	</form>
-
 	</div>
 
-	@endif
-
-
+	@else
 	<div class="col-md-12">
 		<h1 class="text-center">Liste des biens</h1>
+		<div class="text-right">
+			<input type="text" placeholder="Rechercher" name="">
+			<button wire:click="$set('open', true)">Ajouter</button>
+		</div>
 		<table class="table table-bordered table-sm">
 			<thead>
 				<tr>
@@ -114,6 +111,8 @@
 			</tbody>
 		</table>
 	</div>
+
+	@endif
 
 
 </div>

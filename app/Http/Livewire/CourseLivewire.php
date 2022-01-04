@@ -9,6 +9,7 @@ use App\Models\Professeur;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class CourseLivewire extends Component
 {
     use WithPagination;
@@ -48,7 +49,6 @@ class CourseLivewire extends Component
     ];
     public function saveCourse(){
         $this->validate();
-
         $data= [
             "name" => $this->name,
             "ponderation" => $this->ponderation,
@@ -71,7 +71,6 @@ class CourseLivewire extends Component
     public function updateCourse($id){
 
         $course = Cour::find($id);
-
         $this->name = $course->name;
         $this->identifiant = $course->id;
         $this->professeur_id = $course->professeur_id;
@@ -79,7 +78,5 @@ class CourseLivewire extends Component
         $this->category_id = $course->category_id;
         $this->ponderation = $course->ponderation;
         $this->credit = $course->credit;
-      
-
     }
 }
