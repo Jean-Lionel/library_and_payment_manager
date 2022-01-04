@@ -246,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
  })
 
 });
+<<<<<<< HEAD
 function clickButton(el){
 	var divContents = document.getElementById(el).innerHTML;
             var a = window.open('', '', 'height=auto, width=20vw');
@@ -258,6 +259,15 @@ function clickButton(el){
             a.document.write('</body>');
             a.document.close();
             a.print();
+=======
+function clickButton(){
+	printPage('main-content');
+		// printJS({
+		// 	printable: 'main-content',
+		// 	css : "",
+		// 	type : 'html'
+		// });
+>>>>>>> 417531339f12d04e0a0e0df8c2f89ec47a4215b9
 }
 </script>
 

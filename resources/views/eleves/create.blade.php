@@ -13,11 +13,11 @@
 			<h5 class="text-center">Ajouter la liste des élèves   <b> {{ $classe->name ?? "" }} </b> à partir du fichier excel </h5>
 
 			<p>
-			1. Télécharger le Modèl <button onclick="downloadModel({{$classe->id}},'{{$classe->name  }}')" class="ml-4"><i class="fa fa-arrow-down" style="font-size:24px"></i></button>
+			1. Télécharger le Modèle <button onclick="downloadModel({{$classe->id}},'{{$classe->name  }}')" class="ml-4"><i class="fa fa-arrow-down" style="font-size:24px"></i></button>
 			</p>
 
 			<p class="d-flex">
-				2. Charger le Modèl 
+				2. Charger le Modèle 
 				<form action="">
 					<input type="file" id="input_file" accept=".csv">
 					<button id="save"> <i class="fa fa-upload" style="font-size:24px"></i></button>

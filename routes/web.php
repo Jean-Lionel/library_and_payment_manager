@@ -39,7 +39,6 @@ Route::get('/accueil', function () {
 
 
 Route::middleware('auth')->group(function(){
-
 Route::resource('sections', SectionController::class);
 Route::resource('classes', ClasseController::class);
 Route::resource('cours', CourController::class);

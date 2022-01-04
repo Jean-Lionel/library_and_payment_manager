@@ -1,0 +1,65 @@
+<html>
+<head>
+
+   <style type="text/css">
+      table{
+         width: 100%;
+         border-collapse: collapse;
+      }
+      table, th,td, tr{
+         border: 1px solid black;
+      }
+   </style>
+</head>
+<body>
+   <button onClick="printPage('table')">Print</button>
+   <div id="table">
+      <table>
+         <thead>
+            <tr>
+               <th>NOM</th>
+               <th>PRENOM</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>45</td>
+               <td>45</td>
+            </tr>
+            <tr>
+               <td>45</td>
+               <td>45</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   
+
+<script>
+   function printPage(id)
+   {
+      var html=`<html>
+      <style type="text/css">
+      table{
+         width: 100%;
+         border-collapse: collapse;
+      }
+      table, th,td, tr{
+         border: 1px solid black;
+         color : red;
+      }
+   </style>
+      `;
+      html+= document.getElementById(id).innerHTML;
+      html+="</html>";
+      var printWin = window.open('','','left=200,top=20,width=1300,height=800,toolbar=0,scrollbars=0,status  =0');
+      printWin.document.write(html);
+      printWin.document.close();
+      printWin.focus();
+      printWin.print();
+      printWin.close();
+     
+   }
+</script>
+</body>
+</html>

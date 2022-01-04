@@ -19,6 +19,7 @@ class PatrimoineLivewire extends Component
 	public  $qte_en_mauvaise_etat;
 	public  $quantite_en_bonne_etat;
 	public  $open = true;
+	public  $showForm = true;
 
 
 	private $patrimoines;
