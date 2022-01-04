@@ -17,6 +17,10 @@
 					<label for="">Téléphone</label>
 					<input class="form-control" type="text" wire:model="telephone" name="">
 				</div>
+				<div class="form-group">
+					<label for="">Email</label>
+					<input class="form-control" type="email" wire:model="email" name="">
+				</div>
 
 				<div class="form-group">
 					<button class="btn btn-info">Enregistrer</button>

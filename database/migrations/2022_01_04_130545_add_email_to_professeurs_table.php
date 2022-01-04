@@ -14,7 +14,7 @@ class AddEmailToProfesseursTable extends Migration
     public function up()
     {
         Schema::table('professeurs', function (Blueprint $table) {
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->after('name')->unique()->nullable();
         });
     }
 

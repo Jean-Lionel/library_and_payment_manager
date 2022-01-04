@@ -14,6 +14,7 @@ class ProfesseurLivewire extends Component
 	public $name;
 	public $telephone;
 	public $search;
+    public $email;
     public $identification;
 
 	
@@ -30,7 +31,8 @@ class ProfesseurLivewire extends Component
 
     public $rules = [
     	'name' => 'required',
-    	'telephone' => 'required|min:8'
+    	'telephone' => 'required|min:8',
+        'email' => 'required',
     ];
 
     public function saveProffesseur()
@@ -41,7 +43,8 @@ class ProfesseurLivewire extends Component
 
             Professeur::find($this->identification)->update([
                 'name' => $this->name,
-                'telephone' => $this->telephone
+                'telephone' => $this->telephone,
+                'email' => $this->email,
 
                 ]);
 
@@ -50,7 +53,8 @@ class ProfesseurLivewire extends Component
 
     	Professeur::create([
     		'name' => $this->name,
-    		'telephone' => $this->telephone
+                'telephone' => $this->telephone,
+                'email' => $this->email,
 
     	]);
          }
@@ -66,5 +70,6 @@ class ProfesseurLivewire extends Component
         $this->name = $prof->name;
         $this->telephone = $prof->telephone;
         $this->identification = $prof->id;
+        $this->email = $prof->email;
     }
 }
