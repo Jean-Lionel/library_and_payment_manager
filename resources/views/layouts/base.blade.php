@@ -25,10 +25,12 @@
 			color: #000;
 		}
 		.active{
-			background: #abc;
+			background: rgba(0,0,0,.5);
 			border-radius: 6px;
 			padding-left: 5px;
-			
+			text-indent:6px;
+			/* margin-left: 5px; */
+			color:black;
 		}
 	</style>
 
@@ -43,77 +45,77 @@
 					<span class="sr-only">Toggle Menu</span>
 				</button>
 			</div>
-			<div class="p-4">
+			<div class="p-4 ">
 				<h1><a href="#" class="logo">ECOLE </a></h1>
-				<ul class="list-unstyled components mb-5">
+				<ul class="list-unstyled components mb-5 text-light">
 
 
 					@canany(['is-admin','is-prefet'])
-					<li class=" {{ setActiveRoute('sections.index') }}">
-						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3"></span> Section</a>
+					<li class=" {{ setActiveRoute('sections.index') }} text-light">
+						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3 text-light"></span> Section</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-prefet'])
 					<li class="{{ setActiveRoute('eleves.index') }}">
-						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3"></span> Eleve</a>
+						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3 text-light"></span> Eleve</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-prefet'])
 					<li class="{{ setActiveRoute('cours.index') }}">
-						<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3"></span> Cours</a>
+						<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3 text-light"></span> Cours</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-comptable'])
 					<li  class="{{ setActiveRoute('paiements.index') }}">
-						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3"></span> Paiment</a>
+						<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3 text-light"></span> Paiement</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-bibliothequaire'])
 					<li class="{{ setActiveRoute('bibliotheque') }}">
-						<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3"></span> Bibliothèque</a>
+						<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3 text-light"></span> Bibliothèque</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('patrimoines.index') }}">
-						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3"></span>Patrimoines</a>
+						<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3 text-light"></span>Patrimoines</a>
 					</li>
 					@endcanany
 					@canany(['is-admin','is-cantine','is-comptable'])
 					<li class="{{ setActiveRoute('stoks.index') }}">
-						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3"></span> Stock</a>
+						<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3 text-light"></span> Stock</a>
 					</li>
 					@endcanany
 					@canany(['is-admin','is-cantine','is-comptable'])
 					<li class="{{ setActiveRoute('ventes.index') }}">
-						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3"></span> Cantine</a>
+						<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3 text-light"></span> Cantine</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin'])
 					<li class="{{ setActiveRoute('configurations.index') }}">
-						<a href="{{ route('configurations.index') }}"><span class="fa  	fa fa-cog mr-3"></span> Configuration</a>
+						<a href="{{ route('configurations.index') }}"><span class="fa  	fa fa-cog mr-3 text-light"></span> Configuration</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('expenses.index') }}">
-						<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3"></span> Depense</a>
+						<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3 text-light"></span> Depense</a>
 					</li>
 					@endcanany
 					@canany(['is-admin','is-comptable'])
 					<li class="{{ setActiveRoute('rapport') }}">
-						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3"></span> Rapport</a>
+						<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3 text-light"></span> Rapport</a>
 					</li>
 					@endcanany
 
 					@canany(['is-admin'])
 					<li class="{{ setActiveRoute('utilisateur') }}">
-						<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3"></span> Utilisateur</a>
+						<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3 text-light"></span> Utilisateur</a>
 					</li>
 					@endcanany
 
@@ -128,15 +130,15 @@
 
 		<!-- Page Content  -->
 		<div id="content">
-			<div class="row col-12 d-flex flex-row-reverse" >
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" >
+			<div class="row col-12 d-flex flex-row-reverse mt-3">
+						<form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
 
-                                    <button type="submit"><span class="fa fa-lock mr-3"></span> Se deconnecter</button>
+                                    <button type="submit" class="btn border-success p-1"><span class="fa fa-lock mr-2 text text-success"></span>Deconnexion</button>
                            </form>
 
-                           <div class="mr-3 ">
-                           	 <h5> <i class="fa fa-user"></i> {{ Auth::user()->name}}</h5>
+                           <div class="mr-3 d-flex align-items-center">
+                           	 <h6 class="text text-success"> <i class="fa fa-user "></i> {{ Auth::user()->name}}</h6>
                            </div>
 			</div>
 			@if(session()->has('success'))

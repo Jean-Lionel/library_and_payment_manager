@@ -3,20 +3,20 @@
 
 	<div class="row mb-3">
 		<div class="col-md-12 row d-flex justify-content-between">
-			<button wire:click="showForm" class="btn btn-primary"> Nouveau Paiment</button>
-			<button wire:click="showEnOrdre" class="btn btn-primary"> Ceux qui ont Payé</button>
+			<button wire:click="showForm" class="btn btn-primary p-1"> Nouveau Paiement</button>
+			<button wire:click="showEnOrdre" class="btn btn-primary p-1"> Ceux qui ont Payé</button>
 		</div>
 
 		{{-- Impression du recu --}}
 
 		@if($facture and $showFacture)
-			<div class="mt-4">
-					
-						<div>
-							<button onclick="clickButton()">Imprimer</button>
-							<button wire:click="closeBill">Fermer</button>
+			<div class="mt-4 d-flex justify-content-center w-100">
+				<div>
+						<div class="mb-3">
+							<button onclick="clickButton('main-content')" class="btn p-1 m-0 border border-dark"><span style="color:green">🖨</span> Imprimer</button>
+							<button wire:click="closeBill" class="btn p-1 m-0 border border-dark"> ❌ Fermer</button>
 						</div>
-						<div class="main-content" id="main-content">
+						<div class="main-content jumbotron" id="main-content">
 							<header>
 								<h4>ECOLE : XXXX XXXX</h4>
 								<h4>A/S : {{ $facture->annee_scolaire ?? "" }}</h4>
@@ -46,8 +46,8 @@
 									Date : {{ $facture->created_at }}
 								</p>
 							</section>
-						</div>			
-
+						</div>
+				</div>
 			</div>
 
 		@endif
@@ -62,7 +62,7 @@
 					<div class="col-md-4">
 						<div class="form-group row">
 							<label for="compte_name" class="col-sm-4 col-form-label">COMPTE</label>
-							<input class="col-sm-8 form-control form-control-sm" type="text" wire:model="compteName">
+							<input class="col-sm-8 form-control form-control-sm border-dark" type="text" wire:model="compteName">
 							@if($eleve and $compteName)
 							<div class="col-md-12 mt-2 ">	
 								<ul class="list-group">
@@ -89,7 +89,7 @@
 									<div class="form-group row">
 										<label for="montant" class="col-sm-4 col-form-label">Montant</label>
 										<div class="col-sm-8">
-											<input type="number" wire:model="montant" class="form-control" id="montant" placeholder="Montant">
+											<input type="number" wire:model="montant" class=" border-dark form-control" id="montant" placeholder="Montant">
 
 											@error('montant') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>
@@ -101,7 +101,7 @@
 									<div class="form-group row">
 										<label for="montant" class="col-sm-4 col-form-label">Bordereau N°</label>
 										<div class="col-sm-8">
-											<input wire:model="bordereau" type="text" class="form-control" id="bordereau" placeholder="">
+											<input wire:model="bordereau" type="text" class="form-control border-dark" id="bordereau" placeholder="">
 
 											@error('bordereau') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>
@@ -114,7 +114,7 @@
 									<div class="form-group row">
 										<label  class="col-sm-4 col-form-label" for="">Periode</label>
 
-										<select  wire:model="trimestre" name="" id="" class="form-control col-sm-8">
+										<select  wire:model="trimestre" name="" id="" class="form-control col-sm-8 border-dark">
 											<option value="">Choisissez ici le trimestre</option>
 
 											<option value="PREMIER TRIMESTRE">
@@ -139,7 +139,7 @@
 
 										<label for="" class="col-sm-6">PAIEMENT</label>
 
-										<select class="col-md-6 form-control" wire:model="type_paiement" id="">
+										<select class="col-md-6 form-control border-dark" wire:model="type_paiement" id="">
 											<option value="">CHOISISSEZ ....</option>
 											<option value="MINERVAL">MINERVAL</option>
 											<option value="CONTRIBUTION">CONTRIBUTION</option>
@@ -157,10 +157,10 @@
 
 								</div>
 
-								<div class="col-md-6">
+								<div class="col-md-3 mt-3">
 									@if($eleve and $compteName)
 
-									<button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
+									<button type="submit" class="btn btn-primary btn-block p-1">💰 Payer</button>
 
 									@endif
 								</div>
@@ -246,12 +246,18 @@ document.addEventListener('DOMContentLoaded', function () {
  })
 
 });
-function clickButton(){
-		printJS({
-			printable: 'main-content',
-			css : "",
-			type : 'html'
-		});
+function clickButton(el){
+	var divContents = document.getElementById(el).innerHTML;
+            var a = window.open('', '', 'height=auto, width=20vw');
+            a.document.write('<html>');
+            a.document.write('<head>');
+            a.document.write('<link rel="stylesheet" href="{{asset("css/facture.css")}}"/>');
+            a.document.write('</head>');
+            a.document.write('<body>');
+            a.document.write(divContents);
+            a.document.write('</body>');
+            a.document.close();
+            a.print();
 }
 </script>
 
