@@ -1,15 +1,16 @@
 <div>
 	{{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 
-	<div class="row">
-		<div class="col-md-3">
+	<div class="row mb-3">
+		<div class="col-md-12 row d-flex justify-content-between">
 			<button wire:click="showForm" class="btn btn-primary"> Nouveau Paiment</button>
+			<button wire:click="showEnOrdre" class="btn btn-primary"> Ceux qui ont Payé</button>
 		</div>
 
 		{{-- Impression du recu --}}
 
 		@if($facture and $showFacture)
-			<div>
+			<div class="mt-4">
 					
 						<div>
 							<button onclick="clickButton()">Imprimer</button>
@@ -55,15 +56,15 @@
 		{{-- Apres l'Impression du recu --}}
 
 		@if($showFormulaire)
-		<div class="col-md-12">
+		<div class="col-md-12 mt-3">
 			<form wire:submit.prevent="savePaiement">
-				<div class="row">
+				<div class="row jumbotron">
 					<div class="col-md-4">
 						<div class="form-group row">
 							<label for="compte_name" class="col-sm-4 col-form-label">COMPTE</label>
 							<input class="col-sm-8 form-control form-control-sm" type="text" wire:model="compteName">
 							@if($eleve and $compteName)
-							<div class="col-md-12">	
+							<div class="col-md-12 mt-2 ">	
 								<ul class="list-group">
 									<li class="list-group-item">
 										Nom et Prénom : <b>{{ $eleve->first_name.' '. $eleve->last_name}} </b></li>
@@ -107,8 +108,9 @@
 									</div>
 									
 								</div>
-
-								<div class="col-md-6">
+								<div class="row">
+									
+								<div class="col-md-4">
 									<div class="form-group row">
 										<label  class="col-sm-4 col-form-label" for="">Periode</label>
 
@@ -131,8 +133,20 @@
 										@error('trimestre') <span class="error text-danger">{{ $message }}</span> @enderror
 									</div>
 								</div>
+								
+								<div class="col-md-4"> 
+									<div class="form-group row">
 
-								<div class="col-md-6">
+										<label for="" class="col-sm-6">PAIEMENT</label>
+
+										<select class="col-md-6 form-control" wire:model="type_paiement" id="">
+											<option value="">CHOISISSEZ ....</option>
+											<option value="MINERVAL">MINERVAL</option>
+											<option value="CONTRIBUTION">CONTRIBUTION</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="d-flex justify-content-between">
 										<label  for="">ANNE SCOLAIRE</label>
 										<label for=""> <b>{{ $anneScolaire->name ?? "" }}</b> </label>
@@ -141,17 +155,6 @@
 								</div>
 
 
-								<div class="col-md-6"> 
-									<div class="form-group row">
-
-										<label for="" class="col-sm-6">TYPE DE PAIMENT</label>
-
-										<select class="col-md-6 form-control" wire:model="type_paiement" id="">
-											<option value="">CHOISISSEZ ....</option>
-											<option value="MINERVAL">MINERVAL</option>
-											<option value="CONTRIBUTION">CONTRIBUTION</option>
-										</select>
-									</div>
 								</div>
 
 								<div class="col-md-6">
@@ -174,7 +177,7 @@
 			@endif
 		</div>
 
-		@if($paiements->count() >0)
+		@if($paiements->count() >0 && $ordre)
 
 		<table class="table table-sm">
 
