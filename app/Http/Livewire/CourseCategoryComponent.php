@@ -12,6 +12,7 @@ class CourseCategoryComponent extends Component
 
     protected $paginationTheme ='bootstrap'; 
     public string $name = "";
+    public string $ordre = "";
     public string $search = "";
     public int $identifiant = 0;
     public int $selectId = 0;
@@ -35,7 +36,8 @@ class CourseCategoryComponent extends Component
     public function saveCouseCategory(){
         $this->validate();
         $data = [
-            'name' => $this->name
+            'name' => $this->name,
+            'ordre' => $this->ordre,
         ];
         if($this->identifiant){
           CourseCategory::findOrFail($this->identifiant)->update($data);
@@ -49,6 +51,7 @@ class CourseCategoryComponent extends Component
     public function editCategory($element){
         $this->selectId = $element['id'];
         $this->name = $element['name'];
+        $this->ordre = $element['ordre'];
         $this->identifiant = $element['id'];
     }
 

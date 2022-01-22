@@ -4,11 +4,25 @@
     @if($showForm)
     <div>
         <form wire:submit.prevent="saveCouseCategory">
-            <label for="">CATEGORIE</label>
-            <input type="text" wire:model="name">
-            @error('name')
-            <span class="text-danger">{{$message }}</span>
-            @enderror
+
+            <div class="form-group">
+                <label for="ordre">Ordre</label>
+                 <input type="text" wire:model="ordre">
+                    @error('ordre')
+                    <span class="text-danger">{{$message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="">Categorie</label>
+                <input type="text" wire:model="name">
+                @error('name')
+                <span class="text-danger">{{$message }}</span>
+                @enderror
+            </div>
+
+
+            
             <button>Enregistrer</button>
         </form>     
     </div>
@@ -21,6 +35,7 @@
             <thead>
                 <tr class="table-dark">
                     <th>#</th>
+                    <th>ORDRE</th>
                     <th>DESCRIPTION</th>
                     <th>ACTION</th>
                 </tr>
@@ -28,32 +43,43 @@
 
             <tbody>
                 @foreach ( $categories as $key=>$category)
-                    {{-- expr --}}
-                    <tr>
-                        <td>{{ ++$key}}</td>
-                        <td>{{  $category->name}}</td>
-                        <td>
-                            <button wire:click="editCategory({{ $category}})"><i class="fa fa-edit"></i> Modifier</button>
-                        </td>
-                    </tr>
+                {{-- expr --}}
+                <tr>
+                    <td>{{ ++$key}}</td>
+                    <td>{{ $category->ordre}}</td>
+                    <td>{{  $category->name}}</td>
+                    <td>
+                        <button wire:click="editCategory({{ $category}})"><i class="fa fa-edit"></i> Modifier</button>
+                    </td>
+                </tr>
 
-                    @if($selectId ==$category->id )
-                    <tr>
-                        <td></td>
-                        <td>
-                            <form wire:submit.prevent="saveCouseCategory">
-                        
+                @if($selectId ==$category->id )
+                <tr>
+                    <td></td>
+                    <td>
+                        <form class="d-flex justify-content-between" wire:submit.prevent="saveCouseCategory">
+
+                            <div>
+                                <input type="text" wire:model="ordre">
+                            </div>
+                            <div>
                                 <input type="text" wire:model="name">
                                 @error('name')
                                 <span class="text-danger">{{$message }}</span>
                                 @enderror
+                            </div>
+                            <div>
                                 <button>Modifier</button>
-                            </form>   
-                        </td>
-                        <td></td>
-                        
-                    </tr>
-                    @endif
+                            </div>
+
+                            
+                            
+                        </form>   
+                    </td>
+                    <td></td>
+
+                </tr>
+                @endif
                 @endforeach
             </tbody>
             

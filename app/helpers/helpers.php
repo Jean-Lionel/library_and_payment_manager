@@ -66,6 +66,8 @@ function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire
                                     ->where('type_evaluation','=',$type_evaluation)
                                     ->get();
 
+         // dd($eleve_id  ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation);
+
         //CALCULER LA MOYENNE SUR 
         $ponderation = Cour::findOrFail($cour_id)->ponderation;
         //POINT OBTENUE  MOYENNE DU COURS

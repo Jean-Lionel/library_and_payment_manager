@@ -13,11 +13,12 @@ class BulletinComponent extends Component
 {
     public $anneScolaire;
     public $classe;
+    public $anne_scolaire_id;
     public $sections;
 
     public function mount(){
         $this->sections = Section::all();
-        $this->anneScolaire = AnneScolaire::latest()->first()->id; 
+        $this->anne_scolaire_id = AnneScolaire::latest()->first()->id; 
     }
 
     public function render()
@@ -28,7 +29,8 @@ class BulletinComponent extends Component
 
         //dump($points);
 
-        $anne_scolaire_id = $this->anneScolaire;
+       
+        $annee_scolaires =  AnneScolaire::latest()->paginate();
         $classe_id = $this->classe;
         $evaluations = Evaluation::where('anne_scolaire_id', '=', 3)
                     ->where('classe_id','=', 2)->get();
@@ -40,9 +42,9 @@ class BulletinComponent extends Component
 
         return view('livewire.bulletin-component',[
             'evaluations' => $evaluations,
-            'anne_scolaire_id' => $anne_scolaire_id,
             'courseCategories' => array_reverse($courseCategories),
             'selectClasse' => Classe::find($classe_id),
+            'annee_scolaires' => $annee_scolaires,
 
         ]);
     }

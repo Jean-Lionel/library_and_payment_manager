@@ -14,19 +14,13 @@ class VenteController extends Controller
      */
     public function index()
     {
-        //
-
         return view('ventes.index');
     }
 
     public function rapport()
     {
-
       //  dump("Je suis en bonne sante");
-
-
-        return view('ventes.rapport');
-        
+        return view('ventes.rapport');  
     }
 
 }

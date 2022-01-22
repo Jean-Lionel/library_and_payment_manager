@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BibliothequeController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ConfigurationController;
@@ -28,12 +29,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-       
+Route::get('/', function () {   
     return view('auth.login');
 });
-Route::get('/accueil', function () {
-       
+Route::get('/accueil', function () {     
     return view('welcome');
 });
 
@@ -73,6 +72,12 @@ Route::view("evaluations","courses.evaluation")->name("evaluations");
 Route::view('evaluations/{id}','courses.points')->name('add_point');
 
 Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
+
+Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
+Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
+Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
+Route::post('get_notes', [BulletinController::class , 'get_notes'])->name('get_notes');
+
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
 
 Route::view('course_categories','courses.categories')->name('course_categories');

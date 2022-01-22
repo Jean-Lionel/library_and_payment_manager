@@ -174,9 +174,7 @@
 
 	<script src="{{ asset('js/convertToLetter.js') }}"></script>
 	@livewireScripts
-
-	
-
+	@yield('javascript')
 	@stack('scripts')
 
 </body>
