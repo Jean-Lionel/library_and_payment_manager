@@ -55,7 +55,6 @@ function getPourcentage($a , $b){
 	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
 }
 
-
 function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
 
 		// echo ' ELEVE ID '.$eleve_id.' COUR ID '.$cour_id.'  TRIMESTRE '. $trimestre_id.' anne_scolaire ID '. $anne_scolaire_id.' TYPE Evaluation ID '. $type_evaluation . '<br>' ;

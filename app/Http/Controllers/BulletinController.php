@@ -7,10 +7,14 @@ use App\Http\Requests\UpdateBulletinRequest;
 use App\Models\AnneScolaire;
 use App\Models\Bulletin;
 use App\Models\Classe;
+use App\Models\Cour;
+use App\Models\Eleve;
+use App\Models\Evaluation;
 use App\Models\PointEvaluation;
 use App\Models\Section;
 use App\Models\Trimestre;
 use Illuminate\Http\Request;
+use PDF;
 
 
 class BulletinController extends Controller
@@ -68,9 +72,13 @@ class BulletinController extends Controller
       $trimestre = $request->trimestre;
       $anne_scolaire_id = $request->annee_scolaire;
 
-     
 
     $eleves = Classe::find( $classe_id)->eleves;
+    $eleves = Eleve::where('classe_id', $classe_id)
+                    ->where('anne_scolaire_id',$anne_scolaire_id)
+                    ->orderByRaw('first_name')
+                    ->orderByRaw('last_name')
+                    ->get();
     $listes_points = [];
 
     foreach($eleves as $eleve){
@@ -88,9 +96,22 @@ class BulletinController extends Controller
 
         $listes_points[] = $v;
 
-
     }
 
-    return view('bulletin.liste_point', compact('listes_points'));
+    $cours = Cour::find($cours_id);
+   
+
+
+    $evaluations = Evaluation::where('cour_id', '=', $cours_id)
+                                    ->where('trimestre','=',$trimestre)
+                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
+                                    ->where('type_evaluation','=','INTERROGATION')
+                                    ->get();
+
+     $pdf = PDF::loadView('bulletin.liste_point', compact('listes_points','evaluations','cours'));
+
+    return $pdf->stream('test.pdf');
+
+   // return view('bulletin.liste_point', compact('listes_points','evaluations','cours'));
     }
 }
