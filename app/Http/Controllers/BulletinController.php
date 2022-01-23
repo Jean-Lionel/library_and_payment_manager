@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBulletinRequest;
 use App\Models\AnneScolaire;
 use App\Models\Bulletin;
 use App\Models\Classe;
+use App\Models\PointEvaluation;
 use App\Models\Section;
 use App\Models\Trimestre;
 use Illuminate\Http\Request;
@@ -56,12 +57,40 @@ class BulletinController extends Controller
 
     public function get_notes(Request $request){
 
-      //"section_id" => "1"
+      //"section_id = $request->
       // "classe_id" => "1"
       // "cours_id" => "1"
       // "trimestre" => "2"
-      // "annee_scolaire" => "1"
+      // "annee_scolaire" => "1"//"section_id" => "1"
+     
+      $classe_id = $request->classe_id;
+      $cours_id = $request->cours_id;
+      $trimestre = $request->trimestre;
+      $anne_scolaire_id = $request->annee_scolaire;
 
-        dd($request->all());
+     
+
+    $eleves = Classe::find( $classe_id)->eleves;
+    $listes_points = [];
+
+    foreach($eleves as $eleve){
+        $v = [];
+        $v['nom'] = $eleve->first_name;
+        $v['prenom'] = $eleve->last_name;
+
+        $points = PointEvaluation::where('cour_id', '=', $cours_id)
+                                    ->where('eleve_id','=',$eleve->id)
+                                    ->where('trimestre_id','=',$trimestre)
+                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
+                                    ->where('type_evaluation','=','INTERROGATION')
+                                    ->get();
+        $v['points'] = $points;
+
+        $listes_points[] = $v;
+
+
+    }
+
+    return view('bulletin.liste_point', compact('listes_points'));
     }
 }

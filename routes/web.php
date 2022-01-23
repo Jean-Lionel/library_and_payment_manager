@@ -9,6 +9,7 @@ use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CourController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\EleveController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\PatrimoineController;
 use App\Http\Controllers\ProductController;
@@ -37,7 +38,10 @@ Route::get('/accueil', function () {
 });
 
 
+
 Route::middleware('auth')->group(function(){
+ Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+ 
 Route::resource('sections', SectionController::class);
 Route::resource('classes', ClasseController::class);
 Route::resource('cours', CourController::class);
