@@ -63,8 +63,8 @@
 	    					<select name="" wire:model="type_evaluation" id="" class="form-control">
 	    						<option value=""></option>
 	    						<option value="INTERROGATION">INTERROGATION</option>
-	    						<option value="EXAMEN">EXAMEN</option>
-	    						<option value="COM">COM.</option>
+	    						<option value="EXAMEN">EXAMEN / RESSOURCE</option>
+	    						<option value="COMPENTENCE">COMPENTENCE</option>
 	    					</select>
 
 	    					@error('type_evaluation')

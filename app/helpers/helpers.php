@@ -20,22 +20,17 @@ function setActiveRoute(string $route): string
 
 function searchProduct($id)
 {
-	
 	foreach (Cart::content() as $cartItem) {
 		if($cartItem->model->id  === $id)
 			return true;
-
 	}
-
 	return false;
 }
 
-
-function getPrice($price, $type="FBU")
+function getPrice($price, $type="", $limit = 2, $separateur = '.' )
 {
-	
 	$price = floatval($price);
-	return number_format($price, 2,',',' . ') ." ". $type;
+	return number_format($price, $limit ,$separateur,' , ') ." ". $type;
 }
 
 function addTwoNumber($a , $b){

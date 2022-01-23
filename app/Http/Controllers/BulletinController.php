@@ -91,12 +91,15 @@ class BulletinController extends Controller
   private function getAllTrimestre($eleves,$cours_id,$anne_scolaire_id){
     // 
 
+    $data = [];
+
     foreach ($eleves as $key => $eleve) {
         // code...
        // $type_evaluation = INTERROGATION | EXAMEN | COMPENTENCE
        // $type_evaluation = INTERROGATION | EXAMEN | COMPENTENCE
         
         $trimestre = [];
+        $total_annuel = 0;
 
         for($i=1; $i<=3; $i++){
               $trimestre[$i]['INTERROGATION'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'INTERROGATION' );
@@ -104,12 +107,29 @@ class BulletinController extends Controller
               $trimestre[$i]['COMPENTENCE'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'COMPENTENCE' );
 
               $trimestre[$i]['EXAMEN'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'EXAMEN' );
-        }
-        dump($trimestre);
 
+              $trimestre[$i]['TOTAL'] = $trimestre[$i]['INTERROGATION'] +$trimestre[$i]['COMPENTENCE'] + $trimestre[$i]['EXAMEN'];
+              $total_annuel +=  $trimestre[$i]['TOTAL'];
+
+        }
+       
+        $v['eleve'] = $eleve;
+        $v['points'] = $trimestre;
+        $v['total_annuel'] = $total_annuel;
+
+        $data[] = $v;
     }
 
-    return view("bulletin.fiche_point");
+    $cours = Cour::find($cours_id);
+
+    $max_total = $cours->ponderation + $cours->ponderation_compentance  + $cours->ponderation_examen ;
+
+     $pdf = PDF::loadView("bulletin.fiche_point", compact('data', 'cours','max_total'));
+
+    //return $pdf->stream($cours->name . '.pdf');
+
+
+     return view("bulletin.fiche_point", compact('data', 'cours','max_total'));
   }
 
   private function getOneTrimestre($eleves,$cours_id,$anne_scolaire_id,$trimestre){
