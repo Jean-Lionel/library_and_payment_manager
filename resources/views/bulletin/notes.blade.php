@@ -67,6 +67,8 @@
         		<option value="{{ $trimestre->id }}">{{ $trimestre->name }}</option>
 
         		@endforeach
+            {{--  FICHES DES POINTS DE TOUT LES TRIMESTRES --}}
+            <option value="FICHE">FICHE DES POINTS</option>
         	</select>
         </div>
 

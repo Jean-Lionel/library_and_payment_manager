@@ -64,6 +64,7 @@
 	    						<option value=""></option>
 	    						<option value="INTERROGATION">INTERROGATION</option>
 	    						<option value="EXAMEN">EXAMEN</option>
+	    						<option value="COM">COM.</option>
 	    					</select>
 
 	    					@error('type_evaluation')

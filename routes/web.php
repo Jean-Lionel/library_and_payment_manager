@@ -80,6 +80,7 @@ Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
 Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
 Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
+
 Route::post('get_notes', [BulletinController::class , 'get_notes'])->name('get_notes');
 
 Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');

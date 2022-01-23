@@ -22,6 +22,8 @@ class CourseLivewire extends Component
 	public $professeur_id;
     public $identifiant;
     public $search;
+    public $ponderation_compentance;
+    public $ponderation_examen;
 
     public function render()
     {
@@ -56,6 +58,9 @@ class CourseLivewire extends Component
             "professeur_id" => $this->professeur_id,
             "classe_id" => $this->classe_id,
             "category_id" => $this->category_id,
+            "ponderation_compentance" => $this->ponderation_compentance,
+            // "ponderation_ressource" => $this->ponderation_ressource,
+            "ponderation_examen" => $this->ponderation_examen,
         ];
 
         if($this->identifiant){
@@ -78,5 +83,7 @@ class CourseLivewire extends Component
         $this->category_id = $course->category_id;
         $this->ponderation = $course->ponderation;
         $this->credit = $course->credit;
+        $this->ponderation_compentance = $course->ponderation_compentance;
+        $this->ponderation_examen = $course->ponderation_examen;
     }
 }

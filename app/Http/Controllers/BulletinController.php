@@ -29,7 +29,7 @@ class BulletinController extends Controller
 
         $selectClasse = Classe::find($classe_id );
 
-           $courseCategories = Classe::find($classe_id) ? Classe::find($classe_id)->courseCategories() : [];
+        $courseCategories = Classe::find($classe_id) ? Classe::find($classe_id)->courseCategories() : [];
         return view('bulletin.show', 
 
             compact('anneScolaire','anne_scolaire_id','selectClasse','courseCategories'));
@@ -52,7 +52,7 @@ class BulletinController extends Controller
         $select_classe = \Request::get('classe_id') ?? 0;
 
         $classes = Classe::where('section_id',$select_section)->get() ?? [];
-       
+
         $choosedClasse = Classe::find($select_classe);
         $annee_scolaires = AnneScolaire::latest()->get();
         return view('bulletin.notes', compact('sections', 'select_section', 'trimestres', 'classes', 'choosedClasse','annee_scolaires', 'select_classe'));
@@ -66,32 +66,66 @@ class BulletinController extends Controller
       // "cours_id" => "1"
       // "trimestre" => "2"
       // "annee_scolaire" => "1"//"section_id" => "1"
-     
+
       $classe_id = $request->classe_id;
       $cours_id = $request->cours_id;
       $trimestre = $request->trimestre;
       $anne_scolaire_id = $request->annee_scolaire;
 
 
-    $eleves = Classe::find( $classe_id)->eleves;
-    $eleves = Eleve::where('classe_id', $classe_id)
-                    ->where('anne_scolaire_id',$anne_scolaire_id)
-                    ->orderByRaw('first_name')
-                    ->orderByRaw('last_name')
-                    ->get();
-    $listes_points = [];
+      $eleves = Eleve::where('classe_id', $classe_id)
+      ->where('anne_scolaire_id',$anne_scolaire_id)
+      ->orderByRaw('first_name')
+      ->orderByRaw('last_name')
+      ->get();
 
+      if( $trimestre == 'FICHE'){
+        // Retourne le fiche des points de tout les trimestre condanse
+       return $this->getAllTrimestre($eleves,$cours_id,$anne_scolaire_id);
+      }else{
+
+        return $this->getOneTrimestre($eleves,$cours_id,$anne_scolaire_id,$trimestre);
+      }
+  }
+
+  private function getAllTrimestre($eleves,$cours_id,$anne_scolaire_id){
+    // 
+
+    foreach ($eleves as $key => $eleve) {
+        // code...
+       // $type_evaluation = INTERROGATION | EXAMEN | COMPENTENCE
+       // $type_evaluation = INTERROGATION | EXAMEN | COMPENTENCE
+        
+        $trimestre = [];
+
+        for($i=1; $i<=3; $i++){
+              $trimestre[$i]['INTERROGATION'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'INTERROGATION' );
+
+              $trimestre[$i]['COMPENTENCE'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'COMPENTENCE' );
+
+              $trimestre[$i]['EXAMEN'] = $eleve->recuperer_point($eleve->id ,$cours_id, $i, $anne_scolaire_id, 'EXAMEN' );
+        }
+        dump($trimestre);
+
+    }
+
+    return view("bulletin.fiche_point");
+  }
+
+  private function getOneTrimestre($eleves,$cours_id,$anne_scolaire_id,$trimestre){
+
+    $listes_points = [];
     foreach($eleves as $eleve){
         $v = [];
         $v['nom'] = $eleve->first_name;
         $v['prenom'] = $eleve->last_name;
 
         $points = PointEvaluation::where('cour_id', '=', $cours_id)
-                                    ->where('eleve_id','=',$eleve->id)
-                                    ->where('trimestre_id','=',$trimestre)
-                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
-                                    ->where('type_evaluation','=','INTERROGATION')
-                                    ->get();
+        ->where('eleve_id','=',$eleve->id)
+        ->where('trimestre_id','=',$trimestre)
+        ->where('anne_scolaire_id','=',$anne_scolaire_id)
+        ->where('type_evaluation','=','INTERROGATION')
+        ->get();
         $v['points'] = $points;
 
         $listes_points[] = $v;
@@ -99,19 +133,15 @@ class BulletinController extends Controller
     }
 
     $cours = Cour::find($cours_id);
-   
-
-
     $evaluations = Evaluation::where('cour_id', '=', $cours_id)
-                                    ->where('trimestre','=',$trimestre)
-                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
-                                    ->where('type_evaluation','=','INTERROGATION')
-                                    ->get();
+    ->where('trimestre','=',$trimestre)
+    ->where('anne_scolaire_id','=',$anne_scolaire_id)
+    ->where('type_evaluation','=','INTERROGATION')
+    ->get();
 
-     $pdf = PDF::loadView('bulletin.liste_point', compact('listes_points','evaluations','cours'));
+    $pdf = PDF::loadView('bulletin.liste_point', compact('listes_points','evaluations','cours'));
 
     return $pdf->stream('test.pdf');
 
-   // return view('bulletin.liste_point', compact('listes_points','evaluations','cours'));
-    }
+}
 }
