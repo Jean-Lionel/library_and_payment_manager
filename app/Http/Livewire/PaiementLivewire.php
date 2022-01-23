@@ -30,7 +30,7 @@ class PaiementLivewire extends Component
 	public $number_letter  = "";
 
 	public $facture;
-
+	public $ordre=false;
 	public $showFacture = false;
 
 	public function mount()
@@ -39,21 +39,27 @@ class PaiementLivewire extends Component
 		
 	}
 
+	public function showEnOrdre()
+	{
+		$this->ordre=!$this->ordre;
+		$this->showFormulaire = false;
+	}
 	
 	public function render()
 	{
 		$this->paiements = Paiment::sortable()->latest()->paginate(20);
 		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
 		return view('livewire.paiement-livewire',
-			[
-				'paiements' => $this->paiements
+		[
+			'paiements' => $this->paiements
 			]
-
+			
 		);
 	}
-
+	
 	public function showForm(){
 		$this->showFormulaire = !$this->showFormulaire;
+		$this->ordre=false;
 	}
 
 	public function updatedCompteName($compte){

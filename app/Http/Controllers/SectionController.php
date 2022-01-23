@@ -46,7 +46,7 @@ class SectionController extends Controller
 
         Section::create($request->all());
 
-        return back();
+        return redirect()->back();
     }
 
     /**
