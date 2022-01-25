@@ -1,0 +1,35 @@
+models:
+    AnneScolaire: { name: string }
+    Auteur: { name: string, pay_orgine: 'string nullable' }
+    Book: { title: string, isbn: 'string nullable', edition: 'string nullable', nombre_exemplaire: 'float:8,2 nullable', nombre_livre_retire: 'float:8,2 nullable', auteur_id: 'biginteger unsigned', classement_id: 'biginteger unsigned' }
+    Bulletin: {  }
+    Category: { name: string, stock_id: 'biginteger unsigned' }
+    Classe: { name: string, section_id: 'biginteger unsigned' }
+    Classement: { name: string, etagere_id: 'biginteger unsigned' }
+    Compte: { eleve_id: 'biginteger unsigned', name: string, montant: 'float:64,2' }
+    Cour: { name: string, ponderation: 'float:10', ponderation_examen: 'integer nullable', ponderation_ressource: 'integer nullable', ponderation_compentance: 'integer nullable', credit: 'float:10 nullable', classe_id: 'biginteger unsigned', category_id: 'biginteger unsigned', professeur_id: 'biginteger unsigned nullable' }
+    CourseCategory: { name: string, ordre: integer }
+    Depense: { action: string, montant: 'float:64,2', description: 'text nullable', user_id: 'biginteger unsigned' }
+    DetailEmprunt: { emprut_id: 'biginteger unsigned', book_id: 'biginteger unsigned', user_id: 'biginteger unsigned', quantite: 'float:8,2', livreremet: 'float:8,2 default:0.00', etat: string }
+    DetailOrder: { product_id: 'biginteger unsigned', order_id: 'biginteger unsigned', quantite: 'float:10', price: 'float:60,2', price_unitaire: 'float:60,2', montant: 'float:60,2' }
+    Eleve: { first_name: 'string nullable', last_name: 'string nullable', sexe: 'string nullable', date_naissance: 'date nullable', nationalite: 'string nullable', address: 'string nullable', anne_scolaire: string, anne_scolaire_id: 'biginteger unsigned', description: 'text nullable', classe_id: 'biginteger unsigned' }
+    Emprut: { eleve_id: 'integer nullable', professeur_id: 'integer nullable', lecteur_id: 'integer nullable', type_lecteur: 'string nullable', etat: 'string nullable', detail_emprunt: 'text nullable', date_retrait: date, date_retour: date, user_id: 'biginteger unsigned' }
+    Etagere: { name: string, description: 'text nullable' }
+    Evaluation: { ponderation: 'float:8,2', trimestre: string, type_evaluation: string, anne_scolaire_id: 'biginteger unsigned', cour_id: 'biginteger unsigned', classe_id: 'biginteger unsigned', user_id: 'biginteger unsigned', date_evaluation: 'date nullable', description: 'text nullable' }
+    FollowProduct: { action: 'enum:ENTRE,SORTIE', products: text, quantite: 'float:10', product_id: 'biginteger unsigned' }
+    Lecteur: { name: string, telephone: 'string nullable', description: 'string nullable' }
+    Order: { montant: 'float:62,2', tax: 'float:62,2', amount_tax: 'float:60,2', client: string, details: text, user_id: 'biginteger unsigned', eleve_id: 'biginteger unsigned' }
+    Paiment: { amount: 'float:60,2', bordereau: string, type_paiement: string, compte_id: 'biginteger unsigned', compte_name: string, eleve_id: 'biginteger unsigned', user_id: 'biginteger unsigned', trimestre: string, annee_scolaire: 'string nullable' }
+    Patrimoine: { name: string, description: text, quantite_total: 'float:62,2', qte_en_mauvaise_etat: 'float:62,2', quantite_en_bonne_etat: 'float:62,2' }
+    PointEvaluation: { evaluation_id: 'biginteger unsigned', eleve_id: 'biginteger unsigned', point_obtenu: 'float:10', ponderation: 'float:10 nullable', cour_id: 'biginteger unsigned', classe_id: 'biginteger unsigned nullable', trimestre_id: 'biginteger unsigned', anne_scolaire_id: 'biginteger unsigned', type_evaluation: 'string nullable', description: 'text nullable' }
+    Product: { name: string, marque: string, unite_mesure: 'string nullable', quantite: 'float:8,2', quantite_alert: 'float:8,2 nullable', price: 'float:62,2', price_max: 'float:62,2 nullable', price_min: 'float:62,2 nullable', date_expiration: 'date nullable', description: 'text nullable', category_id: 'biginteger unsigned' }
+    Professeur: { name: string, email: 'string nullable', telephone: string }
+    RetourLivre: { livre_title: string, quantite: 'float:8,2', livre_id: 'biginteger unsigned', user_id: 'biginteger unsigned', detail_emprunt_id: 'biginteger unsigned', date_retour: date }
+    RetraitLivre: { book_id: 'biginteger unsigned', isbn: 'string nullable', quantite: 'float:8,2', status: string }
+    Role: { name: string }
+    RoleUser: {  }
+    Section: { name: string }
+    Stock: { name: string }
+    Trimestre: { name: string }
+    User: { name: string, telephone: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Vente: {  }
