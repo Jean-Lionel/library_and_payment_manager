@@ -119,7 +119,6 @@
 							($max_total * 3))}}
 						</td>
 
-						
 					</tr>
 				@endforeach
 				
