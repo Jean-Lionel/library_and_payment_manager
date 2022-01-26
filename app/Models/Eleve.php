@@ -23,9 +23,15 @@ class Eleve extends Model
     	return $this->belongsTo('App\Models\Classe');
     }
 
+    public function is_a_girl(){
+        return $this->sexe == "F";
+    }
+    public function is_a_boy(){
+        return $this->sexe == "M" || $this->sexe == "H";
+    }
+
     public function compte(){
     	return $this->belongsTo('App\Models\Compte','id','eleve_id');
-
     }
 
     public function getFullNameAttribute(){

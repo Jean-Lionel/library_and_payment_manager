@@ -8,5 +8,5 @@
  <div class="rapport">
     <a href="{{ route('paiements.create') }}">Rapport des paimements </a>
 
-    <a href="{{ route('paiements.create') }}"> Effectif des élèves </a>
+    <a href="{{ route('effectif') }}"> Effectif des élèves </a>
   </div>

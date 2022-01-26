@@ -13,6 +13,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\PatrimoineController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
@@ -37,57 +38,56 @@ Route::get('/accueil', function () {
     return view('welcome');
 });
 
-
-
 Route::middleware('auth')->group(function(){
- Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
- 
-Route::resource('sections', SectionController::class);
-Route::resource('classes', ClasseController::class);
-Route::resource('cours', CourController::class);
-Route::resource('eleves', EleveController::class);
-Route::resource('paiements', PaimentController::class);
-Route::resource('patrimoines', PatrimoineController::class);
-Route::resource('products', ProductController::class);
-Route::resource('stoks', StockController::class);
-Route::resource('categories', CategoryController::class);
-Route::resource('ventes', VenteController::class);
-Route::resource('expenses', DepenseController::class);
-Route::resource('configurations', ConfigurationController::class);
+    Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+    Route::resource('sections', SectionController::class);
+    Route::resource('classes', ClasseController::class);
+    Route::resource('cours', CourController::class);
+    Route::resource('eleves', EleveController::class);
+    Route::resource('paiements', PaimentController::class);
+    Route::resource('patrimoines', PatrimoineController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('stoks', StockController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('ventes', VenteController::class);
+    Route::resource('expenses', DepenseController::class);
+    Route::resource('configurations', ConfigurationController::class);
 
-Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
+    Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
-Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
-Route::get('history', [BibliothequeController::class, 'history'])->name('history');
+    Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
+    
+    Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
+    Route::get('history', [BibliothequeController::class, 'history'])->name('history');
 
-Route::get('books', [BibliothequeController::class, 'books'])->name('books');
+    Route::get('books', [BibliothequeController::class, 'books'])->name('books');
 
-Route::get('etagers', [BibliothequeController::class, 'etagers'])->name('etagers');
-Route::get('professeurs', [BibliothequeController::class, 'professeurs'])->name('professeurs');
+    Route::get('etagers', [BibliothequeController::class, 'etagers'])->name('etagers');
+    Route::get('professeurs', [BibliothequeController::class, 'professeurs'])->name('professeurs');
 
-Route::get('lecteurs', [BibliothequeController::class, 'lecteurs'])->name('lecteurs');
-Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts');
+    Route::get('lecteurs', [BibliothequeController::class, 'lecteurs'])->name('lecteurs');
+    Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts');
 
-Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
+    Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
 
-Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
+    Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
 
-Route::view("evaluations","courses.evaluation")->name("evaluations");
-Route::view('evaluations/{id}','courses.points')->name('add_point');
+    Route::view("evaluations","courses.evaluation")->name("evaluations");
+    Route::view('evaluations/{id}','courses.points')->name('add_point');
 
-Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
+    Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
-Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
-Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
-Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
+    Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
+    Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
+    Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
 
-Route::post('get_notes', [BulletinController::class , 'get_notes'])->name('get_notes');
+    Route::post('get_notes', [BulletinController::class , 'get_notes'])->name('get_notes');
 
-Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
+    Route::post('save_student', [EleveController::class , 'SaveList'])->name('save_student');
 
-Route::view('course_categories','courses.categories')->name('course_categories');
-Route::view('bullettin','courses.bullettin')->name('bullettin');
-Route::view('utilisateur','users.utilisateur')->name('utilisateur');
+    Route::view('course_categories','courses.categories')->name('course_categories');
+    Route::view('bullettin','courses.bullettin')->name('bullettin');
+    Route::view('utilisateur','users.utilisateur')->name('utilisateur');
 
 });
 
