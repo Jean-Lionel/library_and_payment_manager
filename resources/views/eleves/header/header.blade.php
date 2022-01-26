@@ -1,10 +1,10 @@
 <style>
-	ul li{
+	.header ul li{
 		display: inline-block;
 	}
 </style>
 
-<div class="">
+<div class="header">
 	<ul>
 		@canany(['is-admin','is-prefet'])
 		<li class=" {{ setActiveRoute('sections.index') }} text-light">

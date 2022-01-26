@@ -25,6 +25,7 @@ class LevelStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:400'],
+            'section_id' => 'required',
         ];
     }
 }

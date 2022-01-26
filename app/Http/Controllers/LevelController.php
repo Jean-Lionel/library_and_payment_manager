@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LevelStoreRequest;
 use App\Models\Level;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class LevelController extends Controller
@@ -37,7 +38,8 @@ class LevelController extends Controller
      */
     public function create(Request $request)
     {
-        return view('level.create');
+        $sections = Section::all();
+        return view('level.create',compact('sections'));
     }
     /**
      * @param \Illuminate\Http\Request $request

@@ -1,6 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-level.edit template
+    <div>
+            @include('eleves.header.header')
+    </div>
 @endsection
 
