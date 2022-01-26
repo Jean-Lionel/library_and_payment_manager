@@ -57,7 +57,7 @@
 
 					@foreach ($evaluations as $key => $evaluation)
 						{{-- expr --}}
-							<th> TJ {{ ++$key }}/{{ $evaluation->ponderation }}</th>
+							<th>  /{{ $evaluation->ponderation }}</th>
 						@php
 							$max += $evaluation->ponderation;
 						@endphp
@@ -67,7 +67,7 @@
 						TOTAL / {{ $max }}
 					</th>
 					<th>
-						MOYENNE / {{ $cours->ponderation }}
+						TJ / {{ $cours->ponderation }}
 					</th>
 				</tr>
 				
@@ -105,8 +105,8 @@
 				</td>
 
 				<td>
-					{{ getPrice(($total * $cours->ponderation / 
-						( $max != 0 ? $max : 1 )), "") }}
+					{{ number_format(($total * $cours->ponderation / 
+						( $max != 0 ? $max : 1 ))) }}
 				</td>
 			</tr>
 			@endforeach
