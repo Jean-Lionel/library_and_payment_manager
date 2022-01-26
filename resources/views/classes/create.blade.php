@@ -1,6 +1,9 @@
 @extends('layouts.base')
 
 @section('content')
+<div>
+	@include('eleves.header.header')
+</div>
 
 <div class="container">
 	<h5 class="text-center">Ajouter une section</h5>
