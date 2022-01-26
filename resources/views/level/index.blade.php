@@ -1,7 +1,6 @@
-{{--
-    @extends('layouts.app')
+@extends('layouts.base')
 
-    @section('content')
-        level.index template
-    @endsection
---}}
+@section('content')
+level.index template
+@endsection
+
