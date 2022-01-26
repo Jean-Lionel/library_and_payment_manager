@@ -13,7 +13,7 @@ class Classe extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name','section_id'];
+    protected $fillable = ['name','section_id','level_id'];
 
     public function section()
     {

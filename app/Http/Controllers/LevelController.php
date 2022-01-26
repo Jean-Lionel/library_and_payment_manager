@@ -31,6 +31,14 @@ class LevelController extends Controller
 
         return redirect()->route('level.index');
     }
+    public function update(LevelStoreRequest $request, Level $level)
+    {
+        $level->update($request->validated());
+
+        $request->session()->flash('level.name', $level->name);
+
+        return redirect()->route('level.index');
+    }
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -48,8 +56,8 @@ class LevelController extends Controller
      */
     public function edit(Request $request, Level $level)
     {
-        $level = Level::find($level);
-
-        return view('level.edit', compact('level'));
+        $sections = Section::all(); 
+  
+        return view('level.edit', compact('level','sections'));
     }
 }
