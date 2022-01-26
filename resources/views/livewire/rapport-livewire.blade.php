@@ -88,16 +88,6 @@ body.modal-open {
 </style>
 
 <div class="">
-  <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-      <span class="sr-only">Close</span>
-    </button>
-  </div>
-
-  <div class="div">
-    <a href="{{ route('paiements.create') }}">Rapport des paimements par classe</a>
-  </div>
 
   <div class="row mb-3 text-center">
     <div class="col-xl-3 col-lg-6">
