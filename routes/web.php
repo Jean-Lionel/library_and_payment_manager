@@ -99,3 +99,24 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('post', App\Http\Controllers\PostController::class)->only('index', 'store');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->only('index', 'store');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->only('index', 'store', 'create');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->only('index', 'store', 'create');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->only('index', 'store', 'create');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->except('edit', 'show', 'destroy');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->except('edit', 'show', 'destroy');
+
+
+Route::resource('level', App\Http\Controllers\LevelController::class)->except('update', 'show', 'destroy');

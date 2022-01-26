@@ -1,4 +1,3 @@
-##payment management for secondary and primary school.
 ##The best athlete wants his opponent at his best
 ##La chenille en peinant sans cesse devient le riche papillon
 
@@ -28,3 +27,4 @@
     8888888888888888888888888888888888888888
     8888888888888888888888888888888888888888
     8888888888888888888888888888888888888888
+

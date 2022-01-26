@@ -1,3 +1,12 @@
+created:
+    - app/Http/Controllers/LevelController.php
+    - database/factories/LevelFactory.php
+    - database/migrations/2022_01_26_065141_create_levels_table.php
+    - app/Models/Level.php
+    - tests/Feature/Http/Controllers/LevelControllerTest.php
+    - resources/views/level/edit.blade.php
+updated:
+    - routes/web.php
 models:
     AnneScolaire: { name: string }
     Auteur: { name: string, pay_orgine: 'string nullable' }
@@ -33,3 +42,4 @@ models:
     Trimestre: { name: string }
     User: { name: string, telephone: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
     Vente: {  }
+    Level: { name: 'string:400', section_id: 'id foreign:sections' }

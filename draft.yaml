@@ -1,20 +1,24 @@
 models:
-  Post:
-    title: string:400
-    content: longtext
-    published_at: nullable timestamp
+  Level:
+    name: string:400
+    section_id: id foreign:sections
 
 controllers:
-  Post:
+  Level:
     index:
       query: all
-      render: post.index with:posts
+      render: level.index with:levels
 
     store:
-      validate: title, content
-      save: post
-      send: ReviewNotification to:post.author with:post
-      dispatch: SyncMedia with:post
-      fire: NewPost with:post
-      flash: post.title
-      redirect: post.index
+      validate: name
+      save: level
+      flash: level.name
+      redirect: level.index
+
+    create:
+      render: level.create 
+
+    edit:
+      find: level
+      render: level.edit with.level
+
