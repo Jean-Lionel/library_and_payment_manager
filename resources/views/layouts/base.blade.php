@@ -42,14 +42,6 @@
 			<div class="p-4 ">
 				<h1><a href="#" class="logo">ECOLE </a></h1>
 				<ul class="list-unstyled components mb-5 text-light">
-
-
-					@canany(['is-admin','is-prefet'])
-					<li class=" {{ setActiveRoute('sections.index') }} text-light">
-						<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3 text-light"></span> Section</a>
-					</li>
-					@endcanany
-
 					@canany(['is-admin','is-prefet'])
 					<li class="{{ setActiveRoute('eleves.index') }}">
 						<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3 text-light"></span> Eleve</a>

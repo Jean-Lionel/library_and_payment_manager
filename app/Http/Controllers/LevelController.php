@@ -14,8 +14,7 @@ class LevelController extends Controller
      */
     public function index(Request $request)
     {
-        $levels = Level::all();
-
+        $levels = Level::paginate();
         return view('level.index', compact('levels'));
     }
 
@@ -40,7 +39,6 @@ class LevelController extends Controller
     {
         return view('level.create');
     }
-
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Level $level

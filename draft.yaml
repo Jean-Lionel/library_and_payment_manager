@@ -1,24 +1,25 @@
 models:
-  Level:
-    name: string:400
-    section_id: id foreign:sections
+  Vainquer:
+    firstName: string:400
+    lastName: string:400
+    age : integer
 
 controllers:
-  Level:
+  Vainquer:
     index:
       query: all
-      render: level.index with:levels
+      render: v.index with:vainquers
 
     store:
-      validate: name
-      save: level
-      flash: level.name
-      redirect: level.index
+      validate: firstName,lastName,lastName, age
+      save: vainquer
+      flash: vainquer.firstName
+      redirect: vainquers.index
 
     create:
-      render: level.create 
+      render: vainquers.create 
 
     edit:
-      find: level
-      render: level.edit with.level
+      find: vainquers
+      render: vainquers.edit with.vainquers
 
