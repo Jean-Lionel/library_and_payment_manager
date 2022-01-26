@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use App\Models\Eleve;
+use App\Models\Level;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -32,12 +33,12 @@ class ClasseController extends Controller
     public function create()
     {
         $id = \Request::get('id');
-        $section = Section::find($id);
+       
+        $section = Section::find($id) ?? new Section;
+        $levels = Level::all();
 
-        if(!$section){
-            return $this->index();
-        }
-        return view('classes.create',compact('section'));
+        return view('classes.create',compact('section', 
+            'levels'));
     }
 
     /**
@@ -50,16 +51,12 @@ class ClasseController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'section_id' => 'required|numeric'
-
+            'level_id' => 'required|numeric'
         ]);
-
-
-        Classe::create($request->all());
-
-
-
-        return back();
+        $section_id =  Level::find($request->level_id)->id;
+        Classe::create(array_merge($request->all(), 
+            ['section_id' => $section_id]));
+        return $this->index();
     }
 
     /**
@@ -82,9 +79,12 @@ class ClasseController extends Controller
      * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classe $classe)
+    public function edit($id)
     {
-        return view('classes.edit', compact('classe'));
+        $classe = Classe::find($id);
+        $levels  = Level::all();
+
+        return view('classes.edit', compact('classe','levels'));
     }
 
     /**
@@ -94,14 +94,20 @@ class ClasseController extends Controller
      * @param  \App\Models\Classe  $Classe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request,  $id)
     {
         //
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'level_id' => 'required',
 
         ]);
-        $classe->update($request->all());
+
+        $classe = Classe::find($id);
+        $section_id =  Level::find($request->level_id)->id;
+        $classe->update(array_merge($request->all(), [
+            'section_id' => $section_id
+        ]));
 
         return $this->index();
     }

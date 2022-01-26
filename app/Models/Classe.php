@@ -18,6 +18,10 @@ class Classe extends Model
     public function section()
     {
     	return $this->belongsTo('App\Models\Section'); 	
+    } 
+    public function level()
+    {
+        return $this->belongsTo('App\Models\Level');  
     }
 
     public function eleves(){

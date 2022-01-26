@@ -20,6 +20,7 @@
 				<thead>
 					<tr>
 						<th>#</th>
+						<th>NIVEAU</th>
 						<th>DESCRIPTION</th>
 						<th>SECTION</th>
 						<th>ACTION</th>
@@ -30,6 +31,7 @@
 					@foreach($classes as $classe)
 					<tr>
 						<td>{{ $classe->id }}</td>
+						<td>{{ $classe->level->name ?? "" }}</td>
 						<td><a href="">{{ $classe->name }}</a></td>
 						<td><a href="">{{ $classe->section->name }}</a></td>
 
