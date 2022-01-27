@@ -52,7 +52,7 @@
 
         	<select name="cours_id" id="" class="form-control">
         		<option value=""></option>
-        		@foreach ($choosedClasse->courses ?? [] as $cour)
+        		@foreach ($choosedClasse->courses() ?? [] as $cour)
         			<option value="{{ $cour->id }}">{{ $cour->name }}</option>
         		@endforeach
         		

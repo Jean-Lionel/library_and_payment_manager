@@ -76,29 +76,52 @@ class Eleve extends Model
 
         $choosed_eleve =  $this->id;
         $points = PointEvaluation::where('cour_id', '=', $cour_id)
-                                    ->where('eleve_id','=',$eleve_id ?? $choosed_eleve)
-                                    ->where('trimestre_id','=',$trimestre_id)
-                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
-                                    ->where('type_evaluation','=',$type_evaluation)
-                                    ->get();
+        ->where('eleve_id','=',$eleve_id ?? $choosed_eleve)
+        ->where('trimestre_id','=',$trimestre_id)
+        ->where('anne_scolaire_id','=',$anne_scolaire_id)
+        ->where('type_evaluation','=',$type_evaluation)
+        ->get();
         //CALCULER LA MOYENNE SUR 
         $ponderation = Cour::findOrFail($cour_id)->ponderation;
+        if($type_evaluation == 'EXAMEN'){
+            $ponderation = Cour::findOrFail($cour_id)->ponderation_examen;
+        } 
+        if($type_evaluation == 'COMPENTENCE'){
+            //COMPETANCE
+            $ponderation = Cour::findOrFail($cour_id)->ponderation_compentance;
+        }
+        //$ponderation = Cour::findOrFail($cour_id)->ponderation;
         //POINT OBTENUE  MOYENNE DU COURS
         if($points->sum('ponderation') != 0){
-             $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
-         }else{
-            $resultat  = 0;
-         }
-        return $resultat;
+         $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
+     }else{
+        $resultat  = 0;
     }
+    return $resultat;
+}
     //TYPE DES EVALUATIONS PAR DEFAUT
     //  INTERROGATION
     // EXAMEN
     // COMPENTENCE
 
-    public function getPointTatalObtenue(){
-       dd( $this->level);
+public function getPointTatalObtenue($courses,$trimestre_id, $anne_scolaire_id){
+  
+   $total = 0;
+
+   $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
+
+   foreach ($courses as $key => $cours) {
+    
+    foreach ($type_evaluations as $key => $evaluation) {
+            // code...
+        $total += $this->recuperer_point($eleve_id = "" ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
     }
+    
+}
+
+return $total;
+
+}
 
 }
 

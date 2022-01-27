@@ -25,6 +25,10 @@ class Classe extends Model
         return $this->belongsTo('App\Models\Level');  
     }
 
+    public function courses(){
+        return $this->level->courses;
+    }
+
     public function eleves(){
     	return $this->hasMany('App\Models\Eleve');
     }
@@ -63,9 +67,7 @@ class Classe extends Model
         return count($this->eleves ?? 0);
     }
 
-    public function courses(){
-        return $this->hasMany(Cour::class);
-    }
+  
 
     public function courseCategories(){
         $categories = [];

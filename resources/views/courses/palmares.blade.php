@@ -4,7 +4,7 @@
 
 <div>
 	@include('courses.header')
-	
+	<livewire:palmares-header />
 </div>
 
 

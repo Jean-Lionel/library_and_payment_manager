@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
-    // Route::get('palmares', [PalmaresController::class, 'index'])->name('palmares');
+    Route::get('get_palmares/{annee_scolaire_id}/{classe_id}/{trimestre}', [PalmaresController::class, 'getPalmares'])->name('get_palmares');
 
     Route::view('palmares','courses.palmares')->name('palmares');
 
