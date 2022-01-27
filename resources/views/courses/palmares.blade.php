@@ -4,7 +4,8 @@
 
 <div>
 	@include('courses.header')
-	<livewire:bulletin-component />
+	
 </div>
+
 
 @stop

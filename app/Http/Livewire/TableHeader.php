@@ -11,8 +11,6 @@ class TableHeader extends Component
 	public string $label;
 	public string $field;
 
-
-
 	public function __construct($direction ,$name,$label,$field){
 		$this->direction = $direction;
 		$this->name = $name;

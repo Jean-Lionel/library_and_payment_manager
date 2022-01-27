@@ -11,6 +11,7 @@ use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PaimentController;
+use App\Http\Controllers\PalmaresController;
 use App\Http\Controllers\PatrimoineController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RapportController;
@@ -54,6 +55,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('configurations', ConfigurationController::class);
 
     Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
+
+    // Route::get('palmares', [PalmaresController::class, 'index'])->name('palmares');
+
+    Route::view('palmares','courses.palmares')->name('palmares');
 
     Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
     Route::get('get_effectifs/{anne_scolaire_id}', [RapportController::class, 'getEffectifs'])->name('get_effectifs');

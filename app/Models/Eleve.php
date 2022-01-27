@@ -60,9 +60,7 @@ class Eleve extends Model
 
     // LES POINTS OBTENUES DANS UN EVALUATION
     public function point_obentu_evaluation($evaluation_id){
-
         $check = PointEvaluation::where('evaluation_id', '=',$evaluation_id)->where('eleve_id' ,'=',$this->id)->first();
-
         return  $check ?? new PointEvaluation;
     }
 
@@ -92,6 +90,14 @@ class Eleve extends Model
             $resultat  = 0;
          }
         return $resultat;
+    }
+    //TYPE DES EVALUATIONS PAR DEFAUT
+    //  INTERROGATION
+    // EXAMEN
+    // COMPENTENCE
+
+    public function getPointTatalObtenue(){
+       dd( $this->level);
     }
 
 }

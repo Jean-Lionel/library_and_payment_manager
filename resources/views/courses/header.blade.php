@@ -18,5 +18,7 @@
 	<a class=" {{ setActiveRoute('notes') }}" href="{{ route('notes') }}">Notes</a>
 
 	<a class=" {{ setActiveRoute('bullettin') }}" href="{{ route('bullettin') }}">Bullettin</a>
+	<a class=" {{ setActiveRoute('palmares') }}" href="{{ route('palmares') }}">Palmarès</a>
+
 	<a class="{{ setActiveRoute('professeurs') }}" href="{{ route('professeurs') }}"><i class=" 	fa fa-user-md mr-2"></i>Professeur</a>
 </div>
