@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Classe;
 use App\Models\Cour;
 use App\Models\CourseCategory;
+use App\Models\Level;
 use App\Models\Professeur;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,7 +18,9 @@ class CourseLivewire extends Component
 	public $name;
 	public $ponderation;
     public $credit;
+    public $status = false;
 	public $classe_id;
+    public $level_id;
     public $category_id;
 	public $professeur_id;
     public $identifiant;
@@ -29,12 +32,14 @@ class CourseLivewire extends Component
     {
         $professeurs = Professeur::all();
         $classes = Classe::all();
+        $levels = Level::all();
         $categories = CourseCategory::all();
         $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10);
 
         return view('livewire.course-livewire',[
             'professeurs' => $professeurs,
             'classes' => $classes,
+            'levels' => $levels,
             'courses' => $courses,
             'categories' => $categories,
         ]);
@@ -44,7 +49,7 @@ class CourseLivewire extends Component
         "name" => "required",
         "ponderation" => "required|numeric|min:0",
         "professeur_id" => "required",
-        "classe_id" => "required",
+        "level_id" => "required",
         "credit" => "required",
         "category_id" => "required|numeric|min:0",
 
@@ -57,6 +62,8 @@ class CourseLivewire extends Component
             "credit" => $this->credit,
             "professeur_id" => $this->professeur_id,
             "classe_id" => $this->classe_id,
+            "status" => $this->status,
+            "level_id" => $this->level_id,
             "category_id" => $this->category_id,
             "ponderation_compentance" => $this->ponderation_compentance,
             // "ponderation_ressource" => $this->ponderation_ressource,
@@ -81,6 +88,8 @@ class CourseLivewire extends Component
         $this->professeur_id = $course->professeur_id;
         $this->classe_id = $course->classe_id;
         $this->category_id = $course->category_id;
+        $this->level_id = $course->level_id;
+        $this->status = $course->status;
         $this->ponderation = $course->ponderation;
         $this->credit = $course->credit;
         $this->ponderation_compentance = $course->ponderation_compentance;

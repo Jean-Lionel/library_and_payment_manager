@@ -5,8 +5,14 @@
     	<h5 class="text-center">Ajouter un cours</h5>
     	<form action="" wire:submit.prevent="saveCourse">
     		<div class="form-group">
-    			<label for="">TITLE DU COURS</label>
-    			<input type="text" wire:model="name" class="form-control">
+    			<label for="">TITLE DU COURS 
+                </label>
+    			<input type="text" wire:model="name" class="form-control form-control-sm">
+
+                <label for="">
+                    Marque comme un cours Principal
+                     <input type="checkbox" wire:model="status">
+                </label>
                 @error('name')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -14,7 +20,7 @@
 
              <div class="form-group">
                 <label for="">CATEGORIE</label>
-                <select name="" id="" wire:model="category_id" class="form-control">
+                <select name="" id="" wire:model="category_id" class="form-control form-control-sm">
                     <option value="">...........</option>
                     @foreach ($categories as $category)
                         {{-- expr --}}
@@ -28,7 +34,7 @@
 
     		<div class="form-group">
     			<label for="">PODERATION TJ TRIMESTRIELLE</label>
-    			<input type="number" wire:model="ponderation" class="form-control">
+    			<input type="number" wire:model="ponderation" class="form-control form-control-sm">
                 @error('ponderation')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -36,14 +42,14 @@
             
             <div class="form-group">
                 <label for="">PODERATION COMPÉTENCE </label>
-                <input type="number" wire:model="ponderation_compentance" class="form-control">
+                <input type="number" wire:model="ponderation_compentance" class="form-control form-control-sm">
                 @error('ponderation_compentance')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="">PODERATION RESSOURCE / EXAMEN </label>
-                <input type="number" wire:model="ponderation_examen" class="form-control">
+                <input type="number" wire:model="ponderation_examen" class="form-control form-control-sm">
                 @error('ponderation_examen')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -52,7 +58,7 @@
             
             <div class="form-group">
                 <label for="credit">CREDIT / HS</label>
-                <input type="number" id="credit" wire:model="credit" value="0" class="form-control">
+                <input type="number" id="credit" wire:model="credit" value="0" class="form-control form-control-sm">
                 @error('credit')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -60,7 +66,7 @@
 
     		<div class="form-group">
     			<label for="">PROFESSEUR</label>
-    			<select name="" id="" wire:model="professeur_id" class="form-control">
+    			<select name="" id="" wire:model="professeur_id" class="form-control form-control-sm">
     				<option value="">...........</option>
     				@foreach ($professeurs as $element)
     					{{-- expr --}}
@@ -73,21 +79,18 @@
                 @enderror
     		</div>
     		<div class="form-group">
-    			<label for="">SECTION | CLASSE</label>
-    			<select name="" id="" wire:model="classe_id" class="form-control">
+    			<label for="">SECTION | NIVEAU</label>
+    			<select name="" id="" wire:model="level_id" class="form-control form-control-sm">
     				<option value="">...........</option>
-    				@foreach ($classes as $element)
+    				@foreach ($levels as $element)
     					{{-- expr --}}
     				<option value="{{$element->id}}">{{ucfirst($element->section->name)}} | {{$element->name}}  </option>
     				@endforeach
     			</select>
-                @error('classe_id')
+                @error('level_id')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
-
-           
-
             
     		<div class="form-group mt-3">
     			<button type="submit" class="btn btn-info btn-block">Enregistrer</button>

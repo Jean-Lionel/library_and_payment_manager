@@ -26,4 +26,8 @@ class Cour extends Model
     public function category(){
         return $this->belongsTo(CourseCategory::class,  'category_id','id');
     }
+
+    public function isPrincipal(){
+        return $this->status == 1;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Classe;
+use App\Models\Cour;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +38,33 @@ class Level extends Model
     public function classes()
     {
         return $this->hasMany(Classe::class);
+    }
+
+    public function courses(){
+        return $this->hasMany(Cour::class);
+    }
+
+    public function getMaxTotal(){
+        //TOTAL 35 585 525 111
+        $total_hs = 0;
+        $total_tj = 0;
+        $total_ex = 0;
+
+        foreach ($this->courses as  $cours) {
+            if($cours->isPrincipal()){
+                $total_hs += $cours->credit;
+                $total_tj += $cours->ponderation;
+                // Examen c la ponderation + examen
+                $total_ex += ($cours->ponderation_compentance + $cours->ponderation_examen);
+            }
+           
+        }
+        return [
+            'total_hs' =>  $total_hs,
+            'total_tj' => $total_tj,
+            'total_ex' =>  $total_ex,
+            'total' => ($total_tj + $total_ex)
+        ];
     }
 
     public function getStudentByAnneScolaireId($anne_scolaire_id){
