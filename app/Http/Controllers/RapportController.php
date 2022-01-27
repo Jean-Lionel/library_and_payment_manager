@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eleve;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class RapportController extends Controller
@@ -15,9 +16,20 @@ class RapportController extends Controller
 
     public  function getEffectifs($anne_scolaire_id){
 
-        $eleves = Eleve::where('anne_scolaire_id', $anne_scolaire_id)
-                        ->get();
+        $objects = Level::all()->groupBy('section_id');
 
-        dd($eleves);
+        $classes = [];
+
+        foreach ($objects as $key => $levels) {
+
+            foreach ($levels as $k => $v) {
+                // code...
+              foreach ($v->classes as $key => $value) {
+                $classes[] = $value->getEffectifParClasse($anne_scolaire_id);
+              }
+            }
+        }
+
+        return view('rapport.effectif_doc', compact('classes'));
     }
 }

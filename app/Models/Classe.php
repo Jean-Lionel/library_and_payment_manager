@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cour;
+use App\Models\Eleve;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,8 +29,27 @@ class Classe extends Model
     	return $this->hasMany('App\Models\Eleve');
     }
 
+    public function getEleveByAnneScolaireId($anne_scolaire_id){
+        $eleves = Eleve::where('anne_scolaire_id', $anne_scolaire_id)
+                        ->where('classe_id', $this->id)->get();
+        return $eleves;
+    }
+
+    public function getEffectifParClasse($anne_scolaire_id){
+        $garcons = 0;
+        $filles = 0;
+
+        foreach($this->getEleveByAnneScolaireId($anne_scolaire_id) as $eleve){
+            if($eleve->is_a_girl())
+                $filles++;
+            if($eleve->is_a_boy())
+                $garcons++;
+        }
+        return ["name" => $this->name ,"g" => $garcons, "f" => $filles];
+    }
+
     public function nombre_eleves(){
-        return count($this->eleves);
+        return count($this->eleves ?? 0);
     }
 
     public function courses(){

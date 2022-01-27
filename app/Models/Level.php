@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Classe;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,5 +33,9 @@ class Level extends Model
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+    public function classes()
+    {
+        return $this->hasMany(Classe::class);
     }
 }
