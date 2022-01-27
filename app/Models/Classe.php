@@ -36,16 +36,28 @@ class Classe extends Model
     }
 
     public function getEffectifParClasse($anne_scolaire_id){
+       
         $garcons = 0;
         $filles = 0;
+        $total = 0;
+
 
         foreach($this->getEleveByAnneScolaireId($anne_scolaire_id) as $eleve){
             if($eleve->is_a_girl())
                 $filles++;
             if($eleve->is_a_boy())
                 $garcons++;
+            $total++;
         }
-        return ["name" => $this->name ,"g" => $garcons, "f" => $filles];
+
+        return [
+            "name" => $this->name ,
+            "g" => $garcons, 
+            "p_g" => getPourcentage($garcons , $total ), 
+            "f" => $filles,
+            "p_f" => getPourcentage($filles , $total ),
+            "total" =>  $total
+        ];
     }
 
     public function nombre_eleves(){

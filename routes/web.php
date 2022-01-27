@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function(){
     Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
     Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
+    Route::get('get_effectifs/{anne_scolaire_id}', [RapportController::class, 'getEffectifs'])->name('get_effectifs');
     
     Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
     Route::get('history', [BibliothequeController::class, 'history'])->name('history');

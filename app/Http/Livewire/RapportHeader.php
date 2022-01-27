@@ -23,6 +23,8 @@ class RapportHeader extends Component
 
     public function searchEffectif(){
         $r = new RapportController;
-        $r->getEffectifs($this->anne_scolaire_id);
+         $eleves = $r->getEffectifs($this->anne_scolaire_id);
+
+         return redirect()->route('get_effectifs', $this->anne_scolaire_id);
     }
 }

@@ -30,6 +30,7 @@ class RapportController extends Controller
             }
         }
 
-        return view('rapport.effectif_doc', compact('classes'));
+         return view('rapport.effectif_doc', compact('classes'));
+       
     }
 }

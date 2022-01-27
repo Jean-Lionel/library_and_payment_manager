@@ -47,7 +47,7 @@ function getPourcentage($a , $b){
 	if(floatval($b) != 0)
 		$res = floatval($a) * 100 / floatval($b);
 
-	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
+	return $res != 0 ? number_format($res,1,'.', ' ') :  "0";
 }
 
 function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
@@ -72,8 +72,6 @@ function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire
         }else{
         		$resultat = ' ';
         }
-       
-
         return $resultat;
 
     }
