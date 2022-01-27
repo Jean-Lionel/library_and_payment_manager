@@ -72,7 +72,6 @@
 
 			</tbody>
 		</table>
-
 		<hr>
 		<h4 class="text-center">Effectif des élèves par sexe et par niveau d'étude</h4>
 	</div>

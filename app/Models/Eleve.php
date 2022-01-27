@@ -36,6 +36,11 @@ class Eleve extends Model
 
     public function getFullNameAttribute(){
     	return $this->first_name .'  '. $this->last_name;
+    } 
+
+    // NIVEAU D'ETUDE
+    public function getLevelAttribute(){
+        return $this->classe->level->id ?? 0;
     }
 
     public static function getEleveById($id)

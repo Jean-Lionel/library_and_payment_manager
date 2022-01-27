@@ -40,8 +40,7 @@ class Classe extends Model
         $garcons = 0;
         $filles = 0;
         $total = 0;
-
-
+        
         foreach($this->getEleveByAnneScolaireId($anne_scolaire_id) as $eleve){
             if($eleve->is_a_girl())
                 $filles++;
