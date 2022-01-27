@@ -70,9 +70,59 @@
 				</tr>
 				@endforeach
 
-			</tbody>
-		</table>
-		<hr>
-		<h4 class="text-center">Effectif des élèves par sexe et par niveau d'étude</h4>
+				<tr>
+					<th colspan="2">Total</th>
+					<th>{{ sumColumn($classes, 'f') }}</th>
+					<th>{{ getPourcentage(sumColumn($classes, 'f'),sumColumn($classes, 'total') )  }}</th>
+					<th>{{ sumColumn($classes, 'g') }}</th>
+					<th>{{ getPourcentage(sumColumn($classes, 'g'),sumColumn($classes, 'total') )  }}</th>
+					<th>{{ sumColumn($classes, 'total') }}</th>
+					
+
+				</tbody>
+			</table>
+			<hr>
+			<h4 class="text-center">Effectif des élèves par sexe et par niveau d'étude</h4>
+
+			<table class="">
+				<thead>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Niveau</th>
+							<th>F</th>
+							<th>%F</th>
+							<th>G</th>
+							<th>%G</th>
+							<th>T(G + H)</th>
+						</tr>
+					</thead>
+				</thead>
+				<tbody>
+					@foreach ($levels as $element)
+					{{-- expr --}}
+					<tr>
+						<td>{{ $loop->index +1 }}</td>
+						<td>{{ $element['name'] }}</td>
+						<td>{{ $element['f'] }}</td>
+						<td>{{ $element['p_f'] }}</td>
+						<td>{{ $element['g'] }}</td>
+						<td>{{ $element['p_g'] }}</td>
+						<td>{{ $element['total']  }}</td>
+					</tr>
+					@endforeach
+
+					<tr>
+						<th colspan="2">Total</th>
+						<th>{{ sumColumn($levels, 'f') }}</th>
+						<th>{{ getPourcentage(sumColumn($levels, 'f'),sumColumn($classes, 'total') )  }}</th>
+						<th>{{ sumColumn($levels, 'g') }}</th>
+						<th>{{ getPourcentage(sumColumn($levels, 'g'),sumColumn($classes, 'total') )  }}</th>
+						<th>{{ sumColumn($levels, 'total') }}</th>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>

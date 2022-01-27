@@ -33,6 +33,13 @@ function getPrice($price, $type="", $limit = 2, $separateur = '.' )
 	return number_format($price, $limit ,$separateur,' , ') ." ". $type;
 }
 
+function sumColumn($input, $column_key){
+
+	$res = array_sum(array_column($input, $column_key));
+
+	return getPrice($res, "",0);
+}
+
 function addTwoNumber($a , $b){
 	$res = floatval($a) + floatval($b);
 	return $res != 0 ? number_format($res,1,'.', ' ') :  "";
