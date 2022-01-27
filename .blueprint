@@ -1,3 +1,11 @@
+created:
+    - app/Http/Controllers/TypeEvaluationController.php
+    - database/factories/TypeEvaluationFactory.php
+    - database/migrations/2022_01_27_164811_create_type_evaluations_table.php
+    - app/Models/TypeEvaluation.php
+    - tests/Feature/Http/Controllers/TypeEvaluationControllerTest.php
+updated:
+    - routes/web.php
 models:
     AnneScolaire: { name: string }
     Auteur: { name: string, pay_orgine: 'string nullable' }
@@ -35,3 +43,4 @@ models:
     Vente: {  }
     Level: { name: 'string:400', section_id: 'id foreign:sections' }
     Vainquer: { firstName: 'string:400', lastName: 'string:400', age: integer }
+    TypeEvaluation: { name: 'string:200' }

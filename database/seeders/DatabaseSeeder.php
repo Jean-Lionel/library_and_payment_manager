@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use App\Models\Eleve;
 use App\Models\Trimestre;
+use App\Models\TypeEvaluation;
 use Database\Seeders\AnneScolaireSeeder;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Seeder;
@@ -35,6 +36,10 @@ class DatabaseSeeder extends Seeder
         Trimestre::create([
                 'name' => 'TROISIEME TRIMESTRE'
             ]);
+        // AJOUT DES TYPES D'EVALUATIONS
+        TypeEvaluation::create(['name' => 'INTERROGATION']);
+        TypeEvaluation::create(['name' => 'EXAMEN']);
+        TypeEvaluation::create(['name' => 'COMPENTENCE']);
 
         $this->call([
             //AnneScolaireSeeder::class,

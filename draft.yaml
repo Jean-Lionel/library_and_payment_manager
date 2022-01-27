@@ -1,25 +1,10 @@
 models:
-  Vainquer:
-    firstName: string:400
-    lastName: string:400
-    age : integer
-
+  TypeEvaluation:
+    name: string:200
+    
 controllers:
-  Vainquer:
+  TypeEvaluation:
     index:
       query: all
-      render: v.index with:vainquers
-
-    store:
-      validate: firstName,lastName,lastName, age
-      save: vainquer
-      flash: vainquer.firstName
-      redirect: vainquers.index
-
-    create:
-      render: vainquers.create 
-
-    edit:
-      find: vainquers
-      render: vainquers.edit with.vainquers
+    
 

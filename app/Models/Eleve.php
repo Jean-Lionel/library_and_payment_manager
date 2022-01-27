@@ -59,8 +59,6 @@ class Eleve extends Model
     }
 
     // LES POINTS OBTENUES DANS UN EVALUATION
-
-
     public function point_obentu_evaluation($evaluation_id){
 
         $check = PointEvaluation::where('evaluation_id', '=',$evaluation_id)->where('eleve_id' ,'=',$this->id)->first();
@@ -85,21 +83,15 @@ class Eleve extends Model
                                     ->where('anne_scolaire_id','=',$anne_scolaire_id)
                                     ->where('type_evaluation','=',$type_evaluation)
                                     ->get();
-
         //CALCULER LA MOYENNE SUR 
-
         $ponderation = Cour::findOrFail($cour_id)->ponderation;
-
         //POINT OBTENUE  MOYENNE DU COURS
         if($points->sum('ponderation') != 0){
              $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
          }else{
             $resultat  = 0;
          }
-       
-
         return $resultat;
-
     }
 
 }
