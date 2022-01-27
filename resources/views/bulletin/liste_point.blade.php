@@ -32,8 +32,8 @@
 	<div>
 		<div class="header">
 			<div class="header-left">
-				<p><b>CLASSE : {{  $cours->classe->name}}</b></p>
-				<p><b>BRANCHE : {{ $cours->name }}</b></p>
+				<p><b>CLASSE : {{  $cours->classe->name ?? ''}}</b></p>
+				<p><b>BRANCHE : {{ $cours->name ?? '' }}</b></p>
 				<p><b>ANNEE SCOLAIRE : 2021-2022</b></p>
 			</div>
 			<div class="header-right">

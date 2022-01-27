@@ -49,7 +49,7 @@ class EvaluationComponent extends Component
     }
 
     public function updatedClasseId($classe_id){
-    	$this->cours = Classe::find($classe_id)->courses ?? [];
+    	$this->cours = Classe::find($classe_id)->courses() ?? [];
     	
     }
     public function toogleForm(){

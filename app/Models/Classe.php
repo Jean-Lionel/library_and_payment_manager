@@ -26,7 +26,7 @@ class Classe extends Model
     }
 
     public function courses(){
-        return $this->level->courses;
+        return $this->level->courses ?? [];
     }
 
     public function eleves(){

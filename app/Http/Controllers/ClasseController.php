@@ -36,9 +36,10 @@ class ClasseController extends Controller
        
         $section = Section::find($id) ?? new Section;
         $levels = Level::all();
+        $classe = new Classe;
 
         return view('classes.create',compact('section', 
-            'levels'));
+            'levels','classe'));
     }
 
     /**

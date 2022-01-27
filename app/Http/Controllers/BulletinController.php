@@ -54,6 +54,9 @@ class BulletinController extends Controller
         $classes = Classe::where('section_id',$select_section)->get() ?? [];
 
         $choosedClasse = Classe::find($select_classe);
+
+        if(!$choosedClasse)
+            $choosedClasse = new Classe;
         $annee_scolaires = AnneScolaire::latest()->get();
         return view('bulletin.notes', compact('sections', 'select_section', 'trimestres', 'classes', 'choosedClasse','annee_scolaires', 'select_classe'));
     }
