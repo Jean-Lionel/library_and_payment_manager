@@ -14,15 +14,21 @@ class PalmaresController extends Controller
       $c = Classe::find($classe_id);
       // Liste des cours
       $courses = $c->courses();
-
       $eleves = Eleve::where('anne_scolaire_id', $annee_scolaire_id)
                         ->where('classe_id',$classe_id)->get();
+      $palmares = [];
       foreach ($eleves as $key => $eleve) {
          // code...
-         $v = $eleve->getPointTatalObtenue($courses,$trimestre, $annee_scolaire_id);
+         $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
 
-         dump( $v);
-      }       
+         $eleve->points = $v;
+         $palmares[] = $eleve;
+        
+      } 
+
+      $palmares = collect($palmares)->sortByDesc('points');
+
+      return view();   
       
     // CALCULER TOUT LES NOTES
     // CALCULER LE POURCENTAGE

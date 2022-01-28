@@ -73,7 +73,7 @@ class Eleve extends Model
     // point_evaluations , cour_id , eleve_id , anne_scolaire_id  ,trimestre_id , type_evaluation
 
     public function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
-
+        
         $choosed_eleve =  $this->id;
         $points = PointEvaluation::where('cour_id', '=', $cour_id)
         ->where('eleve_id','=',$eleve_id ?? $choosed_eleve)
@@ -100,21 +100,18 @@ class Eleve extends Model
     return $resultat;
 }
     //TYPE DES EVALUATIONS PAR DEFAUT
-    //  INTERROGATION
+    // INTERROGATION
     // EXAMEN
     // COMPENTENCE
 
-public function getPointTatalObtenue($courses,$trimestre_id, $anne_scolaire_id){
+public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_scolaire_id){
   
    $total = 0;
-
    $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
-
    foreach ($courses as $key => $cours) {
-    
-    foreach ($type_evaluations as $key => $evaluation) {
+    foreach ($type_evaluations as  $evaluation) {
             // code...
-        $total += $this->recuperer_point($eleve_id = "" ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
+        $total += $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
     }
     
 }
