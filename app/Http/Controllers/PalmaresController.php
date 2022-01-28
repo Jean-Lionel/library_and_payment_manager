@@ -12,6 +12,10 @@ class PalmaresController extends Controller
    public  function getPalmares($annee_scolaire_id, $classe_id, $trimestre){
 
       $c = Classe::find($classe_id);
+      $level = $c->level;
+
+      $max_total = $level->getMaxTotal();
+
       // Liste des cours
       $courses = $c->courses();
       $eleves = Eleve::where('anne_scolaire_id', $annee_scolaire_id)
@@ -22,13 +26,14 @@ class PalmaresController extends Controller
          $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
 
          $eleve->points = $v;
+         $eleve->poucentage = getPourcentage($v, $max_total['total']) ;
          $palmares[] = $eleve;
         
       } 
 
       $palmares = collect($palmares)->sortByDesc('points');
 
-      return view();   
+      return view('bulletin.palmares', compact('palmares'));   
       
     // CALCULER TOUT LES NOTES
     // CALCULER LE POURCENTAGE
