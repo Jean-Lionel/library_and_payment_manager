@@ -146,7 +146,7 @@ class BulletinController extends Controller
         ->where('anne_scolaire_id','=',$anne_scolaire_id)
         ->where('type_evaluation','=','INTERROGATION')
         ->get();
-        $v['points'] = $points;
+        $v['listes_points'] = $points;
         $listes_points[] = $v;
 
     }

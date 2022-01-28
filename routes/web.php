@@ -3,6 +3,7 @@
 use App\Http\Controllers\BibliothequeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BulletinController;
+use App\Http\Controllers\BulletinGeneratorContoller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ConfigurationController;
@@ -70,20 +71,16 @@ Route::middleware('auth')->group(function(){
 
     Route::get('etagers', [BibliothequeController::class, 'etagers'])->name('etagers');
     Route::get('professeurs', [BibliothequeController::class, 'professeurs'])->name('professeurs');
-
     Route::get('lecteurs', [BibliothequeController::class, 'lecteurs'])->name('lecteurs');
     Route::get('empruts', [BibliothequeController::class, 'empruts'])->name('empruts');
-
     Route::get('classements', [BibliothequeController::class, 'classements'])->name('classements');
-
     Route::get('retourlivre', [BibliothequeController::class, 'retourlivre'])->name('retourlivre');
-
     Route::view("evaluations","courses.evaluation")->name("evaluations");
     Route::view('evaluations/{id}','courses.points')->name('add_point');
-
     Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
-    Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
+    // Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
+     Route::get('bulletin/{id}', [BulletinGeneratorContoller::class , 'bulletin'])->name('bulletin_generate');
     Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
     Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
 

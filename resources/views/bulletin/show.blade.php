@@ -188,7 +188,7 @@
                     @endforeach
 
                     <tr>
-                        <td colspan="3">TOTAL</td>
+                        <td colspan="3"><b>TOTAL</b></td>
                         <td></td>
                         <td></td>
                         <td></td>
