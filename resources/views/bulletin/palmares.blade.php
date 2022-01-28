@@ -69,7 +69,19 @@
 				@foreach ($palmares as $eleve)
 				{{-- expr --}}
 				<tr>
-					<td> {{ ++$loop->index }}</td>
+					@if ($loop->first)
+						{{-- expr --}}
+						@if ($eleve->is_a_girl())
+							{{-- expr --}}
+							<td> {{ ++$loop->index }} <sup>ère</sup></td>
+						@else
+						    <td> {{ ++$loop->index }} <sup>er</sup></td>
+						@endif
+						
+					@else
+						<td> {{ ++$loop->index }} <sup>ème</sup></td>
+					@endif
+					
 					<td class="text-left">{{ $eleve->fullName }}</td>
 					<td class="text-center">{{ $eleve->sexe }}</td>
 					<td>{{ $eleve->points }}</td>
@@ -78,6 +90,7 @@
 					{{-- expr --}}
 					<td>{{ $course['profondeur_echec'] < 0 ? $course['profondeur_echec'] : '' }}</td>
 					@endforeach
+					<td></td>
 				</tr>
 				@endforeach
 			</tbody>

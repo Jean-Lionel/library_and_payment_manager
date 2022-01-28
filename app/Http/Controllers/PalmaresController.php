@@ -34,7 +34,9 @@ class PalmaresController extends Controller
 
       $palmares = collect($palmares)->sortByDesc('points');
 
-      $pdf = new Pd
+      // $pdf = PDF::loadView('bulletin.palmares', compact('palmares','courses'));
+
+      //  return $pdf->stream();
       return view('bulletin.palmares', compact('palmares','courses'));   
       
     // CALCULER TOUT LES NOTES

@@ -127,7 +127,7 @@ class BulletinController extends Controller
 
     $max_total = $cours->ponderation + $cours->ponderation_compentance  + $cours->ponderation_examen ;
 
-     $pdf = PDF::loadView("bulletin.fiche_point", compact('data', 'cours','max_total'));
+     // $pdf = PDF::loadView("bulletin.fiche_point", compact('data', 'cours','max_total'));
 
     //return $pdf->stream($cours->name . '.pdf');
 
