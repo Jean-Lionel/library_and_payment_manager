@@ -30,9 +30,7 @@ class BulletinController extends Controller
         $selectClasse = Classe::find($classe_id );
 
         $courseCategories = Classe::find($classe_id) ? Classe::find($classe_id)->courseCategories() : [];
-        return view('bulletin.show', 
-
-            compact('anneScolaire','anne_scolaire_id','selectClasse','courseCategories'));
+        return view('bulletin.show',  compact('anneScolaire','anne_scolaire_id','selectClasse','courseCategories'));
     }
 
     public function liste_point(){
@@ -142,7 +140,6 @@ class BulletinController extends Controller
         $v = [];
         $v['nom'] = $eleve->first_name;
         $v['prenom'] = $eleve->last_name;
-
         $points = PointEvaluation::where('cour_id', '=', $cours_id)
         ->where('eleve_id','=',$eleve->id)
         ->where('trimestre_id','=',$trimestre)
@@ -150,7 +147,6 @@ class BulletinController extends Controller
         ->where('type_evaluation','=','INTERROGATION')
         ->get();
         $v['points'] = $points;
-
         $listes_points[] = $v;
 
     }
