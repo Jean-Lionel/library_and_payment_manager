@@ -30,4 +30,8 @@ class Cour extends Model
     public function isPrincipal(){
         return $this->status == 1;
     }
+
+    public function getPonderationTotalAttribute(){
+        return $this->ponderation + $this->ponderation_compentance + $this->ponderation_examen;
+    }
 }

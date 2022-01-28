@@ -105,19 +105,31 @@ class Eleve extends Model
     // COMPENTENCE
 
 public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_scolaire_id){
-  
    $total = 0;
+   $courses_listes = [];
    $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
    foreach ($courses as $key => $cours) {
-    foreach ($type_evaluations as  $evaluation) {
-            // code...
-        $total += $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
+        $v = 0;
+        foreach ($type_evaluations as  $evaluation) {
+                // code...
+            $v += $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
+
+        }
+         $total += $v;
+         $c = [
+            'name' => $cours->name,
+            'total' => $v,
+            'poderation' => $cours->ponderationTotal,
+            //Calcule du profondeur de l'echec point obtenu - 50 % du point total
+            'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
+         ];
+
+         $courses_listes[] = $c;
     }
-    
-}
-
-return $total;
-
+    return [
+        'total' => $total,
+        'courses_listes' => $courses_listes,
+    ];
 }
 
 }

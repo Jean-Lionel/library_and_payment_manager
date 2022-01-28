@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
+use PDF;
 
 class PalmaresController extends Controller
 {
@@ -24,16 +25,17 @@ class PalmaresController extends Controller
       foreach ($eleves as $key => $eleve) {
          // code...
          $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
-
-         $eleve->points = $v;
-         $eleve->poucentage = getPourcentage($v, $max_total['total']) ;
+         $eleve->points = $v['total'];
+         $eleve->courses_listes = $v['courses_listes'];
+         $eleve->pourcentage = getPourcentage($v['total'], $max_total['total']) ;
          $palmares[] = $eleve;
         
       } 
 
       $palmares = collect($palmares)->sortByDesc('points');
 
-      return view('bulletin.palmares', compact('palmares'));   
+      $pdf = new Pd
+      return view('bulletin.palmares', compact('palmares','courses'));   
       
     // CALCULER TOUT LES NOTES
     // CALCULER LE POURCENTAGE
