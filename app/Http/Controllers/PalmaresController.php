@@ -12,6 +12,19 @@ class PalmaresController extends Controller
    
    public  function getPalmares($annee_scolaire_id, $classe_id, $trimestre){
 
+      // $pdf = PDF::loadView('bulletin.palmares', compact('palmares','courses'));
+
+      $data = self::getNote($annee_scolaire_id, $classe_id, $trimestre);
+      //  return $pdf->stream();
+      $palmares = $data['palmares'];
+      $courses = $data['courses'];
+      return view('bulletin.palmares', compact('palmares','courses'));   
+    // CALCULER TOUT LES NOTES
+    // CALCULER LE POURCENTAGE
+    // ORDONNER LES NOTES
+   }
+
+   public static function getNote($annee_scolaire_id, $classe_id, $trimestre){
       $c = Classe::find($classe_id);
       $level = $c->level;
 
@@ -34,13 +47,10 @@ class PalmaresController extends Controller
 
       $palmares = collect($palmares)->sortByDesc('points');
 
-      // $pdf = PDF::loadView('bulletin.palmares', compact('palmares','courses'));
-
-      //  return $pdf->stream();
-      return view('bulletin.palmares', compact('palmares','courses'));   
-      
-    // CALCULER TOUT LES NOTES
-    // CALCULER LE POURCENTAGE
-    // ORDONNER LES NOTES
+      return [
+         'palmares' => $palmares,
+         'courses' => $courses,
+         'trimestre' => $trimestre
+      ];
    }
 }
