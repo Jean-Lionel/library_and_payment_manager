@@ -114,14 +114,17 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
     foreach ($coursCategorie as  $cours) {
         $v = 0;
          $nombres_cours++;
+         $detailPoints = [];
         foreach ($type_evaluations as  $evaluation) {
                 // code...
             $v += $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
+            $detailPoints[][$evaluation] = $v;
         }
          $total += $v;
          $c = [
             'name' => $cours->name,
             'total' => $v,
+            'details' => $detailPoints,
             'poderation' => $cours->ponderationTotal,
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 

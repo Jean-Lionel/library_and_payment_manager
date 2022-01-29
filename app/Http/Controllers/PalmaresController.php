@@ -11,15 +11,12 @@ class PalmaresController extends Controller
 {
    
    public  function getPalmares($annee_scolaire_id, $classe_id, $trimestre){
-
       // $pdf = PDF::loadView('bulletin.palmares', compact('palmares','courses'));
-
       $data = self::getNote($annee_scolaire_id, $classe_id, $trimestre);
       //  return $pdf->stream();
       $palmares = $data['palmares'];
       $courses = $data['courses'];
       $nombres_cours = $data['nombres_cours'];
-
       return view('bulletin.palmares', compact('palmares','courses','nombres_cours'));   
     // CALCULER TOUT LES NOTES
     // CALCULER LE POURCENTAGE
@@ -46,7 +43,6 @@ class PalmaresController extends Controller
          $eleve->courses_listes = $v['courses_listes'];
          $eleve->pourcentage = getPourcentage($v['total'], $max_total['total']) ;
          $palmares[] = $eleve;
-        
       } 
 
       $palmares = collect($palmares)->sortByDesc('points');
