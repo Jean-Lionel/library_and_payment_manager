@@ -79,8 +79,8 @@ Route::middleware('auth')->group(function(){
     Route::view('evaluations/{id}','courses.points')->name('add_point');
     Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
-    // Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
-     Route::get('bulletin/{id}', [BulletinGeneratorContoller::class , 'bulletin'])->name('bulletin_generate');
+    Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
+     // Route::get('bulletin/{id}', [BulletinGeneratorContoller::class , 'bulletin'])->name('bulletin_generate');
     Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
     Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
 

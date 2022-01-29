@@ -26,7 +26,7 @@ class Classe extends Model
     }
 
     public function courses(){
-        return $this->level->courses() ?? [];
+        return $this->level->courses ?? [];
     }
 
     public function eleves(){
@@ -71,7 +71,7 @@ class Classe extends Model
 
     public function courseCategories(){
         $categories = [];
-        foreach($this->courses as $course ){
+        foreach($this->courses() as $course ){
 
             if(!in_array($course->category, $categories)){
                  $categories[$course->category->name ?? ""] = $course->category->courses ?? "";
