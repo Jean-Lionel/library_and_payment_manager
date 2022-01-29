@@ -12,8 +12,8 @@ class BulletinGeneratorContoller extends Controller
       $classe_id = $id;
       $anne_scolaire_id = \Request::get('x');
       
-      $resultat = PalmaresController::getNote($anne_scolaire_id, $classe_id, 1);
+      $data = PalmaresController::getNote($anne_scolaire_id, $classe_id, 1);
 
-      dd( $resultat);
+      return view("bulletin.fondamental", compact('data'));
    }
 }
