@@ -107,13 +107,16 @@ class Eleve extends Model
 public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_scolaire_id){
    $total = 0;
    $courses_listes = [];
+   $nombres_cours = 0;
    $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
-   foreach ($courses as $key => $cours) {
+   foreach ($courses as $key => $coursCategorie) {
+    $categories = [];
+    foreach ($coursCategorie as  $cours) {
         $v = 0;
+         $nombres_cours++;
         foreach ($type_evaluations as  $evaluation) {
                 // code...
             $v += $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
-
         }
          $total += $v;
          $c = [
@@ -123,12 +126,16 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
          ];
-
-         $courses_listes[] = $c;
+         $categories[$key][]= $c;
+        
     }
+        $courses_listes[] = $categories;  
+    }
+
     return [
         'total' => $total,
         'courses_listes' => $courses_listes,
+       
     ];
 }
 

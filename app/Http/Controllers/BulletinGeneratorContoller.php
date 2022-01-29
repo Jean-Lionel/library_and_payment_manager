@@ -11,7 +11,7 @@ class BulletinGeneratorContoller extends Controller
    public function bulletin($id){
       $classe_id = $id;
       $anne_scolaire_id = \Request::get('x');
-
-      //PalmaresController::getNote();
+      
+      PalmaresController::getNote();
    }
 }

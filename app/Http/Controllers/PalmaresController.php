@@ -18,7 +18,9 @@ class PalmaresController extends Controller
       //  return $pdf->stream();
       $palmares = $data['palmares'];
       $courses = $data['courses'];
-      return view('bulletin.palmares', compact('palmares','courses'));   
+      $nombres_cours = $data['nombres_cours'];
+
+      return view('bulletin.palmares', compact('palmares','courses','nombres_cours'));   
     // CALCULER TOUT LES NOTES
     // CALCULER LE POURCENTAGE
     // ORDONNER LES NOTES
@@ -29,9 +31,11 @@ class PalmaresController extends Controller
       $level = $c->level;
 
       $max_total = $level->getMaxTotal();
+       $nombres_cours = $c->courses()->count();
 
       // Liste des cours
-      $courses = $c->courses();
+      $courses = $c->courseCategories();
+
       $eleves = Eleve::where('anne_scolaire_id', $annee_scolaire_id)
                         ->where('classe_id',$classe_id)->get();
       $palmares = [];
@@ -50,7 +54,8 @@ class PalmaresController extends Controller
       return [
          'palmares' => $palmares,
          'courses' => $courses,
-         'trimestre' => $trimestre
+         'trimestre' => $trimestre,
+         'nombres_cours' => $nombres_cours,
       ];
    }
 }

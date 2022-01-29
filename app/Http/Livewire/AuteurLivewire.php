@@ -35,7 +35,6 @@ class AuteurLivewire extends Component
     public function saveAuthor()
     {
     	$this->validate();
-
         if($this->identification){
             $auteur = Auteur::find($this->identification);
              $auteur->update([

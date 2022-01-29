@@ -30,12 +30,19 @@ class PalmaresHeader extends Component
         ]);
     }
 
+    protected $rules = [
+        'anne_scolaire_id' => 'required',
+        'classe_id' => 'required',
+        'trimestre' => 'required',
+
+    ];
     public function updatedSectionId(){
 
         $this->classes = Classe::where('section_id',$this->section_id)->get();
     }
 
     public function searchParmales(){
+        $this->validate();
         return redirect()->route('get_palmares',[
             'annee_scolaire_id' =>  $this->anne_scolaire_id,
             'classe_id' =>  $this->classe_id,

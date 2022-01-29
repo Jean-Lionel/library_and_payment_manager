@@ -55,13 +55,19 @@
 					<th rowspan="2">Sexe</th>
 					<th rowspan="2">Totat des points obtenus</th>
 					<th rowspan="2">%</th>
-					<th colspan="{{ $courses->count()  }}">Echecs</th>
+					
+					<th colspan=" {{ $nombres_cours + 
+						count($courses) }} ">Echecs</th>
 					<th rowspan="2">Décision du jury</th>
 				</tr>
 				<tr>
-					@foreach ($courses as $course)
+					@foreach ($courses as $key => 
+						$courseCategorie)
 					{{-- expr --}}
-					<th>{{ $course->name }}</th>
+					@foreach ($courseCategorie as $element)
+						<th>{{ $element->name }}</th>
+					@endforeach
+					<th>{{ $key }}</th>
 					@endforeach
 				</tr>
 			</thead>
@@ -86,9 +92,15 @@
 					<td class="text-center">{{ $eleve->sexe }}</td>
 					<td>{{ $eleve->points }}</td>
 					<td>{{ $eleve->pourcentage }}</td>
-					@foreach ($eleve->courses_listes as $course)
+					@foreach ($eleve->courses_listes as $coursesCategories)
 					{{-- expr --}}
-					<td>{{ $course['profondeur_echec'] < 0 ? $course['profondeur_echec'] : '' }}</td>
+					@foreach ($coursesCategories as $courses)
+						@foreach ($courses as $course)
+							
+							<td>{{ $course['profondeur_echec'] }}</td>
+						@endforeach
+					@endforeach
+					<td></td>
 					@endforeach
 					<td></td>
 				</tr>
