@@ -125,11 +125,13 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
          $total += $v;
          $c = [
             'name' => $cours->name,
+            'cours' => $cours,
             'total' => $v,
             'details' => $detailPoints,
             'interrogation' => $detailPoints['INTERROGATION'],
             'examen' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE']),
             'poderation' => $cours->ponderationTotal,
+            'total' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION']),
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
          ];

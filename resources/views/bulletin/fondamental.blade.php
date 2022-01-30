@@ -8,7 +8,10 @@
 		border: 1px solid black;
 	}
 	td{
-		text-align: right;
+		text-align: center;
+	}
+	.bold{
+		font-weight: bold;
 	}
 	.text-left{
 		text-align: left;
@@ -28,11 +31,12 @@
 
 </style>
 
-<div>
-	
 
-	@foreach ($data['palmares'] as $eleve)
-		{{-- expr --}}
+
+
+@foreach ($data['palmares'] as $eleve)
+{{-- expr --}}
+<div>
 	<table>
 		<thead>
 			<tr>
@@ -90,7 +94,6 @@
 				$coursListe)
 				{{-- expr --}}
 				<tr>
-
 					<td rowspan="{{ count($coursListe) }}">{{ ++$loop->index }}  </td>
 					<td rowspan="{{ count($coursListe) }}">
 						{{ array_keys($coursListe)[0] }}
@@ -98,20 +101,63 @@
 				</tr>
 
 				@foreach ($coursListe as $cours)
-					@foreach ($cours as $course)
-						<tr>
-							<td></td>
-							<td></td>
-							<td>{{ $course['name'] }}</td>
-							<td>
-								@dump($course)
-							</td>
-						</tr>
-					@endforeach
+				@foreach ($cours as $course)
+				<tr>
+					<td></td>
+					<td></td>
+					<td>{{ $course['name'] }}</td>
+					<td>
+						{{ $course['cours']->credit }}
+					</td>
+					<td>{{ $course['cours']->ponderation }}</td>
+					<td>{{ $course['cours']->ponderation }}</td>
+
+					<td>
+						{{ $course['poderation'] }}
+					</td>
+					{{-- PREMIER TRIMESTRE --}}
+					<td>{{ $course['interrogation'] }}</td>
+					<td>{{ $course['examen'] }}</td>
+					<td>{{ $course['total'] }}</td>
+
+					{{-- II TRIMESTRE --}}
+					<td></td>
+					<td></td>
+					<td></td>
+					{{-- III TRIMESTRE --}}
+					<td></td>
+					<td></td>
+					<td></td>
+					{{--  --}}
+
+					<td class="bold">
+						{{ $course['cours']->ponderationTotal * 3 }}
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 				@endforeach
-			@endforeach
-		</tbody>
-	</table>
+				@endforeach
+				@endforeach
+
+				<tr>
+					<th>TOTAL</th>
+				</tr>
+				<tr>
+					<th>Pourcentage</th>
+				</tr>
+				<tr>
+					<th>Place</th>
+				</tr>
+				<tr>
+					<th>Education Morale</th>
+				</tr>
+				<tr>
+					<th>Signatures</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 	@endforeach
-</div>
