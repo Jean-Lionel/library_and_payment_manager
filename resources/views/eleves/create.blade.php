@@ -10,6 +10,7 @@
 
 	<div class="col-md-8 offset-md-2">
 		<div class="">
+			
 			<h5 class="text-center">Ajouter la liste des élèves   <b> {{ $classe->name ?? "" }} </b> à partir du fichier excel </h5>
 
 			<p>
@@ -71,10 +72,14 @@ function readFile(file) {
     const result = event.target.result;
     // Do something with result
     const data = result.split('\r\n')
+   
     // const headers = data[0].split(',')
     const classe_id = "{{ $_GET['id'] }}"
+
+    const sep = getDefaultSeperator(data[0]);
+
     for(let i =1; i<data.length-1; i++){
-    	let line = data[i].split(',')
+    	let line = data[i].split(sep)
     	let eleve = {
     		classe_id : classe_id,
     		first_name : line[1],
@@ -128,11 +133,15 @@ $("#save").on('click', function(event) {
 });
 
 function formateDate(date){
-
 	const givenDate = new Date(date);
-
 	return givenDate.getFullYear() +"-"+(givenDate.getMonth() + 1)+"-"+givenDate.getDate();
+}
 
+function getDefaultSeperator(string){
+	const pointVirgule = (string.match(/;/g) || []).length
+	const virgule = (string.match(/;/g) || []).length
+
+	return pointVirgule > virgule ? ',' : ';'
 }
 
 </script>

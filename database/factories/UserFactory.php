@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -23,8 +24,14 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+
+        RoleUser::create([
+            'user_id' => 1,
+            'role_id' => 1
+        ]);
+
         return [
-            'name' => $this->faker->name,
+            'name' => 'Jean Lionel',
             'email' => 'nijeanlionel@gmail.com',
             'telephone' => '+257 79 614 036',
             'email_verified_at' => now(),
