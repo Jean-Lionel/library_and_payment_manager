@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cour;
+use App\Models\CourseCategory;
 use App\Models\Eleve;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -68,25 +69,46 @@ class Classe extends Model
     }
 
   
-
     public function courseCategories(){
-        $categories = [];
-        foreach($this->courses() as $course ){
+        return $this->categories();
 
-            if(!in_array($course->category, $categories)){
-                 $categories[$course->category->name ?? ""] = $course->category->courses ?? "";
-                 //dump($course->category->name ?? "");
-            }
-            //POUR LES COURS QUI N'APPARTIENT A AUCUNE CATEGORIES
+        // $categories = [];
 
-            if(!isset($course->category)){
-                $categories["AUTRES"][] = $course;
-            }
-        }
-        return $categories;
+        // foreach($this->courses() as $course ){
+        //     if(!in_array($course->category, $categories)){
+
+        //          $categories[$course->category->name ?? ""] = $course ?? "";
+                
+        //     }
+        //     //POUR LES COURS QUI N'APPARTIENT A AUCUNE CATEGORIES
+
+        //     if(!isset($course->category)){
+        //         $categories["AUTRES"][] = $course;
+        //     }
+        // }
+        // return $categories;
     }
 
     public function getClasseById($id){
         return self::find($id);
+    }
+
+    public function categories(){
+        // SELECT DISTINCT CATEGORIE ID , ORDRE FROM CATEGORIES WHERE 
+        $categories = array_unique($this->courses()->map->category_id->toArray());
+        $coursCategorie = [];
+
+        foreach ($categories as $key => $value) {
+            // code...
+            dump($value);
+            $category = CourseCategory::find($value);
+            $courses = Cour::where('category_id',$value)
+                            ->where('level_id', $this->level->id)->get();
+
+             $coursCategorie[$category->name] = $courses;
+        }
+        //dd($coursCategorie);
+        return   $coursCategorie ?? [];
+       
     }
 }

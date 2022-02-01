@@ -93,19 +93,24 @@
 			@foreach ($eleve->courses_listes as $key => 
 				$coursListe)
 				{{-- expr --}}
+				@php
+					$taille = count(array_values($coursListe)[0]);
+				@endphp
 				<tr>
-					<td rowspan="{{ count($coursListe) }}">{{ ++$loop->index }}  </td>
-					<td rowspan="{{ count($coursListe) }}">
-						{{ array_keys($coursListe)[0] }}
+					<td rowspan="{{ $taille +1 }}" > {{ ++$loop->index }}  </td>
+
+					<td class="text-left" rowspan="{{ $taille +1 }}" >
+						<b>{{ array_keys($coursListe)[0] }}</b>
 					</td>
+					<td colspan="17"></td>
+
 				</tr>
 
 				@foreach ($coursListe as $cours)
 				@foreach ($cours as $course)
 				<tr>
-					<td></td>
-					<td></td>
-					<td>{{ $course['name'] }}</td>
+					
+					<td class="text-left">{{ $course['name'] }}</td>
 					<td>
 						{{ $course['cours']->credit }}
 					</td>
@@ -142,19 +147,24 @@
 				@endforeach
 
 				<tr>
-					<th>TOTAL</th>
+					<td></td>
+					<th class="text-left">TOTAL</th>
 				</tr>
 				<tr>
-					<th>Pourcentage</th>
+					<td></td>
+					<th class="text-left">Pourcentage</th>
 				</tr>
 				<tr>
-					<th>Place</th>
+					<td></td>
+					<th class="text-left">Place</th>
 				</tr>
 				<tr>
-					<th>Education Morale</th>
+					<td></td>
+					<th class="text-left">Education Morale</th>
 				</tr>
 				<tr>
-					<th>Signatures</th>
+
+					<th colspan="3">Signatures</th>
 				</tr>
 			</tbody>
 		</table>
