@@ -96,18 +96,21 @@ class Classe extends Model
     public function categories(){
         // SELECT DISTINCT CATEGORIE ID , ORDRE FROM CATEGORIES WHERE 
         $categories = array_unique($this->courses()->map->category_id->toArray());
+        //sort($categories);
+        //Recuperation des category groupe par leur ordre
+        $coursCategories = CourseCategory::whereIn('id',$categories)->orderBy('ordre')->get(); 
+
         $coursCategorie = [];
 
-        foreach ($categories as $key => $value) {
-            // code...
-            dump($value);
-            $category = CourseCategory::find($value);
-            $courses = Cour::where('category_id',$value)
+        foreach ($coursCategories as $key =>  $category ) {
+           
+            $courses = Cour::where('category_id',$category->id)
                             ->where('level_id', $this->level->id)->get();
 
              $coursCategorie[$category->name] = $courses;
+
         }
-        //dd($coursCategorie);
+       // dd($coursCategorie);
         return   $coursCategorie ?? [];
        
     }

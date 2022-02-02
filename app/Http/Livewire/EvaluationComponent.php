@@ -9,6 +9,7 @@ use App\Models\Evaluation;
 use App\Models\Trimestre;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class EvaluationComponent extends Component
 {
@@ -34,7 +35,7 @@ class EvaluationComponent extends Component
 	public function mount(){
 		$this->classes = Classe::all();
 		$this->cours = [];
-		$this->start_date = now();
+		$this->start_date = Carbon::now()->subDays(30);
 		$this->trimestres = Trimestre::all();
 		$this->currentAnneScolaire =  AnneScolaire::latest()->first();
 	}
