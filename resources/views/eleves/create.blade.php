@@ -139,9 +139,9 @@ function formateDate(date){
 
 function getDefaultSeperator(string){
 	const pointVirgule = (string.match(/;/g) || []).length
-	const virgule = (string.match(/;/g) || []).length
+	const virgule = (string.match(/,/g) || []).length
 
-	return pointVirgule > virgule ? ',' : ';'
+	return pointVirgule > virgule ? ';' : ','
 }
 
 </script>

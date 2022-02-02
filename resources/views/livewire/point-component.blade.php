@@ -76,7 +76,7 @@
         e.preventDefault();
 
         let info_s = @json($info);
-        let classe_name = info_s.classe_name +"_cour_"+info_s.cour_name
+        let classe_name = info_s.classe_name +"_cours_"+info_s.cour_name
                                 +"_date_"+info_s.date_evaluation;
         let tout_eleves = @json($tout_eleves);
         let csvContent = "data:text/csv;charset=utf-8,";
@@ -118,10 +118,12 @@
             const result = e.target.result
             const data = result.split('\r\n')
 
-            const headers = data[0].split(',')
+            const separateur = getDefaultSeperator(data[0]);
+
+            const headers = data[0].split(separateur)
 
             for(let i = 1; i<data.length; i++){
-                let line = data[i].split(',')
+                let line = data[i].split(separateur)
                 list_points.push({
                     evaluation_id : evaluation_id,
                     eleve_id  : line[1],
@@ -144,6 +146,13 @@
         @this.testExemple(list_points)
 
     })
+
+    function getDefaultSeperator(string){
+    const pointVirgule = (string.match(/;/g) || []).length
+    const virgule = (string.match(/,/g) || []).length
+
+    return pointVirgule > virgule ? ';' : ','
+}
 </script>
 
 

@@ -139,8 +139,7 @@
     						<a href="{{ route('add_point',$evaluation->id ) }}" class="btn btn-primary" title="Ajout des points des élèves">
     							<i class="fa fa-plus"></i>
     						</a>
-    						
-    						
+    		
     					</td>
     				</tr>
     			@endforeach
