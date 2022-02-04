@@ -16,7 +16,7 @@ class CreateCourseCategoriesTable extends Migration
         Schema::create('course_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('ordre');
+            $table->integer('ordre');
             $table->boolean('is_primary')->default(true);
             $table->timestamps();
             $table->softDeletes();

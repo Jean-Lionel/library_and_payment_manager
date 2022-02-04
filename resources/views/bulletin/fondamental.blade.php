@@ -1,3 +1,4 @@
+
 <style>
 	table{
 		border-collapse: collapse;
@@ -104,20 +105,31 @@
 				<tr>
 					<td rowspan="{{ $taille +1 }}" > {{ ++$loop->index }}  </td>
 
+					@if(!is_numeric(array_keys($coursListe)[0]))
 					<td class="text-left" rowspan="{{ $taille +1 }}" >
 						<b>{{ array_keys($coursListe)[0] }}</b>
 					</td>
-					<td colspan="17"></td>
+					@else
+					
+					@endif
+					
 
 				</tr>
 
 				@foreach ($coursListe as $cours)
 				@foreach ($cours as $course)
 				<tr>
-					
+
+					@if(!is_numeric(array_keys($coursListe)[0]))
 					<td class="text-left">
 						{{ $course['name'] }}
 					</td>
+					@else
+					<td class="text-left" colspan="2">
+						{{ $course['name'] }}
+					</td>
+					@endif
+					
 					<td>
 						{{ $course['cours']->credit }}
 					</td>

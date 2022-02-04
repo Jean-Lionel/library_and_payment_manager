@@ -97,17 +97,27 @@ class Classe extends Model
         // SELECT DISTINCT CATEGORIE ID , ORDRE FROM CATEGORIES WHERE 
         $categories = array_unique($this->courses()->map->category_id->toArray());
         //sort($categories);
+
+
         //Recuperation des category groupe par leur ordre
         $coursCategories = CourseCategory::whereIn('id',$categories)->orderBy('ordre')->get(); 
 
+        //dd($coursCategories->map->ordre);
         $coursCategorie = [];
 
         foreach ($coursCategories as $key =>  $category ) {
            
             $courses = Cour::where('category_id',$category->id)
                             ->where('level_id', $this->level->id)->get();
+            // Selectionner les catégories à afficher
 
-             $coursCategorie[$category->name] = $courses;
+             if ($category->is_primary) {
+                 // code...
+                $coursCategorie[$category->name] = $courses;
+             }else{
+                $coursCategorie[$key] = $courses;
+             }
+             
 
         }
        // dd($coursCategorie);
