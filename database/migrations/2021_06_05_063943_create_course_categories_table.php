@@ -17,6 +17,7 @@ class CreateCourseCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('ordre');
+            $table->boolean('is_primary')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

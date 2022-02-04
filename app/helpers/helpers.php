@@ -27,7 +27,7 @@ function searchProduct($id)
 	return false;
 }
 
-function getPrice($price, $type="", $limit = 2, $separateur = '.' )
+function getPrice($price, $type="", $limit = 1, $separateur = '.' )
 {
 	$price = floatval($price);
 	return number_format($price, $limit ,$separateur,' , ') ." ". $type;
@@ -55,6 +55,10 @@ function getPourcentage($a , $b){
 		$res = floatval($a) * 100 / floatval($b);
 
 	return $res != 0 ? number_format($res,1,'.', ' ') :  "0";
+}
+
+function afficherPoint($nombre){
+	return getPrice($nombre);
 }
 
 function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){

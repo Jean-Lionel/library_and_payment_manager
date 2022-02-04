@@ -1,4 +1,3 @@
-
 <style>
 	table{
 		border-collapse: collapse;
@@ -28,11 +27,17 @@
 	.header-right{
 		float: right;
 	}
+	.pied_page{
+		margin-top: 40px;
+	}
+
+	@media print {
+    .pagebreak { 
+    	page-break-before: always; 
+    } /* page-break-after works, as well */
+   }
 
 </style>
-
-
-
 
 @foreach ($data['palmares'] as $eleve)
 {{-- expr --}}
@@ -110,7 +115,9 @@
 				@foreach ($cours as $course)
 				<tr>
 					
-					<td class="text-left">{{ $course['name'] }}</td>
+					<td class="text-left">
+						{{ $course['name'] }}
+					</td>
 					<td>
 						{{ $course['cours']->credit }}
 					</td>
@@ -121,9 +128,9 @@
 						{{ $course['poderation'] }}
 					</td>
 					{{-- PREMIER TRIMESTRE --}}
-					<td>{{ $course['interrogation'] }}</td>
-					<td>{{ $course['examen'] }}</td>
-					<td>{{ $course['total'] }}</td>
+					<td>{{ afficherPoint($course['interrogation']) }}</td>
+					<td>{{ afficherPoint($course['examen']) }}</td>
+					<td>{{ afficherPoint($course['total']) }}</td>
 
 					{{-- II TRIMESTRE --}}
 					<td></td>
@@ -148,26 +155,125 @@
 
 				<tr>
 					<td></td>
-					<th class="text-left">TOTAL</th>
+					<th class="text-left" colspan="2">TOTAL</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	I TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	II TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<th class="text-left">Pourcentage</th>
+					<th class="text-left" colspan="2">Pourcentage</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	I TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	II TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<th class="text-left">Place</th>
+					<th class="text-left" colspan="2">Place</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	I TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	II TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<th class="text-left">Education Morale</th>
+					<th class="text-left" colspan="2">Education Morale</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	I TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	II TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+				<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
-
-					<th colspan="3">Signatures</th>
+					<th colspan="3" rowspan="2" >Signatures</th>
+					<td colspan="4" class="text-left">Tutulaire</td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+					<td colspan="4"></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-left">Parent</td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+					<td colspan="4"></td>
 				</tr>
 			</tbody>
 		</table>
+
+		<div class="pagebreak pied_page">
+			
+		</div>
 	</div>
 
 	@endforeach

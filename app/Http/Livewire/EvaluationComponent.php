@@ -23,7 +23,7 @@ class EvaluationComponent extends Component
 	public $classeId=null;
 	public $anne_scolaire_id;
 	public $description;
-	public $date_evaluation;
+	public $date_evaluation ;
 	public $classes;
 	public $start_date;
 	public $cours;

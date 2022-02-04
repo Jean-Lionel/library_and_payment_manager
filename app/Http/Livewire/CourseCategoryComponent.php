@@ -14,6 +14,7 @@ class CourseCategoryComponent extends Component
     public string $name = "";
     public string $ordre = "";
     public string $search = "";
+    public  $is_primary;
     public int $identifiant = 0;
     public int $selectId = 0;
     public  $showForm;
@@ -30,7 +31,9 @@ class CourseCategoryComponent extends Component
     }
 
     protected $rules = [
-        'name' => 'required'
+        'name' => 'required',
+        'is_primary' => 'required',
+        'ordre' => 'numeric',
     ];
 
     public function saveCouseCategory(){
@@ -38,6 +41,7 @@ class CourseCategoryComponent extends Component
         $data = [
             'name' => $this->name,
             'ordre' => $this->ordre,
+            'is_primary' => $this->is_primary,
         ];
         if($this->identifiant){
           CourseCategory::findOrFail($this->identifiant)->update($data);
@@ -53,6 +57,7 @@ class CourseCategoryComponent extends Component
         $this->name = $element['name'];
         $this->ordre = $element['ordre'];
         $this->identifiant = $element['id'];
+        $this->is_primary = $element['is_primary'];
     }
 
     public function openForm(){
