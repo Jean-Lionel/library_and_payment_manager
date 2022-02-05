@@ -25,11 +25,6 @@ class UserFactory extends Factory
     public function definition()
     {
 
-        RoleUser::create([
-            'user_id' => 1,
-            'role_id' => 1
-        ]);
-
         return [
             'name' => 'Jean Lionel',
             'email' => 'nijeanlionel@gmail.com',

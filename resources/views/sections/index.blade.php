@@ -38,12 +38,12 @@
 
 								<a href="{{ route('sections.edit',$section) }}" class="btn btn-sm btn-info">Modifier</a>
 
-								<form action="{{ route('sections.destroy',$section) }}" method="post">
+								{{-- <form action="{{ route('sections.destroy',$section) }}" method="post">
 									@csrf
 									@method('DELETE')
 
 									<button type="submit" onclick="return confirm('Voulez-vous  supprimer ?')" class="btn btn-sm btn-danger">Supprimer</button>
-								</form>
+								</form> --}}
 								
 							</div>
 							

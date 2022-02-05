@@ -19,7 +19,7 @@ class CourseCategoryComponent extends Component
     public int $selectId = 0;
     public  $showForm;
 
-
+  
     public function render()
     {
 
@@ -32,7 +32,6 @@ class CourseCategoryComponent extends Component
 
     protected $rules = [
         'name' => 'required',
-        'is_primary' => 'required',
         'ordre' => 'numeric',
     ];
 
@@ -41,7 +40,7 @@ class CourseCategoryComponent extends Component
         $data = [
             'name' => $this->name,
             'ordre' => $this->ordre,
-            'is_primary' => $this->is_primary,
+            'is_primary' => $this->is_primary ?? 0,
         ];
         if($this->identifiant){
           CourseCategory::findOrFail($this->identifiant)->update($data);

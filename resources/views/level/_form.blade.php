@@ -1,7 +1,7 @@
 <div>
 	<div class="col-md-4 ofset-md-4">
 		<div class="form-group">
-			<label for="">Nom</label>
+			<label for="">Niveau</label>
 			<input class="form-control" value="{{ old('name') ?? $level->name ?? '' }}" type="text" name="name">
 			@error('name')
 			<span class="text-danger text-center">{{ $message }}</span>
@@ -9,7 +9,7 @@
 		</div>
 		<div class="form-group">
 
-			<label for="section_id">Niveau</label>
+			<label for="section_id">Section</label>
 			<select class="form-control" required 
 			name="section_id" id="" >
 				<option value=""></option>

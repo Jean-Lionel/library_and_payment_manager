@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\Eleve;
+use App\Models\RoleUser;
 use App\Models\Trimestre;
 use App\Models\TypeEvaluation;
 use Database\Seeders\AnneScolaireSeeder;
@@ -45,5 +46,7 @@ class DatabaseSeeder extends Seeder
             //AnneScolaireSeeder::class,
             RoleSeeder::class
         ]);
+
+     
     }
 }

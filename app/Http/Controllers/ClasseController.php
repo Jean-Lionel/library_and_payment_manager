@@ -54,9 +54,14 @@ class ClasseController extends Controller
             'name' => 'required',
             'level_id' => 'required|numeric'
         ]);
-        $section_id =  Level::find($request->level_id)->id;
+
+        $level =  Level::find($request->level_id);
+
+        $section_id = $level->section->id;
+
         Classe::create(array_merge($request->all(), 
-            ['section_id' => $section_id]));
+            ['section_id' => $section_id])
+      );
         return $this->index();
     }
 
@@ -105,7 +110,10 @@ class ClasseController extends Controller
         ]);
 
         $classe = Classe::find($id);
-        $section_id =  Level::find($request->level_id)->id;
+        $level =  Level::find($request->level_id);
+
+        $section_id = $level->section->id;
+
         $classe->update(array_merge($request->all(), [
             'section_id' => $section_id
         ]));

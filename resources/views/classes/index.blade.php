@@ -22,8 +22,8 @@
 				<thead>
 					<tr>
 						<th>#</th>
+						<th>CLASSE</th>
 						<th>NIVEAU</th>
-						<th>DESCRIPTION</th>
 						<th>SECTION</th>
 						<th>ACTION</th>
 					</tr>
@@ -32,23 +32,23 @@
 				<tbody>
 					@foreach($classes as $classe)
 					<tr>
-						<td>{{ $classe->id }}</td>
-						<td>{{ $classe->level->name ?? "" }}</td>
+						<td>{{ ++$loop->index }}</td>
 						<td><a href="">{{ $classe->name }}</a></td>
-						<td><a href="">{{ $classe->section->name }}</a></td>
+						<td>{{ $classe->level->name ?? "" }}</td>
+						<td><a href="">{{ $classe->level->section->name ?? "" }}</a></td>
 
 						<td class="">
 
 							<div class="d-flex justify-content-around">
-								<a href="{{ route('classes.edit',$classe) }}" class="btn btn-info">Modifier</a>
+								<a href="{{ route('classes.edit',$classe) }}" class="btn btn-info btn-sm">Modifier</a>
 
 
-								<form action="{{ route('classes.destroy',$classe) }}" method="post">
+								{{-- <form action="{{ route('classes.destroy',$classe) }}" method="post">
 									@csrf
 									@method('DELETE')
 
 									<button type="submit" onclick="return confirm('Vous êtez sûr ?')" class="btn btn-danger">Supprimer</button>
-								</form>
+								</form> --}}
 								
 							</div>
 							
