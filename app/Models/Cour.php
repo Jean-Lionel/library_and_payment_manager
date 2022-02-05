@@ -34,4 +34,8 @@ class Cour extends Model
     public function getPonderationTotalAttribute(){
         return $this->ponderation + $this->ponderation_compentance + $this->ponderation_examen;
     }
+
+    public function getTotalExamenAttribute(){
+        return $this->ponderation_compentance + $this->ponderation_examen;
+    }
 }

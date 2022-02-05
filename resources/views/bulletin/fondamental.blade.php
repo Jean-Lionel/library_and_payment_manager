@@ -40,6 +40,7 @@
 
 </style>
 
+
 @foreach ($data['palmares'] as $eleve)
 {{-- expr --}}
 <div>
@@ -104,7 +105,6 @@
 				@endphp
 				<tr>
 					<td rowspan="{{ $taille +1 }}" > {{ ++$loop->index }}  </td>
-
 					@if(!is_numeric(array_keys($coursListe)[0]))
 					<td class="text-left" rowspan="{{ $taille +1 }}" >
 						<b>{{ array_keys($coursListe)[0] }}</b>
@@ -112,8 +112,6 @@
 					@else
 					
 					@endif
-					
-
 				</tr>
 
 				@foreach ($coursListe as $cours)
@@ -131,10 +129,10 @@
 					@endif
 					
 					<td>
-						{{ $course['cours']->credit }}
+						{{ $course['cours']->credit != 0 ?  $course['cours']->credit : '' }}
 					</td>
 					<td>{{ $course['cours']->ponderation }}</td>
-					<td>{{ $course['cours']->ponderation }}</td>
+					<td>{{ $course['cours']->totalExamen != 0 ? $course['cours']->totalExamen : '-' }}</td>
 
 					<td>
 						{{ $course['poderation'] }}
@@ -168,14 +166,15 @@
 				<tr>
 					<td></td>
 					<th class="text-left" colspan="2">TOTAL</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>{{ $data['ponderation_total']['total_credit']}}</td>
+					<td>{{ $data['ponderation_total']['total_interrogation']}}</td>
+					<td>{{ $data['ponderation_total']['total_examen']}}</td>
+					<td>{{ $data['ponderation_total']['total']}}</td>
+					
 				<!-- 	I TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>{{ afficherPoint($eleve->points_total['INTERROGATION']) }}</td>
+					<td>{{afficherPoint($eleve->points_total['EXAMEN']) }}</td>
+					<td>{{afficherPoint($eleve->points_total['TOTAL']) }}</td>
 				<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
@@ -197,10 +196,16 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	I TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
+				<!-- 	I TRIMESTRE -->s
+					<td>
+						<b>{{ afficherPoint($eleve->points_total['POURCENTAGE_INTERROGATION']) }}</b>
+					</td>
+					<td>
+						<b>
+						{{afficherPoint($eleve->points_total['POURCENTAGE_EXAMEN']) }}
+						</b>
+					</td>
+					<td><b>{{ $eleve->pourcentage }}</b></td>
 				<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
@@ -225,7 +230,11 @@
 				<!-- 	I TRIMESTRE -->
 					<td></td>
 					<td></td>
-					<td></td>
+					<td>
+						<b>
+						{!! affichePlace(++$loop->index, $eleve->is_a_girl()) !!}
+						</b>
+					</td>
 				<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>

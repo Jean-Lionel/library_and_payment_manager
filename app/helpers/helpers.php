@@ -86,3 +86,22 @@ function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire
         return $resultat;
 
     }
+
+
+//HOMME = 1
+//FILLE = 0
+function affichePlace($place, $is_girl){
+
+	if($place == 1){
+		if ($is_girl == 0) {
+			return 1 .' <sup>er</sup>';
+		}else{
+			return 1 .' <sup>ère</sup>';
+		}
+	}
+
+	return  $place .' <sup>ème</sup>';
+
+}
+
+

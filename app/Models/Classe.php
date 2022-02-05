@@ -71,22 +71,6 @@ class Classe extends Model
   
     public function courseCategories(){
         return $this->categories();
-
-        // $categories = [];
-
-        // foreach($this->courses() as $course ){
-        //     if(!in_array($course->category, $categories)){
-
-        //          $categories[$course->category->name ?? ""] = $course ?? "";
-                
-        //     }
-        //     //POUR LES COURS QUI N'APPARTIENT A AUCUNE CATEGORIES
-
-        //     if(!isset($course->category)){
-        //         $categories["AUTRES"][] = $course;
-        //     }
-        // }
-        // return $categories;
     }
 
     public function getClasseById($id){
@@ -123,5 +107,26 @@ class Classe extends Model
        // dd($coursCategorie);
         return   $coursCategorie ?? [];
        
+    }
+
+    public function ponderation(){
+        $total_credit = 0;
+        $total_examen = 0;
+        $total_interrogation = 0;
+
+        foreach ($this->courses() as $key => $course) {
+            // code...
+            $total_credit += $course->credit;
+            $total_examen += ($course->ponderation_compentance + $course->ponderation_examen);
+            $total_interrogation += $course->ponderation;
+        }
+
+        return [
+            'total_credit' => $total_credit,
+            'total_examen' => $total_examen,
+            'total_interrogation' => $total_interrogation,
+            'total' => $total_interrogation + $total_examen,
+
+        ];
     }
 }

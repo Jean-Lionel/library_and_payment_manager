@@ -108,6 +108,13 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
    $total = 0;
    $courses_listes = [];
    $nombres_cours = 0;
+   $points_total = [
+    'INTERROGATION'=> 0 ,
+    'EXAMEN' => 0,
+    'TOTAL' => 0,
+    'POURCENTAGE_INTERROGATION' => 0,
+    'POURCENTAGE_EXAMEN' => 0,
+   ];
    $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
    foreach ($courses as $key => $coursCategorie) {
     $categories = [];
@@ -120,8 +127,8 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
             $r = $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
             $v += $r;
             $detailPoints[$evaluation] =  $r;
-
         }
+
          $total += $v;
          $c = [
             'name' => $cours->name,
@@ -135,15 +142,26 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
          ];
-         $categories[$key][]= $c;
+        $points_total['INTERROGATION'] +=  $c['interrogation'];
+        $points_total['EXAMEN'] +=  $c['examen'];
+        $points_total['TOTAL'] +=  $c['total'];
+
+        $categories[$key][]= $c;
         
     }
         $courses_listes[] = $categories;  
     }
 
+    $p = $this->classe->ponderation();
+
+    // POURCENTAGE DES EXAMENS ET DES INTERROGATIONS
+     $points_total['POURCENTAGE_INTERROGATION'] = getPourcentage( $points_total['INTERROGATION'],  $p['total_interrogation'] ); 
+     $points_total['POURCENTAGE_EXAMEN'] = getPourcentage($points_total['EXAMEN'], $p['total_examen'] );
+
     return [
         'total' => $total,
         'courses_listes' => $courses_listes,
+        'points_total' => $points_total,
        
     ];
 }

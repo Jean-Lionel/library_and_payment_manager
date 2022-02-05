@@ -12,6 +12,14 @@ class BulletinGeneratorContoller extends Controller
       $classe_id = $id;
       $anne_scolaire_id = \Request::get('x');
       $data = PalmaresController::getNote($anne_scolaire_id, $classe_id, 1);
+
+      $this->getDataSum($data);
       return view("bulletin.fondamental", compact('data'));
+   }
+
+
+   private function getDataSum($data){
+      
+      
    }
 }

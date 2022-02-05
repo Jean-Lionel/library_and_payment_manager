@@ -24,7 +24,10 @@ class PalmaresController extends Controller
    }
 
    public static function getNote($annee_scolaire_id, $classe_id, $trimestre){
-      $c = Classe::find($classe_id);
+      $c = Classe::findOrFail($classe_id);
+
+      $ponderation_total = $c->ponderation();
+
       $level = $c->level;
 
       $max_total = $level->getMaxTotal();
@@ -41,7 +44,8 @@ class PalmaresController extends Controller
          $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
          $eleve->points = $v['total'];
          $eleve->courses_listes = $v['courses_listes'];
-         $eleve->pourcentage = getPourcentage($v['total'], $max_total['total']) ;
+         $eleve->points_total = $v['points_total'];
+         $eleve->pourcentage = getPourcentage($v['total'], $ponderation_total['total']) ;
          $palmares[] = $eleve;
       } 
 
@@ -52,6 +56,12 @@ class PalmaresController extends Controller
          'courses' => $courses,
          'trimestre' => $trimestre,
          'nombres_cours' => $nombres_cours,
+         'ponderation_total' => $ponderation_total
       ];
    }
+
+   private function getPlace(){
+      
+   }
+
 }
