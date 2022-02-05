@@ -196,7 +196,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	I TRIMESTRE -->s
+				<!-- 	I TRIMESTRE -->
 					<td>
 						<b>{{ afficherPoint($eleve->points_total['POURCENTAGE_INTERROGATION']) }}</b>
 					</td>

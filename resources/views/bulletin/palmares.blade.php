@@ -67,7 +67,7 @@
 					@foreach ($courseCategorie as $element)
 						<th>{{ $element->name }}</th>
 					@endforeach
-					<th>{{ $key }}</th>
+					
 					@endforeach
 				</tr>
 			</thead>
@@ -90,19 +90,19 @@
 					
 					<td class="text-left">{{ $eleve->fullName }}</td>
 					<td class="text-center">{{ $eleve->sexe }}</td>
-					<td>{{ $eleve->points }}</td>
-					<td>{{ $eleve->pourcentage }}</td>
+					<td>{{ afficherPoint($eleve->points) }}</td>
+					<td>{{ afficherPoint($eleve->pourcentage) }}</td>
 					@foreach ($eleve->courses_listes as $coursesCategories)
 					{{-- expr --}}
 					@foreach ($coursesCategories as $courses)
 						@foreach ($courses as $course)
 							
-							<td>{{ $course['profondeur_echec'] }}</td>
+							<td>{{ afficherPoint($course['profondeur_echec']) }}</td>
 						@endforeach
 					@endforeach
-					<td></td>
+					
 					@endforeach
-					<td></td>
+					
 				</tr>
 				@endforeach
 			</tbody>

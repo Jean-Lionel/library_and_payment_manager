@@ -3,13 +3,13 @@
 use App\Models\Cour;
 use App\Models\PointEvaluation;
 
-
 if(!function_exists('dire_bonjour')){
 	function dire_bonjour(string $message="") : string
 	{
 		return "Bonjour ". $message;
 	}
 }
+
 
 function setActiveRoute(string $route): string
 {
@@ -54,11 +54,24 @@ function getPourcentage($a , $b){
 	if(floatval($b) != 0)
 		$res = floatval($a) * 100 / floatval($b);
 
-	return $res != 0 ? number_format($res,1,'.', ' ') :  "0";
+	return $res != 0 ? afficherPoint($res) :  "0";
 }
 
-function afficherPoint($nombre){
-	return getPrice($nombre);
+function afficherPoint($val){
+
+	$numPointPosition = intval(strpos($val, '.'));
+   	
+    if ($numPointPosition === 0) { //$val is an integer
+        return $val;
+    }
+
+    $decimal = substr($val,($numPointPosition +1),1);
+    $number = substr($val,0,($numPointPosition));
+
+    if($decimal == 5)
+    	return $number.'.5';
+
+	return getPrice($val);
 }
 
 function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
