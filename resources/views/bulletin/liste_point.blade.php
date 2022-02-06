@@ -53,6 +53,8 @@
 
 					@php
 						$max = 0;
+						$colones_entente = 0;
+
 					@endphp
 
 					@foreach ($evaluations as $key => $evaluation)
@@ -60,6 +62,7 @@
 							<th>  /{{ $evaluation->ponderation }}</th>
 						@php
 							$max += $evaluation->ponderation;
+							$colones_entente++;
 						@endphp
 					@endforeach
 					
@@ -75,25 +78,40 @@
 
 		<tbody>
 			@foreach($listes_points as $key => $eleve)
+
 			<tr>
 				<td>{{ ++$key }}</td>
 				<td colspan="2" class="text-left">{{ $eleve['nom'] }} {{ $eleve['prenom'] }}</td>
 			
-
 				@php
 					$total = 0;
+					$colones_recu = 0;
+
 				@endphp
 
-				
-
-				@foreach ($evaluations as $key => $evaluation)
+				@foreach ($eleve['listes_points'] as $key => $evaluation)
 					{{-- expr --}}
-					<td>{{ $eleve['points'][$key]->point_obtenu ?? "" }}</td> 
+					<td>{{ afficherPoint($evaluation->point_obtenu) }}</td> 
 
 					@php
-						$total += $eleve['points'][$key]->point_obtenu ?? 0;
+						$total = $total + $evaluation->point_obtenu ?? 0;
+						$colones_recu ++;
+						
 					@endphp
 				@endforeach
+
+				@if ($colones_recu != $colones_entente )
+					{{-- expr --}}
+
+					@for ($i = 0; $i < ($colones_entente - $colones_recu) ; $i++)
+						{{-- expr --}}
+						<td></td>
+					@endfor
+
+
+				@endif
+
+				
 			
 				{{-- @foreach ($eleve['points'] as $evaluation)
 					<td>{{  $evaluation->point_obtenu}}</td>

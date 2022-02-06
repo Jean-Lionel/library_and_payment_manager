@@ -83,8 +83,8 @@
 	    			</div>
 	    			<div class="col-md-6">
 	    				<div class="form-group">
-	    					<label for="">Ponderation</label><br>
-	    					<input class="form-control" type="number" wire:model="ponderation">
+	    					<label for="">Max</label><br>
+	    					<input class="form-control" min="0" type="number" wire:model="ponderation">
 	    					@error('ponderation')
 	    					<span class="text-danger">{{ $message }}</span>
 	    					@enderror

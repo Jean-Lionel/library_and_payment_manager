@@ -35,7 +35,7 @@
 
 			<div class="form-group row">
 				<label for="" class="col-sm-4">QUANTITE TOTAL</label>
-				<input type="number" wire:model="quantite_total" class="col-sm-8 form-control">
+				<input type="number" min="0" wire:model="quantite_total" class="col-sm-8 form-control">
 				@error('quantite_total')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror

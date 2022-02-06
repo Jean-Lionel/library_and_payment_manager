@@ -126,7 +126,7 @@
 
                                 <td>
 
-                                    <input type="number" class="form-control {{ $inputFormControl }}" wire:keydown.enter="updateQuantite($event.target.value, '{{ $cartItem->rowId }}')" value="{{ $cartItem->qty }}">
+                                    <input type="number" min="0" class="form-control {{ $inputFormControl }}" wire:keydown.enter="updateQuantite($event.target.value, '{{ $cartItem->rowId }}')" value="{{ $cartItem->qty }}">
                                  {{--    <input type="text"  wire:keydown="updateQuantite($event.target.value,{{  $cartItem->rowId }})" value="{{ $cartItem->qty }}"> --}}
                                 </td>
 

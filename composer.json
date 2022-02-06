@@ -46,7 +46,7 @@
         }
     },
     "autoload-dev": {
-        "files":["app/helpers/helpers.php"],
+        "files":["app/helpers/helpers.php","app/helpers/polyfill.php"],
         "psr-4": {
             "Tests\\": "tests/"
         }

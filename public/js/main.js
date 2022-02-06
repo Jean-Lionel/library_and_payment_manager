@@ -31,3 +31,17 @@ function printPage(id)
    printWin.print();
    //printWin.close();
 }
+
+
+function getDefaultCsvSeparator(){
+	 const language = navigator.language;
+
+	 if(language.search('fr') != -1){
+	 	return ';';
+	 }
+	 if(language.search('en') != -1){
+	 	return ',';
+	 }
+
+	 return ',';
+}

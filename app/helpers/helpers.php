@@ -3,6 +3,7 @@
 use App\Models\Cour;
 use App\Models\PointEvaluation;
 
+
 if(!function_exists('dire_bonjour')){
 	function dire_bonjour(string $message="") : string
 	{
@@ -59,6 +60,10 @@ function getPourcentage($a , $b){
 
 function afficherPoint($val){
 
+	if($val ==0){
+		return '';
+	}
+
 	$numPointPosition = intval(strpos($val, '.'));
    	
     if ($numPointPosition === 0) { //$val is an integer
@@ -68,8 +73,13 @@ function afficherPoint($val){
     $decimal = substr($val,($numPointPosition +1),1);
     $number = substr($val,0,($numPointPosition));
 
-    if($decimal == 5)
+    if($decimal >= 5)
     	return $number.'.5';
+
+    if ( $decimal < 5) {
+    	// code...
+    	return $number;
+    }
 
 	return getPrice($val);
 }
@@ -116,5 +126,7 @@ function affichePlace($place, $is_girl){
 	return  $place .' <sup>ème</sup>';
 
 }
+
+
 
 

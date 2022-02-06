@@ -36,7 +36,7 @@
                 
                 <td>{{ $element->point_obentu_evaluation($evaluation->id)->point_obtenu }}</td>
     			<td>
-    			<button wire:click="startId({{$element->id}})">Edit</button>
+    			<button wire:click="startId({{$element->id}})">Ajouter</button>
     			</td>
     		</tr>
     			@if ($element->id == $editId)
@@ -69,6 +69,7 @@
 @push("scripts")
 <script> 
     const evaluation_id = "{{ $evaluation->id }}"
+   
 
     let list_points = []
     const a = document.getElementById("telecharger")
@@ -88,8 +89,11 @@
             datas.push([info_s.classe_name,eleve.id, eleve.first_name, eleve.last_name],)
          });
 
+        const sep = getDefaultCsvSeparator();
+
+
         datas.forEach((rowArray) =>{
-            let row = rowArray.join(",");
+            let row = rowArray.join(sep);
             csvContent += row + "\r\n";
         });
         var encodedUri = encodeURI(csvContent);

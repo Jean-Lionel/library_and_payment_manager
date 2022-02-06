@@ -51,7 +51,7 @@
 
                         @if($detail->etat == 'NON REMIS')
     					<label class="w-75" for="">{{ $detail->book->title }}</label>
-    					<input wire:model="numberLivre.{{ $detail->id }}"  type="checkbox" value="{{$detail->quantite  }}" class="form-control">
+    					<input min="1" wire:model="numberLivre.{{ $detail->id }}"  type="checkbox" value="{{$detail->quantite  }}" class="form-control">
 
                         @endif
     				</div>

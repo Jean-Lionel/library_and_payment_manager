@@ -34,7 +34,7 @@
 
     		<div class="form-group">
     			<label for="">PODERATION TJ TRIMESTRIELLE</label>
-    			<input type="number" wire:model="ponderation" class="form-control form-control-sm">
+    			<input type="number" min="0" wire:model="ponderation" class="form-control form-control-sm">
                 @error('ponderation')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -42,14 +42,14 @@
             
             <div class="form-group">
                 <label for="">PODERATION COMPÉTENCE </label>
-                <input type="number" wire:model="ponderation_compentance" class="form-control form-control-sm">
+                <input type="number" min="0" wire:model="ponderation_compentance" class="form-control form-control-sm">
                 @error('ponderation_compentance')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="">PODERATION RESSOURCE / EXAMEN </label>
-                <input type="number" wire:model="ponderation_examen" class="form-control form-control-sm">
+                <input type="number" min="0" wire:model="ponderation_examen" class="form-control form-control-sm">
                 @error('ponderation_examen')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror

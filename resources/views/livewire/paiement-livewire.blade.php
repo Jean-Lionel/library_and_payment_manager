@@ -89,7 +89,7 @@
 									<div class="form-group row">
 										<label for="montant" class="col-sm-4 col-form-label">Montant</label>
 										<div class="col-sm-8">
-											<input type="number" wire:model="montant" class=" border-dark form-control" id="montant" placeholder="Montant">
+											<input type="number" min="0" wire:model="montant" class=" border-dark form-control" id="montant" placeholder="Montant">
 
 											@error('montant') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>

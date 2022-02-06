@@ -160,6 +160,9 @@
 					<td></td>
 				</tr>
 				@endforeach
+				<tr>
+					<td colspan="17"></td>
+				</tr>
 				@endforeach
 				@endforeach
 

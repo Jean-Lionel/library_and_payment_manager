@@ -158,6 +158,8 @@ class BulletinController extends Controller
     ->where('type_evaluation','=','INTERROGATION')
     ->get();
 
+    /*return view('bulletin.liste_point', compact('listes_points','evaluations','cours'));*/
+
     $pdf = PDF::loadView('bulletin.liste_point', compact('listes_points','evaluations','cours'));
 
     return $pdf->stream('test.pdf');
