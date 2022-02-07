@@ -168,6 +168,9 @@
 						$categoriesTotal = array_values($coursListe)[0];
 					@endphp
 					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
+					<th>{{ sumColumn($categoriesTotal, 'ponderationTJ') }}</th>
+					<th>{{ sumColumn($categoriesTotal, 'ponderationEx') }}</th>
+					<th>{{ sumColumn($categoriesTotal, 'max_tj_examen') }}</th>
 					@endif
 					
 				</tr>
