@@ -132,6 +132,7 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
          $total += $v;
          $c = [
             'name' => $cours->name,
+            'credit' => $cours->credit,
             'cours' => $cours,
             'total' => $v,
             'details' => $detailPoints,

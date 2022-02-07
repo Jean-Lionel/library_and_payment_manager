@@ -104,9 +104,9 @@
 					$taille = count(array_values($coursListe)[0]);
 				@endphp
 				<tr>
-					<td rowspan="{{ $taille +1 }}" > {{ ++$loop->index }}  </td>
+					<td rowspan="{{ $taille +2 }}" > {{ ++$loop->index }}  </td>
 					@if(!is_numeric(array_keys($coursListe)[0]))
-					<td class="text-left" rowspan="{{ $taille +1 }}" >
+					<td class="text-left" rowspan="{{ $taille +2 }}" >
 						<b>{{ array_keys($coursListe)[0] }}</b>
 					</td>
 					@else
@@ -161,7 +161,15 @@
 				</tr>
 				@endforeach
 				<tr>
-					<td colspan="17"></td>
+					{{-- MAXIMA --}}
+					@if(!is_numeric(array_keys($coursListe)[0]))
+					<th class="text-left">TOTAL</th>
+					@php
+						$categoriesTotal = array_values($coursListe)[0];
+					@endphp
+					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
+					@endif
+					
 				</tr>
 				@endforeach
 				@endforeach
