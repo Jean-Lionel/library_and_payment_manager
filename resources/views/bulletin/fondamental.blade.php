@@ -161,16 +161,30 @@
 				</tr>
 				@endforeach
 				<tr>
-					{{-- MAXIMA --}}
+					
 					@if(!is_numeric(array_keys($coursListe)[0]))
 					<th class="text-left">TOTAL</th>
 					@php
 						$categoriesTotal = array_values($coursListe)[0];
 					@endphp
+					{{-- MAXIMA --}}
 					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationTJ') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationEx') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'max_tj_examen') }}</th>
+
+					{{-- I TRIMESTRE --}}
+
+					<th>
+						{{sumColumn($categoriesTotal, 'interrogation')  }}
+					</th>
+					<th>
+						{{sumColumn($categoriesTotal, 'examen')  }}
+					</th>
+					<th>
+						{{sumColumn($categoriesTotal, 'total')  }}
+					</th>
+
 					@endif
 					
 				</tr>
