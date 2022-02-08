@@ -22,6 +22,7 @@ class CreateCoursTable extends Migration
             $table->double('credit')->nullable();
             // Pour dire si le cours est principale ou Pas 
             $table->boolean('status')->nullable();
+            $table->boolean('conduite')->nullable();
             $table->foreignId('classe_id')->nullable();
             $table->foreignId('level_id');
             $table->foreignId('category_id')->nullabale();

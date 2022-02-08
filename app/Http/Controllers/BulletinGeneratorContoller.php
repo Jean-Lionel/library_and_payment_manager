@@ -11,9 +11,11 @@ class BulletinGeneratorContoller extends Controller
 
    public function __construct(){
 
-      $eleve = Eleve::findOrFail(3);
+      $eleves = Eleve::where('classe_id',2)->get();
 
-      $eleve->is_nonClasse(1,1);
+      foreach($eleves as $eleve){
+         dump($eleve->is_nonClasse(1,1));
+      }
       
    }
    

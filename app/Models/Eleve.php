@@ -181,6 +181,7 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
     
     $courses = $this->classe->courses();
 
+    //dd($this->classe_id);
     // Vérifier que chaque cours possède l'évaluation d'une interrogagation
     // Vérifier que chaque cours possède l'évaluation de l'Examen
 
@@ -189,15 +190,37 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
          $courses_evaluations = Evaluation::where('trimestre','=',$trimestre)
                                 ->where('anne_scolaire_id','=',$anne_scolaire_id)
                                 ->where('cour_id',$course->id)
+                                ->where('classe_id',$this->classe_id)
                                 ->get();
+        // Quand on ne trouve pas une évaluation on s'arrête
+        if(!$courses_evaluations or ($courses_evaluations->count() < 2) ){
+             dump('Pas des evaluations suffisantes');
+             dump($course);
+            return true;
+        }
+        //dd();
+        //dump($courses_evaluations);
         foreach ($courses_evaluations as $key => $ev) {
             // code...
-            
+            $points = PointEvaluation::where('evaluation_id',$ev->id)
+                                        ->where('eleve_id', $this->id)
+                                        ->first();
+            if($points == null){
+                dump('Points est = a null dans le cours', $ev->cour->name,$ev->type_evaluation);
+                return true;
+            }else{
+               // dump( $points );
+            }
+
+            if($points->point_obtenu == NULL){
+                dump('Points est POINT OBETNUE ', $points->point_obtenu);
+                return true;
+            }
         }
 
     }
 
-    
+    return false;
 }
 
 }

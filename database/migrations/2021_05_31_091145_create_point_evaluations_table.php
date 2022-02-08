@@ -16,7 +16,7 @@ class CreatePointEvaluationsTable extends Migration
         Schema::create('point_evaluations', function (Blueprint $table) {
             $table->id();
             $table->foreignId("evaluation_id");
-            $table->foreignId("eleve_id");
+            $table->foreignId("eleve_id")->nullable();
             $table->double("point_obtenu");
             $table->double("ponderation")->nullable();
             $table->foreignId("cour_id");
