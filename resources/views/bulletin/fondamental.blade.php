@@ -1,4 +1,3 @@
-
 <style>
 	table{
 		border-collapse: collapse;
@@ -43,6 +42,7 @@
 
 @foreach ($data['palmares'] as $eleve)
 {{-- expr --}}
+
 <div>
 	<table>
 		<thead>

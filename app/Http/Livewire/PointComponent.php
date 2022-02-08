@@ -15,6 +15,7 @@ class PointComponent extends Component
 	use WithPagination;
 	protected $paginationTheme ='bootstrap';
 	public $evaluation_id ;
+	public $classe_id ;
 	public $evaluation;
 	public $point_obentu;
 	public $courId;
@@ -51,6 +52,7 @@ class PointComponent extends Component
 	public function mount(Request $request){
 		$this->evaluation_id = $request->id;
 		$this->evaluation = Evaluation::where('id','=',$request->id)->firstOrFail();
+		$this->classe_id = $this->evaluation->classe_id;
 		
 	}
 	public function savePoint(){
@@ -68,6 +70,7 @@ class PointComponent extends Component
 					'eleve_id' => $this->editId,
 					'point_obtenu' => $this->point_obentu,
 					'cour_id' => $this->courId,
+					'classe_id' => $this->classe_id,
 					'type_evaluation' => $this->evaluation->type_evaluation,
 					'ponderation' => $this->evaluation->ponderation,
 					'trimestre_id' => $this->evaluation->trimestre,

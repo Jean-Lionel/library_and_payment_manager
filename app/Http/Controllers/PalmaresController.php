@@ -25,14 +25,10 @@ class PalmaresController extends Controller
 
    public static function getNote($annee_scolaire_id, $classe_id, $trimestre){
       $c = Classe::findOrFail($classe_id);
-
       $ponderation_total = $c->ponderation();
-
       $level = $c->level;
-
       $max_total = $level->getMaxTotal();
-       $nombres_cours = $c->courses()->count();
-
+      $nombres_cours = $c->courses()->count();
       // Liste des cours
       $courses = $c->courseCategories();
 
@@ -44,6 +40,16 @@ class PalmaresController extends Controller
          $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
          $eleve->points = $v['total'];
          $eleve->courses_listes = $v['courses_listes'];
+
+         if ($trimestre == 1) {
+            // code...
+            $eleve->trimestre = [
+               'TRIMESTRE_1' => 1,
+               'TRIMESTRE_2' => 1,
+               'TRIMESTRE_3' => 1,
+            ];
+         }
+         
          $eleve->points_total = $v['points_total'];
          $eleve->pourcentage = getPourcentage($v['total'], $ponderation_total['total']) ;
          $palmares[] = $eleve;

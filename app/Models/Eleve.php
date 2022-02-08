@@ -73,7 +73,7 @@ class Eleve extends Model
     // point_evaluations , cour_id , eleve_id , anne_scolaire_id  ,trimestre_id , type_evaluation
 
     public function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
-        
+
         $choosed_eleve =  $this->id;
         $points = PointEvaluation::where('cour_id', '=', $cour_id)
         ->where('eleve_id','=',$eleve_id ?? $choosed_eleve)
@@ -93,8 +93,8 @@ class Eleve extends Model
         //$ponderation = Cour::findOrFail($cour_id)->ponderation;
         //POINT OBTENUE  MOYENNE DU COURS
         if($points->sum('ponderation') != 0){
-         $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
-     }else{
+           $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
+       }else{
         $resultat  = 0;
     }
     return $resultat;
@@ -105,23 +105,23 @@ class Eleve extends Model
     // COMPENTENCE
 
 public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_scolaire_id){
-   $total = 0;
-   $courses_listes = [];
-   $nombres_cours = 0;
-   $points_total = [
+ $total = 0;
+ $courses_listes = [];
+ $nombres_cours = 0;
+ $points_total = [
     'INTERROGATION'=> 0 ,
     'EXAMEN' => 0,
     'TOTAL' => 0,
     'POURCENTAGE_INTERROGATION' => 0,
     'POURCENTAGE_EXAMEN' => 0,
-   ];
-   $type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
-   foreach ($courses as $key => $coursCategorie) {
+];
+$type_evaluations = ['INTERROGATION', 'EXAMEN', 'COMPENTENCE'];
+foreach ($courses as $key => $coursCategorie) {
     $categories = [];
     foreach ($coursCategorie as  $cours) {
         $v = 0;
-         $nombres_cours++;
-         $detailPoints = [];
+        $nombres_cours++;
+        $detailPoints = [];
         foreach ($type_evaluations as  $evaluation) {
                 // code...
             $r = $this->recuperer_point($eleve_id ,$cours->id, $trimestre_id, $anne_scolaire_id, $evaluation );
@@ -129,8 +129,8 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
             $detailPoints[$evaluation] =  $r;
         }
 
-         $total += $v;
-         $c = [
+        $total += $v;
+        $c = [
             'name' => $cours->name,
             'credit' => $cours->credit,
             'ponderationTJ' => $cours->ponderation,
@@ -145,7 +145,7 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
             'total' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION']),
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
-         ];
+        ];
         $points_total['INTERROGATION'] +=  $c['interrogation'];
         $points_total['EXAMEN'] +=  $c['examen'];
         $points_total['TOTAL'] +=  $c['total'];
@@ -153,21 +153,51 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
         $categories[$key][]= $c;
         
     }
-        $courses_listes[] = $categories;  
-    }
+    $courses_listes[] = $categories;  
+}
 
-    $p = $this->classe->ponderation();
+$p = $this->classe->ponderation();
 
     // POURCENTAGE DES EXAMENS ET DES INTERROGATIONS
-     $points_total['POURCENTAGE_INTERROGATION'] = getPourcentage( $points_total['INTERROGATION'],  $p['total_interrogation'] ); 
-     $points_total['POURCENTAGE_EXAMEN'] = getPourcentage($points_total['EXAMEN'], $p['total_examen'] );
+$points_total['POURCENTAGE_INTERROGATION'] = getPourcentage( $points_total['INTERROGATION'],  $p['total_interrogation'] ); 
+$points_total['POURCENTAGE_EXAMEN'] = getPourcentage($points_total['EXAMEN'], $p['total_examen'] );
 
-    return [
-        'total' => $total,
-        'courses_listes' => $courses_listes,
-        'points_total' => $points_total,
-       
-    ];
+return [
+    'total' => $total,
+    'courses_listes' => $courses_listes,
+    'points_total' => $points_total,
+
+];
+}
+
+
+public function is_nonClasse($trimestre,$anne_scolaire_id){
+    // Un élève est consideré comme un non classé si il n'a pas passé tout les examens
+    // Année scolaire
+    // Classe
+    // Trimestre
+    // Tous les évaluations 
+    // LES EVALUATIONS ANNEE SCOLAIRE TRIMESTRE
+    
+    $courses = $this->classe->courses();
+
+    // Vérifier que chaque cours possède l'évaluation d'une interrogagation
+    // Vérifier que chaque cours possède l'évaluation de l'Examen
+
+    foreach($courses as $course){
+        // Je recupere tout les evaluations d'un cours
+         $courses_evaluations = Evaluation::where('trimestre','=',$trimestre)
+                                ->where('anne_scolaire_id','=',$anne_scolaire_id)
+                                ->where('cour_id',$course->id)
+                                ->get();
+        foreach ($courses_evaluations as $key => $ev) {
+            // code...
+            
+        }
+
+    }
+
+    
 }
 
 }
