@@ -185,6 +185,8 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
     // Vérifier que chaque cours possède l'évaluation d'une interrogagation
     // Vérifier que chaque cours possède l'évaluation de l'Examen
 
+    $errors = [];
+
     foreach($courses as $course){
         // Je recupere tout les evaluations d'un cours
          $courses_evaluations = Evaluation::where('trimestre','=',$trimestre)
@@ -193,10 +195,10 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
                                 ->where('classe_id',$this->classe_id)
                                 ->get();
         // Quand on ne trouve pas une évaluation on s'arrête
-        if(!$courses_evaluations or ($courses_evaluations->count() < 2) ){
-             dump('Pas des evaluations suffisantes');
-             dump($course);
-            return true;
+
+        if(!$courses_evaluations or (!$course->conduite and $courses_evaluations->count() < 2) ){
+            
+            $errors['EVALUATION_INCOMPLET'][] = $course;
         }
         //dd();
         //dump($courses_evaluations);
@@ -205,22 +207,21 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
             $points = PointEvaluation::where('evaluation_id',$ev->id)
                                         ->where('eleve_id', $this->id)
                                         ->first();
-            if($points == null){
-                dump('Points est = a null dans le cours', $ev->cour->name,$ev->type_evaluation);
-                return true;
-            }else{
-               // dump( $points );
+            if($points == null || $points->point_obtenu == null){
+                
+                $errors['EVALUATION_INCOMPLET'][] = [
+                    'cours' => $ev->cour->name,
+                    'evaluations' => $ev->type_evaluation,
+
+                ];
             }
 
-            if($points->point_obtenu == NULL){
-                dump('Points est POINT OBETNUE ', $points->point_obtenu);
-                return true;
-            }
+            
         }
 
     }
 
-    return false;
+    return count($errors) > 0 ? $errors : false;
 }
 
 }

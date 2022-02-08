@@ -16,6 +16,10 @@
                 @error('name')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
+
+                <br>
+                <label for="conduite">Conduite</label>
+                <input type="checkbox" id="conduite" wire:model="conduite">
     		</div>
 
              <div class="form-group">

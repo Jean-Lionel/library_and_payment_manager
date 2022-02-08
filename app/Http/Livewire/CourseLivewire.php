@@ -20,6 +20,7 @@ class CourseLivewire extends Component
     public $credit;
     public $status = false;
 	public $classe_id;
+    public $conduite;
     public $level_id;
     public $category_id;
 	public $professeur_id;
@@ -62,6 +63,7 @@ class CourseLivewire extends Component
             "credit" => $this->credit,
             "professeur_id" => $this->professeur_id,
             "classe_id" => $this->classe_id,
+            "conduite" => $this->conduite,
             "status" => $this->status,
             "level_id" => $this->level_id,
             "category_id" => $this->category_id,
@@ -92,6 +94,7 @@ class CourseLivewire extends Component
         $this->status = $course->status;
         $this->ponderation = $course->ponderation;
         $this->credit = $course->credit;
+        $this->conduite = $course->conduite;
         $this->ponderation_compentance = $course->ponderation_compentance;
         $this->ponderation_examen = $course->ponderation_examen;
     }
