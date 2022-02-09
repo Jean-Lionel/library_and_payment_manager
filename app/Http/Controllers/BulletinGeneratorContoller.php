@@ -19,7 +19,7 @@ class BulletinGeneratorContoller extends Controller
 
       $data = PalmaresController::getNoteAllTrimestre($anne_scolaire_id, $classe_id);
 
-      dd($data);
+      return view("bulletin.bulletin", compact('data'));
 
       /*$data = PalmaresController::getNote($anne_scolaire_id, $classe_id, 1);
       $this->getDataSum($data);

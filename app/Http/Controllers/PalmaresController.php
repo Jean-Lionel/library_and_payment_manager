@@ -111,10 +111,10 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
             $t[$i]['pourcentage'] = getPourcentage( $t[$i]['total'], $ponderation_total['total']);
             $t[$i]['place'] = [];
          }
-        $eleve->trimestre = $t;
-        $palmares[] = $eleve;
 
-        dd($eleve);
+        $eleve->trimestre = $t;
+        $eleve->courses_listes = $t[1]['courses_listes'];
+        $palmares[] = $eleve;
      } 
       //dd($palmares);
      $palmares = collect($palmares)->sort();
@@ -122,7 +122,6 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
      return [
       'palmares' => $palmares,
       'courses' => $courses,
-      'trimestre' => $trimestre,
       'nombres_cours' => $nombres_cours,
       'ponderation_total' => $ponderation_total
    ];
