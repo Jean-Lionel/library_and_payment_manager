@@ -19,7 +19,6 @@ class PointComponent extends Component
 	public $evaluation;
 	public $point_obentu;
 	public $courId;
-
 	public $search;
 	public $points=[];
 	public string $orderField = 'first_name';

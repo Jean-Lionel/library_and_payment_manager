@@ -194,15 +194,15 @@
 				<tr>
 					<td></td>
 					<th class="text-left" colspan="2">TOTAL</th>
-					<td>{{ $data['ponderation_total']['total_credit']}}</td>
-					<td>{{ $data['ponderation_total']['total_interrogation']}}</td>
-					<td>{{ $data['ponderation_total']['total_examen']}}</td>
-					<td>{{ $data['ponderation_total']['total']}}</td>
+					<th>{{ $data['ponderation_total']['total_credit']}}</th>
+					<th>{{ $data['ponderation_total']['total_interrogation']}}</th>
+					<th>{{ $data['ponderation_total']['total_examen']}}</th>
+					<th>{{ $data['ponderation_total']['total']}}</th>
 					
 				<!-- 	I TRIMESTRE -->
-					<td>{{ afficherPoint($eleve->points_total['INTERROGATION']) }}</td>
-					<td>{{afficherPoint($eleve->points_total['EXAMEN']) }}</td>
-					<td>{{afficherPoint($eleve->points_total['TOTAL']) }}</td>
+					<th>{{ afficherPoint($eleve->points_total['INTERROGATION']) }}</th>
+					<th>{{afficherPoint($eleve->points_total['EXAMEN']) }}</th>
+					<th>{{afficherPoint($eleve->points_total['TOTAL']) }}</th>
 				<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
@@ -226,14 +226,22 @@
 					<td></td>
 				<!-- 	I TRIMESTRE -->
 					<td>
+						@if ( !$eleve->isNonClasse)
 						<b>{{ afficherPoint($eleve->points_total['POURCENTAGE_INTERROGATION']) }}</b>
+						@endif
 					</td>
 					<td>
+						@if ( !$eleve->isNonClasse)
 						<b>
 						{{afficherPoint($eleve->points_total['POURCENTAGE_EXAMEN']) }}
 						</b>
+						@endif
 					</td>
-					<td><b>{{ $eleve->pourcentage }}</b></td>
+					<td>
+						@if (!$eleve->isNonClasse)
+						<b>{{ $eleve->pourcentage }}</b>
+						@endif
+					</td>
 				<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
@@ -259,9 +267,13 @@
 					<td></td>
 					<td></td>
 					<td>
-						<b>
+						@if ( !$eleve->isNonClasse)
+							{{-- expr --}}
+							<b>
 						{!! affichePlace(++$loop->index, $eleve->is_a_girl()) !!}
 						</b>
+						@endif
+						
 					</td>
 				<!-- 	II TRIMESTRE -->
 					<td></td>

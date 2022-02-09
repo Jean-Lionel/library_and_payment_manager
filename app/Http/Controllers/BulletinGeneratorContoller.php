@@ -10,13 +10,7 @@ class BulletinGeneratorContoller extends Controller
 {
 
    public function __construct(){
-
-      $eleves = Eleve::where('classe_id',2)->get();
-
-      foreach($eleves as $eleve){
-         dump($eleve->is_nonClasse(1,1));
-      }
-      
+      //$eleves = Eleve::where('classe_id',2)->get();
    }
    
    public function bulletin($id){

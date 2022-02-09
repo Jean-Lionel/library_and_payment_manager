@@ -34,11 +34,21 @@ class PalmaresController extends Controller
 
       $eleves = Eleve::where('anne_scolaire_id', $annee_scolaire_id)
                         ->where('classe_id',$classe_id)->get();
+
+      /*$eleves = self::get_eleve_en_ordre($all_eleves,$annee_scolaire_id, $trimestre);*/
+
       $palmares = [];
       foreach ($eleves as $key => $eleve) {
          // code...
          $v = $eleve->getPointTatalObtenue($eleve->id,$courses,$trimestre, $annee_scolaire_id);
-         $eleve->points = $v['total'];
+
+         if ($eleve->is_nonClasse($trimestre, $annee_scolaire_id)) {
+            // code...
+            $eleve->isNonClasse = true;
+         }else{
+             $eleve->isNonClasse = false;
+              $eleve->points = $v['total'];
+         }
          $eleve->courses_listes = $v['courses_listes'];
 
          if ($trimestre == 1) {
@@ -54,7 +64,7 @@ class PalmaresController extends Controller
          $eleve->pourcentage = getPourcentage($v['total'], $ponderation_total['total']) ;
          $palmares[] = $eleve;
       } 
-
+      //dd($palmares);
       $palmares = collect($palmares)->sortByDesc('points');
 
       return [
@@ -66,8 +76,18 @@ class PalmaresController extends Controller
       ];
    }
 
-   private function getPlace(){
-      
+   public static function get_eleve_en_ordre($all_eleves,$anne_scolaire_id,$trimestre){
+      $order = [];
+      $non_classes = [];
+      foreach ($all_eleves as $eleve){
+         if (!$eleve->is_nonClasse($trimestre, $anne_scolaire_id)) {
+            $order[] = $eleve;
+         }else{
+            $non_classes[] = $eleve;
+         }
+      }
+
+      return $order;
    }
 
 }
