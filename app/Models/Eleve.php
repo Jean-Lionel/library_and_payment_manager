@@ -198,7 +198,7 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
 
         if(!$courses_evaluations or (!$course->conduite and $courses_evaluations->count() < 2) ){
             
-            $errors['EVALUATION_INCOMPLET'][] = $course;
+            $errors['EVALUATION_INCOMPLETE'][] = $course;
         }
         //dd();
         //dump($courses_evaluations);
@@ -209,13 +209,12 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
                                         ->first();
             if($points == null || $points->point_obtenu == null){
                 
-                $errors['EVALUATION_INCOMPLET'][] = [
+                $errors['EVALUATION_INCOMPLETE'][] = [
                     'cours' => $ev->cour->name,
                     'evaluations' => $ev->type_evaluation,
 
                 ];
             }
-
             
         }
 
