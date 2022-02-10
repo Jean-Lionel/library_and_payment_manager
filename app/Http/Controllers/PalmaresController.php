@@ -9,7 +9,6 @@ use PDF;
 
 class PalmaresController extends Controller
 {
-
    public  function getPalmares($annee_scolaire_id, $classe_id, $trimestre){
       // $pdf = PDF::loadView('bulletin.palmares', compact('palmares','courses'));
       $data = self::getNote($annee_scolaire_id, $classe_id, $trimestre);
@@ -31,10 +30,8 @@ class PalmaresController extends Controller
       $nombres_cours = $c->courses()->count();
       // Liste des cours
       $courses = $c->courseCategories();
-
       $eleves = Eleve::where('anne_scolaire_id', $annee_scolaire_id)
       ->where('classe_id',$classe_id)->get();
-
       /*$eleves = self::get_eleve_en_ordre($all_eleves,$annee_scolaire_id, $trimestre);*/
 
       $palmares = [];
@@ -55,6 +52,8 @@ class PalmaresController extends Controller
 
         $eleve->points_total = $v['points_total'];
         $eleve->pourcentage = getPourcentage($v['total'], $ponderation_total['total']) ;
+
+
 
         $palmares[] = $eleve;
      } 
@@ -98,7 +97,6 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
       ->where('classe_id',$classe_id)->get();
 
       /*$eleves = self::get_eleve_en_ordre($all_eleves,$annee_scolaire_id, $trimestre);*/
-
       $palmares = [];
       foreach ($eleves as $key => $eleve) {
          $t = [];
@@ -114,10 +112,14 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
 
         $eleve->trimestre = $t;
         $eleve->courses_listes = $t[1]['courses_listes'];
+
+         //dd($eleve);
         $palmares[] = $eleve;
      } 
       //dd($palmares);
-     $palmares = collect($palmares)->sort();
+
+     $palmares = self::getDataOrderby($palmares);
+     //$palmares = collect($palmares)->sort();
 
      return [
       'palmares' => $palmares,
@@ -125,6 +127,29 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
       'nombres_cours' => $nombres_cours,
       'ponderation_total' => $ponderation_total
    ];
+}
+
+private static function getDataOrderby($palmares)
+{
+   // code...
+   $trimestre_1 =  collect($palmares)->SortByDesc('trimestre.1.pourcentage')->toArray();
+   $trimestre_2 =  collect($palmares)->SortByDesc('trimestre.2.pourcentage')->toArray();
+   $trimestre_3 =  collect($palmares)->SortByDesc('trimestre.3.pourcentage')->toArray();
+
+   //dd( $trimestre_1 );
+
+   $data = [];
+   $place = 1;
+
+
+   foreach ($trimestre_1 as $key => $eleve){
+      $eleve['trimestre'][1]['place'] = $place;
+      $place++;
+      $data[] = $eleve;
+   }
+
+  
+   return collect($data);
 }
 
 }

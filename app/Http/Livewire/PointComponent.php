@@ -9,6 +9,7 @@ use App\Models\PointEvaluation;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use DB;
 
 class PointComponent extends Component
 {
@@ -122,15 +123,17 @@ class PointComponent extends Component
 
 	public function testExemple($data){
 
-		foreach($data as $entry){
+		try {
+			DB::beginTransaction();
+			foreach($data as $entry){
 			//VERFICATION QUE LA LIGNE N'EXISTE PAS 
 
-			if(isset($entry['evaluation_id']) and isset($entry['eleve_id'])){
+				if(isset($entry['evaluation_id']) and isset($entry['eleve_id'])){
 
-				$check = PointEvaluation::where('evaluation_id', '=',
-					$entry['evaluation_id'])->where('eleve_id' ,'=',$entry['eleve_id'])->first();
+					$check = PointEvaluation::where('evaluation_id', '=',
+						$entry['evaluation_id'])->where('eleve_id' ,'=',$entry['eleve_id'])->first();
 				// Vérification des points
-				$metaData =  [
+					$metaData =  [
 						'cour_id' => $this->evaluation->cour_id,
 						'classe_id' => $this->classe_id,
 						'trimestre_id' => $this->evaluation->trimestre,
@@ -139,23 +142,30 @@ class PointComponent extends Component
 						'ponderation' => $this->evaluation->ponderation,
 					];
 
-				if (isset($entry['point_obtenu']) and is_numeric($entry['point_obtenu']) and $entry['point_obtenu'] <= $this->evaluation->ponderation ) {
+					if (isset($entry['point_obtenu']) and is_numeric($entry['point_obtenu']) and $entry['point_obtenu'] <= $this->evaluation->ponderation ) {
 					// code...
 					//dd($entry['point_obtenu']);
-					$entry = array_merge($entry,$metaData);
-					
-				}else{
-					$entry['point_obtenu'] = NULL;
+						$entry = array_merge($entry,$metaData);
+						
+					}else{
+						$entry['point_obtenu'] = NULL;
+					}
+					if($check){
+						$check->update($entry);
+					}else{
+						PointEvaluation::create($entry);
+					}
+
 				}
-				if($check){
-					$check->update($entry);
-				}else{
-					PointEvaluation::create($entry);
-				}
+				
 
 			}
+			DB::commit();
 			
-
+		} catch (\Exception $e) {
+			dd($e->getMessage());
+			DB::rollback();
+			
 		}
 	}
 }

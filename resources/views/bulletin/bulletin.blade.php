@@ -32,10 +32,10 @@
 	}
 
 	@media print {
-    .pagebreak { 
-    	page-break-before: always; 
-    } /* page-break-after works, as well */
-   }
+		.pagebreak { 
+			page-break-before: always; 
+		} /* page-break-after works, as well */
+	}
 
 </style>
 
@@ -101,9 +101,9 @@
 				$coursListe)
 				{{-- expr --}}
 				@php
-					$taille = count(array_values($coursListe)[0]);
+				$taille = count(array_values($coursListe)[0]);
 
-					$categories_name = array_keys($coursListe)[0];
+				$categories_name = array_keys($coursListe)[0];
 				@endphp
 				<tr>
 					<td rowspan="{{ $taille +2 }}" > {{ ++$loop->index }}  </td>
@@ -120,7 +120,7 @@
 				@foreach ($cours as $course)
 				<tr>
 					@php
-						$course_name = $course['name'];
+					$course_name = $course['name'];
 					@endphp
 
 					@if(!is_numeric($categories_name))
@@ -147,32 +147,42 @@
 					<td>{{ afficherPoint($course['examen']) }}</td>
 					<td>{{ afficherPoint($course['total']) }}</td> --}}
 
+					@php
+					$cours_total_annuel = 0;
+
+					@endphp
+
 					@foreach ($eleve->trimestre as $trimestre)
-						<td>
-							@php
-								$cours_categories_points = array_values($trimestre['courses_listes'][$key])[0];
+					@php
+					$cours_categories_points = array_values($trimestre['courses_listes'][$key])[0];
+					$getCourse = [];
+					foreach ($cours_categories_points as $e){
+						if($e['name'] ==  $course_name){
+							$getCourse = $e;
+							break;
+						}
+					}
 
-								$getCourse = [];
-
-							    foreach ($cours_categories_points as $e){
-							    	if($e['name'] ==  $course_name){
-										$getCourse = $e;
-										break;
-									}
-							    }
-									
-							@endphp
-							 {{	afficherPoint($getCourse['interrogation'])}}
-						</td>
-						<td>{{	afficherPoint($getCourse['examen'])}} </td>
-						<td>{{	afficherPoint($getCourse['total'])}}</td>
+					$cours_total_annuel  += $getCourse['total'];
+					@endphp
+					<td>
+						{{	afficherPoint($getCourse['interrogation'])}}
+					</td>
+					<td>{{	afficherPoint($getCourse['examen'])}} </td>
+					<td>{{	afficherPoint($getCourse['total'])}}</td>
 					@endforeach
 					{{--  --}}
 					<td class="bold">
 						{{ $course['cours']->ponderationTotal * 3 }}
 					</td>
-					<td></td>
-					<td></td>
+					<td>
+						{{ afficherPoint($cours_total_annuel) }}
+					</td>
+					<td>
+						{{
+							afficherPoint(getPourcentage($cours_total_annuel, ($course['cours']->ponderationTotal * 3)))
+						}}
+					</td>
 					<td></td>
 				</tr>
 				@endforeach
@@ -181,7 +191,7 @@
 					@if(!is_numeric(array_keys($coursListe)[0]))
 					<th class="text-left">TOTAL</th>
 					@php
-						$categoriesTotal = array_values($coursListe)[0];
+					$categoriesTotal = array_values($coursListe)[0];
 					@endphp
 					{{-- MAXIMA --}}
 					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
@@ -191,13 +201,7 @@
 					{{-- I TRIMESTRE --}}
 
 					<th>
-						{{sumColumn($categoriesTotal, 'interrogation')  }}
-					</th>
-					<th>
-						{{sumColumn($categoriesTotal, 'examen')  }}
-					</th>
-					<th>
-						{{sumColumn($categoriesTotal, 'total')  }}
+						
 					</th>
 
 					@endif
@@ -214,23 +218,19 @@
 					<th>{{ $data['ponderation_total']['total_examen']}}</th>
 					<th>{{ $data['ponderation_total']['total']}}</th>
 					
-				<!-- 	I TRIMESTRE -->
-					<th></th>
-					<th></th>
-					<th></th>
-				<!-- 	II TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-				<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-				<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<!-- 	I TRIMESTRE -->
+
+					@foreach ($eleve->trimestre as $el)
+					{{-- expr --}}
+						<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
+						<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
+						<th>{{ afficherPoint($el['total'])}}</th>
+					@endforeach
+					{{-- empty expr --}}
+				
+					
+					<!-- 	III TRIMESTRE -->
+					
 				</tr>
 				<tr>
 					<td></td>
@@ -239,30 +239,13 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	I TRIMESTRE -->
-					<td>
-						
-						
-					</td>
-					<td>
-						
-					</td>
-					<td>
-						
-					</td>
-				<!-- 	II TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-				<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-				<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<!-- 	I TRIMESTRE -->
+					@foreach ($eleve->trimestre as $el)
+					{{-- expr --}}
+						<th> {{afficherPoint($el['points_total']['POURCENTAGE_INTERROGATION'])}}</th>
+						<th> {{afficherPoint($el['points_total']['POURCENTAGE_EXAMEN'])}}</th>
+						<th>{{ afficherPoint($el['pourcentage'])}}</th>
+					@endforeach
 				</tr>
 				<tr>
 					<td></td>
@@ -271,22 +254,21 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	I TRIMESTRE -->
+					<!-- 	I TRIMESTRE -->
 					<td></td>
 					<td></td>
-					<td>
-						
-						
-					</td>
-				<!-- 	II TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-				<!-- 	III TRIMESTRE -->
+					<th>
+						{!! affichePlace(++$loop->index, $eleve->is_a_girl()) !!}
+					</th>
+					<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	III TRIMESTRE -->
+					<!-- 	III TRIMESTRE -->
+					<td></td>
+					<td></td>
+					<td></td>
+					<!-- 	III TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
@@ -299,19 +281,19 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	I TRIMESTRE -->
+					<!-- 	I TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	II TRIMESTRE -->
+					<!-- 	II TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	III TRIMESTRE -->
+					<!-- 	III TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
-				<!-- 	III TRIMESTRE -->
+					<!-- 	III TRIMESTRE -->
 					<td></td>
 					<td></td>
 					<td></td>
