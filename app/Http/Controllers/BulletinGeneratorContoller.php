@@ -16,8 +16,9 @@ class BulletinGeneratorContoller extends Controller
    public function bulletin($id){
       $classe_id = $id;
       $anne_scolaire_id = \Request::get('x');
+      $trimestre_id = \Request::get('t');
 
-      $data = PalmaresController::getNoteAllTrimestre($anne_scolaire_id, $classe_id);
+      $data = PalmaresController::getNoteAllTrimestre($anne_scolaire_id, $classe_id,$trimestre_id);
 
       return view("bulletin.bulletin", compact('data'));
 

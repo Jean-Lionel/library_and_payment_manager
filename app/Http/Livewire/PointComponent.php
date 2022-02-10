@@ -146,15 +146,21 @@ class PointComponent extends Component
 					// code...
 					//dd($entry['point_obtenu']);
 						$entry = array_merge($entry,$metaData);
+						if($check){
+							$check->update($entry);
+						}else{
+							PointEvaluation::create($entry);
+						}
 						
 					}else{
 						$entry['point_obtenu'] = NULL;
+						if($check){
+							$check->update($entry);
+						}else{
+							PointEvaluation::create($entry);
+						}
 					}
-					if($check){
-						$check->update($entry);
-					}else{
-						PointEvaluation::create($entry);
-					}
+					
 
 				}
 				

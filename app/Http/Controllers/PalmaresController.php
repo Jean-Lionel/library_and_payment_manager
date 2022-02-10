@@ -83,7 +83,7 @@ public static function get_eleve_en_ordre($all_eleves,$anne_scolaire_id,$trimest
    return $order;
 }
 
-public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
+public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id){
 
    $c = Classe::findOrFail($classe_id);
       $ponderation_total = $c->ponderation();
@@ -117,7 +117,7 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
      } 
       //dd($palmares);
 
-     $palmares = self::getDataOrderby($palmares);
+     $palmares = self::getDataOrderby($palmares, $trimestre_id);
      //$palmares = collect($palmares)->sort();
 
      return [
@@ -129,7 +129,7 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
    ];
 }
 
-private static function getDataOrderby($palmares)
+private static function getDataOrderby($palmares, $trimestre_id)
 {
    // Place TRIMESTRE 1...
    $trimestre_1 =  collect($palmares)->SortByDesc('trimestre.1.pourcentage')->values();
@@ -149,8 +149,16 @@ private static function getDataOrderby($palmares)
 
    // PLACE DES TRAVAUX JOURNALIER
    $data = [];
+   // Par defaut on arrage les données par le premier trimestre
+   $sorterDBy = $trimestre_1;
 
-   foreach ($trimestre_1 as $key => $eleve){
+   if($trimestre_id == 2)
+      $sorterDBy = $trimestre_2;
+   //Pour la troisième trimestre
+   if($trimestre_id == 3)
+      $sorterDBy = $trimestre_3;
+
+   foreach ($sorterDBy as $key => $eleve){
       $e = $eleve->toArray();
       $trim_1 = $trimestre_1->where('id', $eleve->id)->keys();
       $trim_1_tj = $trimestre_1_tj->where('id', $eleve->id)->keys();
