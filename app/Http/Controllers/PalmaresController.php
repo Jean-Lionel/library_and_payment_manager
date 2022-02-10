@@ -109,11 +109,9 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
             $t[$i]['pourcentage'] = getPourcentage( $t[$i]['total'], $ponderation_total['total']);
             $t[$i]['place'] = [];
          }
-
         $eleve->trimestre = $t;
         $eleve->courses_listes = $t[1]['courses_listes'];
 
-         //dd($eleve);
         $palmares[] = $eleve;
      } 
       //dd($palmares);
@@ -125,29 +123,69 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id){
       'palmares' => $palmares,
       'courses' => $courses,
       'nombres_cours' => $nombres_cours,
-      'ponderation_total' => $ponderation_total
+      'ponderation_total' => $ponderation_total,
+      'classe' => $c,
    ];
 }
 
 private static function getDataOrderby($palmares)
 {
-   // code...
-   $trimestre_1 =  collect($palmares)->SortByDesc('trimestre.1.pourcentage')->toArray();
-   $trimestre_2 =  collect($palmares)->SortByDesc('trimestre.2.pourcentage')->toArray();
-   $trimestre_3 =  collect($palmares)->SortByDesc('trimestre.3.pourcentage')->toArray();
+   // Place TRIMESTRE 1...
+   $trimestre_1 =  collect($palmares)->SortByDesc('trimestre.1.pourcentage')->values();
+   $trimestre_1_tj =  collect($palmares)->SortByDesc('trimestre.1.points_total.INTERROGATION')->values();
+   $trimestre_1_ex =  collect($palmares)->SortByDesc('trimestre.1.points_total.EXAMEN')->values();
 
-   //dd( $trimestre_1 );
+   // PLACE TRIMESTRE II
+   $trimestre_2 =  collect($palmares)->SortByDesc('trimestre.2.pourcentage')->values();
+    $trimestre_2_tj =  collect($palmares)->SortByDesc('trimestre.2.points_total.INTERROGATION')->values();
+   $trimestre_2_ex =  collect($palmares)->SortByDesc('trimestre.2.points_total.EXAMEN')->values();
 
+   // PLACE TRIMESTRE III
+   $trimestre_3 =  collect($palmares)->SortByDesc('trimestre.3.pourcentage')->values();
+
+   $trimestre_3_tj =  collect($palmares)->SortByDesc('trimestre.3.points_total.INTERROGATION')->values();
+   $trimestre_3_ex =  collect($palmares)->SortByDesc('trimestre.3.points_total.EXAMEN')->values();
+
+   // PLACE DES TRAVAUX JOURNALIER
    $data = [];
-   $place = 1;
-
 
    foreach ($trimestre_1 as $key => $eleve){
-      $eleve['trimestre'][1]['place'] = $place;
-      $place++;
-      $data[] = $eleve;
-   }
+      $e = $eleve->toArray();
+      $trim_1 = $trimestre_1->where('id', $eleve->id)->keys();
+      $trim_1_tj = $trimestre_1_tj->where('id', $eleve->id)->keys();
+      $trim_1_ex = $trimestre_1_ex->where('id', $eleve->id)->keys();
+      // Définition des places 
+      /*
+      Par défaut le tableau commence par zéro on ajouter donc 1 pour trouve la place
+      */
+      $e['trimestre'][1]['place'] = [
+         'tj' => $trim_1_tj->get(0) + 1,
+         'ex' => $trim_1_ex->get(0) + 1,
+         'total' => $trim_1->get(0) + 1,
+      ];
 
+      $trim_2 = $trimestre_2->where('id', $eleve->id)->keys();
+      $trim_2_tj = $trimestre_2_tj->where('id', $eleve->id)->keys();
+      $trim_2_ex = $trimestre_2_ex->where('id', $eleve->id)->keys();
+
+      $e['trimestre'][2]['place'] = [
+         'tj' => $trim_2_tj->get(0) + 1,
+         'ex' => $trim_2_ex->get(0) + 1,
+         'total' => $trim_2->get(0) + 1,
+      ];
+
+      $trim_3 = $trimestre_3->where('id', $eleve->id)->keys();
+      $trim_3_tj = $trimestre_3_tj->where('id', $eleve->id)->keys();
+      $trim_3_ex = $trimestre_3_ex->where('id', $eleve->id)->keys();
+
+      $e['trimestre'][3]['place'] = [
+         'tj' => $trim_3_tj->get(0) + 1,
+         'ex' => $trim_3_ex->get(0) + 1,
+         'total' => $trim_3->get(0) + 1,
+      ];
+      
+      $data[] = new Eleve($e);
+   }
   
    return collect($data);
 }

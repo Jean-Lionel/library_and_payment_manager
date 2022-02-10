@@ -38,7 +38,7 @@ function sumColumn($input, $column_key){
 
 	$res = array_sum(array_column($input, $column_key));
 
-	return getPrice($res, "",0);
+	return afficherPoint($res);
 }
 
 function addTwoNumber($a , $b){

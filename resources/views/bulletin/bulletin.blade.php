@@ -51,8 +51,8 @@
 			</tr>
 			<tr>
 				<th colspan="3" class="text-left">
-					Classe : {{ $eleve->classe->name }} <br>
-					Nombres des élèves : {{$eleve->classe->nombre_eleves() }} 
+					Classe : {{ $data['classe']->name }} <br>
+					Nombres des élèves : {{$data['classe']->nombre_eleves() }} 
 				</th>
 				<th rowspan="2">
 					H/S
@@ -200,8 +200,14 @@
 					<th>{{ sumColumn($categoriesTotal, 'max_tj_examen') }}</th>
 					{{-- I TRIMESTRE --}}
 
-					<th>
-						
+					<th> 
+						{{ sumColumn($categoriesTotal, 'interrogation') }}
+					</th>
+					<th> 
+						{{ sumColumn($categoriesTotal, 'examen') }}
+					</th>
+					<th> 
+						{{ sumColumn($categoriesTotal, 'total') }}
 					</th>
 
 					@endif
@@ -255,24 +261,14 @@
 					<td></td>
 					<td></td>
 					<!-- 	I TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<th>
-						{!! affichePlace(++$loop->index, $eleve->is_a_girl()) !!}
-					</th>
-					<!-- 	II TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-					<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-					<!-- 	III TRIMESTRE -->
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+
+					@foreach ($eleve->trimestre as $element)
+						{{-- expr --}}
+						<td>{!! affichePlace($element['place']['tj'], $eleve->is_a_girl()) !!}</td>
+						<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
+						<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
+						
+					@endforeach
 				</tr>
 				<tr>
 					<td></td>
