@@ -106,7 +106,7 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
             $t[$i] = $eleve->getPointTatalObtenue($eleve->id,$courses,$i, 
                $annee_scolaire_id);
            
-            $t[$i]['isNonClasse'] = $eleve->is_nonClasse($i, $annee_scolaire_id);
+            $t[$i]['isNonClasse'] = $eleve->is_nonClasse($i, $annee_scolaire_id) ? 1 : 0;
             $t[$i]['pourcentage'] = getPourcentage( $t[$i]['total'], $ponderation_total['total']);
             $t[$i]['place'] = [];
          }
@@ -115,7 +115,7 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
 
         $palmares[] = $eleve;
      } 
-      //dd($palmares);
+     // dd($palmares);
 
      $palmares = self::getDataOrderby($palmares, $trimestre_id);
      //$palmares = collect($palmares)->sort();
@@ -132,7 +132,13 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
 private static function getDataOrderby($palmares, $trimestre_id)
 {
    // Place TRIMESTRE 1...
-   $trimestre_1 =  collect($palmares)->SortByDesc('trimestre.1.pourcentage')->values();
+   $trimestre_1 = collect($palmares)->SortByDesc('trimestre.1.pourcentage')->values();
+   /*$trim1 = collect($palmares)->groupBy('trimestre.1.isNonClasse');
+
+   $trimestre_1 =  $strim1[0]->SortByDesc('trimestre.1.pourcentage')->values();
+   dd($trimestre_1->toArray());*/
+
+
    $trimestre_1_tj =  collect($palmares)->SortByDesc('trimestre.1.points_total.INTERROGATION')->values();
    $trimestre_1_ex =  collect($palmares)->SortByDesc('trimestre.1.points_total.EXAMEN')->values();
 

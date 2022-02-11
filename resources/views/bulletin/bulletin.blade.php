@@ -223,9 +223,13 @@
 							{{ afficherPoint($element['categoriesTotal'][$categorie_name][0]['total']) }}
 						</th> 
 						@endforeach
-
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 
 						@endif
+
 						
 					</tr>
 					@endforeach
@@ -243,11 +247,25 @@
 
 						@foreach ($eleve->trimestre as $el)
 						{{-- expr --}}
-						<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
+						@if (!$el['isNonClasse'])
+							<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
 						<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
 						<th>{{ afficherPoint($el['total'])}}</th>
+						@else
+						<th></th>
+						<th></th>
+						<th></th>
+						
+
+						@endif
+						
 						@endforeach
 						{{-- empty expr --}}
+
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 						
 						
 						<!-- 	III TRIMESTRE -->
@@ -263,10 +281,21 @@
 						<!-- 	I TRIMESTRE -->
 						@foreach ($eleve->trimestre as $el)
 						{{-- expr --}}
+						@if (!$el['isNonClasse'])
 						<th> {{afficherPoint($el['points_total']['POURCENTAGE_INTERROGATION'])}}</th>
 						<th> {{afficherPoint($el['points_total']['POURCENTAGE_EXAMEN'])}}</th>
 						<th>{{ afficherPoint($el['pourcentage'])}}</th>
+						@else
+						<th></th>
+						<th></th>
+						<th></th>
+						@endif
 						@endforeach
+
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 					</tr>
 					<tr>
 						<td></td>
@@ -279,11 +308,24 @@
 
 						@foreach ($eleve->trimestre as $element)
 						{{-- expr --}}
+						@if (!$element['isNonClasse'])
 						<td>{!! affichePlace($element['place']['tj'], $eleve->is_a_girl()) !!}</td>
 						<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
 						<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
+						@else
+
+						<th></th>
+						<th></th>
+						<th></th>
+
+						@endif
 						
 						@endforeach
+
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 					</tr>
 					<tr>
 						<td></td>
