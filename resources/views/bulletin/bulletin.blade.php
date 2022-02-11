@@ -193,8 +193,11 @@
 					<th class="text-left">TOTAL</th>
 					@php
 					$categoriesTotal = array_values($coursListe)[0];
+
+					$maxima_annuel = sumColumn($categoriesTotal, 'max_tj_examen') * 3;
 					@endphp
 					{{-- MAXIMA --}}
+
 					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationTJ') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationEx') }}</th>
@@ -203,10 +206,13 @@
 
 					@php
 					$categorie_name = array_keys($coursListe)[0];
+					$total_annuel_categorie = 0;
 					@endphp
 					@foreach ($eleve->trimestre as $element)
 					{{-- expr --}}	
-					
+					@php
+						$total_annuel_categorie += $element['categoriesTotal'][$categorie_name][0]['total'];
+					@endphp
 					
 					<th> 
 						{{ 
@@ -223,9 +229,9 @@
 							{{ afficherPoint($element['categoriesTotal'][$categorie_name][0]['total']) }}
 						</th> 
 						@endforeach
-						<th></th>
-						<th></th>
-						<th></th>
+						<th>{{ afficherPoint($maxima_annuel) }}</th>
+						<th>{{afficherPoint($total_annuel_categorie)}}</th>
+						<th>{{ getPourcentage($total_annuel_categorie,$maxima_annuel) }}</th>
 						<th></th>
 
 						@endif
@@ -313,15 +319,11 @@
 						<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
 						<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
 						@else
-
 						<th></th>
 						<th></th>
 						<th></th>
-
 						@endif
-						
 						@endforeach
-
 						<th></th>
 						<th></th>
 						<th></th>
