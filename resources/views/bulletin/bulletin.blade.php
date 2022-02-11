@@ -250,9 +250,15 @@
 						<th>{{ $data['ponderation_total']['total']}}</th>
 						
 						<!-- 	I TRIMESTRE -->
+						@php
+							$max_total_an = 0;
+						@endphp
 
 						@foreach ($eleve->trimestre as $el)
 						{{-- expr --}}
+						@php
+							$max_total_an  += $el['total'];
+						@endphp
 						@if (!$el['isNonClasse'])
 							<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
 						<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
@@ -268,9 +274,13 @@
 						@endforeach
 						{{-- empty expr --}}
 
-						<th></th>
-						<th></th>
-						<th></th>
+						@php
+							$z = $data['ponderation_total']['total'] * 3;
+						@endphp
+
+						<th>{{$z  }}</th>
+						<th>{{ afficherPoint($max_total_an ) }}</th>
+						<th>{{ getPourcentage( $max_total_an, $z ) }}</th>
 						<th></th>
 						
 						
