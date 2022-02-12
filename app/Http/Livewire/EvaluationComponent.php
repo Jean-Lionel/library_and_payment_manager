@@ -31,10 +31,20 @@ class EvaluationComponent extends Component
 	public $showForm = false;
 	public $identification = null;
 	public $currentAnneScolaire ;
+	public $professeur;
 
 	public function mount(){
-		$this->classes = Classe::all();
-		$this->cours = [];
+		if(auth()->user()->isProfesseur()){
+			 $this->professeur = auth()->user()->professeur;
+			 $levels = $this->professeur->cours->map->level_id;
+
+			$this->classes = Classe::whereIn('level_id',$levels)->get();
+			$this->cours = [];
+		}else{
+			$this->classes = Classe::all();
+			$this->cours = [];
+		}
+		
 		$this->start_date = Carbon::now()->subDays(30);
 		$this->trimestres = Trimestre::all();
 		$this->currentAnneScolaire =  AnneScolaire::latest()->first();
@@ -45,14 +55,12 @@ class EvaluationComponent extends Component
 
     	 if(auth()->user()->isProfesseur()){
            //$prof = auth()->user()->professeur;
-    	 	
+
             $evaluations = Evaluation::where('user_id', auth()->user()->id)->latest()->paginate(10);
         }else{
           $evaluations = Evaluation::latest()->paginate(10);
         }
 
-
-    	
 
         return view('livewire.evaluation-component',[
         	'evaluations' => $evaluations
@@ -60,8 +68,13 @@ class EvaluationComponent extends Component
     }
 
     public function updatedClasseId($classe_id){
-    	$this->cours = Classe::find($classe_id)->courses() ?? [];
-    	
+    	if($this->professeur){
+    		$classe = Classe::find($classe_id);
+    		$this->cours = Cour::where('level_id',$classe->level_id)
+    							->where('professeur_id',$this->professeur->id)->get();
+    	}else{
+    		$this->cours = Classe::find($classe_id)->courses() ?? [];
+    	}
     }
     public function toogleForm(){
     	$this->showForm = true;

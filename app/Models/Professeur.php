@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Level;
 use App\Models\cours;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,10 @@ class Professeur extends Model
     protected $guarded= [];
 
     public function cours(){
+        return $this->hasMany(cour::class);
+    }
 
-        return $this->hasMany(cours::class);
+    public function level(){
+        return $this->hasMany(Level::class);
     }
 }
