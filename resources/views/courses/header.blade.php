@@ -21,7 +21,7 @@
 
 	<a class=" {{ setActiveRoute('bullettin') }}" href="{{ route('bullettin') }}">Bullettin</a>
 	<a class=" {{ setActiveRoute('palmares') }}" href="{{ route('palmares') }}">Palmarès</a>
-	@canany(['is-admin','is-prefet'])
+	@canany(['is-admin','is-prefetro'])
 	<a class="{{ setActiveRoute('professeurs') }}" href="{{ route('professeurs') }}"><i class=" 	fa fa-user-md mr-2"></i>Professeur</a>
 	@endcanany
 </div>

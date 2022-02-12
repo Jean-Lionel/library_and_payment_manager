@@ -20,6 +20,7 @@ class CourseLivewire extends Component
     public $credit;
     public $status = false;
 	public $classe_id;
+    public $showForm = false;
     public $conduite;
     public $level_id;
     public $category_id;
@@ -78,6 +79,7 @@ class CourseLivewire extends Component
         }else{
             Cour::create($data);
         }
+        $this->showForm = false;
 
     	$this->reset();
     }
@@ -97,5 +99,6 @@ class CourseLivewire extends Component
         $this->conduite = $course->conduite;
         $this->ponderation_compentance = $course->ponderation_compentance;
         $this->ponderation_examen = $course->ponderation_examen;
+        $this->showForm = true;
     }
 }

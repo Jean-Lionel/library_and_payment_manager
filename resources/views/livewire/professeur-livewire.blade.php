@@ -34,10 +34,17 @@
 				<div class="form-group">
 					<label for="">Téléphone</label>
 					<input class="form-control" type="text" wire:model="telephone" name="">
+					@error('telephone')
+					<span class="error text-danger">{{ $message }}</span>
+					@enderror
+
 				</div>
 				<div class="form-group">
 					<label for="">Email</label>
 					<input class="form-control" type="email" wire:model="email" name="">
+					@error('email')
+					<span class="error text-danger">{{ $message }}</span>
+					@enderror
 				</div>
 
 				<div class="form-group">

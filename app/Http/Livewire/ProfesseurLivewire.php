@@ -38,7 +38,7 @@ class ProfesseurLivewire extends Component
 public $rules = [
    'name' => 'required',
    'telephone' => 'required|min:8',
-   'email' => 'required|user:unique',
+   'email' => 'required|email|unique:professeurs',
 ];
 
 public function saveProffesseur()
