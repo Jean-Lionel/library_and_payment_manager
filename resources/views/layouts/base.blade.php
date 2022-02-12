@@ -48,7 +48,7 @@
 					</li>
 					@endcanany
 
-					@canany(['is-admin','is-prefet'])
+					@canany(['is-admin','is-prefet','is-professeur'])
 					<li class="{{ setActiveRoute('cours.index') }}">
 						<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3 text-light"></span> Cours</a>
 					</li>
