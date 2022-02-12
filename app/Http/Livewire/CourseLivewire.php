@@ -36,7 +36,17 @@ class CourseLivewire extends Component
         $classes = Classe::all();
         $levels = Level::all();
         $categories = CourseCategory::all();
-        $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10);
+        
+
+        if(auth()->user()->isProfesseur()){
+
+           $prof = auth()->user()->professeur;
+
+            $courses =  Cour::where('name', 'like', '%'. $this->search .'%')
+                            ->where('professeur_id',  $prof->id )->latest()->paginate(10);
+        }else{
+           $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10); 
+        }
 
         return view('livewire.course-livewire',[
             'professeurs' => $professeurs,

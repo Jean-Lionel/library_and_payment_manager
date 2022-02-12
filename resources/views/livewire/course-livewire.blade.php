@@ -114,22 +114,27 @@
                <input type="text" wire:model="search" placeholder="Rechercher">
             </div>
             <div class="col text-right">
-                <button class="btn btn-sm btn-info" wire:click="$set('showForm', true)">
-                    <i class="fa fa-plus"></i>
+                @canany(['is-admin','is-prefet'])
+                    <button class="btn btn-sm btn-info" wire:click="$set('showForm', true)">
+                        <i class="fa fa-plus"></i>
                 </button>
+                @endcanany
             </div>
         </div>
        
         <table class="table tab-content table-sm table-hover">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>NOM DU COURS</th>
                     <th>CATEGORIE</th>
                     <th>PONDERATION</th>
                     <th>CREDIT / HS</th>
                     <th>NIVEAU</th>
                     <th>PROFESSEUR</th>
+                    @canany(['is-admin','is-prefet'])
                     <th>ACTION</th>
+                    @endcanany
                 </tr>
                 
             </thead>
@@ -138,14 +143,21 @@
             @foreach ($courses as $course)
             {{-- expr --}}
             <tr>
+                <td>{{ ++$loop->index}}</td>
                 <td>{{ $course->name }}</td>
                 <td>{{ $course->category->name ?? "" }}</td>
                 <td>{{ $course->ponderation }}</td>
                 <td>{{ $course->credit }}</td>
                 <td>{{ $course->level->name ?? "" }}</td>
                 <td>{{ $course->professeur->name ?? "" }}</td>
-                <td><button class="btn-info btn-sm" wire:click="updateCourse({{ $course->id }})">
-                     Modifier</button></td>
+                
+                    @canany(['is-admin','is-prefet'])
+                    <td>
+                    <button class="btn-info btn-sm" wire:click="updateCourse({{ $course->id }})">
+                     Modifier</button>
+                     </td>
+                     @endcanany
+                 
             </tr>
             @endforeach 
             </tbody>
