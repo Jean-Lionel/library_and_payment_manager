@@ -42,7 +42,17 @@ class EvaluationComponent extends Component
 
 	public function render()
     {
-    	$evaluations = Evaluation::latest()->paginate(10);
+
+    	 if(auth()->user()->isProfesseur()){
+           //$prof = auth()->user()->professeur;
+    	 	
+            $evaluations = Evaluation::where('user_id', auth()->user()->id)->latest()->paginate(10);
+        }else{
+          $evaluations = Evaluation::latest()->paginate(10);
+        }
+
+
+    	
 
         return view('livewire.evaluation-component',[
         	'evaluations' => $evaluations
