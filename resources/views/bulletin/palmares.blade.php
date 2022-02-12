@@ -65,10 +65,11 @@
 						$courseCategorie)
 					{{-- expr --}}
 					@foreach ($courseCategorie as $element)
-						<th>{{ $element->name }}</th>
+						<th>{{ substr($element->name, 0,4) }}.</th>
 					@endforeach
 					
 					@endforeach
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -96,12 +97,21 @@
 					{{-- expr --}}
 					@foreach ($coursesCategories as $courses)
 						@foreach ($courses as $course)
-							
-							<td>{{ afficherPoint($course['profondeur_echec']) }}</td>
+							@if ($course['profondeur_echec'] <= -0.5 )
+								{{-- expr --}}
+								
+								<td> 
+									
+								{{ afficherPoint($course['profondeur_echec']) }}</td>
+							@else
+								<td></td>
+							@endif
+						
 						@endforeach
 					@endforeach
-					
+										
 					@endforeach
+
 					
 				</tr>
 				@endforeach
