@@ -16,6 +16,7 @@ class CreateProfesseursTable extends Migration
         Schema::create('professeurs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreign_id('user_id')->nullable();
             $table->string('telephone');
             $table->timestamps();
             $table->softDeletes();
