@@ -23,6 +23,7 @@ class RapportPaiment extends Component
 	public $eleve;
 	public $classe;
 	public $annee_scolaire;
+	public $minMontant = 1000;
 	public $anneScolaire;
 	public $trimestre = "PREMIER TRIMESTRE";
     public $category_paiement = "MINERVAL";
@@ -51,6 +52,7 @@ class RapportPaiment extends Component
 		$type_paiement =  $this->type_paiement;
         $annee_scolaire =  $this->annee_scolaire;
         $trimestre =  $this->trimestre;
+        $minMontant =  $this->minMontant;
         $category_paiement =  $this->category_paiement; // MINERVAL OU CONTRIBUTION
 
         
@@ -71,15 +73,15 @@ class RapportPaiment extends Component
     					;
 
     					})->whereIn('eleves.classe_id' ,$class_id)
-    					  ->where(function($query) use ($type_paiement){
+    					  ->where(function($query) use ($type_paiement, $minMontant){
 
     					  	if($type_paiement == 'PAYE'){
-    					  		$query->where('paiments.amount', '>=', 7000);
+    					  		$query->where('paiments.amount', '>=',  $minMontant);
     					  	}
 
     					  	if($type_paiement == 'NON PAYE')
     					  	{
-    					  		 $query->where('paiments.amount', '<', 7000)
+    					  		 $query->where('paiments.amount', '<',  $minMontant)
     					  		 		->orWhere('paiments.amount', '=', NULL);
     					  	}
     					  	

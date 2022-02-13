@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-3">
             <label for="">SECTION</label>
-            <select name="" wire:model="selectedSection" id="" class="form-control">
+            <select name="" wire:model="selectedSection" id="" class="form-control form-control-sm">
                 
                 <option value="">Choisissez une section</option>
 
@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for=""> CLASSE </label>
 
-                <select name="" wire:model="selectedClasse" id="" class="form-control">
+                <select name="" wire:model="selectedClasse" id="" class="form-control form-control-sm">
                     <option value="">Choisissez une classe</option>
 
                     @foreach($classes as $classe)
@@ -30,7 +30,7 @@
         <div class="col-md-3">
             <label for="">CATEGORIE</label>
 
-        	<select wire:model="type_paiement" id="" class="form-control">
+        	<select wire:model="type_paiement" id="" class="form-control form-control-sm">
         		<option value="">Choisissez ...</option>
         		<option value="PAYE">Ceux qui ont payé</option>
         		<option value="NON PAYE">Ceux qui n'ont pas payé</option>
@@ -40,7 +40,8 @@
           <div class="col-md-3">
             <label for="">TYPE DE PAIMENENT</label>
 
-            <select wire:model="category_paiement" id="" class="form-control">
+            <select wire:model="category_paiement" id="" 
+            class="form-control form-control-sm">
                 <option value="MINERVAL" >MINERVAL</option>
                 <option value="CONTRIBUTION" selected="">CONTRIBUTION</option>
                
@@ -50,7 +51,7 @@
 
         <div class="col-md-3">
             <label for="">Année scolaire</label>
-             <select wire:model="annee_scolaire" name="" id="" class="form-control">
+             <select wire:model="annee_scolaire" name="" id="" class="form-control form-control-sm">
 
                 @forelse ($anneScolaire as $key => $anne)
                  <option value="{{ $anne->name }}" @if($key == 0) selected @endif >{{$anne->name}}</option>
@@ -64,7 +65,8 @@
         <div class="col-md-3">
             <label for="">TRIMESTRE</label>
 
-            <select name="" wire:model="trimestre" id="" class="form-control">
+            <select name="" wire:model="trimestre" id="" 
+            class="form-control form-control-sm">
                 
                 <option value="PREMIER TRIMESTRE">I ère TRIMESTRE</option>
                 <option value="DEUXIEME TRIMESTRE">II ère TRIMESTRE</option>
@@ -72,12 +74,15 @@
             </select>
             
         </div>
-
+        <div class="col-md-3">
+            <label for="">Minimum</label>
+            <input type="text" class="form-control form-control-sm" wire:model="minMontant">
+        </div>
       
         <div class="col-md-3">
             <label for="">Rechercher </label>
 
-            <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control">
+            <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control form-control-sm">
         </div>
 
 
@@ -160,6 +165,7 @@
                     <td>{{ strtoupper($paiement->first_name)  .'  '. 
                 ucwords(strtolower($paiement->last_name)) }}</td>
                     <td>{{ $paiement->amount }}</td>
+                    <td></td>
 
                 </tr>
 

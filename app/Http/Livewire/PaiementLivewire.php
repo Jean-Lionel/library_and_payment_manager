@@ -19,6 +19,7 @@ class PaiementLivewire extends Component
 	public $showFormulaire = false ;
 	public $compteName;
 	public $eleve;
+	public $search;
 
 	//Les attributs 
 
@@ -47,8 +48,15 @@ class PaiementLivewire extends Component
 	
 	public function render()
 	{
-		$this->paiements = Paiment::sortable()->latest()->paginate(20);
+		$s = $this->search;
+		$this->paiements = Paiment::where(function($q) use ($s){
+			if($s != ""){
+				$q->where('eleve_id', $s);
+			}
+		})->sortable()->latest()->paginate(20);
 		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
+
+
 		return view('livewire.paiement-livewire',
 		[
 			'paiements' => $this->paiements

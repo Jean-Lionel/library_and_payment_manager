@@ -16,7 +16,7 @@
 							<button onclick="clickButton('main-content')" class="btn p-1 m-0 border border-dark"><span style="color:green">🖨</span> Imprimer</button>
 							<button wire:click="closeBill" class="btn p-1 m-0 border border-dark"> ❌ Fermer</button>
 						</div>
-						<div class="main-content jumbotron" id="main-content">
+						<div class="main-content jumbotron d-none" id="main-content">
 							<header>
 								<h4>ECOLE : XXXX XXXX</h4>
 								<h4>A/S : {{ $facture->annee_scolaire ?? "" }}</h4>
@@ -179,8 +179,14 @@
 
 		@if($paiements->count() >0 && $ordre)
 
-		<table class="table table-sm">
+		<div>
+			<div class="col-md-4">
+				<input type="text" wire:model="search" placeholder="Rechercher" class="form-control form-control-sm">
+			</div>
+			
+		</div>
 
+		<table class="table table-sm">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -242,13 +248,16 @@ document.addEventListener('DOMContentLoaded', function () {
  	let number_letter = NumberToLetter(paiement.amount);
 
  	@this.call('printBill',paiement.id,number_letter)
+
+ 	//clickButton('main-content')
  	
  })
 
 });
 function clickButton(el){
 	var divContents = document.getElementById(el).innerHTML;
-            var a = window.open('', '', 'height=auto, width=20vw');
+
+            var a = window.open('', '', 'height=auto, width=20');
             a.document.write('<html>');
             a.document.write('<head>');
             a.document.write('<link rel="stylesheet" href="{{asset("css/facture.css")}}"/>');
