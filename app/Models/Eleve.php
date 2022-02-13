@@ -149,7 +149,8 @@ foreach ($courses as $key => $coursCategorie) {
             'poderation' => $cours->ponderationTotal,
             'total' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION']),
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
-            'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)), 
+            'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)),
+            'is_echec' => ($v < ( $cours->ponderationTotal / 2))
         ];
 
         $total_tj += $c['interrogation'];

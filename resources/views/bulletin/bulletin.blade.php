@@ -6,6 +6,10 @@
 	tr,td,th,table{
 		border: 1px solid black;
 	}
+	.is_echec{
+		color: red;
+		text-decoration: underline;
+	}
 	td{
 		text-align: center;
 	}
@@ -147,12 +151,9 @@
 				{{-- 	<td>{{ afficherPoint($course['interrogation']) }}</td>
 					<td>{{ afficherPoint($course['examen']) }}</td>
 					<td>{{ afficherPoint($course['total']) }}</td> --}}
-
 					@php
 					$cours_total_annuel = 0;
-
 					@endphp
-
 					@foreach ($eleve->trimestre as $trimestre)
 					@php
 					$cours_categories_points = array_values($trimestre['courses_listes'][$key])[0];
@@ -163,14 +164,18 @@
 							break;
 						}
 					}
-
 					$cours_total_annuel  += $getCourse['total'];
 					@endphp
 					<td>
 						{{	afficherPoint($getCourse['interrogation'])}}
 					</td>
 					<td>{{	afficherPoint($getCourse['examen'])}} </td>
-					<td>{{	afficherPoint($getCourse['total'])}}</td>
+					<td 
+						@if ($getCourse['is_echec'])
+							{{-- expr --}}
+							class="is_echec"
+						@endif
+					>{{	afficherPoint($getCourse['total'])}}</td>
 					@endforeach
 					{{--  --}}
 					<td class="bold">
@@ -381,6 +386,10 @@
 					</tr>
 				</tbody>
 			</table>
+
+			<div>
+				
+			</div>
 
 			<div class="pagebreak pied_page">
 				

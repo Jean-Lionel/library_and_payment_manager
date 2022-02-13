@@ -137,6 +137,10 @@ class EvaluationComponent extends Component
 		$this->showForm = true;
 	}
 
+	public function annulerEvalution(){
+		
+	}
+
 
 	public function ajoutPoint($id){
 		dd($id);
