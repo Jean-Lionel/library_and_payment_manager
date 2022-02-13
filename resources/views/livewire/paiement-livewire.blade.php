@@ -4,7 +4,7 @@
 	<div class="row mb-3">
 		<div class="col-md-12 row d-flex justify-content-between">
 			<button wire:click="showForm" class="btn btn-primary p-1"> Nouveau Paiement</button>
-			<button wire:click="showEnOrdre" class="btn btn-primary p-1"> Ceux qui ont Payé</button>
+			<button wire:click="showEnOrdre" class="btn btn-primary p-1"> Historique de paiements</button>
 		</div>
 
 		{{-- Impression du recu --}}
@@ -246,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function () {
  })
 
 });
-<<<<<<< HEAD
 function clickButton(el){
 	var divContents = document.getElementById(el).innerHTML;
             var a = window.open('', '', 'height=auto, width=20vw');
@@ -259,7 +258,8 @@ function clickButton(el){
             a.document.write('</body>');
             a.document.close();
             a.print();
-=======
+ }
+
 function clickButton(){
 	printPage('main-content');
 		// printJS({
@@ -267,7 +267,6 @@ function clickButton(){
 		// 	css : "",
 		// 	type : 'html'
 		// });
->>>>>>> 417531339f12d04e0a0e0df8c2f89ec47a4215b9
 }
 </script>
 
