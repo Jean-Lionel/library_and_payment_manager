@@ -133,7 +133,11 @@
     					<td>{{ $evaluation->ponderation }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>
-    						<button wire:click="modifierEvaluation({{$evaluation->id }})">
+    						
+    						<button class="btn-danger" wire:click="annulerEvalution({{ $evaluation->id }})">
+    							<i class="fa fa-remove"></i>
+    						</button>
+    						<button title="Modifier" wire:click="modifierEvaluation({{$evaluation->id }})">
     							<i class="fa fa-edit"></i>
     						</button>
     						<a href="{{ route('add_point',$evaluation->id ) }}" class="btn btn-primary" title="Ajout des points des élèves">
@@ -153,3 +157,7 @@
     </div>
     @endif
 </div>
+
+
+
+

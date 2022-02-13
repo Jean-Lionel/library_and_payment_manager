@@ -19,7 +19,7 @@
         <div class="form-group col-md-3">
         	<label for="">SECTION</label>
 
-        	<select name="section_id" id="section_id" class="form-control">
+        	<select name="section_id" required id="section_id" class="form-control">
         		<option value=""></option>
         		@foreach ($sections as $section)
         			{{-- expr --}}
@@ -35,7 +35,7 @@
         <div class="form-group col-md-3">
         	<label for="">Classe</label>
 
-        	<select name="classe_id" id="classe_id" class="form-control">
+        	<select name="classe_id" required id="classe_id" class="form-control">
         		<option></option>
         		@foreach ($classes as $classe)
         			{{-- expr --}}
@@ -50,7 +50,7 @@
 
         	<label for="">Cours</label>
 
-        	<select name="cours_id" id="" class="form-control">
+        	<select name="cours_id" required id="" class="form-control">
         		<option value=""></option>
         		@foreach ($choosedClasse->courses() ?? [] as $cour)
         			<option value="{{ $cour->id }}">{{ $cour->name }}</option>
@@ -61,7 +61,7 @@
          <div class="form-group col-md-3">
         	<label for="">TRIMESTRE</label>
 
-        	<select name="trimestre" id="trimestre" class="form-control">
+        	<select name="trimestre" required id="trimestre" class="form-control">
         		<option value=""></option>
         		@foreach($trimestres as $trimestre)
         		<option value="{{ $trimestre->id }}">{{ $trimestre->name }}</option>
@@ -75,7 +75,7 @@
         <div class="form-group col-md-3">
         	<label for="">Année Scolaire</label>
 
-        	<select name="annee_scolaire" id="annee_scolaire" class="form-control">
+        	<select name="annee_scolaire" required id="annee_scolaire" class="form-control">
         		<option value=""></option>
         		@forelse ($annee_scolaires as $annee_scolaire)
         			<option value="{{ $annee_scolaire->id }}">{{ $annee_scolaire->name }}</option>

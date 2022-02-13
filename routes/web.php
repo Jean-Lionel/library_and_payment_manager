@@ -19,6 +19,7 @@ use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
+use App\Http\Livewire\NotificationSweetAlert;
 use App\Http\Livewire\VenteLivewire;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('notification-sweetalert', NotificationSweetAlert::class);
 
 Route::get('/', function () {   
     return view('auth.login');

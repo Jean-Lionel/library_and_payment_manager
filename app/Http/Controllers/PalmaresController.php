@@ -53,8 +53,6 @@ class PalmaresController extends Controller
         $eleve->points_total = $v['points_total'];
         $eleve->pourcentage = getPourcentage($v['total'], $ponderation_total['total']) ;
 
-
-
         $palmares[] = $eleve;
      } 
       //dd($palmares);
