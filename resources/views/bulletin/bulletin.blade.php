@@ -236,7 +236,13 @@
 						@endforeach
 						<th>{{ afficherPoint($maxima_annuel) }}</th>
 						<th>{{afficherPoint($total_annuel_categorie)}}</th>
-						<th>{{ getPourcentage($total_annuel_categorie,$maxima_annuel) }}</th>
+						<th
+						@if (getPourcentage($total_annuel_categorie,$maxima_annuel) < 50 )
+							{{-- expr --}}
+							class="is_echec"
+						@endif
+
+						>{{ getPourcentage($total_annuel_categorie,$maxima_annuel) }}</th>
 						<th></th>
 
 						@endif
@@ -285,7 +291,15 @@
 
 						<th>{{$z  }}</th>
 						<th>{{ afficherPoint($max_total_an ) }}</th>
-						<th>{{ getPourcentage( $max_total_an, $z ) }}</th>
+						<th 
+
+						@if (getPourcentage( $max_total_an, $z ) < 50)
+							{{-- expr --}}
+							class="is_echec"
+						@endif
+						>
+						{{ getPourcentage( $max_total_an, $z ) }}
+						</th>
 						<th></th>
 						
 						

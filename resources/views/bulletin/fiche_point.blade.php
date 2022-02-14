@@ -1,4 +1,3 @@
-
 <style>
 	table{
 		border-collapse: collapse;
@@ -33,7 +32,7 @@
 <div>
 	<div class="header">
 			<div class="header-left">
-				<p><b>CLASSE : {{  $cours->classe->name}}</b></p>
+				<p><b>CLASSE : {{  $cours->classe->name ?? ''}}</b></p>
 				<p><b>BRANCHE : {{ $cours->name }}</b></p>
 				<p><b>ANNEE SCOLAIRE : 2021-2022</b></p>
 			</div>
@@ -87,7 +86,7 @@
 							{{ $cours->ponderation }}
 						</td>
 						<td>
-							{{ $cours->ponderation_compentance }}
+							{{ afficherPoint($cours->ponderation_compentance) }}
 						</td>
 						<td>
 							{{ $cours->ponderation_examen }}
@@ -103,7 +102,7 @@
 							   	
 							   	@if ($p != 0)
 							   		{{-- expr --}}
-							   		<td>{{ getPrice($p,'',1) }}</td>
+							   		<td>{{ afficherPoint($p) }}</td>
 							   	@else
 							   	    <td></td>
 							   	@endif
@@ -113,9 +112,9 @@
 						@endforeach
 
 						<td>{{ $max_total * 3 }}</td>
-						<td>{{ getPrice($el['total_annuel'],'',1) }}</td>
+						<td>{{ afficherPoint($el['total_annuel']) }}</td>
 						<td>
-							{{ getPrice($el['total_annuel'] * 100 / 
+							{{ afficherPoint($el['total_annuel'] * 100 / 
 							($max_total * 3))}}
 						</td>
 
