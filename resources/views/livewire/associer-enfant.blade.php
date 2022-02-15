@@ -27,8 +27,24 @@
         <div class="col-md-2">
             <input type="text"  wire:model="searchKey" placeholder="Rechercher ici " class="form-control form-control-sm">
         </div>
-        <div class="col-md-3">
-            {{ $eleves}}
+        <div class="col-md-6">
+            <ul class="table-hover table-striped">
+              @foreach ( $eleves as $element)
+                   <li class="d-flex ">
+                        <span class="mr-3">{{ $element->id}}</span>
+                       <span class="mr-3">{{ $element->fullName}}</span>
+                       @if ($element->parent_id)
+                           {{-- expr --}}
+                       @else
+                         <span wire:click="assosierParent({{ $element->id}})" style="cursor:pointer;" class="btn-link">Associer</span>
+                       @endif
+                      
+                      
+                   </li>
+               @endforeach
+                
+            </ul>
+          
         </div>
 
     </div>

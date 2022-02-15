@@ -30,11 +30,10 @@ class AssocierEnfant extends Component
                             if($q){
                                 $query->where('first_name','LIKE','%'.$q.'%')
                                       ->orWhere('last_name','like', '%'.$q.'%')
-                                   ; 
+                                      ->orWHere('id',$q); 
                             } 
 
-                        })
-                        ->paginate(4);
+                        })->take(2)->get();
 
         return view('livewire.associer-enfant',[
             'eleves' => $eleves
@@ -45,7 +44,16 @@ class AssocierEnfant extends Component
     {
         $section = Section::find($section_id);
         $this->classes = $section->classes ?? collect();
-
+        $this->render();
     }
+
+    public function assosierParent($eleve_id){
+       
+        $eleve = Eleve::findOrFail($eleve_id);
+        $eleve->parent_id =  $this->parent;
+        $eleve->save();
+    }
+
+     
 
 }

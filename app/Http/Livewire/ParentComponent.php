@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Eleve;
 use App\Models\EleveParent;
-
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -67,5 +67,11 @@ class ParentComponent extends Component
 
     public function choosedParent($id){
         $this->selectedParent = $id;
+    }
+
+   public function supprimerEnfant($id){
+        $eleve = Eleve::findOrFail($id);
+        $eleve->parent_id =  NULL;
+        $eleve->save();
     }
 }

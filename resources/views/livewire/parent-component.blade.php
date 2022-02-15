@@ -86,7 +86,20 @@
                         <td>{{ $parent->lastName }}</td>
                         <td>{{ $parent->telephone }}</td>
                         <td>{{ $parent->email }}</td>
-                        <td></td>
+                        <td>
+                            <ul>
+                                @foreach ( $parent->enfant as $enfant)
+                                    <li class="d-flex justify-content-between">
+                                        <span>
+                                            <a href="#"  wire:click.prevent="supprimerEnfant({{$enfant->id}})" title="Supprimer l'enfant">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            {{$enfant->fullName }} </span>
+                                        <span>{{$enfant->classe->name ?? "" }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </td>
                         <td>
                             <span style="cursor: pointer;" class=" btn-sm btn-link" wire:click="modifierParent({{$parent->id}})">Modifier</span>
 

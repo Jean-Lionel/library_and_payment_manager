@@ -14,6 +14,6 @@ class EleveParent extends Model
     protected $guarded = [];
 
     public function enfant(){
-        return $this->hasMany(Eleve::class);
+        return $this->hasMany(Eleve::class,'parent_id','id');
     }
 }
