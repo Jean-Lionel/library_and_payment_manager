@@ -4,6 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\Eleve;
 use App\Models\EleveParent;
+use App\Models\Role;
+use App\Models\User;
+use DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -41,21 +45,54 @@ class ParentComponent extends Component
             'email' => $this->email,
             'telephone' => $this->telephone,
             'address' => $this->address,
-            'user_id' => auth()->user()->id,
+            'created_by' => auth()->user()->id,
         ];
           //dd($this->identification);
-        if ($this->identification) {
+
+        try {
+            DB::beginTransaction();
+            if ($this->identification) {
             // code...
-            EleveParent::find($this->identification)->update($data);
-        }else{
-            EleveParent::create($data);
+                $user = User::update([
+                    'name' => $this->firstName.' '.$this->lastName,
+                    'email' => $this->email,
+                    'telephone' => $this->telephone,
+                    'email_verified_at' => now(),
+                    // 12345678 Mot de passe par defaut
+                    'password' => bcrypt('12345678'), 
+                    'remember_token' => Str::random(10),
+                ]);
+                EleveParent::find($this->identification)->update($data);
+            }else{
+                $user = User::create([
+                    'name' => $this->firstName.' '.$this->lastName,
+                    'email' => $this->email,
+                    'telephone' => $this->telephone,
+                    'email_verified_at' => now(),
+                    'password' => bcrypt('12345678'), // 12345678 Mot de passe par defaut
+                    'remember_token' => Str::random(10),
+                ]);
+                $data['user_id'] = $user->id;
+
+                $role = Role::where('name','PARENT')->first();
+
+                $user->roles()->sync([$role->id]);
+                EleveParent::create($data);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            
         }
+
+
+        
         $this->reset();
     }
 
     public function modifierParent($id){
         $parent = EleveParent::findOrFail($id);
-
         $this->firstName = $parent->firstName;
         $this->lastName = $parent->lastName;
         $this->email = $parent->email;
@@ -69,7 +106,7 @@ class ParentComponent extends Component
         $this->selectedParent = $id;
     }
 
-   public function supprimerEnfant($id){
+    public function supprimerEnfant($id){
         $eleve = Eleve::findOrFail($id);
         $eleve->parent_id =  NULL;
         $eleve->save();

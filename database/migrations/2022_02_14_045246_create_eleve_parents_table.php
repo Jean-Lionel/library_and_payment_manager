@@ -21,6 +21,7 @@ class CreateEleveParentsTable extends Migration
             $table->string('email')->unique();
             $table->string('address')->nullabale();
             $table->foreignId('user_id')->nullabale();
+            $table->foreignId('created_by')->nullabale();
             $table->timestamps();
             $table->softDeletes();
         });

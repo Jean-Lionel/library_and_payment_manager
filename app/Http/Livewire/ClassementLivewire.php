@@ -59,8 +59,6 @@ class ClassementLivewire extends Component
 
         }
 
-    	
-
     	session()->flash('message', "Réussi");
 
         $this->reset();
