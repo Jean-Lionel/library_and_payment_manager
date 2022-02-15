@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParentsTable extends Migration
+class CreateEleveParentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateParentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('parents', function (Blueprint $table) {
+        Schema::create('eleve_parents', function (Blueprint $table) {
             $table->id();
             $table->string('firstName');
             $table->string('lastName');
             $table->string('telephone');
             $table->string('email')->unique();
             $table->string('address')->nullabale();
+            $table->foreignId('user_id')->nullabale();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +33,6 @@ class CreateParentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parents');
+        Schema::dropIfExists('eleve_parents');
     }
 }

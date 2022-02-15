@@ -20,6 +20,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
 use App\Http\Livewire\NotificationSweetAlert;
+use App\Http\Livewire\ParentComponent;
 use App\Http\Livewire\VenteLivewire;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('cours', CourController::class);
     Route::resource('eleves', EleveController::class);
     Route::resource('paiements', PaimentController::class);
+    Route::get('parents', ParentComponent::class)->name('parents');
     Route::resource('patrimoines', PatrimoineController::class);
     Route::resource('products', ProductController::class);
     Route::resource('stoks', StockController::class);
