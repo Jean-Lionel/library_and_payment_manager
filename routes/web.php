@@ -64,6 +64,8 @@ Route::middleware('auth')->group(function(){
     Route::get('get_palmares/{annee_scolaire_id}/{classe_id}/{trimestre}', [PalmaresController::class, 'getPalmares'])->name('get_palmares');
 
     Route::view('palmares','courses.palmares')->name('palmares');
+    //Profil
+    Route::view('profiles','profiles.profile')->name('profiles');
 
     Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
     Route::get('get_effectifs/{anne_scolaire_id}', [RapportController::class, 'getEffectifs'])->name('get_effectifs');
