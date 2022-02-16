@@ -17,10 +17,16 @@ class ProfileComponent extends Component
     {
         $user = auth()->user();
         $parent = EleveParent::where('user_id',$user->id)->firstOrFail();
+        $eleves = [];
+        if ($user->isParent()) {
+            // code...
+            $eleves = $parent->enfant;
+        }
 
         return view('livewire.profile-component',[
             'user' => $user,
             'parent' => $parent,
+            'eleves' => $eleves
         ]);
     }
 
