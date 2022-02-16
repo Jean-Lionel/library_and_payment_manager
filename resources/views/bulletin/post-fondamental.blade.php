@@ -62,16 +62,16 @@
 				<th rowspan="2">
 					H/S
 				</th>
-				<th colspan="3">
+				<th colspan="4">
 					MAXIMA
 				</th>
-				<th colspan="3">
+				<th colspan="4">
 					Premier Trimestre
 				</th>
-				<th colspan="3">
+				<th colspan="4">
 					Deuxième Trimestre
 				</th>
-				<th colspan="3">
+				<th colspan="4">
 					Troisième Trimestre 
 				</th>
 				<th colspan="4">
@@ -83,17 +83,26 @@
 				<th>No</th>
 				<th colspan="2">Domaines/Disciplines</th>
 				<th>T.J </th>
-				<th>Ex. </th>
-				<th>Total </th>
+				<th>COM. </th>
+				<th>RES. </th>
+				<th>TOT </th>
+				
 				<th>T.J </th>
-				<th>Ex. </th>
-				<th>Total </th>
+				<th>COM. </th>
+				<th>RES. </th>
+				<th>TOT </th>
+
 				<th>T.J </th>
-				<th>Ex. </th>
-				<th>Total </th>
+				<th>COM. </th>
+				<th>RES. </th>
+				<th>TOT </th>
+
 				<th>T.J </th>
-				<th>Ex. </th>
-				<th>Total </th>
+				<th>COM. </th>
+				<th>RES. </th>
+				<th>TOT </th>
+
+				
 				<th>MAX </th>
 				<th>TOT  </th>
 				<th>%  </th>
@@ -142,7 +151,9 @@
 						{{ $course['cours']->credit != 0 ?  $course['cours']->credit : '' }}
 					</td>
 					<td>{{ $course['cours']->ponderation }}</td>
-					<td>{{ $course['cours']->totalExamen != 0 ? $course['cours']->totalExamen : '-' }}</td>
+					<td>{{ $course['cours']->ponderation_compentance != 0 ? $course['cours']->ponderation_compentance : '-' }}</td>
+
+					<td>{{ $course['cours']->ponderation_examen != 0 ? $course['cours']->ponderation_examen : '-' }}</td>
 
 					<td>
 						{{ $course['poderation'] }}
@@ -166,8 +177,13 @@
 					}
 					$cours_total_annuel  += $getCourse['total'];
 					@endphp
+
+
 					<td>
 						{{	afficherPoint($getCourse['interrogation'])}}
+					</td>
+					<td>
+						{{	afficherPoint($getCourse['compentence'])}}
 					</td>
 					<td>{{	afficherPoint($getCourse['examen'])}} </td>
 					<td 

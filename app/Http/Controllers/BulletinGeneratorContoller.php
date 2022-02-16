@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\PalmaresController;
+use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,14 @@ class BulletinGeneratorContoller extends Controller
 
       $data = PalmaresController::getNoteAllTrimestre($anne_scolaire_id, $classe_id,$trimestre_id);
 
-      return view("bulletin.bulletin", compact('data'));
+      $section = Classe::findOrFail($classe_id)->section;
+
+      if (strcmp(strtoupper($section->name),'FONDAMENTALE') == 0) {
+         // code...
+          return view("bulletin.fondamental", compact('data'));
+      }else{
+         return view("bulletin.post-fondamental", compact('data'));
+      }
 
       /*$data = PalmaresController::getNote($anne_scolaire_id, $classe_id, 1);
       $this->getDataSum($data);

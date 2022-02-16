@@ -111,6 +111,7 @@ public function getPointTatalObtenue($eleve_id,$courses,$trimestre_id, $anne_sco
  $points_total = [
     'INTERROGATION'=> 0 ,
     'EXAMEN' => 0,
+    'COMPENTENCE' => 0,
     'TOTAL' => 0,
     'POURCENTAGE_INTERROGATION' => 0,
     'POURCENTAGE_EXAMEN' => 0,
@@ -134,6 +135,8 @@ foreach ($courses as $key => $coursCategorie) {
             $detailPoints[$evaluation] =  $r;
         }
 
+       // dd($detailPoints);
+
         $total += $v;
         $c = [
             'name' => $cours->name,
@@ -145,7 +148,8 @@ foreach ($courses as $key => $coursCategorie) {
             'total' => $v,
             'details' => $detailPoints,
             'interrogation' => $detailPoints['INTERROGATION'],
-            'examen' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE']),
+            'examen' => $detailPoints['EXAMEN'],
+            'compentence' =>  $detailPoints['COMPENTENCE'],
             'poderation' => $cours->ponderationTotal,
             'total' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION']),
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
