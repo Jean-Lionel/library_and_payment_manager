@@ -11,6 +11,7 @@ class ProfileComponent extends Component
     public $oldPassword;
     public $currentPassword;
     public $newPassword;
+    public $showForm = false;
 
     public function render()
     {
@@ -27,25 +28,29 @@ class ProfileComponent extends Component
 
         if (!(Hash::check($this->oldPassword, auth()->user()->password))) {
             // The passwords matches
-            return redirect()->back()->with("error","Your current password does not matches with the password.");
-        }
+            session()->flash("error","Your current password does not matches with the password.");
 
-        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        }else{
+
+            if(strcmp($this->currentPassword, $this->newPassword)){
             // Current password and new password same
-            return redirect()->back()->with("error","New Password cannot be same as your current password.");
-        }
+                session()->flash("error","New Password cannot be same as your current password.");
+            }else{
+             $user = auth()->user();
+             $user->password = bcrypt($this->currentPassword);
+             $user->save();
+             session()->flash("success","Password successfully changed!");
+             $this->showForm = false;
+         }
+       }
 
-        $validatedData = $request->validate([
-            'current-password' => 'required',
-            'new-password' => 'required|string|min:8|confirmed',
-        ]);
+       /* $validatedData = $request->validate([
+            'oldPassword' => 'required',
+            'currentPassword' => 'required|string|min:8|confirmed',
+        ]);*/
 
         //Change Password
-        $user = Auth::user();
-        $user->password = bcrypt($request->get('new-password'));
-        $user->save();
-
-        return redirect()->back()->with("success","Password successfully changed!");
+        
 
        // dump($this->oldPassword, $this->currentPassword, $this->newPassword);
         
