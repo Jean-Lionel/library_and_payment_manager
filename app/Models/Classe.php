@@ -112,18 +112,22 @@ class Classe extends Model
     public function ponderation(){
         $total_credit = 0;
         $total_examen = 0;
+        $ponderation_compentance = 0;
         $total_interrogation = 0;
 
         foreach ($this->courses() as $key => $course) {
             // code...
+            
             $total_credit += $course->credit;
-            $total_examen += ($course->ponderation_compentance + $course->ponderation_examen);
+            $total_examen +=  $course->ponderation_examen;
+            $ponderation_compentance += $course->ponderation_compentance ;
             $total_interrogation += $course->ponderation;
         }
 
         return [
             'total_credit' => $total_credit,
             'total_examen' => $total_examen,
+            'ponderation_compentance' => $ponderation_compentance,
             'total_interrogation' => $total_interrogation,
             'total' => $total_interrogation + $total_examen,
 

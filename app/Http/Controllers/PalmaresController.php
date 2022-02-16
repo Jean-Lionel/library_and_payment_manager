@@ -85,6 +85,8 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
 
    $c = Classe::findOrFail($classe_id);
       $ponderation_total = $c->ponderation();
+
+      //dd( $ponderation_total);
       $level = $c->level;
       $max_total = $level->getMaxTotal();
       $nombres_cours = $c->courses()->count();

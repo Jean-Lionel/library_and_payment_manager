@@ -272,7 +272,10 @@
 						<td></td>
 						<th class="text-left" colspan="2">TOTAL</th>
 						<th>{{ $data['ponderation_total']['total_credit']}}</th>
+
 						<th>{{ $data['ponderation_total']['total_interrogation']}}</th>
+						
+						<th>{{ $data['ponderation_total']['ponderation_compentance']}}</th>
 						<th>{{ $data['ponderation_total']['total_examen']}}</th>
 						<th>{{ $data['ponderation_total']['total']}}</th>
 						
