@@ -110,11 +110,11 @@
     <div>
   
     	<div class="row">
-    		<div class="col-md-2">
+    		<div class="col-md-1">
     			<button wire:click="toogleForm" class="btn btn-primary" title="Nouvelle Evaluation"><i class="fa fa-plus"></i></button>
     		</div>
-    		<div class="col-md-2">
-    			<input type="text" class="form-control form-control-sm">
+    		<div class="col-md-5">
+    			<input type="text" wire:model="search" placeholder="Recherche " class="form-control form-control-sm">
     		</div>
     	</div>
     	<table class="table table-sm">
@@ -141,8 +141,9 @@
     					<td>{{ $evaluation->cour->name  ?? ""}}</td>
     					<td>{{ $evaluation->type_evaluation }}</td>
     					<td>{{ $evaluation->ponderation }}</td>
+    					<td>{{ $evaluation->trimestre }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
-    					<td>{{ $evaluation->date_evaluation }}</td>
+    					
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>
     						
