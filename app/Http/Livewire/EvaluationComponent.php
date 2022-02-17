@@ -32,6 +32,7 @@ class EvaluationComponent extends Component
 	public $identification = null;
 	public $currentAnneScolaire ;
 	public $professeur;
+	public $search;
 
 	public function mount(){
 		if(auth()->user()->isProfesseur()){

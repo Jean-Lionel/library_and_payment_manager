@@ -108,7 +108,15 @@
 	    </div>
     @else
     <div>
-    	<button wire:click="toogleForm" class="btn btn-primary" title="Nouvelle Evaluation"><i class="fa fa-plus"></i></button>
+  
+    	<div class="row">
+    		<div class="col-md-2">
+    			<button wire:click="toogleForm" class="btn btn-primary" title="Nouvelle Evaluation"><i class="fa fa-plus"></i></button>
+    		</div>
+    		<div class="col-md-2">
+    			<input type="text" class="form-control form-control-sm">
+    		</div>
+    	</div>
     	<table class="table table-sm">
     		<thead>
     			<tr>
@@ -117,6 +125,8 @@
     				<th>COURS</th>
     				<th>TYPE</th>
     				<th>PONDERATION</th>
+    				<th>TRIMESTRE</th>
+    				<th>A\S</th>
     				<th>DATE</th>
     				<th>ACTION</th>
     			</tr>
@@ -131,6 +141,8 @@
     					<td>{{ $evaluation->cour->name  ?? ""}}</td>
     					<td>{{ $evaluation->type_evaluation }}</td>
     					<td>{{ $evaluation->ponderation }}</td>
+    					<td>{{ $evaluation->date_evaluation }}</td>
+    					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>
     						
