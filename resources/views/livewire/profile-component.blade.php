@@ -63,7 +63,7 @@
                 <span><b>{{ $user->name}}</b></span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-                Téléphone : <b>{{$parent->telephone}}</b>
+                Téléphone : <b>{{$user->telephone}}</b>
             </li>
             <li class="list-group-item d-flex justify-content-between">
                 Email : <b>{{ $user->email}}</b>

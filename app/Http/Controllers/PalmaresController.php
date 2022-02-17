@@ -107,6 +107,8 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
                $annee_scolaire_id);
            
             $t[$i]['isNonClasse'] = $eleve->is_nonClasse($i, $annee_scolaire_id) ? 1 : 0;
+            $a = $eleve->is_nonClasse($i, $annee_scolaire_id);
+           // dd($a);
             $t[$i]['pourcentage'] = getPourcentage( $t[$i]['total'], $ponderation_total['total']);
             $t[$i]['place'] = [];
          }

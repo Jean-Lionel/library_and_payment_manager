@@ -16,7 +16,7 @@ class ProfileComponent extends Component
     public function render()
     {
         $user = auth()->user();
-        $parent = EleveParent::where('user_id',$user->id)->firstOrFail();
+        $parent = EleveParent::where('user_id',$user->id)->first();
         $eleves = [];
         if ($user->isParent()) {
             // code...

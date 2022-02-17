@@ -222,6 +222,7 @@
 					<th>{{ sumColumn($categoriesTotal, 'credit') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationTJ') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'ponderationEx') }}</th>
+					<th>{{ sumColumn($categoriesTotal, 'ponderation_compentance') }}</th>
 					<th>{{ sumColumn($categoriesTotal, 'max_tj_examen') }}</th>
 					{{-- I TRIMESTRE --}}
 
@@ -250,6 +251,9 @@
 							{{ afficherPoint($element['categoriesTotal'][$categorie_name][0]['total']) }}
 						</th> 
 						@endforeach
+						<th></th>
+						<th></th>
+						<th></th>
 						<th>{{ afficherPoint($maxima_annuel) }}</th>
 						<th>{{afficherPoint($total_annuel_categorie)}}</th>
 						<th
@@ -291,6 +295,7 @@
 						@endphp
 						@if (!$el['isNonClasse'])
 							<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
+							<th>To do</th>
 						<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
 						<th>{{ afficherPoint($el['total'])}}</th>
 						@else
@@ -336,7 +341,9 @@
 						@foreach ($eleve->trimestre as $el)
 						{{-- expr --}}
 						@if (!$el['isNonClasse'])
+						<th></th>
 						<th> {{afficherPoint($el['points_total']['POURCENTAGE_INTERROGATION'])}}</th>
+
 						<th> {{afficherPoint($el['points_total']['POURCENTAGE_EXAMEN'])}}</th>
 						<th>{{ afficherPoint($el['pourcentage'])}}</th>
 						@else
@@ -363,7 +370,10 @@
 						@foreach ($eleve->trimestre as $element)
 						{{-- expr --}}
 						@if (!$element['isNonClasse'])
+						<td></td>
 						<td>{!! affichePlace($element['place']['tj'], $eleve->is_a_girl()) !!}</td>
+						<td></td>
+
 						<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
 						<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
 						@else
