@@ -54,7 +54,7 @@
                 <h5>Liste des parents</h5>
             </div>
             <div class="col-md-7">
-                <input type="text" class="form-control form-control-sm">
+                <input type="text" wire:model="search" class="form-control form-control-sm">
             </div>
             <div class="col-md-1 text-right">
                 <button class="btn-sm btn-block btn-primary" wire:click="$set('showForm',true)"> 

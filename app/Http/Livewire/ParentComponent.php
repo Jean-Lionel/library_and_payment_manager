@@ -20,10 +20,21 @@ class ParentComponent extends Component
     public $address;
     public $showForm = false;
     public $selectedParent = 0;
+    public $search;
 
     public function render()
     {
-        $parents = EleveParent::latest()->paginate();
+        $s = $this->search;
+        $parents = EleveParent::where(function ($query) use($s){
+
+            if(!empty($s)){
+                $query->where('firstName','like','%'.$s.'%')
+                     ->orWhere('lastName','like','%'.$s.'%')
+                     ->orWhere('email','like','%'.$s.'%')
+                     ->orWhere('telephone','like','%'.$s.'%');
+            }
+
+        } )->latest()->paginate();
 
         return view('livewire.parent-component',[
             'parents' => $parents

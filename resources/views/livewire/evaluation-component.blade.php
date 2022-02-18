@@ -141,7 +141,7 @@
     					<td>{{ $evaluation->cour->name  ?? ""}}</td>
     					<td>{{ $evaluation->type_evaluation }}</td>
     					<td>{{ $evaluation->ponderation }}</td>
-    					<td>{{ $evaluation->trimestre }}</td>
+	    					<td>{{ $evaluation->trimestre }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
     					
     					<td>{{ $evaluation->date_evaluation }}</td>
