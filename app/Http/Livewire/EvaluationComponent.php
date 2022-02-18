@@ -53,13 +53,29 @@ class EvaluationComponent extends Component
 
 	public function render()
     {
+    	$s = $this->search;
 
     	 if(auth()->user()->isProfesseur()){
            //$prof = auth()->user()->professeur;
+            $evaluations = Evaluation::where(function($query) use ($s){
 
-            $evaluations = Evaluation::where('user_id', auth()->user()->id)->latest()->paginate(10);
+            	if(!empty($s)){
+            		$query->where("ponderation",'=',$s)
+            					->orWhere("type_evaluation","like","%".$s."%")
+            					->orWhere("date_evaluation","like","%".$s."%")
+            					->orWhere("cour_id","=", $s);
+            	};
+
+            })->where('user_id', auth()->user()->id)->latest()->paginate(10);
         }else{
-          $evaluations = Evaluation::latest()->paginate(10);
+          $evaluations = Evaluation::where(function($query) use($s){
+          	if(!empty($s)){
+            		$query->where("ponderation",'=',$s)
+            					->orWhere("type_evaluation","like","%".$s."%")
+            					->orWhere("date_evaluation","like","%".$s."%")
+            					->orWhere("cour_id","=", $s);
+            	};
+          })->latest()->paginate(10);
         }
 
 
