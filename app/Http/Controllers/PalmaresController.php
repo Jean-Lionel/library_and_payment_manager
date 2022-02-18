@@ -101,18 +101,27 @@ public function getNoteAllTrimestre($annee_scolaire_id, $classe_id,$trimestre_id
       foreach ($eleves as $key => $eleve) {
          $t = [];
          // Recuperation des points pour chaque trimestre
+         $afficher_total_annuel = 0;
+
          for ($i=1; $i <=3 ; $i++) { 
             // code...
             $t[$i] = $eleve->getPointTatalObtenue($eleve->id,$courses,$i, 
                $annee_scolaire_id);
            
             $t[$i]['isNonClasse'] = $eleve->is_nonClasse($i, $annee_scolaire_id) ? 1 : 0;
+
+            if ($t[$i]['isNonClasse'] == 1) {
+               // code...
+               $afficher_total_annuel = 1;
+            }
             $a = $eleve->is_nonClasse($i, $annee_scolaire_id);
            // dd($a);
+
             $t[$i]['pourcentage'] = getPourcentage( $t[$i]['total'], $ponderation_total['total']);
             $t[$i]['place'] = [];
          }
         $eleve->trimestre = $t;
+        $eleve->afficher_total_annuel =  $afficher_total_annuel;
         $eleve->courses_listes = $t[1]['courses_listes'];
 
         $palmares[] = $eleve;

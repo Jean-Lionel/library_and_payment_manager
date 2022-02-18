@@ -3,7 +3,7 @@
 		border-collapse: collapse;
 		width: 100%;
 	}
-	tr,td,th,table{
+	tr,td,th,table,tbody,thead{
 		border: 1px solid black;
 	}
 	.is_echec{
@@ -38,7 +38,9 @@
 	@media print {
 		.pagebreak { 
 			page-break-before: always; 
-		} /* page-break-after works, as well */
+		} 
+
+		
 	}
 
 </style>
@@ -171,16 +173,18 @@
 					</td>
 					<td>{{	afficherPoint($getCourse['examen'])}} </td>
 					<td 
-						@if ($getCourse['is_echec'])
-							{{-- expr --}}
-							class="is_echec"
-						@endif
+					@if ($getCourse['is_echec'])
+					{{-- expr --}}
+					class="is_echec"
+					@endif
 					>{{	afficherPoint($getCourse['total'])}}</td>
 					@endforeach
 					{{--  --}}
 					<td class="bold">
 						{{ $course['cours']->ponderationTotal * 3 }}
 					</td>
+					@if (!$eleve->afficher_total_annuel)
+					{{-- expr --}}
 					<td>
 						{{ afficherPoint($cours_total_annuel) }}
 					</td>
@@ -189,6 +193,13 @@
 							afficherPoint(getPourcentage($cours_total_annuel, ($course['cours']->ponderationTotal * 3)))
 						}}
 					</td>
+					@else
+
+					<td></td>
+					<td></td>
+
+					@endif
+					
 					<td></td>
 				</tr>
 				@endforeach
@@ -216,7 +227,7 @@
 					@foreach ($eleve->trimestre as $element)
 					{{-- expr --}}	
 					@php
-						$total_annuel_categorie += $element['categoriesTotal'][$categorie_name][0]['total'];
+					$total_annuel_categorie += $element['categoriesTotal'][$categorie_name][0]['total'];
 					@endphp
 					
 					<th> 
@@ -235,179 +246,196 @@
 						</th> 
 						@endforeach
 						<th>{{ afficherPoint($maxima_annuel) }}</th>
+
+						@if (!$eleve->afficher_total_annuel)
+						{{-- expr --}}
+						
 						<th>{{afficherPoint($total_annuel_categorie)}}</th>
 						<th
 						@if (getPourcentage($total_annuel_categorie,$maxima_annuel) < 50 )
-							{{-- expr --}}
-							class="is_echec"
-						@endif
-
-						>{{ getPourcentage($total_annuel_categorie,$maxima_annuel) }}</th>
-						<th></th>
-
-						@endif
-
-						
-					</tr>
-					@endforeach
-					@endforeach
-
-					<tr>
-						<td></td>
-						<th class="text-left" colspan="2">TOTAL</th>
-						<th>{{ $data['ponderation_total']['total_credit']}}</th>
-						<th>{{ $data['ponderation_total']['total_interrogation']}}</th>
-						<th>{{ $data['ponderation_total']['total_examen']}}</th>
-						<th>{{ $data['ponderation_total']['total']}}</th>
-						
-						<!-- 	I TRIMESTRE -->
-						@php
-							$max_total_an = 0;
-						@endphp
-
-						@foreach ($eleve->trimestre as $el)
 						{{-- expr --}}
-						@php
-							$max_total_an  += $el['total'];
-						@endphp
-						@if (!$el['isNonClasse'])
-							<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
-						<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
-						<th>{{ afficherPoint($el['total'])}}</th>
-						@else
-						<th></th>
-						<th></th>
-						<th></th>
-						
-
+						class="is_echec"
 						@endif
-						
-						@endforeach
-						{{-- empty expr --}}
 
-						@php
-							$z = $data['ponderation_total']['total'] * 3;
-						@endphp
-
-						<th>{{$z  }}</th>
-						<th>{{ afficherPoint($max_total_an ) }}</th>
-						<th 
-
-						@if (getPourcentage( $max_total_an, $z ) < 50)
-							{{-- expr --}}
-							class="is_echec"
-						@endif
 						>
-						{{ getPourcentage( $max_total_an, $z ) }}
-						</th>
-						<th></th>
-						
-						
-						<!-- 	III TRIMESTRE -->
-						
-					</tr>
-					<tr>
-						<td></td>
-						<th class="text-left" colspan="2">Pourcentage</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	I TRIMESTRE -->
-						@foreach ($eleve->trimestre as $el)
-						{{-- expr --}}
-						@if (!$el['isNonClasse'])
-						<th> {{afficherPoint($el['points_total']['POURCENTAGE_INTERROGATION'])}}</th>
-						<th> {{afficherPoint($el['points_total']['POURCENTAGE_EXAMEN'])}}</th>
-						<th>{{ afficherPoint($el['pourcentage'])}}</th>
-						@else
-						<th></th>
-						<th></th>
-						<th></th>
-						@endif
-						@endforeach
+					{{ getPourcentage($total_annuel_categorie,$maxima_annuel) }}</th>
+					@else
+					<th></th>
+					<th></th>
 
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-					<tr>
-						<td></td>
-						<th class="text-left" colspan="2">Place</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	I TRIMESTRE -->
+					@endif
+					<th></th>
 
-						@foreach ($eleve->trimestre as $element)
-						{{-- expr --}}
-						@if (!$element['isNonClasse'])
-						<td>{!! affichePlace($element['place']['tj'], $eleve->is_a_girl()) !!}</td>
-						<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
-						<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
-						@else
-						<th></th>
-						<th></th>
-						<th></th>
-						@endif
-						@endforeach
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-					<tr>
-						<td></td>
-						<th class="text-left" colspan="2">Education Morale</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	I TRIMESTRE -->
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	II TRIMESTRE -->
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	III TRIMESTRE -->
-						<td></td>
-						<td></td>
-						<td></td>
-						<!-- 	III TRIMESTRE -->
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th colspan="3" rowspan="2" >Signatures</th>
-						<td colspan="4" class="text-left">Tutulaire</td>
-						<td colspan="3"></td>
-						<td colspan="3"></td>
-						<td colspan="3"></td>
-						<td colspan="4"></td>
-					</tr>
-					<tr>
-						<td colspan="4" class="text-left">Parent</td>
-						<td colspan="3"></td>
-						<td colspan="3"></td>
-						<td colspan="3"></td>
-						<td colspan="4"></td>
-					</tr>
-				</tbody>
-			</table>
+					@endif
 
-			<div>
+					
+				</tr>
+				@endforeach
+				@endforeach
+
+				<tr>
+					<td></td>
+					<th class="text-left" colspan="2">TOTAL</th>
+					<th>{{ $data['ponderation_total']['total_credit']}}</th>
+					<th>{{ $data['ponderation_total']['total_interrogation']}}</th>
+					<th>{{ $data['ponderation_total']['total_examen']}}</th>
+					<th>{{ $data['ponderation_total']['total']}}</th>
+					
+					<!-- 	I TRIMESTRE -->
+					@php
+					$max_total_an = 0;
+					@endphp
+
+					@foreach ($eleve->trimestre as $el)
+					{{-- expr --}}
+					@php
+					$max_total_an  += $el['total'];
+					@endphp
+					@if (!$el['isNonClasse'])
+					<th> {{afficherPoint($el['points_total']['INTERROGATION'])}}</th>
+					<th> {{afficherPoint($el['points_total']['EXAMEN'])}}</th>
+					<th>{{ afficherPoint($el['total'])}}</th>
+					@else
+					<th></th>
+					<th></th>
+					<th></th>
+					
+
+					@endif
+					
+					@endforeach
+					{{-- empty expr --}}
+
+					@php
+					$z = $data['ponderation_total']['total'] * 3;
+					@endphp
+
+					<th>{{$z  }}</th>
+
+					@if (!$eleve->afficher_total_annuel)
+					<th>{{ afficherPoint($max_total_an ) }}</th>
+					<th 
+
+					@if (getPourcentage( $max_total_an, $z ) < 50)
+					{{-- expr --}}
+					class="is_echec"
+					@endif
+					>
+					{{ getPourcentage( $max_total_an, $z ) }}
+				</th>
+
+				@else
+				<th></th>
+				<th></th>
+				@endif
+				<th></th>
 				
-			</div>
-
-			<div class="pagebreak pied_page">
 				
-			</div>
-		</div>
+				<!-- 	III TRIMESTRE -->
+				
+			</tr>
+			<tr>
+				<td></td>
+				<th class="text-left" colspan="2">Pourcentage</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	I TRIMESTRE -->
+				@foreach ($eleve->trimestre as $el)
+				{{-- expr --}}
+				@if (!$el['isNonClasse'])
+				<th> {{afficherPoint($el['points_total']['POURCENTAGE_INTERROGATION'])}}</th>
+				<th> {{afficherPoint($el['points_total']['POURCENTAGE_EXAMEN'])}}</th>
+				<th>{{ afficherPoint($el['pourcentage'])}}</th>
+				@else
+				<th></th>
+				<th></th>
+				<th></th>
+				@endif
+				@endforeach
 
-		@endforeach
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td></td>
+				<th class="text-left" colspan="2">Place</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	I TRIMESTRE -->
+
+				@foreach ($eleve->trimestre as $element)
+				{{-- expr --}}
+				@if (!$element['isNonClasse'])
+				<td>{!! affichePlace($element['place']['tj'], $eleve->is_a_girl()) !!}</td>
+				<td>{!! affichePlace($element['place']['ex'], $eleve->is_a_girl()) !!}</td>
+				<th>{!! affichePlace($element['place']['total'], $eleve->is_a_girl()) !!}</th>
+				@else
+				<th></th>
+				<th></th>
+				<th></th>
+				@endif
+				@endforeach
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td></td>
+				<th class="text-left" colspan="2">Education Morale</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	I TRIMESTRE -->
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	II TRIMESTRE -->
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	III TRIMESTRE -->
+				<td></td>
+				<td></td>
+				<td></td>
+				<!-- 	III TRIMESTRE -->
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th colspan="3" rowspan="2" >Signatures</th>
+				<td colspan="4" class="text-left">Tutulaire</td>
+				<td colspan="3"></td>
+				<td colspan="3"></td>
+				<td colspan="3"></td>
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td colspan="4" class="text-left">Parent</td>
+				<td colspan="3"></td>
+				<td colspan="3"></td>
+				<td colspan="3"></td>
+				<td colspan="4"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div>
+		
+	</div>
+
+	<div class="pagebreak pied_page">
+		
+	</div>
+</div>
+
+@endforeach

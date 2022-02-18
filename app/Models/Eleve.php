@@ -81,6 +81,11 @@ class Eleve extends Model
         ->where('anne_scolaire_id','=',$anne_scolaire_id)
         ->where('type_evaluation','=',$type_evaluation)
         ->get();
+
+        if ($points == null) {
+            // code...
+            return NULL;
+        }
         //CALCULER LA MOYENNE SUR 
         $ponderation = Cour::findOrFail($cour_id)->ponderation;
         if($type_evaluation == 'EXAMEN'){
