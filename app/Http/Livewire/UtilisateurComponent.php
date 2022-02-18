@@ -13,6 +13,7 @@ class UtilisateurComponent extends Component
     public $password;
     public $telephone;
     public $email;
+    public $search;
     public $identifiant;
     public $password_confirmation;
     public $showForm = false;
@@ -28,7 +29,15 @@ class UtilisateurComponent extends Component
 
     public function render()
     {
-        $users = User::latest()->paginate();
+        $s = $this->search;
+
+        $users = User::where(function($query) use ($s){
+
+            if(!empty($s)){
+                $query->where('name','LIKE', '%'.$s.'%')
+                        ->orWhere('email','like','%'.$s.'%');
+            }
+        })->latest()->paginate();
         $roles = Role::all();
 
         return view('livewire.utilisateur-component',[

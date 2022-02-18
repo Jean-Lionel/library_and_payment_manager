@@ -43,7 +43,7 @@ class CourseLivewire extends Component
            $prof = auth()->user()->professeur;
 
             $courses =  Cour::where('name', 'like', '%'. $this->search .'%')
-                            ->where('professeur_id',  $prof->id )->latest()->paginate(10);
+                            ->where('professeur_id',  $prof->id ?? 0 )->latest()->paginate(10);
         }else{
            $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10); 
         }

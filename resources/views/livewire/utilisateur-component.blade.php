@@ -63,7 +63,18 @@
 
     @else
     <div class="text-right">
-        <button wire:click="$set('showForm', {{! $showForm}})" class="btn btn-primary btn-sm" title="Nouvel Utilisateur"><i class="fa fa-plus"></i></button>
+        <div class="row">
+           <div class="col-md-5">
+               <h4>Liste des utilisateurs</h4>
+           </div>
+            <div class="col-md-6">
+                <input type="text" wire:model="search" class="form-control" placeholder="Recherche">
+            </div>
+             <div class="col-md-1">
+                 <button wire:click="$set('showForm', {{! $showForm}})" class="btn btn-primary btn-sm" title="Nouvel Utilisateur"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+       
     </div>
     <table class="table table-sm">
         <thead>
