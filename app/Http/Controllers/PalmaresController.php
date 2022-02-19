@@ -55,8 +55,14 @@ class PalmaresController extends Controller
 
         $palmares[] = $eleve;
      } 
+      //dd($palmares);$grouped = $collection->groupBy('account_id');
+     $classes = collect($palmares)->groupBy('isNonClasse');
+
+     //dump($classes[1]);
+
+
+     $palmares = collect($classes[1])->sortByDesc('points');
       //dd($palmares);
-     $palmares = collect($palmares)->sortByDesc('points');
 
      return [
       'palmares' => $palmares,
