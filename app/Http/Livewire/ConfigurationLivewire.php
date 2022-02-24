@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\AnneScolaire;
+use App\Models\Trimestre;
 use Livewire\Component;
 
 class ConfigurationLivewire extends Component
@@ -11,12 +12,11 @@ class ConfigurationLivewire extends Component
 	public $annee;
     public function render()
     {
-    
         return view('livewire.configuration-livewire',
         	[
-        		'currentAnneScolaire' =>  AnneScolaire::latest()->first()
+        		'currentAnneScolaire' =>  AnneScolaire::latest()->first(),
+                'trimestres' => Trimestre::all();
         	]
-
     	);
     }
 

@@ -36,14 +36,15 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('notification-sweetalert', NotificationSweetAlert::class);
 
-Route::get('/', function () {   
-    return view('auth.login');
-});
-Route::get('/accueil', function () {     
-    return view('welcome');
-});
+
 
 Route::middleware('auth')->group(function(){
+    Route::get('/', function () {   
+        return view('auth.login');
+    });
+    Route::get('/accueil', function () {     
+        return view('welcome');
+    });
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     Route::resource('sections', SectionController::class);
     Route::resource('classes', ClasseController::class);
@@ -86,7 +87,7 @@ Route::middleware('auth')->group(function(){
     Route::get('rapport', [VenteController::class , 'rapport'])->name('rapport');
 
     // Route::get('bulletin/{id}', [BulletinController::class , 'bulletin'])->name('bulletin_generate');
-     Route::get('bulletin/{id}', [BulletinGeneratorContoller::class , 'bulletin'])->name('bulletin_generate');
+    Route::get('bulletin/{id}', [BulletinGeneratorContoller::class , 'bulletin'])->name('bulletin_generate');
     Route::get('liste_point', [BulletinController::class , 'liste_point'])->name('liste_point');
     Route::get('notes', [BulletinController::class , 'notes'])->name('notes');
 

@@ -14,14 +14,14 @@
 
     		<ul class="list-group">
     			<li class="list-group-item">
-
     			<h3>ANNEE SCOLAIRE : {{ $currentAnneScolaire->name ?? ""}}</h3> 
-
-    				
     			</li>
     		</ul>
     	</div>
-    	<div class="col"></div>
+    	<div class="col">
+            <h4>Trimestre</h4>
+            
+        </div>
     	<div class="col"></div>
     	<div class="col"></div>
     </div>

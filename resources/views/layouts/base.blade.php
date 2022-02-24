@@ -14,9 +14,10 @@
 		@livewireStyles
 
 		<style type="text/css">
-			body{
-				background: #fff;
-				color: #000;
+			
+
+			.{
+				background: rgba(255,255,255,0.5);
 			}
 			.active{
 				background: rgba(0,0,0,.5);

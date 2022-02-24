@@ -16,6 +16,7 @@ class CreateTrimestresTable extends Migration
         Schema::create('trimestres', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_current')->default(false);
             $table->timestamps();
         });
     }
