@@ -10,14 +10,31 @@ class ConfigurationLivewire extends Component
 {
 	public $showInputYear = false;
 	public $annee;
+    public $choosedTrimestre;
+
     public function render()
     {
         return view('livewire.configuration-livewire',
         	[
         		'currentAnneScolaire' =>  AnneScolaire::latest()->first(),
-                'trimestres' => Trimestre::all();
+                'trimestres' => Trimestre::all(),
+                'curreTrimestre' => Trimestre::where('is_current',1)->first()
         	]
     	);
+    }
+
+    public function updatedChoosedTrimestre(){
+        //dd($this->choosedTrimestre);
+        $trimestres = Trimestre::all();
+
+        foreach ($trimestres as $trimestre){
+            $trimestre->is_current = false;
+            $trimestre->save();
+        }
+
+        $curreTrim = Trimestre::find($this->choosedTrimestre);
+        $curreTrim->is_current = true;
+        $curreTrim->save();
     }
 
     protected $rules = [
