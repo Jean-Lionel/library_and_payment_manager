@@ -139,10 +139,10 @@ foreach ($courses as $key => $coursCategorie) {
             $v += $r;
             $detailPoints[$evaluation] =  $r;
         }
-
        // dd($detailPoints);
-
         $total += $v;
+        /*$total_trimestre = $detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION'];*/
+        $total_trimestre = "";
         $c = [
             'name' => $cours->name,
             'credit' => $cours->credit,
@@ -150,13 +150,13 @@ foreach ($courses as $key => $coursCategorie) {
             'ponderationEx' => $cours->totalExamen,
             'max_tj_examen' => ($cours->totalExamen + $cours->ponderation),
             'cours' => $cours,
-            'total' => $v,
+            'total_1' => $v,
             'details' => $detailPoints,
             'interrogation' => $detailPoints['INTERROGATION'],
             'examen' => $detailPoints['EXAMEN'],
             'compentence' =>  $detailPoints['COMPENTENCE'],
             'poderation' => $cours->ponderationTotal,
-            'total' => ($detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION']),
+            'total' => $total_trimestre,
             //Calcule du profondeur de l'echec point obtenu - 50 % du point total
             'profondeur_echec' => ($v - ( $cours->ponderationTotal / 2)),
             'is_echec' => ($v < ( $cours->ponderationTotal / 2))
@@ -166,7 +166,7 @@ foreach ($courses as $key => $coursCategorie) {
         $total_examen += $c['examen'];
         $points_total['INTERROGATION'] +=  $c['interrogation'];
         $points_total['EXAMEN'] +=  $c['examen'];
-        $points_total['TOTAL'] +=  $c['total'];
+        $points_total['TOTAL'] +=  floatval($c['total']) ;
 
         $categories[$key][]= $c;
 
@@ -206,7 +206,6 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
     // LES EVALUATIONS ANNEE SCOLAIRE TRIMESTRE
     
     $courses = $this->classe->courses();
-
     //dd($this->classe_id);
     // Vérifier que chaque cours possède l'évaluation d'une interrogagation
     // Vérifier que chaque cours possède l'évaluation de l'Examen

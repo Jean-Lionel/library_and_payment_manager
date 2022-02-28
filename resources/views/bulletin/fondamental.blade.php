@@ -49,7 +49,6 @@
 @foreach ($data['palmares'] as $eleve)
 {{-- expr --}}
 
-
 <div>
 	<table>
 		<thead>
@@ -166,7 +165,7 @@
 							break;
 						}
 					}
-					$cours_total_annuel  += $getCourse['total'];
+					$cours_total_annuel  += floatval($getCourse['total']);
 					@endphp
 					<td>
 						{{	afficherPoint($getCourse['interrogation'])}}
@@ -177,6 +176,7 @@
 					{{-- expr --}}
 					class="is_echec"
 					@endif
+					
 					>{{	afficherPoint($getCourse['total'])}}</td>
 					@endforeach
 					{{--  --}}
