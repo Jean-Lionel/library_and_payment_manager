@@ -48,13 +48,8 @@
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">TRIMESTRE</label><br>
-	    					<select name="" wire:model="trimestre" class="form-control">
-	    						<option value=""></option>
-	    					@foreach ($trimestres as $trimestre)
-	    						{{-- expr --}}
-	    						<option value="{{$trimestre->id}}">{{$trimestre->name}}</option>
-	    					@endforeach
-	    					</select>
+	    					<h4>{{ $trimestre->name }}</h4>
+	    					
 
 	    					@error('trimestre')
 	    					<span class="text-danger">{{ $message }}</span>

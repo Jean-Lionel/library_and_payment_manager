@@ -48,6 +48,7 @@ class EvaluationComponent extends Component
 		
 		$this->start_date = Carbon::now()->subDays(30);
 		$this->trimestres = Trimestre::all();
+		$this->trimestre = Trimestre::current();
 		$this->currentAnneScolaire =  AnneScolaire::latest()->first();
 	}
 
@@ -99,7 +100,6 @@ class EvaluationComponent extends Component
 
     protected $rules = [
 		"ponderation" => "numeric|required|min:0",
-		"trimestre" => "required",
 		"courId" => "required",
 		"classeId" => "required",
 		// "date_evaluation" => "required|date|min:now()",
@@ -113,7 +113,7 @@ class EvaluationComponent extends Component
 		$this->validate();
 		$data = [
 			"ponderation" => $this->ponderation,
-			"trimestre" => $this->trimestre,
+			"trimestre" => $this->trimestre->id,
 			"cour_id" => $this->courId,
 			"classe_id" => $this->classeId,
 			"date_evaluation" => $this->date_evaluation,
@@ -157,19 +157,18 @@ class EvaluationComponent extends Component
 	public function annulerEvalution($id){
 
 		$trimestre = Trimestre::current();
+		$annee_scolaire = AnneScolaire::current();
 		
 		$evaluation = Evaluation::find($id);
-		if (($evaluation->user_id == auth()->user()->id) and ($evaluation->trimestre == $trimestre->id) ) {
+		if (($evaluation->user_id == auth()->user()->id) and ($evaluation->trimestre == $trimestre->id) and ($annee_scolaire->anne_scolaire_id == $evaluation->anne_scolaire_id) ) {
 			//Verfier l'année scolaire
 			// Vérifier si c'est le trimestre actuel 
-
 			$evaluation->delete();
 				session()->flash('error',"L'evaluation a été annulé avec success");
 		}else{
 			session()->flash('error',"Impossible d'annuler l'evaluation");
 		}
 		
-
 	}
 
 	public function ajoutPoint($id){
