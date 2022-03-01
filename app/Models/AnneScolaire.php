@@ -10,4 +10,10 @@ class AnneScolaire extends Model
     use HasFactory;
 
     protected $guarded =[];
+
+    public static function current()
+    {
+        // code...
+        return self::latest()->first();
+    }
 }

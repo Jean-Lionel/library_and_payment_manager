@@ -156,10 +156,21 @@ class EvaluationComponent extends Component
 
 	public function annulerEvalution($id){
 
-		dd($id);
+		$trimestre = Trimestre::current();
 		
-	}
+		$evaluation = Evaluation::find($id);
+		if (($evaluation->user_id == auth()->user()->id) and ($evaluation->trimestre == $trimestre->id) ) {
+			//Verfier l'année scolaire
+			// Vérifier si c'est le trimestre actuel 
 
+			$evaluation->delete();
+				session()->flash('error',"L'evaluation a été annulé avec success");
+		}else{
+			session()->flash('error',"Impossible d'annuler l'evaluation");
+		}
+		
+
+	}
 
 	public function ajoutPoint($id){
 		dd($id);

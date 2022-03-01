@@ -9,4 +9,8 @@ class Trimestre extends Model
 {
     use HasFactory;
     protected $guarded;
+
+    public static function current(){
+        return self::where('is_current',1)->first();
+    }
 }

@@ -140,7 +140,7 @@
 				@endif
 
 				@if(session()->has('error'))
-				<div class="alert alert-dange">
+				<div class="alert alert-danger">
 					{{ session()->get('error') }}
 				</div>
 				@endif

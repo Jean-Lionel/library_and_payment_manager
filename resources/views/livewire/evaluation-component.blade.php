@@ -1,6 +1,12 @@
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 
+    @if(session()->has('error'))
+	<div class="alert alert-danger">
+			{{ session()->get('error') }}
+	</div>
+	@endif
+
     @if($showForm)
 	    <div>
 	    	<h3>Ajout d'une evaluation</h3>
