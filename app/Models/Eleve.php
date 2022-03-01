@@ -53,6 +53,16 @@ class Eleve extends Model
         return $this->hasMany(Emprut::class);
     }
 
+    public function isFondementale()
+    {
+        // code...
+        if (strcmp(strtoupper($this->classe->level->section->name),'FONDAMENTALE') == 0){
+            return true;
+        }
+
+        return false;
+    }
+
     public function listeEmprutNonRemis()
     {
         return "JE suis cool";
@@ -82,7 +92,7 @@ class Eleve extends Model
         ->where('type_evaluation','=',$type_evaluation)
         ->get();
 
-        if ($points == null) {
+        if (count($points) == 0) {
             // code...
             return NULL;
         }
@@ -141,8 +151,24 @@ foreach ($courses as $key => $coursCategorie) {
         }
        // dd($detailPoints);
         $total += $v;
-        /*$total_trimestre = $detailPoints['EXAMEN'] + $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION'];*/
-        $total_trimestre = "";
+        /*$total_trimestre = $detailPoints['EXAMEN'] +
+         $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION'];*/
+
+        if ($detailPoints['EXAMEN'] != NULL && 
+            $detailPoints['INTERROGATION'] != NULL) {
+            // code...
+            $total_trimestre = $detailPoints['EXAMEN'] + $detailPoints['INTERROGATION'];
+            
+            if (!$this->isFondementale() and ($detailPoints['COMPENTENCE'] == NULL)) {
+                // code...
+                $total_trimestre = "";
+            }else{
+              $total_trimestre += $detailPoints['COMPENTENCE'];
+            }
+
+        }else{
+              $total_trimestre = "";
+        }
         $c = [
             'name' => $cours->name,
             'credit' => $cours->credit,

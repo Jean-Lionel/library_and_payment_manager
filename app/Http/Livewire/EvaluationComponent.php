@@ -154,7 +154,9 @@ class EvaluationComponent extends Component
 		$this->showForm = true;
 	}
 
-	public function annulerEvalution(){
+	public function annulerEvalution($id){
+
+		dd($id);
 		
 	}
 

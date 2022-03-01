@@ -6,6 +6,7 @@ use App\Http\Controllers\PalmaresController;
 use App\Models\Classe;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
+use PDF;
 
 class BulletinGeneratorContoller extends Controller
 {
@@ -25,6 +26,12 @@ class BulletinGeneratorContoller extends Controller
 
       if (strcmp(strtoupper($section->name),'FONDAMENTALE') == 0) {
          // code...
+          /*$pdf = PDF::loadView('bulletin.fondamental',compact('data'));
+
+          $pdf->setPaper("A3","landscape");
+
+          return $pdf->download('hello.pdf');*/
+
           return view("bulletin.fondamental", compact('data'));
       }else{
          return view("bulletin.post-fondamental", compact('data'));

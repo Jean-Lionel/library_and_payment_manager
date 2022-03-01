@@ -34,6 +34,9 @@
 	.pied_page{
 		margin-top: 40px;
 	}
+	.pagebreak{
+   		 page-break-before: always; 
+	}
 
 	@media print {
 		.pagebreak { 

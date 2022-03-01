@@ -147,7 +147,7 @@
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>
     						
-    						<button class="btn-danger" wire:click="annulerEvalution({{ $evaluation->id }})">
+    						<button class="btn-danger" wire:click="$emit('triggerDelete',{{ $evaluation->id }})">
     							<i class="fa fa-remove"></i>
     						</button>
     						<button title="Modifier" wire:click="modifierEvaluation({{$evaluation->id }})">
@@ -172,9 +172,38 @@
 </div>
 
 
+@push('scripts')
 <script type="text/javascript">
-	
+    document.addEventListener('DOMContentLoaded', function () {
+
+        @this.on('triggerDelete', orderId => {
+            Swal.fire({
+                title: 'Vous êtez sûr ?',
+                text: "D'annuler d' evaluation",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: 'var(--danger)',
+                cancelButtonColor: 'var(--primary)',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+		//if user clicks on delete
+                if (result.value) {
+		     // calling destroy method to delete
+                    @this.call('annulerEvalution',orderId)
+		    // success response
+                    responseAlert({title: session('message'), type: 'success'});
+                    
+                } else {
+                    responseAlert({
+                        title: 'Operation Cancelled!',
+                        type: 'success'
+                    });
+                }
+            });
+        });
+    })
 </script>
+@endpush
 
 
 
