@@ -16,11 +16,11 @@ class CreateConfigurationsTable extends Migration
         Schema::create('configurations', function (Blueprint $table) {
             $table->id();
             $table->string('etablimssement')->nullable();
-            $table->string('abreviation')->nullabale();
-            $table->string('address')->nullabale();
-            $table->string('direction_provincial')->nullabale();
-            $table->string('direction_communal')->nullabale();
-            $table->string('comment')->nullabale();
+            $table->string('abbreviation')->nullable();
+            $table->string('address')->nullable();
+            $table->string('direction_provincial')->nullable();
+            $table->string('direction_communal')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
