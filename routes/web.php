@@ -19,6 +19,7 @@ use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
+use App\Http\Livewire\ConfigurationComponent;
 use App\Http\Livewire\NotificationSweetAlert;
 use App\Http\Livewire\ParentComponent;
 use App\Http\Livewire\VenteLivewire;
@@ -69,6 +70,7 @@ Route::middleware('auth')->group(function(){
     Route::view('profiles','profiles.profile')->name('profiles');
 
     Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
+    Route::get('configurations_component', ConfigurationComponent::class)->name('configurations_component');
     Route::get('get_effectifs/{anne_scolaire_id}', [RapportController::class, 'getEffectifs'])->name('get_effectifs');
     
     Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');

@@ -1,6 +1,11 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
     <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('configurations_component') }}">
+                configuration des paramètres essentiels
+            </a>
+        </div>
     	<div class="col">
     		<button wire:click="$set('showInputYear', true)" class="btn btn-primary btn-sm">Ajouter l'année scolaire</button>
 

@@ -18,7 +18,7 @@ class PatrimoineLivewire extends Component
 	public  $quantite_total;
 	public  $qte_en_mauvaise_etat;
 	public  $quantite_en_bonne_etat;
-	public  $open = true;
+	public  $open = false;
 	public  $showForm = true;
 
 
@@ -63,6 +63,7 @@ class PatrimoineLivewire extends Component
 		$this->quantite_total = "";
 		$this->qte_en_mauvaise_etat = "";
 		$this->quantite_en_bonne_etat = "";
+		$this->open = !$this->open;
 
 	}
 
