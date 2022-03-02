@@ -242,40 +242,18 @@
 <script type="text/javascript">		
 //montant_lettre.innerHTML = "HELLO JE SUIS UN FUTURE MILLIARDAIRE"		
 document.addEventListener('DOMContentLoaded', function () {
-
-
  @this.on('printBill', paiement =>{
  	let number_letter = NumberToLetter(paiement.amount);
 
- 	@this.call('printBill',paiement.id,number_letter)
+ 	@this.call('printBill',paiement.id,number_letter);
 
- 	//clickButton('main-content')
- 	
+ 	//printPage('main-content');
  })
 
 });
-function clickButton(el){
-	var divContents = document.getElementById(el).innerHTML;
-
-            var a = window.open('', '', 'height=auto, width=20');
-            a.document.write('<html>');
-            a.document.write('<head>');
-            a.document.write('<link rel="stylesheet" href="{{asset("css/facture.css")}}"/>');
-            a.document.write('</head>');
-            a.document.write('<body>');
-            a.document.write(divContents);
-            a.document.write('</body>');
-            a.document.close();
-            a.print();
- }
 
 function clickButton(){
 	printPage('main-content');
-		// printJS({
-		// 	printable: 'main-content',
-		// 	css : "",
-		// 	type : 'html'
-		// });
 }
 </script>
 
