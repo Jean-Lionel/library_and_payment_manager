@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\AnneScolaire;
 use App\Models\Classe;
+use App\Models\Configuration;
 use App\Models\Eleve;
 use App\Models\Paiment;
 use App\Models\Section;
@@ -95,14 +96,16 @@ class RapportPaiment extends Component
 
     				  	 ->get();
 
+    	$configuration = Configuration::latest()->first();
+
 
         return view('livewire.rapport-paiment',
 
         	[
 				// 'eleves'=> $students,
-				'eleves' => $eleves
+				'eleves' => $eleves,
+				'configuration' => $configuration
 			]
-
 
     );
     }

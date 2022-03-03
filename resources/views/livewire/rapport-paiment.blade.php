@@ -128,9 +128,10 @@
             <header>
                 <div >
 
-                    <h5>LYCEE DU SAINT ESPRIT</h5>
-                    <h5>DPE : BUJUMBURA</h5>
-                    <h5>A/S : {{ $annee_scolaire}}</h5>
+                    <h6>{{ $configuration->abbreviation ?? "" }}</h6>
+                    <h6>DCE : {{ $configuration->direction_communal ?? "" }}</h6>
+                    <h6>DPE : {{ $configuration->direction_provincial ?? "" }}</h6>
+                    <h6>A/S : {{ $annee_scolaire}}</h6>
                 </div>
 
                 <div>

@@ -1,6 +1,9 @@
 <div>
 	{{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 	<div class="row mb-3">
+		<div class="col-md-12">
+			 <a href="{{ route('paiements.create') }}">Rapport des paimements </a>
+		</div>
 		<div class="col-md-12 row d-flex justify-content-between">
 			<button wire:click="showForm" class="btn btn-primary p-1"> Nouveau Paiement</button>
 			<button wire:click="showEnOrdre" class="btn btn-primary p-1"> Historique de paiements</button>
