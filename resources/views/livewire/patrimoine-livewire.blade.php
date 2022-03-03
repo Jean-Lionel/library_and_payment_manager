@@ -101,7 +101,7 @@
 
 					<td>
 						<button wire:click="edit({{ $patrimoine->id  }})">Modifier</button>
-						<button class="btn btn-sm btn-danger" wire:click="effacer({{ $patrimoine->id  }})">Supprimer</button>
+						<button class="btn btn-sm btn-danger" wire:click="$emit('deletePatrimoine',{{ $patrimoine->id  }})">Supprimer</button>
 					</td>
 					
 				</tr>
@@ -116,6 +116,21 @@
 
 
 </div>
+
+@push('scripts')
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded',function(){
+		@this.on('deletePatrimoine',(el )=>{
+			const response = confirm("êtez-vous sûr de vouloir de supprimer ?");
+
+			if(response){
+				@this.call('effacer',el)
+			}
+		})
+	});
+
+</script>
+@endpush
 
 
 

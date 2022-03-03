@@ -9,7 +9,7 @@
     			<label for="">Rechercher ici !!!</label> <input placeholder="Entre le nom ou le prenom" type="text" wire:model="searchName">
     		</div>
 
-    		<table class="table table-sm">
+    		<table class="table table-sm table-striped">
     			<thead>
     				<tr>
     					<th>Numéro</th>
@@ -44,8 +44,6 @@
     		<div>
 
     			<form action="" wire:submit.prevent="validerRemet" >
-    				
-    			
     				@foreach($detailEmprunt->detailsBooks as $detail)
     				<div class="form-group d-flex">
 

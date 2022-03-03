@@ -114,18 +114,11 @@ class PatrimoineLivewire extends Component
 
 	}
 
-
-
 	public function effacer($id){
 		$patrimoine = Patrimoine::find($id);
 		$patrimoine->delete();
-
-	
 		$this->render();
 	}
-
-
-
 
     public function destroy()
     {
