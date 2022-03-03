@@ -90,7 +90,7 @@
             <div class="text-right">
                 <input type="text" placeholder="Rechercher ici !!">
                 <button wire:click="$set('showForm',true)">Ajouter</button></div>
-    		<table class="table table-hover table-sm table-responsive">
+    		<table class="table table-hover table-sm table-striped ">
     			<thead>
     				<tr>
     					<th>No</th>
@@ -120,9 +120,9 @@
                             <td>{{($book->nombre_exemplaire - $book->nombre_livre_retire) ?? 0 }}</td>
 
                             <td class="d-flex">
-                                <button class="btn btn-warning" wire:click="updateBook({{ $book->id }})" title="Modifier"> <i class="fa fa-edit"></i> </button>
+                                <button class="btn-sm btn-warning" wire:click="updateBook({{ $book->id }})" title="Modifier"> <i class="fa fa-edit"></i> </button>
 
-                                <button wire:click="$emit('triggerDelete', {{$book->id}})" class="ml-3 btn-danger"><i class="fa fa-trash"></i></button>
+                                <button wire:click="$emit('triggerDelete', {{$book->id}})" class="ml-3 btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                             </td>
     					</tr>
     				@empty
