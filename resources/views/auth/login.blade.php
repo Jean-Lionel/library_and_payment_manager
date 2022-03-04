@@ -37,16 +37,10 @@
                     <form method="POST" action="{{ route('login') }}" class="login100-form validate-form p-b-33 p-t-5">
 
                         @csrf
-                    
-                        <div class="wrap-input100 validate-input" data-validate="Enter username">
-                            <input class="input100  @error('email') is-invalid @enderror" type="text" name="email" placeholder="User name">
-                            <span class="focus-input100" data-placeholder=""></span>
 
-                             @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="wrap-input100 validate-input" data-validate="Enter username">
+                            <input class="input100  @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="User name">
+                            <span class="focus-input100" data-placeholder=""></span>
                         </div>
                         <div class="wrap-input100 validate-input alert-validate" data-validate="Enter password">
                             <input class="input100  @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password">
@@ -59,6 +53,10 @@
                                     </span>
                                 @enderror
                         </div>
+
+                         <p class="text-danger text-center">
+                              {{count($errors) > 0 ? 'vos identifiants sont peut-être erronés' : ""}}
+                         </p>
                         <div class="container-login100-form-btn m-t-32">
                             <button type="submit" class="login100-form-btn">
                                 Login

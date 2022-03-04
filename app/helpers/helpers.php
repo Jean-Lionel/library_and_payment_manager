@@ -1,16 +1,14 @@
 <?php
 
-use App\Models\Cour;
-use App\Models\PointEvaluation;
+use App\Models\Configuration;
 
 
-if(!function_exists('dire_bonjour')){
-	function dire_bonjour(string $message="") : string
-	{
-		return "Bonjour ". $message;
-	}
+function configuration(){
+
+	$configuration = Configuration::latest()->first();
+
+	return $configuration;
 }
-
 
 function setActiveRoute(string $route): string
 {
@@ -83,32 +81,6 @@ function afficherPoint($val){
 
 	return getPrice($val);
 }
-
-function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
-
-		// echo ' ELEVE ID '.$eleve_id.' COUR ID '.$cour_id.'  TRIMESTRE '. $trimestre_id.' anne_scolaire ID '. $anne_scolaire_id.' TYPE Evaluation ID '. $type_evaluation . '<br>' ;
-        $points = PointEvaluation::where('cour_id', '=', $cour_id)
-                                    ->where('eleve_id','=',$eleve_id)
-                                    ->where('trimestre_id','=',$trimestre_id)
-                                    ->where('anne_scolaire_id','=',$anne_scolaire_id)
-                                    ->where('type_evaluation','=',$type_evaluation)
-                                    ->get();
-
-         // dd($eleve_id  ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation);
-
-        //CALCULER LA MOYENNE SUR 
-        $ponderation = Cour::findOrFail($cour_id)->ponderation;
-        //POINT OBTENUE  MOYENNE DU COURS
-
-        if($points->sum('ponderation') != 0){
-        	 $resultat = $points->sum('point_obtenu') * $ponderation / $points->sum('ponderation');
-        	$resultat = number_format($resultat,1,'.', ' ');
-        }else{
-        		$resultat = ' ';
-        }
-        return $resultat;
-
-    }
 
 
 //HOMME = 1
