@@ -59,7 +59,6 @@ class ParentComponent extends Component
             'created_by' => auth()->user()->id,
         ];
           //dd($this->identification);
-
         try {
             DB::beginTransaction();
             if ($this->identification) {
@@ -96,9 +95,6 @@ class ParentComponent extends Component
             DB::rollback();
             
         }
-
-
-        
         $this->reset();
     }
 
