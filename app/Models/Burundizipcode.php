@@ -17,8 +17,6 @@ class Burundizipcode extends Model
         } catch (\Exception $e) {
             $data = null;
         }
-        
-
         return $data;
     }
 
@@ -31,8 +29,11 @@ class Burundizipcode extends Model
 
     public static function collines($commune = ""){
          $data = DB::select("SELECT DISTINCT city FROM `burundizipcodes` WHERE region='$commune'");
-
         return $data;
+
+    }
+
+    public static function zipcode($province="", $commune ="", $colline = "" ){
 
     }
 

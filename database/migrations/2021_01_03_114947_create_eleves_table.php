@@ -26,8 +26,14 @@ class CreateElevesTable extends Migration
             $table->foreignId('anne_scolaire_id');
             $table->foreignId('parent_id')->nullable();
             $table->text('description')->nullable();
+            //Region  Burundi Code ZIP
+            $table->text('region')->nullable();
+            $table->text('district')->nullable();
+            $table->text('city')->nullable();
+            $table->text('zipcode')->nullable();
+
+
             $table->unsignedBigInteger('classe_id');
-            
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
