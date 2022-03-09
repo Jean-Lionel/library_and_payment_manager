@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnneScolaire;
+use App\Models\Burundizipcode;
 use App\Models\Classe;
 use App\Models\Compte;
 use App\Models\Eleve;
@@ -44,6 +45,7 @@ class EleveController extends Controller
      */
     public function create()
     {
+        
         $id = \Request::get('id');
         $classe = Classe::find( $id );
        return view('eleves.create',compact('classe'));
