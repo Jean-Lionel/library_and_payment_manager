@@ -1,4 +1,5 @@
-<div class="col-md-8 offset-md-2">
+<div class="row">
+	<div class="col-md-8">
 	<div class="row">
 		<div class="form-group col-6">
 			<input type="hidden" name="classe_id" value="{{ $classe->id ?? old('classe_id') }}">
@@ -58,4 +59,10 @@
 
 	<a href="{{ route('classes.show',$classe) }}" class="btn btn-warning">Retour</a>
 
+</div>
+
+<div class="col-md-4">
+	
+	<livewire:addresse-component/>
+</div>
 </div>
