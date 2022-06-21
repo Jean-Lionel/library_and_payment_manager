@@ -19,7 +19,7 @@
 
     		<ul class="list-group">
     			<li class="list-group-item">
-    			<h3>ANNEE SCOLAIRE : {{ $currentAnneScolaire->name ?? ""}}</h3> 
+    			<h3>ANNEE SCOLAIRE : {{ $currentAnneScolaire ? $currentAnneScolaire->name : ""}}</h3> 
     			</li>
     		</ul>
     	</div>
@@ -41,7 +41,7 @@
                 @endforeach
             </select>
 
-            <h5>{{$curreTrimestre->name}}</h5>
+            <h5>{{$curreTrimestre ?  $curreTrimestre->name : ""}}</h5>
             
         </div>
     	<div class="col"></div>
