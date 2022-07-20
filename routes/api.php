@@ -22,3 +22,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //apiEleve
 
 Route::get('eleve_api', [EleveController::class, 'apiEleve'])->name('eleve_api');
+
+Route::get('/clear', function (Request $request) {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+   
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+    
+    $runMigrate = Artisan::call('migrate');
+
+    echo "MIGRATE SUCCES";
+});

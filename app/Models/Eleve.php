@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Cour;
 use App\Models\Emprut;
+use App\Models\Paiment;
 use App\Models\PointEvaluation;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Eleve extends Model
 {
@@ -25,6 +26,12 @@ class Eleve extends Model
 
     public function is_a_girl(){
         return $this->sexe == "F";
+    }
+
+    public function paiements(){
+
+        return $this->hasMany(Paiment::class,'eleve_id','id');
+
     }
     public function is_a_boy(){
         return $this->sexe == "M" || $this->sexe == "H";

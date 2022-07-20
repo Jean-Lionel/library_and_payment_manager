@@ -18,15 +18,23 @@ class ProfileComponent extends Component
         $user = auth()->user();
         $parent = EleveParent::where('user_id',$user->id)->first();
         $eleves = [];
+        $paiements = [];
         if ($user->isParent()) {
             // code...
             $eleves = $parent->enfant;
+
+            foreach ($eleves as $key => $value) {
+                
+               $paiements[] = $value->paiements;
+            }
+
         }
 
         return view('livewire.profile-component',[
             'user' => $user,
             'parent' => $parent,
-            'eleves' => $eleves
+            'eleves' => $eleves,
+            'paiements' => $paiements,
         ]);
     }
 

@@ -99,6 +99,63 @@
     </div>
 
 </div>
+
+<div class="col-md-8">
+
+    @if ($paiements)
+        {{-- expr --}}
+        <div>
+            <div class="bg-dark">Paiement</div>
+
+            <table class="table table-sm table-hover table-stipped">
+                <thead class="badge-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Bordereau</th>
+                       
+                        <th>TYPE</th>
+                        <th>Trimestre</th>
+                        <th>A\S</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($paiements as $key => $paiement)
+                        {{-- expr --}}
+                        @if ( $paiement[0])
+                            {{-- expr --}}
+                             <tr>
+                            <td colspan="5" class="bg-info text-center">
+                               <b>{{ ++$key }} # {{ $paiement[0]->eleve->fullName}} </b>
+                            </td>
+                        </tr>
+                        @endif
+                       
+                        @foreach ($paiement as $p) 
+
+                         <tr>
+                            <td>{{ $p->id}}</td>
+                            <td>{{ $p->bordereau}}</td>
+                            <td>{{ $p->type_paiement}}</td>
+                            <td>{{ $p->trimestre}}</td>
+                            <td>{{ $p->annee_scolaire}}</td>
+                            <td>{{ $p->amount}}</td>
+                            <td>{{ $p->created_at}}</td>
+                        </tr>
+
+                        @endforeach
+                       
+                    @endforeach
+                </tbody>
+            </table>
+
+
+        </div>
+    @endif
+    
+</div>
 </div>
 
 
