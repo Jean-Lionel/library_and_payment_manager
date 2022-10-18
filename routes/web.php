@@ -41,11 +41,11 @@ Route::get('notification-sweetalert', NotificationSweetAlert::class);
 
 Route::middleware('auth')->group(function(){
     Route::get('/', function () {   
-        return view('auth.login');
+        return view('welcome');
     });
     Route::get('/accueil', function () {     
         return view('welcome');
-    });
+    })->name('accueil');
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     Route::resource('sections', SectionController::class);
     Route::resource('classes', ClasseController::class);
