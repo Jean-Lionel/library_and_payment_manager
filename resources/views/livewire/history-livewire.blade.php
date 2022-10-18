@@ -1,7 +1,10 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
     <div class="row"> 	
-    	<table class="table table-bordered">
+        <div>
+            <input type="text" >
+        </div>
+    	<table class="table table-sm table-bordered">
     		<thead>
     			<tr>
     				<th>Lecteur</th>
@@ -17,6 +20,8 @@
     				<td>
                         {{ $emprut->eleve->fullName }} <br>
                         Classe : {{ $emprut->eleve->classe->name }}
+                        <br>
+                        N° : {{ $emprut->eleve->id }}
                     </td>
     				<td>
     					<ul>
@@ -24,7 +29,7 @@
                             <li class="d-flex justify-content-between">
 
                                 <span>{{ $value->book->title }}</span>
-                                <span>Nombre d'exemplaire : 
+                                <span>Nombre : 
                                     {{ $value->quantite }}</span>
                             </li>
                             <hr>
