@@ -8,9 +8,12 @@
 
 		<link rel="stylesheet" href="{{ asset('fonts/css/font-awesome.min.css') }}">
 
-		<link rel="stylesheet" href="{{ asset('style.css')}}">
+		<link rel="stylesheet" href="{{ asset('style.css')}}" defer>
 		<link rel="stylesheet" href="{{ asset('css/print.min.css')}}">
 		<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
+		<link rel="stylesheet" href="{{ asset('datatable/css/jquery.dataTables.min.css')}}">
+		<link rel="stylesheet" href="{{ asset('datatable/css/datatables.min.css')}}">
+
 		@livewireStyles
 
 		<style type="text/css">
@@ -156,12 +159,15 @@
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/print.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
-
 		<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
-
 		<script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
-
 		<script src="{{ asset('js/convertToLetter.js') }}"></script>
+
+		<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ asset('datatable/datatables.min.js') }}"></script>
+		<script src="{{ asset('datatable/pdfmake.min.js') }}"></script>
+
+
 		@livewireScripts
 		@yield('javascript')
 		@stack('scripts')
