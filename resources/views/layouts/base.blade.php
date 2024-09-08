@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="{{ asset('fonts/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 
-		<link rel="stylesheet" href="{{ asset('style.css')}}">
+		<link rel="stylesheet" href="{{ asset('style.css')}}" defer>
 		<link rel="stylesheet" href="{{ asset('css/print.min.css')}}">
 		<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
@@ -173,12 +173,15 @@
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/print.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
-
 		<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
-
 		<script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
-
 		<script src="{{ asset('js/convertToLetter.js') }}"></script>
+
+		<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ asset('datatable/datatables.min.js') }}"></script>
+		<script src="{{ asset('datatable/pdfmake.min.js') }}"></script>
+
+
 		@livewireScripts
 		@yield('javascript')
 		@stack('scripts')

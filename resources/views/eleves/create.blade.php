@@ -134,6 +134,7 @@ $("#save").on('click', function(event) {
 
 function formateDate(date){
 	const givenDate = new Date(date);
+	
 	return givenDate.getFullYear() +"-"+(givenDate.getMonth() + 1)+"-"+givenDate.getDate();
 }
 

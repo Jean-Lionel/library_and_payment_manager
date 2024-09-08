@@ -52,7 +52,7 @@ class ClasseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:classes',
             'level_id' => 'required|numeric'
         ]);
 

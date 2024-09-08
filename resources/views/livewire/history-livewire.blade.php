@@ -1,47 +1,79 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
-    <div class="row"> 	
-    	<table class="table table-bordered">
+
+    <div class="col-md-12"> 	
+
+    	<table id="table" width="100%" class="table table-hover">
     		<thead>
     			<tr>
-    				<th>Lecteur</th>
+    				<th colspan="3">Lecteur</th>
     				<th>Livre Retirer</th>
     				<th>date de retrait</th>
     				<th>Date de retour</th>
     			</tr>
-    		</thead>
+                <tr>
+                    <th>Nom et Prénom</th>
+                    <th>Classe</th>
+                    <th>Numéro</th>
+                    <th>DATE DE </th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
 
-    		<tbody>
-    			@forelse($empruts as $emprut)
-    			<tr>
-    				<td>
-                        {{ $emprut->eleve->fullName }} <br>
-                        Classe : {{ $emprut->eleve->classe->name }}
-                    </td>
-    				<td>
-    					<ul>
-                            @foreach($emprut->detailsBooks as $value)
-                            <li class="d-flex justify-content-between">
+            <tbody>
+               @forelse($empruts as $emprut)
+               <tr>
+                <td> {{ $emprut->eleve->fullName }}</td>
+                <td> {{ $emprut->eleve->classe->name }}</td>
+                <td> {{ $emprut->eleve->id }}</td>
 
-                                <span>{{ $value->book->title }}</span>
-                                <span>Nombre d'exemplaire : 
-                                    {{ $value->quantite }}</span>
-                            </li>
-                            <hr>
-                            @endforeach 
-                        </ul>
-    				</td>
-    				<td>{{ $emprut->date_retrait }}</td>
-    				<td>{{ $emprut->date_retour }}</td>
-    				
-    			</tr>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Nombre</th>
+                        </tr>
+                        @foreach($emprut->detailsBooks as $value)
+                        <tr>
+                            <td class="d-flex justify-content-between">
+                                {{ $value->book->title }}
+                            </td>
+                            <td> {{ $value->quantite }} </td>
+                        </tr>
+                        @endforeach 
+                            
+                        </table>
 
-    			@empty
+                </td>
+                    <td>{{ $emprut->date_retrait }}</td>
+                    <td>{{ $emprut->date_retour }}</td>
 
-    			@endforelse
-    		</tbody>
-    	</table>
+                </tr>
+
+                @empty
+
+                @endforelse
+            </tbody>
+        </table>
     </div>
 
-    {{ $empruts->links() }}
+
 </div>
+
+@push('scripts')
+<script>
+
+    $(document).ready( function () {
+        $('#table').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print',
+            ], 
+            pagingType: "full_numbers",
+            scrollX: true,
+        });
+        
+    } );
+
+</script>
+@endpush

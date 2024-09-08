@@ -127,7 +127,7 @@
     					</tr>
     				@empty
     				<td colspan="8">
-    					<h5>Pas des des livres disponibles</h5>
+    					<h5>Pas de livres disponibles</h5>
     				</td>
 
     				@endforelse
