@@ -12,7 +12,7 @@
 
 <div class="course_header">
 	
-	<a class=" {{ setActiveRoute('cours.index') }}"  href="{{ route('cours.index') }}"><i class="fa fa-plus"></i> Cours</a>
+	<a class="btn btn-sm btn-primary text-white {{ setActiveRoute('cours.index') }}"  href="{{ route('cours.index') }}"><i class="fa fa-plus text-white"></i> Cours</a>
 	<a class=" {{ setActiveRoute('evaluations') }}" href="{{ route('evaluations') }}">Evaluation</a>
 	@canany(['is-admin','is-prefet'])
 	<a class=" {{ setActiveRoute('course_categories') }}" href="{{ route('course_categories') }}">Catégorie</a>

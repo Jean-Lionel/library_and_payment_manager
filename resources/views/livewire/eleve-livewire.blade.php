@@ -38,44 +38,54 @@
 
     </div>
 
-
-    <table class="table table-bordered table-sm">
+<div class="tabledata mt-3 card--container">
+    <form method="POST" action="{{ route('presences.store') }}">
+        @csrf
+    <table class="table table-bordered table-sm ">
     	<thead>
     		<tr>
-    			      <th>Numéro</th>
-                <th>Section</th>
-                <th>Classe</th>
+    			<th>#</th>
+                <th>Photo</th>
+                {{-- <th>Section</th>
+                <th>Classe</th> --}}
                 <th>Numéro de compte</th>
                 <th>Nom</th>
                 <th>Prénom</th>
+                <th>Sexe</th>
+                <th>Adresse</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-          @foreach($eleves as $key =>$eleve)
+          @foreach($eleves as $key => $eleve)
           <tr>
-             <td>{{ ++$key }}</td>
-             <td>{{ $eleve->classe->section->name }}</td>
-              <td>{{ $eleve->classe->name }}</td>
+            <td><input type="checkbox" value="{{ $eleve->id }}" name="eleve_id[]"/></td>
+             {{-- <td>{{ ++$key }}</td> --}}
+             <td><img src="{{ asset('uploads/eleve/' .$eleve->image_eleve) }}" alt="image" style="width: 44px; height: 44px; border-radius: 100%;"/></td>
+             {{-- <td>{{ $eleve->classe->section->name }}</td>
+              <td>{{ $eleve->classe->name }}</td> --}}
              <td>{{ $eleve->compte->name ?? "" }}</td>
-            
              <td>{{ $eleve->first_name }}</td>
              <td>{{ $eleve->last_name }}</td>
+             <td>{{ $eleve->sexe }}</td>
+             <td>{{ $eleve->address }}</td>
              <td class="d-flex ">
                 <a href="{{ route('eleves.edit', $eleve) }}" class="btn-sm btn-info mr-2">Modifier</a>
 
-                <form action="{{ route('eleves.destroy', $eleve) }}" method="POST">
+                {{-- <form action="{{ route('eleves.destroy', $eleve) }}" method="POST">
                   @csrf
                   @method('DELETE')
 
                   <button class="btn-sm btn-danger" onclick="return confirm('Etez-vous sûr ?')">Supprimer</button>
-                </form>
+                </form> --}}
         </td>
          </tr>
 
          @endforeach
      </tbody>
  </table>
-
+ <button class=" btn btn-sm btn-primary float-right">Enregistrer</button>
+</form>
  {{ $eleves->links()}}
+</div>
 </div>

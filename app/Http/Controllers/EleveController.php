@@ -28,7 +28,7 @@ class EleveController extends Controller
 
         //dd($eleves);
         return view('eleves.eleve', compact('eleves'));
-        
+
     }
 
 
@@ -45,7 +45,7 @@ class EleveController extends Controller
      */
     public function create()
     {
-        
+
         $id = \Request::get('id');
         $classe = Classe::find( $id );
        return view('eleves.create',compact('classe'));
@@ -62,7 +62,7 @@ class EleveController extends Controller
         $request->validate([
             'first_name' => 'required|min:2',
             'last_name' => [
-                             'required', 
+                             'required',
                              Rule::unique('eleves')
                                     ->where('first_name', $request->first_name)
                                     ->where('classe_id', $request->classe_id)
@@ -71,14 +71,18 @@ class EleveController extends Controller
             'date_naissance' => 'date',
             'sexe' => 'required',
             'address' => 'required',
+            'image_eleve' => 'image|mimes:jpg,jpeg,png|max:1024',
         ]);
+        $fileName = time().'.'.$request->image_eleve->extension();
+
+        $request->image_eleve->move(public_path('uploads/eleve'), $fileName);
         try {
             DB::beginTransaction();
              $anne_scolaire = AnneScolaire::latest()->firstOrFail();
            //  dd($anne_scolaire);
              $eleve = Eleve::create(
                 [
-                'anne_scolaire' =>  $anne_scolaire->name, 
+                'anne_scolaire' =>  $anne_scolaire->name,
                 'anne_scolaire_id' => $anne_scolaire->id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -86,8 +90,8 @@ class EleveController extends Controller
                 'date_naissance' => $request->date_naissance,
                 'sexe' => $request->sexe,
                 'address' => $request->address,
+                'image_eleve' => $fileName,
                 ]);
-
              $compte = Compte::create([
                 'name' => 'SE-'.$eleve->id,
                 'eleve_id' => $eleve->id,
@@ -98,10 +102,10 @@ class EleveController extends Controller
             Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
 
             DB::commit();
-            
+
         } catch (\Exception $e) {
             dd($e->getMessage());
-            DB::rollback();  
+            DB::rollback();
         }
 
         return back();
@@ -125,27 +129,27 @@ class EleveController extends Controller
              DB::beginTransaction();
              $anne_scolaire = AnneScolaire::latest()->firstOrFail();
              foreach ($data['data'] as $key => $value) {
-                  
+
                    $result = array_merge($value, [
                         'anne_scolaire_id' =>  $anne_scolaire->id,
                         'anne_scolaire' =>  $anne_scolaire->name,
 
                    ]);
-                 
+
                     $eleve = Eleve::create($result);
                     $compte = Compte::create([
                             'name' => 'SE-'.$eleve->id,
                             'eleve_id' => $eleve->id,
                             'montant' => 0,
                      ]);
-                
-              } 
+
+              }
 
             DB::commit();
         } catch (\Exception $e) {
-           
+
            return $e->getMessage();
-            
+
         }
 
        return $data;

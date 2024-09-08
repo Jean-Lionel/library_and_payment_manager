@@ -1,20 +1,23 @@
 <!doctype html>
 	<html lang="en">
 	<head>
-		<title>LYCEE D'EXCELLENCE</title>
+		<title>ECOLE PARENT ELEVE</title>
 		<meta charset="utf-8">
 		<link rel="icon" type="text/css" href="data:.">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<link rel="stylesheet" href="{{ asset('fonts/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 
 		<link rel="stylesheet" href="{{ asset('style.css')}}">
 		<link rel="stylesheet" href="{{ asset('css/print.min.css')}}">
 		<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"/>
 		@livewireStyles
 
 		<style type="text/css">
-			
+
 
 			.{
 				background: rgba(205,250,200,0.5);
@@ -43,31 +46,45 @@
 				<div class="p-4 ">
 					<h1><a href="#" class="logo">{{configuration()->etablimssement ?? ""}} </a></h1>
 					<ul class="list-unstyled components mb-5 text-light">
+                        @can(['is-admin'])
+                        <li class="{{ setActiveRoute('accueil') }}">
+							<a href="{{ route('accueil') }}"><span class="fa-solid fa-school mr-3 text-light"></span>Accueil</a>
+						</li>
+                        @endcan
+                        @can(['is-admin'])
+                        <li class="{{ setActiveRoute('ecoles.create') }}">
+							<a href="{{ route('ecoles.create') }}"><span class="fa-solid fa-school mr-3 text-light"></span> Ecoles</a>
+						</li>
+                        @endcan
 						@canany(['is-admin','is-prefet'])
 						<li class="{{ setActiveRoute('eleves.index') }}">
-							<a href="{{ route('eleves.index') }}"><span class="fa fa-user mr-3 text-light"></span> Eleve</a>
+							<a href="{{ route('eleves.index') }}"><span class="fas fa-child mr-3 text-light"></span> Eleve</a>
 						</li>
 						@endcanany
 
 						@canany(['is-admin','is-prefet','is-professeur'])
 						<li class="{{ setActiveRoute('cours.index') }}">
-							<a href="{{ route('cours.index') }}"><span class="fa fa-bars mr-3 text-light"></span> Cours</a>
+							<a href="{{ route('cours.index') }}"><span class="fas fa-book-reader mr-3 text-light"></span> Cours</a>
 						</li>
 						@endcanany
-
-						@canany(['is-admin','is-comptable'])
+                        @canany(['is-admin','is-prefet','is-professeur'])
+						<li class="{{ setActiveRoute('horaire') }}">
+							<a href="{{ route('horaire') }}"><span class="fas fa-stopwatch mr-3 text-light"></span>Horaire</a>
+						</li>
+						@endcanany
+						@canany(['is-admin','is-comptable','is-prefet'])
 						<li  class="{{ setActiveRoute('paiements.index') }}">
 							<a href="{{ route('paiements.index') }}"><span class="fa fa-briefcase mr-3 text-light"></span> Paiement</a>
 						</li>
 						@endcanany
 
-						@canany(['is-admin','is-bibliothequaire'])
+						@canany(['is-admin','is-bibliothequaire','is-prefet'])
 						<li class="{{ setActiveRoute('bibliotheque') }}">
 							<a href="{{ route('bibliotheque') }}"><span class="fa fa-book mr-3 text-light"></span> Bibliothèque</a>
 						</li>
 						@endcanany
 
-						@canany(['is-admin','is-comptable'])
+						@canany(['is-admin','is-comptable','is-prefet'])
 						<li class="{{ setActiveRoute('patrimoines.index') }}">
 							<a href="{{ route('patrimoines.index') }}"><span class="fa fa-sticky-note mr-3 text-light"></span>Patrimoines</a>
 						</li>
@@ -89,29 +106,29 @@
 						</li>
 						@endcanany
 
-						@canany(['is-admin','is-comptable'])
+						@canany(['is-admin','is-comptable','is-prefet'])
 						<li class="{{ setActiveRoute('expenses.index') }}">
-							<a href="{{ route('expenses.index') }}"><span class="fa fa-window-minimize mr-3 text-light"></span> Depense</a>
+							<a href="{{ route('expenses.index') }}"><span class="fas fa-chart-line mr-3 text-light"></span> Depense</a>
 						</li>
 						@endcanany
-						@canany(['is-admin','is-comptable'])
+						@canany(['is-admin','is-comptable','is-prefet'])
 						<li class="{{ setActiveRoute('rapport') }}">
 							<a href="{{ route('rapport') }}"><span class="fa fa fa-bar-chart-o mr-3 text-light"></span> Rapport</a>
 						</li>
 						@endcanany
 
-						@canany(['is-admin'])
+						@canany(['is-admin','is-prefet'])
 						<li class="{{ setActiveRoute('utilisateur') }}">
 							<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3 text-light"></span> Utilisateur</a>
 						</li>
 						<li class="{{ setActiveRoute('parents') }}">
-							<a href="{{ route('parents') }}"><span class="fa fa fa-users mr-3 text-light"></span> Parents</a>
+							<a href="{{ route('parents') }}"><span class="fas fa-restroom mr-3 text-light"></span> Parents</a>
 						</li>
 
 						@endcanany
 
 						<li class="{{ setActiveRoute('profiles') }}">
-							<a href="{{ route('profiles') }}"><span class="fa fa fa-users mr-3 text-light"></span> Profil</a>
+							<a href="{{ route('profiles') }}"><span class="fas fa-user-circle mr-3 text-light"></span> Profil</a>
 						</li>
 
 					</ul>
@@ -145,9 +162,9 @@
 				</div>
 				@endif
 
-				<div  class="p-md-2 ml-4"> 
+				<div  class="p-md-2 ml-4">
 					@yield('content')
-				</div>		
+				</div>
 			</div>
 		</div>
 

@@ -19,11 +19,18 @@ use App\Http\Controllers\RapportController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\EcoleController;
 use App\Http\Livewire\ConfigurationComponent;
 use App\Http\Livewire\NotificationSweetAlert;
 use App\Http\Livewire\ParentComponent;
 use App\Http\Livewire\VenteLivewire;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\TerritoireController;
+use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\PresenceController;
+use App\Http\Livewire\HoraireComponent;
+use App\Http\Controllers\HoraireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +47,13 @@ Route::get('notification-sweetalert', NotificationSweetAlert::class);
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/', function () {   
+    Route::get('/', function () {
         return view('auth.login');
     });
-    Route::get('/accueil', function () {     
-        return view('welcome');
-    });
+    // Route::get('/accueil', function () {
+    //     return view('welcome');
+    // })->name('accueil');
+    Route::get('/accueil', [AccueilController::class, 'index'])->name('accueil');
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     Route::resource('sections', SectionController::class);
     Route::resource('classes', ClasseController::class);
@@ -60,6 +68,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('ventes', VenteController::class);
     Route::resource('expenses', DepenseController::class);
     Route::resource('configurations', ConfigurationController::class);
+    Route::resource('ecoles', EcoleController::class);
+    Route::resource('provinces', ProvinceController::class);
+    Route::resource('territoires', TerritoireController::class);
+    Route::resource('presences', PresenceController::class);
 
     Route::get('bibliotheque', [BibliothequeController::class, 'index'])->name('bibliotheque');
 
@@ -72,7 +84,7 @@ Route::middleware('auth')->group(function(){
     Route::get('effectif', [RapportController::class, 'effectif'])->name('effectif');
     Route::get('configurations_component', ConfigurationComponent::class)->name('configurations_component');
     Route::get('get_effectifs/{anne_scolaire_id}', [RapportController::class, 'getEffectifs'])->name('get_effectifs');
-    
+
     Route::get('etageres', [BibliothequeController::class, 'etageres'])->name('etageres');
     Route::get('history', [BibliothequeController::class, 'history'])->name('history');
 
@@ -100,6 +112,9 @@ Route::middleware('auth')->group(function(){
     Route::view('course_categories','courses.categories')->name('course_categories');
     Route::view('bullettin','courses.bullettin')->name('bullettin');
     Route::view('utilisateur','users.utilisateur')->name('utilisateur');
+    // Route::get('horaire', HoraireComponent::class)->name('horaire');
+    Route::view('horaire', 'horaire.create')->name('horaire');
+    Route::post('addhoraire', [HoraireController::class, 'store'])->name('horaire.create');
 
 });
 

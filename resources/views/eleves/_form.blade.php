@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row bg-white">
 	<div class="col-md-8">
 	<div class="row">
 		<div class="form-group col-6">
@@ -6,12 +6,12 @@
 			<label for="first_name">NOM</label>
 			<input type="text" class="form-control {{$errors->has('first_name') ? 'is-invalid' : '' }}" id="first_name" name="first_name" value="{{ old('first_name') ?? $eleve->first_name?? ' ' }}">
 			{!! $errors->first('first_name', '<small class="help-block  invalid-feedback">:message</small>') !!}
-		
+
 	  </div>
 	  <div class="form-group col-6">
 		<label for="last_name">PRENOM</label>
 		<input type="text" class="form-control {{$errors->has('last_name') ? 'is-invalid' : '' }}" id="last_name" name="last_name" value="{{ old('last_name') ?? $eleve->last_name?? ' ' }}">
-		{!! $errors->first('last_name', '<small class="help-block invalid-feedback">:message</small>') !!}	
+		{!! $errors->first('last_name', '<small class="help-block invalid-feedback">:message</small>') !!}
 	  </div>
 	</div>
 	  <div class="row">
@@ -23,34 +23,41 @@
 	  </div>
 	  <div class="form-group col-6" style="font-size: 20px; cursor: pointer;">
 		<label for="sexe">SEXE</label> <br>
-		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "H") checked @endif name="sexe" id="homme" value="H" title="MASCULIN"> 
+		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "H") checked @endif name="sexe" id="homme" value="H" title="MASCULIN">
 		<label for="homme">MASCULIN</label>
-		
+
 		<input type="radio" @if(isset($eleve->sexe)  and $eleve->sexe == "F") checked @endif id="femme" name="sexe" value="F">
 		<label for="femme">FEMININ</label>
 		{!! $errors->first('sexe', '<small class="help-block invalid-feedback">:message</small>') !!}
-		
+
 	  </div>
 
-		
+
 
 	</div>
 
 	<div class="row">
 		<div class="form-group col-6">
-			
+
 			<label for="nationalite">NATIONALITE</label>
 			<input type="text" class="form-control {{$errors->has('nationalite') ? 'is-invalid' : '' }}" id="nationalite" name="nationalite" value="{{ old('nationalite') ?? $eleve->nationalite?? 'BURUNDAISE ' }}">
 			{!! $errors->first('nationalite', '<small class="help-block invalid-feedback">:message</small>') !!}
-		
 	  </div>
 
 	  <div class="form-group col-6">
 		<label for="address">ADRESSE</label>
 		<input type="text" class="form-control {{$errors->has('address') ? 'is-invalid' : '' }}" id="address" name="address" value="{{ old('address') ?? $eleve->address?? ' ' }}">
 		{!! $errors->first('address', '<small class="help-block invalid-feedback">:message</small>') !!}
-		
+
 	  </div>
+
+      <div class="form-group col-6 " class="btn btn-primary btn-rounded">
+
+        <label for="image_eleve">Photo</label>
+        <input type="file" class="form-control {{$errors->has('image_eleve') ? 'is-invalid' : '' }} rounded-5" id="image_eleve" name="image_eleve" value="{{ old('image_eleve') }}">
+        {!! $errors->first('image_eleve', '<small class="help-block invalid-feedback">:message</small>') !!}
+
+  </div>
 
 	</div>
 
@@ -62,7 +69,7 @@
 </div>
 
 <div class="col-md-4">
-	
+
 	<livewire:addresse-component/>
 </div>
 </div>

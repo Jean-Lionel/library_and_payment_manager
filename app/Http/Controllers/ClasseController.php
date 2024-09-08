@@ -7,6 +7,7 @@ use App\Models\Eleve;
 use App\Models\Level;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Models\RoleUser;
 
 class ClasseController extends Controller
 {
@@ -33,12 +34,12 @@ class ClasseController extends Controller
     public function create()
     {
         $id = \Request::get('id');
-       
+
         $section = Section::find($id) ?? new Section;
         $levels = Level::all();
         $classe = new Classe;
 
-        return view('classes.create',compact('section', 
+        return view('classes.create',compact('section',
             'levels','classe'));
     }
 
@@ -59,7 +60,7 @@ class ClasseController extends Controller
 
         $section_id = $level->section->id;
 
-        Classe::create(array_merge($request->all(), 
+        Classe::create(array_merge($request->all(),
             ['section_id' => $section_id])
       );
         return $this->index();

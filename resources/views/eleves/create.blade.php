@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<h5 class="text-center">Ajouter un élève en <b> {{ $classe->name ?? "" }} </b></h5>
-	<form action="{{ route('eleves.store') }}" method="POST">
+	<form action="{{ route('eleves.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		@method('POST')
 		@include('eleves._form',['btn_name' => 'Enregistrer'])
@@ -10,7 +10,7 @@
 
 	<div class="col-md-8 offset-md-2">
 		<div class="">
-			
+
 			<h5 class="text-center">Ajouter la liste des élèves   <b> {{ $classe->name ?? "" }} </b> à partir du fichier excel </h5>
 
 			<p>
@@ -18,19 +18,19 @@
 			</p>
 
 			<p class="d-flex">
-				2. Charger le Modèle 
+				2. Charger le Modèle
 				<form action="">
 					<input type="file" id="input_file" accept=".csv">
 					<button id="save"> <i class="fa fa-upload" style="font-size:24px"></i></button>
 					<img src="{{ asset('images/loader.gif') }}" width="200" alt="" id="loader" style="display: none;" >
 				</form>
-				
+
 			</p>
 			<p id="responseGet">
-				
+
 			</p>
 
-	
+
 		</div>
 	</div>
 </div>
@@ -72,7 +72,7 @@ function readFile(file) {
     const result = event.target.result;
     // Do something with result
     const data = result.split('\r\n')
-   
+
     // const headers = data[0].split(',')
     const classe_id = "{{ $_GET['id'] }}"
 
@@ -129,7 +129,7 @@ $("#save").on('click', function(event) {
 	    $("#responseGet").html(`<span class="text-danger"> Erreur ${textStatus}  élèves</span>`)
 	  }
 	});
-	
+
 });
 
 function formateDate(date){

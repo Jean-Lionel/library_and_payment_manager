@@ -3,13 +3,13 @@
 
     @if ($showForm)
         {{-- expr --}}
-    
+
     <div class="offset-2 col-md-6">
-    	<h5 class="text-center">Ajouter un cours</h5>
+    	<h5 class="text-center">Nouveau un cours</h5>
     	<form action="" wire:submit.prevent="saveCourse" class="row">
 
     		<div class="form-group col-md-6">
-    			<label for="">TITLE DU COURS 
+    			<label for="">TITLE DU COURS
                 </label>
     			<input type="text" wire:model="name" class="form-control form-control-sm">
 
@@ -40,14 +40,14 @@
             </div>
 
     		<div class="form-group col-md-6">
-    			<label for="">PODERATION TJ TRIMESTRIELLE</label>
+    			<label for="">PONDERATION TJ TRIMESTRIELLE</label>
     			<input type="number" min="0" wire:model="ponderation" class="form-control form-control-sm">
                 @error('ponderation')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
             <div class="form-group col-md-6">
-                <label for="">PODERATION COMPÉTENCE </label>
+                <label for="">PONDERATION COMPÉTENCE </label>
                 <input type="number" min="0" wire:model="ponderation_compentance" class="form-control form-control-sm">
                 @error('ponderation_compentance')
                 <p class="text-danger text-center"> {{ $message }}</p>
@@ -60,8 +60,8 @@
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
             </div>
-            
-            
+
+
             <div class="form-group col-md-6">
                 <label for="credit">CREDIT / HS</label>
                 <input type="number" id="credit" wire:model="credit" value="0" class="form-control form-control-sm">
@@ -97,12 +97,12 @@
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
-            
-    		<div class="form-group mt-3 col-md-6">
-    			<button type="submit" class="btn btn-info btn-block">Enregistrer</button>
-    		</div>
+
+
+    			<button type="submit" class="btn btn-info btn-block w-100">Enregistrer</button>
+
     	</form>
-    	
+
     </div>
 
     @else
@@ -121,7 +121,7 @@
                 @endcanany
             </div>
         </div>
-       
+
         <table class="table tab-content table-sm table-hover">
             <thead>
                 <tr>
@@ -136,7 +136,7 @@
                     <th>ACTION</th>
                     @endcanany
                 </tr>
-                
+
             </thead>
 
             <tbody>
@@ -150,24 +150,24 @@
                 <td>{{ $course->credit }}</td>
                 <td>{{ $course->level->name ?? "" }}</td>
                 <td>{{ $course->professeur->name ?? "" }}</td>
-                
+
                     @canany(['is-admin','is-prefet'])
                     <td>
                     <button class="btn-info btn-sm" wire:click="updateCourse({{ $course->id }})">
                      Modifier</button>
                      </td>
                      @endcanany
-                 
+
             </tr>
-            @endforeach 
+            @endforeach
             </tbody>
         </table>
 
         {{ $courses->links()}}
 
-       
+
     </div>
 
     @endif
-        
+
 </div>

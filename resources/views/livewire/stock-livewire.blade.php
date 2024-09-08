@@ -15,14 +15,12 @@
     		 		</p>
     		 		<button type="submit" class="btn-primary btn-block btn-sm">Enregistrer</button>
     		 	</div>
-    	
    			 </form>
-    		
     	</div>
     	<div class="col-md-8">
     		<a class="btn btn-info" href="{{ route('categories.index') }}">Category</a>
             <a class="btn btn-info" href="{{ route('products.index') }}">Produits</a>
-    		<table class="table table-sm"> 
+    		<table class="table table-sm">
     			<thead class="badge-dark">
     				<tr>
     					<th>#</th>
@@ -39,13 +37,13 @@
     						<button class="btn btn-sm btn-warning" wire:click="edit({{ $stock->id }})">modifier</button>
                             @if($stock->categories->count() ==0)
     						<button class="btn btn-sm btn-danger" wire:click="destroy({{ $stock->id }})">Supprimer</button>
-                            @endif   
+                            @endif
     					</td>
     				</tr>
 
     				@endforeach
     			</tbody>
-    			
+
     		</table>
     	</div>
     </div>
@@ -54,7 +52,7 @@
 @push('scripts')
 
 <script>
-    
+
 </script>
 
 @endpush

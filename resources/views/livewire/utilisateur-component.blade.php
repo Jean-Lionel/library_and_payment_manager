@@ -1,26 +1,34 @@
 <div>
     {{-- Do your work, then step back. --}}
-    <h4>Liste des Utilisateurs</h4>
+    <h4 class="text-center">Liste des Utilisateurs</h4>
 
     <style>
         .inputs{
             display: inline-block;
             margin-right: 10px;
         }
+        img
+        {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
 
     @if($showForm)
-    <div class="row">
-        <div class="offset-3 col-md-5">
-            <form action="" wire:submit.prevent="saveUser">
-                            <div class="form-group">
+    <div class="container">
+        <div class="row">
+            <form action="" wire:submit.prevent="saveUser" enctype="multipart/form-data">
+            <div class="form-row">
+             <div class="form-group col-md-4">
                 <label for="">NOM ET PRENOM</label>
                 <input type="text" wire:model="name" class="form-control">
                 @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-             <div class="form-group">
+             <div class="form-group col-md-4">
                 <label for="email">EMAIL</label>
                 <input id="email" type="email" placeholder="ex : nijeanlionel@gmail.com" wire:model="email" class="form-control">
                 @error('email')
@@ -28,17 +36,34 @@
                 @enderror
 
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-4">
                 <label for="">TELEPHONE</label>
                 <input type="text" placeholder="ex : +257 79 614 036" wire:model="telephone" class="form-control">
                 @error('telephone')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
-
             </div>
 
+            <div class="form-group col-md-4">
+                <label for="">ECOLE</label>
+                <select type="text" wire:model="ecole_id" class="form-control">
+                    @foreach ($ecoles as $ecole)
+                    <option value={{ $ecole->id }}>{{$ecole->nom_ecole}}</option>
+                    @endforeach
+                </select>
+                @error('ecole')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-4">
+                <label for="email">Photo</label>
+                <input id="image_user" type="file"  wire:model="image_user" class="form-control">
+                @error('image_user')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
                 <label for="">MOT DE PASSE</label>
                 <input type="password" placeholder="" wire:model="password" class="form-control">
                 @error('password')
@@ -46,53 +71,51 @@
                 @enderror
             </div>
 
-             <div class="form-group">
+             <div class="form-group col-md-4">
                 <label for="">RETAPEZ VOTRE MOT DE PASSE</label>
                 <input type="password" placeholder="" wire:model="password_confirmation" class="form-control">
                 @error('password')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary">Enregistrer</button>
-            </div>
+        </div>
+        <button class="btn btn-primary float-right mt-3">Enregistrer</button>
             </form>
-            
+
         </div>
     </div>
 
     @else
     <div class="text-right">
         <div class="row">
-           <div class="col-md-5">
-               <h4>Liste des utilisateurs</h4>
-           </div>
             <div class="col-md-6">
                 <input type="text" wire:model="search" class="form-control" placeholder="Recherche">
             </div>
-             <div class="col-md-1">
+             <div class="col-md-6 float-end">
                  <button wire:click="$set('showForm', {{! $showForm}})" class="btn btn-primary btn-sm" title="Nouvel Utilisateur"><i class="fa fa-plus"></i></button>
             </div>
         </div>
-       
+
     </div>
-    <table class="table table-sm">
-        <thead>
+    <table class="table table-sm table-striped bg-white mt-4">
+        <thead class="bg-primary text-white">
             <tr>
+                <th>Photo</th>
                 <th>NOM ET PRENOM</th>
                 <th>EMAIL</th>
                 <th>ROLES</th>
                 <th>ACTION</th>
             </tr>
-            
+
         </thead>
- 
+
         <tbody>
 
             @foreach ($users  as $user)
                 {{-- expr --}}
 
                 <tr>
+                    <td><img src="{{ asset('../uploads/user' . $user->image_user) }}" alt=""></td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
@@ -113,12 +136,12 @@
                     </td>
                 </tr>
                 @if($editId == $user->id)
-                <tr>   
+                <tr>
                     <td colspan="3">
                     @if($addRoleToUser)
                        @foreach ($roles as $role)
                         {{-- expr --}}
-                        <input   type="checkbox" 
+                        <input   type="checkbox"
                         value="{{$role->id}}"
                         wire:model="choosedroles.{{$role->name}}"
                          id="{{$role->id}}">
@@ -130,17 +153,17 @@
 
                     </td>
                     <td>
-                        
+
                     </td>
                 </tr>
 
                 @endif
             @endforeach
-            
+
         </tbody>
     </table>
 
     @endif
 
-   
+
 </div>

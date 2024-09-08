@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'telephone',
+        'ecole_id',
+        'image_user'
     ];
 
     /**
@@ -93,5 +95,5 @@ class User extends Authenticatable
         return $this->roles()->where('name','GERANT QUANTINE')->first();
     }
 
-    
+
 }
