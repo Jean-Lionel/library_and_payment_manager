@@ -1,10 +1,18 @@
 <div>
 	{{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    <style>
+        .btn
+           {
+               background: #1A5684 !important;
+               color: #ffffff;
+               border: none
+           }
+   </style>
 	<div class="row mb-3">
 		<div class="col-md-12">
 			 <a href="{{ route('paiements.create') }}">Rapport des paimements </a>
 		</div>
-		<div class="col-md-12 row d-flex justify-content-between">
+		<div class="col-md-8 row d-flex justify-content-between">
 			<button wire:click="showForm" class="btn btn-primary p-1"> Nouveau Paiement</button>
 			<button wire:click="showEnOrdre" class="btn btn-primary p-1"> Historique de paiements</button>
 		</div>
@@ -27,12 +35,12 @@
 							<section>
 								<p>Bordereau N° : {{ $facture->bordereau }} </p>
 								<p>Classe : {{ $facture->eleve->classe->name }}</p>
-								
+
 								<p>Compte de l'élève : {{ $facture->compte_name }} </p>
 								<p>Nom et prénom : {{ $facture->eleve->fullName }}</p>
 								<p>Montant Payé : {{ $facture->amount }} <br>
 									Nous disons :  <span id="montant_lettre">
-										{{$number_letter}} 
+										{{$number_letter}}
 									</span>
 								</p>
 								<p>FRAIS : {{ $facture->type_paiement }} DU {{ $facture->trimestre }}</p>
@@ -40,7 +48,7 @@
 								<div style="display: flex;justify-content: space-between;">
 									<p>Signature de l'élève</p>
 									<p>Signature du caissier</p>
-									
+
 								</div>
 
 								<p style="text-align: center;">
@@ -65,7 +73,7 @@
 							<label for="compte_name" class="col-sm-4 col-form-label">COMPTE</label>
 							<input class="col-sm-8 form-control form-control-sm border-dark" type="text" wire:model="compteName">
 							@if($eleve and $compteName)
-							<div class="col-md-12 mt-2 ">	
+							<div class="col-md-12 mt-2 ">
 								<ul class="list-group">
 									<li class="list-group-item">
 										Nom et Prénom : <b>{{ $eleve->first_name.' '. $eleve->last_name}} </b></li>
@@ -107,10 +115,10 @@
 											@error('bordereau') <span class="error text-danger">{{ $message }}</span> @enderror
 										</div>
 									</div>
-									
+
 								</div>
 								<div class="row">
-									
+
 								<div class="col-md-4">
 									<div class="form-group row">
 										<label  class="col-sm-4 col-form-label" for="">Periode</label>
@@ -128,14 +136,14 @@
 												TROISIEME TRIMESTRE
 											</option>
 
-											
+
 										</select>
 
 										@error('trimestre') <span class="error text-danger">{{ $message }}</span> @enderror
 									</div>
 								</div>
-								
-								<div class="col-md-4"> 
+
+								<div class="col-md-4">
 									<div class="form-group row">
 
 										<label for="" class="col-sm-6">PAIEMENT</label>
@@ -184,7 +192,7 @@
 			<div class="col-md-4">
 				<input type="text" wire:model="search" placeholder="Rechercher" class="form-control form-control-sm">
 			</div>
-			
+
 		</div>
 
 		<table class="table table-sm">
@@ -215,19 +223,19 @@
 				<td>{{ $paiment->bordereau }}</td>
 				<td>{{ $paiment->created_at }}</td>
 				<td>
-					
-			
 
-				<button  class="btn btn-sm btn-info" 
+
+
+				<button  class="btn btn-sm btn-info"
 				wire:click="$emit('printBill',{{ $paiment  }})">Imprimer</button>
 
-				
+
 				</td>
 			</tr>
 
 			@endforeach
 		</tbody>
-		
+
 	</table>
 
 	@endif
@@ -240,8 +248,8 @@
 
 
 @push('scripts')
-<script type="text/javascript">		
-//montant_lettre.innerHTML = "HELLO JE SUIS UN FUTURE MILLIARDAIRE"		
+<script type="text/javascript">
+//montant_lettre.innerHTML = "HELLO JE SUIS UN FUTURE MILLIARDAIRE"
 document.addEventListener('DOMContentLoaded', function () {
  @this.on('printBill', paiement =>{
  	let number_letter = NumberToLetter(paiement.amount);

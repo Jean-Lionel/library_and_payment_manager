@@ -15,10 +15,24 @@ class CreateRepetiteursTable extends Migration
     {
         Schema::create('repetiteurs', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_repetiteur');
+            $table->string('prenom_repetiteur');
+            $table->string('postnom_repetiteur');
             $table->string('carte_identite_repetiteur');
-            $table->string('photo_repetiteur');
+            $table->string('email_repetiteur');
+            $table->string('photo_repetiteur')->nullable();
+            $table->string('sexe_repetiteur');
+            $table->string('date_naissance_repetiteur');
+            $table->text('description_repetiteur');
+            $table->string('telephone_repetiteur');
+            $table->string('cv_repetiteur');
+            $table->string('territoire');
+            $table->string('quartier');
+            $table->string('avenue');
+            $table->string('cours')->nullable();
+            $table->integer('experience');
             $table->foreignId('user_id');
-            $table->foreignId('enseignant_id')->nullable();
+            $table->foreignId('ecole_id')->nullable();
             $table->timestamps();
         });
     }

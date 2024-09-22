@@ -1,5 +1,12 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    <style>
+        .btn
+           {
+               background: #1A5684 !important;
+               color: #ffffff;
+           }
+   </style>
 
     <div class="row">
         <div class="col-md-3">
@@ -15,7 +22,7 @@
         <div class="col-md-3">
             <div class="form-group">
 
-                <select name="" wire:model="selectedClasse" id="" class="form-control">
+                <select name="selectedClasse" wire:model="selectedClasse" id="" class="form-control">
                     <option value="">Choisissez une classe</option>
 
                     @foreach($classes as $classe)
@@ -59,6 +66,7 @@
         <tbody>
           @foreach($eleves as $key => $eleve)
           <tr>
+
             <td><input type="checkbox" value="{{ $eleve->id }}" name="eleve_id[]"/></td>
              {{-- <td>{{ ++$key }}</td> --}}
              <td><img src="{{ asset('uploads/eleve/' .$eleve->image_eleve) }}" alt="image" style="width: 44px; height: 44px; border-radius: 100%;"/></td>
@@ -84,7 +92,7 @@
          @endforeach
      </tbody>
  </table>
- <button class=" btn btn-sm btn-primary float-right">Enregistrer</button>
+ <button class=" btn btn-sm  float-right">Enregistrer</button>
 </form>
  {{ $eleves->links()}}
 </div>

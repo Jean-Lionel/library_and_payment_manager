@@ -1,5 +1,12 @@
 <div>
     {{-- The whole world belongs to you --}}
+    <style>
+        .btn
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
      @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
@@ -51,14 +58,14 @@
     					@forelse($authors as $author)
     					<option value="{{ $author->id }}">{{ $author->name }}</option>
     					@empty
-    					
+
     					@endforelse
     				</select>
 
     				@error('auteur_id')
     						<span class="error text-danger">{{ $message }}</span>
     						@enderror
-    				
+
     			</div>
 
     			<div class="form-group">
@@ -72,16 +79,16 @@
     				@error('nombre_exemplaire')
     						<span class="error text-danger">{{ $message }}</span>
     						@enderror
-    			
+
     			</div>
 
     			<div class="form-group">
-    				<button class="btn btn-info btn-block">Enregistrer</button>
+    				<button class="btn btn-sm float-right w-100">Enregistrer</button>
     			</div>
 
 
     		</form>
-    	</div> 
+    	</div>
 
         @else
 
@@ -165,7 +172,7 @@
                     @this.call('supprimerLivre',bookId)
             // success response
                     responseAlert({title: session('message'), type: 'success'});
-                    
+
                 } else {
                     responseAlert({
                         title: 'Operation Cancelled!',
@@ -177,7 +184,7 @@
         });
 
     });
-    
+
 </script>
 
 @endpush

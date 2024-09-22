@@ -13,18 +13,22 @@
             </div>
     @endif
 
-
+    <style>
+        .btn
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
 
 
     <div class="row">
     	<div class="col-md-4">
-    		<h4>Enregistrement de l'auteur</h4>
+    		<h4>Nouveau Auteur</h4>
     		<form action="" wire:submit.prevent='saveAuthor'>
-    			
-
     			<div class="form-group">
     				<label>Nom de l'auteur</label>
-    				<input class="form-control" type="text" wire:model="name" name="">
+    				<input class="form-control rounded-0" type="text" wire:model="name" name="">
 
                     @error('name')
                             <span class="error text-danger">{{ $message }}</span>
@@ -34,11 +38,11 @@
 
     			<div class="form-group">
     				<label>Pays d'orgine</label>
-    				<input class="form-control" type="text" wire:model="pay_orgine" name="">
+    				<input class="form-control rounded-0" type="text" wire:model="pay_orgine" name="">
     			</div>
 
     			<div class="mt-4">
-    				<button class="btn btn-primary">Enregistrer</button>
+    				<button class="btn btn-sm w-100">Enregistrer</button>
     			</div>
     		</form>
     	</div>
@@ -49,10 +53,10 @@
                     <h3>Liste des auteurs</h3>
                 </div>
                 <div class="col">
-                     <input type="text" class="form-control" wire:model="search">
+                     <input type="text" class="form-control rounded-0" wire:model="search">
                 </div>
             </div>
-    		
+
 
     		<table class="table">
     			<thead>
@@ -72,7 +76,7 @@
     					<td>{{ $auteur->name }}</td>
     					<td>{{ $auteur->pay_orgine }}</td>
                         <td>
-                            <button class="btn-info" wire:click="updateAuteur({{$auteur->id}})">Modifier</button>
+                            <button class="btn btn-sm w-100" wire:click="updateAuteur({{$auteur->id}})">Modifier</button>
                         </td>
     				</tr>
 
@@ -84,7 +88,7 @@
     		</table>
 
             {{ $auteurs->links() }}
-    		
+
     	</div>
     </div>
 </div>

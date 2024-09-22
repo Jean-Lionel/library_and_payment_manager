@@ -21,6 +21,7 @@ class CreateHorairesTable extends Migration
             $table->foreignId('enseignant_id');
             $table->string('heure');
             $table->foreignId('user_id');
+            $table->foreignId('ecole_id');
             $table->timestamps();
         });
     }

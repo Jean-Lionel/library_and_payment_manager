@@ -30,7 +30,9 @@ use App\Http\Controllers\TerritoireController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Livewire\HoraireComponent;
+use App\Http\Livewire\RepetiteurComponent;
 use App\Http\Controllers\HoraireController;
+use App\Http\Controllers\RepetiteurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +117,7 @@ Route::middleware('auth')->group(function(){
     // Route::get('horaire', HoraireComponent::class)->name('horaire');
     Route::view('horaire', 'horaire.create')->name('horaire');
     Route::post('addhoraire', [HoraireController::class, 'store'])->name('horaire.create');
+    Route::view('repetiteur', 'repetiteur.create')->name('repetiteur');
 
 });
 

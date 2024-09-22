@@ -17,6 +17,7 @@ class CreateClassementsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('etagere_id');
+            $table->foreignId('ecole_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

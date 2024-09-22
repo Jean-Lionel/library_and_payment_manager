@@ -14,6 +14,16 @@
             cursor: pointer;
             border-radius: 50%;
         }
+
+        .but
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+        .but:hover
+        {
+            color: #ffffff
+        }
     </style>
 
     @if($showForm)
@@ -79,7 +89,7 @@
                 @enderror
             </div>
         </div>
-        <button class="btn btn-primary float-right mt-3">Enregistrer</button>
+        <button class="btn but float-right mt-3">Enregistrer</button>
             </form>
 
         </div>
@@ -92,13 +102,13 @@
                 <input type="text" wire:model="search" class="form-control" placeholder="Recherche">
             </div>
              <div class="col-md-6 float-end">
-                 <button wire:click="$set('showForm', {{! $showForm}})" class="btn btn-primary btn-sm" title="Nouvel Utilisateur"><i class="fa fa-plus"></i></button>
+                 <button wire:click="$set('showForm', {{! $showForm}})" class="btn but  btn-sm" title="Nouvel Utilisateur"><i class="fa fa-plus"></i></button>
             </div>
         </div>
 
     </div>
     <table class="table table-sm table-striped bg-white mt-4">
-        <thead class="bg-primary text-white">
+        <thead class="but text-white">
             <tr>
                 <th>Photo</th>
                 <th>NOM ET PRENOM</th>

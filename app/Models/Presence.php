@@ -10,4 +10,10 @@ class Presence extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function eleves(){
+        // presences
+
+        return $this->hasMany(Eleve::class , 'eleve_id');
+    }
 }

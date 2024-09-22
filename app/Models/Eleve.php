@@ -43,7 +43,7 @@ class Eleve extends Model
 
     public function getFullNameAttribute(){
     	return $this->first_name .'  '. $this->last_name;
-    } 
+    }
 
     // NIVEAU D'ETUDE
     public function getLevelAttribute(){
@@ -82,11 +82,11 @@ class Eleve extends Model
     }
 
     // LA FONCTION POUR RECUPERER LES POINTS D'UN ELEVE
-    // ELEVE 
-    // COURS 
-    // TRIMESTRE 
-    // ANNEE SCOLAIRE 
-    // TYPE D'EVALUATION 
+    // ELEVE
+    // COURS
+    // TRIMESTRE
+    // ANNEE SCOLAIRE
+    // TYPE D'EVALUATION
     // point_evaluations , cour_id , eleve_id , anne_scolaire_id  ,trimestre_id , type_evaluation
 
     public function recuperer_point($eleve_id = "" ,$cour_id, $trimestre_id, $anne_scolaire_id, $type_evaluation ){
@@ -103,11 +103,11 @@ class Eleve extends Model
             // code...
             return NULL;
         }
-        //CALCULER LA MOYENNE SUR 
+        //CALCULER LA MOYENNE SUR
         $ponderation = Cour::findOrFail($cour_id)->ponderation;
         if($type_evaluation == 'EXAMEN'){
             $ponderation = Cour::findOrFail($cour_id)->ponderation_examen;
-        } 
+        }
         if($type_evaluation == 'COMPENTENCE'){
             //COMPETANCE
             $ponderation = Cour::findOrFail($cour_id)->ponderation_compentance;
@@ -145,7 +145,7 @@ foreach ($courses as $key => $coursCategorie) {
 
     $total_tj = 0;
     $total_examen = 0;
-    
+
     foreach ($coursCategorie as  $cours) {
         $v = 0;
         $nombres_cours++;
@@ -161,11 +161,11 @@ foreach ($courses as $key => $coursCategorie) {
         /*$total_trimestre = $detailPoints['EXAMEN'] +
          $detailPoints['COMPENTENCE'] + $detailPoints['INTERROGATION'];*/
 
-        if ($detailPoints['EXAMEN'] != NULL && 
+        if ($detailPoints['EXAMEN'] != NULL &&
             $detailPoints['INTERROGATION'] != NULL) {
             // code...
             $total_trimestre = $detailPoints['EXAMEN'] + $detailPoints['INTERROGATION'];
-            
+
             if (!$this->isFondementale() and ($detailPoints['COMPENTENCE'] == NULL)) {
                 // code...
                 $total_trimestre = "";
@@ -203,21 +203,21 @@ foreach ($courses as $key => $coursCategorie) {
 
         $categories[$key][]= $c;
 
-       
+
     }
      $categoriesTotal[$key][] = [
             'tj' => $total_tj,
             'examen' => $total_examen,
             'total' => ($total_examen + $total_tj)
         ];
-        
+
    // $categories[$key]['total'] = [];
-    $courses_listes[] = $categories;  
+    $courses_listes[] = $categories;
 }
 //dd($categoriesTotal);
 $p = $this->classe->ponderation();
     // POURCENTAGE DES EXAMENS ET DES INTERROGATIONS
-$points_total['POURCENTAGE_INTERROGATION'] = getPourcentage( $points_total['INTERROGATION'],  $p['total_interrogation'] ); 
+$points_total['POURCENTAGE_INTERROGATION'] = getPourcentage( $points_total['INTERROGATION'],  $p['total_interrogation'] );
 $points_total['POURCENTAGE_EXAMEN'] = getPourcentage($points_total['EXAMEN'], $p['total_examen'] );
 
 return [
@@ -235,9 +235,9 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
     // Année scolaire
     // Classe
     // Trimestre
-    // Tous les évaluations 
+    // Tous les évaluations
     // LES EVALUATIONS ANNEE SCOLAIRE TRIMESTRE
-    
+
     $courses = $this->classe->courses();
     //dd($this->classe_id);
     // Vérifier que chaque cours possède l'évaluation d'une interrogagation
@@ -255,7 +255,7 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
         // Quand on ne trouve pas une évaluation on s'arrête
 
         if(!$courses_evaluations or (!$course->conduite and $courses_evaluations->count() < 2) ){
-            
+
             $errors['EVALUATION_INCOMPLETE'][] = $course;
         }
         //dd();
@@ -266,14 +266,14 @@ public function is_nonClasse($trimestre,$anne_scolaire_id){
                                         ->where('eleve_id', $this->id)
                                         ->first();
             if($points == null || $points->point_obtenu == null){
-                
+
                 $errors['EVALUATION_INCOMPLETE'][] = [
                     'cours' => $ev->cour->name,
                     'evaluations' => $ev->type_evaluation,
 
                 ];
             }
-            
+
         }
 
     }

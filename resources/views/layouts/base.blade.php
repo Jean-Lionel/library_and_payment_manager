@@ -118,13 +118,15 @@
 						@endcanany
 
 						@canany(['is-admin','is-prefet'])
+                        <li class="{{ setActiveRoute('repetiteur') }}">
+							<a href="{{ route('repetiteur') }}"><span class="fa fa fa-users mr-3 text-light"></span>Repetiteur</a>
+						</li>
 						<li class="{{ setActiveRoute('utilisateur') }}">
 							<a href="{{ route('utilisateur') }}"><span class="fa fa fa-users mr-3 text-light"></span> Utilisateur</a>
 						</li>
 						<li class="{{ setActiveRoute('parents') }}">
 							<a href="{{ route('parents') }}"><span class="fas fa-restroom mr-3 text-light"></span> Parents</a>
 						</li>
-
 						@endcanany
 
 						<li class="{{ setActiveRoute('profiles') }}">

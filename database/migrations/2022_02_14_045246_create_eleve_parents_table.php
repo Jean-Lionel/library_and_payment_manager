@@ -22,6 +22,7 @@ class CreateEleveParentsTable extends Migration
             $table->string('address')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('created_by')->nullable();
+            $table->foreignId('ecole_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->float('nombre_livre_retire')->nullable();
             $table->foreignId('auteur_id');
             $table->foreignId('classement_id');
+            $table->foreignId('ecole_id')->nullable();
             $table->timestamps();
              $table->softDeletes();
         });

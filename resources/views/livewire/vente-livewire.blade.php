@@ -13,7 +13,17 @@
             </div>
     @endif
 
-
+    <style>
+        .but
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+        .but:hover
+        {
+            color: #ffffff
+        }
+    </style>
 
     <div class="row">
         <div class="col-md-12">
@@ -24,11 +34,11 @@
                 <div>
                     {{--  <i class="fa fa-shopping-cart text-lg-center"></i> <span class="badge badge-light"></span> --}}
 
-                    <button class="btn btn-sm btn-info" style="font-size:20px"> <i class="fa fa-shopping-cart"></i> {{ Cart::count()}}</button>
+                    <button class="btn btn-sm but" style="font-size:20px"> <i class="fa fa-shopping-cart"></i> {{ Cart::count()}}</button>
                 </div>
 
             </div>
-            
+
             <table class="table-sm table">
 
                 <thead class="badge-dark">
@@ -43,7 +53,7 @@
                         <td>PRIX TOTAL</td> --}}
                         <td>Action</td>
                     </tr>
-                    
+
                 </thead>
 
                 <tbody>
@@ -59,12 +69,12 @@
                         <td>{{  getPrice($product->price) }}</td>
                         <td>
                             @if(!searchProduct( $product->id) and $product->quantite > 0 )
-                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info" style="font-size:15px"> <i class="fa fa-plus"></i></button>
+                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm  but" style="font-size:15px"> <i class="fa fa-plus"></i></button>
                             @else
                                 <i class="fa fa-check"></i>
 
                             @endif
-                            
+
                         </td>
                     </tr>
 
@@ -79,21 +89,21 @@
                         <td>{{  getPrice($product->price) }}</td>
                         <td>
                             @if(!searchProduct( $product->id) and $product->quantite > 0 )
-                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info" style="font-size:15px"> <i class="fa fa-plus"></i></button>
+                            <button wire:click="addToCart({{$product->id  }})" class="btn btn-sm btn-info but" style="font-size:15px"> <i class="fa fa-plus"></i></button>
                             @else
                                 <i class="fa fa-check"></i>
 
                             @endif
-                            
+
                         </td>
                     </tr>
 
                     @endif
 
                     @endforeach
-                    
+
                 </tbody>
-                
+
             </table>
 
             {{ $products->links() }}
@@ -119,9 +129,9 @@
                              @foreach(Cart::content() as $cartItem)
                              <tr>
                                 <td>
-                                   
+
                                     <p class="text-dark">{{ $cartItem->model->name ?? "" }}</p>
-                                        
+
                                 </td>
 
                                 <td>
@@ -139,19 +149,19 @@
                                 <td>
                                     <button wire:click="removeItem('{{ $cartItem->rowId }}')">Supprimer</button>
                                 </td>
-                            
+
                             </tr>
-                   
+
 
                              @endforeach
-                            
+
                         </tbody>
                     </table>
-                   
-                    
-               
-               
-                
+
+
+
+
+
             </div>
 
             <div class="col-md-4">
@@ -174,7 +184,7 @@
                 <hr>
                 <input type="text" wire:model="client_name" placeholder="Nom du client">
                 <hr>
-                  <button wire:click="storeInvoice()" type="button" class="btn btn-primary btn-block">Payement</button>
+                  <button wire:click="storeInvoice()" type="button" class="btn btn-sm w-100 but">Payement</button>
             </div>
         </div>
 
@@ -207,11 +217,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                       
+
                    </div>
                </div>
             @endif
-            
+
             @if($order)
             <table class="table-sm table table-striped">
                 <thead class="badge-info">
@@ -230,8 +240,8 @@
                         <td>{{ getPrice($order->tax) }}</td>
                         <td>{{ getPrice($order->montant) }}</td>
                         <td>
-                            <button wire:click="$set('printOrder','{{ !$printOrder  }}')">Imprimer</button>
-                        </td>         
+                            <button wire:click="$set('printOrder','{{ !$printOrder  }}')" class="btn btn-sm but">Imprimer</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

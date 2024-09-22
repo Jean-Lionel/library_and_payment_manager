@@ -13,12 +13,20 @@
             </div>
     @endif
 
+    <style>
+        .btn
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
+
 	<div class="row">
 
 		<div class="col-md-4">
 			<h3 class="text-center">Retrait du livre</h3>
 			{{-- <form action="" wire:submit.prevent="validerEmprut()"> --}}
- 
+
 				<div class="form-group">
 					<label for="">TYPE DE LECTEUR</label>
 					<select wire:model="type_lecteur" class="form-control form-control-sm">
@@ -37,7 +45,7 @@
 						@forelse($readers as $reader)
 					{{-- 	{{ $reader }} --}}
 						<div class="row p-2" >
-						
+
 							<div class="col">
 								<h6>Nom et Prénom</h6>
 								<h6>{{  $reader->first_name.' '.$reader->last_name  }}</h6>
@@ -45,7 +53,7 @@
 							<div class="col">
 								<h6>SECTION : {{ $reader->classe->section->name  }}</h6>
 								<h6> CLASSE : {{ $reader->classe->name  }}</h6>
-								
+
 							</div>
 							<div class="col-12">
 								<button wire:click="choisirEleve({{$reader  }})" class="btn btn-block btn-outline-success btn-sm">Choisir</button>
@@ -54,18 +62,18 @@
 						@empty
 						<p>Rechercher</p>
 						@endforelse
-				
+
 				</div>
 
-				
+
 			{{-- </form> --}}
 
 			<div>
 				<ul class="list-group">
-					<li class="list-group-item text-center"><h6>Liste des livres choisit</h6></li>
+					<li class="text-center"><h6 class="text-info">Liste des livres choisit</h6></li>
 				@forelse( Cart::content() as $selectBook)
 				<li class="list-group-item d-flex justify-content-between">
-					
+
 					<span>{{ $selectBook->name }}</span>
 					<span>Nombre de livre :  <b>{{ $selectBook->qty }}</b></span>
 					<span>
@@ -82,7 +90,7 @@
 				<span class="error text-danger"> {{ $message }}</span>
 
 				@enderror
-				<button wire:click="validerRetrait()" class="btn btn-info">Valider le retrait</button>
+				<button wire:click="validerRetrait()" class="btn btn-sm rounded-0 mt-2">Valider le retrait</button>
 			</div>
 		</div>
 
@@ -127,7 +135,7 @@
 
 
 			</div>
-			
+
 		</div>
 
 		<div class="col-md-4">
@@ -147,7 +155,7 @@
 
 					</ul>
 
-			@endif	
+			@endif
 
 		</div>
 
@@ -173,7 +181,7 @@
 
 			@forelse($livres as $key => $book)
 			<div class="row">
-				
+
 				<div class="col-2">
 					<h4>Je suis</h4>
 				</div>

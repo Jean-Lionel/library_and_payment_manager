@@ -1,4 +1,11 @@
 <div>
+    <style>
+        .btn
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
     <div class="container">
         <h3>Ajouter horaire</h3>
         <div class="row">
@@ -19,7 +26,7 @@
                     <select wire:model="classe" id="classe" class="form-control rounded-0">
                         <option value="null">--Selectionner--</option>
                         @foreach ($classes as $class )
-                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                        <option value="{{ $class->id .'#'. $class->name  }}">{{ $class->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -37,12 +44,12 @@
                         <select class="form-control rounded-0" wire:model="teacher" id="teacher">
                             <option value="null">--Selectionner--</option>
                             @foreach ($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{$user->id .'#'.$user->name }}">{{$user->name}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <button id="btn_save" type="button" class="bt btn-sm btn-info float-right w-100">Ajouter</button>
+                <button id="btn_save" type="button" class="btn btn-sm float-right w-100">Ajouter</button>
             </form>
         </div>
 
@@ -64,7 +71,7 @@
 
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-sm btn-info float-right" id="save_info">Enregistrer</button>
+                    <button type="submit" class="btn btn-sm float-right" id="save_info">Enregistrer</button>
                     {{-- <div class="d-flex">
                         {!! $formation->links() !!}
                     </div> --}}
@@ -82,7 +89,8 @@
             //Generate table of data with ajax
             $('#btn_save').on('click', function(e) {
                 e.preventDefault();
-                console.log();
+
+                alert($('#teacher').val())
                 //Designation Qte P.U HTVA  P.V N° Lot
                 const entry = {
                     jour: $('#jour').val(),
@@ -91,9 +99,11 @@
                     heure: $('#heure').val(),
                     cours: $('#cours').val(),
                     teacher: $('#teacher').val().split('#')[0],
-                    nom_teacher: $('#teacher').val().split('#')[1],
+                    nom_teacher: $('#teacher').val(),
                 }
                 listeHoraire.push(entry)
+
+                console.log(entry)
                 let trs = "";
                 for (const el of listeHoraire) {
                     trs += `
@@ -102,7 +112,7 @@
                                     <td>${el.classe}</td>
                                      <td>${el.classe}</td>
                                     <td>${el.cours}</td>
-                                    <td>${el.teacher}</td>
+                                    <td>${el.nom_teacher.split('#')[1]} </td>
 
                                     </tr>
                                     `

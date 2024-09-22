@@ -17,6 +17,7 @@ class CreateEtageresTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->foreignId('ecole_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

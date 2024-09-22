@@ -1,5 +1,12 @@
 @extends('layouts.base')
 @section('content')
+<style>
+     .but
+        {
+            background: #1A5684 !important;
+            color: #ffffff;
+        }
+</style>
 <div class="container pt-5 border px-5 py-5  border-dark bg-white">
     <div class="float-right">
     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">
@@ -141,7 +148,7 @@
                 @endforeach
             </select>
             </div>
-            <button type="submit" class="btn btn-primary float-end">Enregistrer</button>
+            <button type="submit" class="btn btn-sm but float-end">Enregistrer</button>
           </form>
         </div>
       </div>

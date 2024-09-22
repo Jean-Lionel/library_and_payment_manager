@@ -1,4 +1,4 @@
-<div class="row">
+<div>
 	{{-- The whole world belongs to you --}}
 
 	{{-- public string $name;
@@ -6,65 +6,72 @@
 	public float $quantite_total;
 	public float $qte_en_mauvaise_etat;
 	public float $quantite_en_bonne_etat; --}}
+    <style>
+        .btn
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
 
 	@if($open)
 	<div>
 		<h4 class="text-center">Enregistrement des Patrimoines</h4>
 		<button wire:click="$set('open',false)">Fermer <i class="fa fa-close"> </i></button>
-	<form wire:submit.prevent="savePatrimoine" class="row col-md-12">
-		<div class="col-md-6">
+	<form wire:submit.prevent="savePatrimoine">
+		<div class="form-row">
 
-			<div class="form-group row">
-				<label for="" class="col-sm-4">DESIGNATION</label>
-				<input type="text" wire:model="name" class="col-sm-8 form-control">
+			<div class="form-group col-md-4">
+				<label for="">DESIGNATION</label>
+				<input type="text" wire:model="name" class="form-control rounded-0">
 				@error('name')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
 
-			<div class="form-group row">
-				<label for="" class="col-sm-4">description</label>
-				<textarea class="col-sm-8 form-control" wire:model="description"></textarea>
+			<div class="form-group col-md-4">
+				<label for="">description</label>
+				<textarea class="form-control rounded-0" wire:model="description"></textarea>
 				@error('description')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
-		</div>
 
-		<div class="col-md-6">
 
-			<div class="form-group row">
-				<label for="" class="col-sm-4">QUANTITE TOTAL</label>
-				<input type="number" min="0" wire:model="quantite_total" class="col-sm-8 form-control">
+
+			<div class="form-group col-md-4">
+				<label for="">QUANTITE TOTAL</label>
+				<input type="number" min="0" wire:model="quantite_total" class="form-control rounded-0">
 				@error('quantite_total')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
 
-			<div class="form-group row">
-				<label for="" class="col-sm-4">QTE EN BON ETAT</label>
-				<input type="number" wire:model="qte_en_mauvaise_etat" class="col-sm-8 form-control">
+			<div class="form-group col-md-4">
+				<label for="">QTE EN BON ETAT</label>
+				<input type="number" wire:model="qte_en_mauvaise_etat" class="form-control rounded-0">
 				@error('qte_en_mauvaise_etat')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
 
-			<div class="form-group row">
-				<label for="" class="col-sm-4">QTE EN MAUVAIS ETAT</label>
-				<input type="number" wire:model="quantite_en_bonne_etat" class="col-sm-8 form-control">
+			<div class="form-group col-md-4">
+				<label for="">QTE EN MAUVAIS ETAT</label>
+				<input type="number" wire:model="quantite_en_bonne_etat" class="form-control rounded-0">
 				@error('quantite_en_bonne_etat')
 				<span class="error text-danger">{{ $message }}</span>
 				@enderror
 			</div>
 
-			@if ($identifiant !== null)
+
+        </div>
+        @if ($identifiant !== null)
 				{{-- expr --}}
-				<button type="submit" class="btn btn-warning btn-block">MODIFIER</button>
+				<button type="submit" class="btn btn-warning float-right">MODIFIER</button>
 			@else
-			<button type="submit" class="btn btn-primary btn-block">ENREGISTRER</button>
+			<button type="submit" class="btn btn-sm rounded-0 float-right">ENREGISTRER</button>
 
 			@endif
-		</div>
 	</form>
 	</div>
 
@@ -86,7 +93,7 @@
 					<th>Qté EN MAUVAISE ETAT</th>
 					<th>ACTION</th>
 				</tr>
-				
+
 			</thead>
 			<tbody>
 
@@ -103,11 +110,11 @@
 						<button wire:click="edit({{ $patrimoine->id  }})">Modifier</button>
 						<button class="btn btn-sm btn-danger" wire:click="$emit('deletePatrimoine',{{ $patrimoine->id  }})">Supprimer</button>
 					</td>
-					
+
 				</tr>
 
 				@endforeach
-				
+
 			</tbody>
 		</table>
 	</div>
