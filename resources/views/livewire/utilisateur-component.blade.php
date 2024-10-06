@@ -27,20 +27,20 @@
     </style>
 
     @if($showForm)
-    <div class="container">
+    <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-4">
         <div class="row">
             <form action="" wire:submit.prevent="saveUser" enctype="multipart/form-data">
             <div class="form-row">
              <div class="form-group col-md-4">
                 <label for="">NOM ET PRENOM</label>
-                <input type="text" wire:model="name" class="form-control">
+                <input type="text" wire:model="name" class="form-control rounded-0">
                 @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
              <div class="form-group col-md-4">
                 <label for="email">EMAIL</label>
-                <input id="email" type="email" placeholder="ex : nijeanlionel@gmail.com" wire:model="email" class="form-control">
+                <input id="email" type="email" placeholder="ex : dieudonne@gmail.com" wire:model="email" class="form-control rounded-0">
                 @error('email')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="">TELEPHONE</label>
-                <input type="text" placeholder="ex : +257 79 614 036" wire:model="telephone" class="form-control">
+                <input type="text" placeholder="ex : +257 79 614 036" wire:model="telephone" class="form-control rounded-0">
                 @error('telephone')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -56,7 +56,7 @@
 
             <div class="form-group col-md-4">
                 <label for="">ECOLE</label>
-                <select type="text" wire:model="ecole_id" class="form-control">
+                <select type="text" wire:model="ecole_id" class="form-control rounded-0">
                     @foreach ($ecoles as $ecole)
                     <option value={{ $ecole->id }}>{{$ecole->nom_ecole}}</option>
                     @endforeach
@@ -68,14 +68,14 @@
 
             <div class="form-group col-md-4">
                 <label for="email">Photo</label>
-                <input id="image_user" type="file"  wire:model="image_user" class="form-control">
+                <input id="image_user" type="file"  wire:model="image_user" class="form-control rounded-0">
                 @error('image_user')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
             <div class="form-group col-md-4">
                 <label for="">MOT DE PASSE</label>
-                <input type="password" placeholder="" wire:model="password" class="form-control">
+                <input type="password" placeholder="" wire:model="password" class="form-control rounded-0">
                 @error('password')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -83,7 +83,7 @@
 
              <div class="form-group col-md-4">
                 <label for="">RETAPEZ VOTRE MOT DE PASSE</label>
-                <input type="password" placeholder="" wire:model="password_confirmation" class="form-control">
+                <input type="password" placeholder="" wire:model="password_confirmation" class="form-control rounded-0">
                 @error('password')
                 <span class="text-danger">{{$message}}</span>
                 @enderror

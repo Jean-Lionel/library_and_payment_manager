@@ -44,7 +44,8 @@ class AuteurLivewire extends Component
 
              ]);
 
-             session()->flash('message', 'Modification réussi');
+            //  session()->flash('message', 'Modification réussi');
+            $this->dispatchBrowserEvent('success', ['message' => 'Modification effectué avec succès']);
 
         }else{
             Auteur::create(
@@ -55,12 +56,13 @@ class AuteurLivewire extends Component
 
              );
 
-             session()->flash('message', 'Enregistrement réussi');
+            //  session()->flash('message', 'Enregistrement réussi');
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 
         }
     	$this->reset();
 
-    	
+
     }
 
     public function updateAuteur($id)

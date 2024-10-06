@@ -69,7 +69,7 @@ class ParentComponent extends Component
                     'telephone' => $this->telephone,
                     'email_verified_at' => now(),
                     // 12345678 Mot de passe par defaut
-                    'password' => bcrypt('12345678'), 
+                    'password' => bcrypt('12345678'),
                     'remember_token' => Str::random(10),
                 ]);
                 EleveParent::find($this->identification)->update($data);
@@ -83,7 +83,7 @@ class ParentComponent extends Component
                     'remember_token' => Str::random(10),
                 ]);
                 $data['user_id'] = $user->id;
-
+                $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
                 $role = Role::where('name','PARENT')->first();
 
                 $user->roles()->sync([$role->id]);
@@ -93,7 +93,7 @@ class ParentComponent extends Component
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            
+
         }
         $this->reset();
     }

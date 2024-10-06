@@ -48,6 +48,7 @@ class CategoryLivewire extends Component
     			'name' => $this->name,
     			'stock_id' => $this->stock_id,
     		]);
+            $this->dispatchBrowserEvent('success', ['message' => 'Nouvelle catégorie enregister avec succès']);
     	}
 
 

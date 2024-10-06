@@ -5,20 +5,14 @@
         @if (session()->has('error'))
 
         <div class="alert alert-danger">
-
             {{ session('error') }}
-
         </div>
 
         @endif
         @if (session()->has('success'))
-
         <div class="alert alert-success">
-
             {{ session('success') }}
-
         </div>
-
         @endif
 
     </div>
@@ -83,7 +77,7 @@
                 <div class="form-group">
                     <label for="">Nouveau mot de passe</label>
                     <input type="password" wire:model="currentPassword" class="form-control form-control-sm">
-                </div> 
+                </div>
                 <div class="form-group">
                     <label for="">Rettapez votre mot de passe</label>
                     <input type="password" wire:model="newPassword" class="form-control form-control-sm">
@@ -112,7 +106,7 @@
                     <tr>
                         <th>#</th>
                         <th>Bordereau</th>
-                       
+
                         <th>TYPE</th>
                         <th>Trimestre</th>
                         <th>A\S</th>
@@ -132,8 +126,8 @@
                             </td>
                         </tr>
                         @endif
-                       
-                        @foreach ($paiement as $p) 
+
+                        @foreach ($paiement as $p)
 
                          <tr>
                             <td>{{ $p->id}}</td>
@@ -146,7 +140,7 @@
                         </tr>
 
                         @endforeach
-                       
+
                     @endforeach
                 </tbody>
             </table>
@@ -154,8 +148,18 @@
 
         </div>
     @endif
-    
+
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
 </div>
 
 

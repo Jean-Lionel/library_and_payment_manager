@@ -93,10 +93,10 @@ class PatrimoineLivewire extends Component
 				'quantite_en_bonne_etat' => $this->quantite_en_bonne_etat,
 
 			]);
-
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 		}
 
-		
+
 
 		$this->resetInput();
 		$this->render();

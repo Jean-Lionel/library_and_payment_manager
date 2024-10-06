@@ -1,10 +1,14 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <div class="row">
-        <div class="col-md-3">
+    <div class="container pt-5 border px-5 py-5  border-dark bg-white">
+        <a href="{{ route('paiements.index') }}" class="btn btn-sm btn-primary float-right">RETOUR</a>
+        <h3 class="text-center">SELECTIONNER LES INFORMATIONS DONT VOUS AVEZ BESOIN</h3>
+        <div class="row">
+
+        <div class="form-group col-md-3">
             <label for="">SECTION</label>
             <select name="" wire:model="selectedSection" id="" class="form-control form-control-sm">
-                
+
                 <option value="">Choisissez une section</option>
 
                 @foreach($sections as $section)
@@ -13,8 +17,8 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
+
+            <div class="form-group col-md-3">
                 <label for=""> CLASSE </label>
 
                 <select name="" wire:model="selectedClasse" id="" class="form-control form-control-sm">
@@ -26,10 +30,8 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-        <div class="col-md-3">
+        <div class="form-group col-md-3">
             <label for="">CATEGORIE</label>
-
         	<select wire:model="type_paiement" id="" class="form-control form-control-sm">
         		<option value="">Choisissez ...</option>
         		<option value="PAYE">Ceux qui ont payé</option>
@@ -37,19 +39,18 @@
         	</select>
         </div>
 
-          <div class="col-md-3">
+          <div class="form-group col-md-3">
             <label for="">TYPE DE PAIMENENT</label>
-
-            <select wire:model="category_paiement" id="" 
+            <select wire:model="category_paiement" id=""
             class="form-control form-control-sm">
                 <option value="MINERVAL" >MINERVAL</option>
                 <option value="CONTRIBUTION" selected="">CONTRIBUTION</option>
-               
+
             </select>
         </div>
 
 
-        <div class="col-md-3">
+        <div class="form-group col-md-3">
             <label for="">Année scolaire</label>
              <select wire:model="annee_scolaire" name="" id="" class="form-control form-control-sm">
 
@@ -62,29 +63,29 @@
         </div>
 
 
-        <div class="col-md-3">
+        <div class="form-group col-md-3">
             <label for="">TRIMESTRE</label>
 
-            <select name="" wire:model="trimestre" id="" 
+            <select name="" wire:model="trimestre" id=""
             class="form-control form-control-sm">
-                
+
                 <option value="PREMIER TRIMESTRE">I ère TRIMESTRE</option>
                 <option value="DEUXIEME TRIMESTRE">II ère TRIMESTRE</option>
                 <option value="TROISIEME TRIMESTRE">III ère TRIMESTRE</option>
             </select>
-            
+
         </div>
-        <div class="col-md-3">
+        <div class="form-group col-md-3">
             <label for="">Minimum</label>
             <input type="text" class="form-control form-control-sm" wire:model="minMontant">
         </div>
-      
+
         <div class="col-md-3">
             <label for="">Rechercher </label>
 
             <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control form-control-sm">
         </div>
-
+    </div>
 
     </div>
 
@@ -135,7 +136,7 @@
                 </div>
 
                 <div>
-                
+
                     <span>{{ date('d/m/Y')}}</span>
              </div>
 
@@ -163,7 +164,7 @@
                     <td>{{ ++$key}}</td>
 
                     <td>{{ $classe->getClasseById($paiement->classe_id)->name}}</td>
-                    <td>{{ strtoupper($paiement->first_name)  .'  '. 
+                    <td>{{ strtoupper($paiement->first_name)  .'  '.
                 ucwords(strtolower($paiement->last_name)) }}</td>
                     <td>{{ $paiement->amount }}</td>
                     <td></td>
@@ -183,7 +184,7 @@
 
 
 @push('scripts')
-<script type="text/javascript">             
+<script type="text/javascript">
 
 function clickButton(){
         printJS({

@@ -13,7 +13,7 @@
         }
     </style>
 	<div class="btn-group" role="group" aria-label="Basic example">
-		<button type="button" wire:click="$set('ShowForm', true)" class="btn btn-sm but" >Nouveau dépense</button>
+		<button type="button" wire:click="$set('ShowForm', true)" class="btn btn-sm btn-warning" >Nouveau dépense</button>
 		<button type="button" class="btn btn-sm but" wire:click="$set('ShowForm', false)">Tout les dépenses</button>
 
 	</div>
@@ -21,47 +21,49 @@
 
 
 	@if($ShowForm)
-	<form wire:submit.prevent="saveDepense" >
-		<div class="form-row">
+    <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-4">
+        <form wire:submit.prevent="saveDepense" >
+            <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="" >ACTION</label>
 
-				<div class="form-group col-md-6">
-					<label for="" >ACTION</label>
+                            <input type="text" class="form-control rounded-0"  wire:model="action">
+                            @error('action')
+                            <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+                    </div>
 
-						<input type="text" class="form-control rounded-0"  wire:model="action">
-						@error('action')
-						<span class="error text-danger">{{ $message }}</span>
-						@enderror
-				</div>
+                    <div class="form-group col-md-6">
+                        <label for="">MONTANT</label>
+                            <input type="number" class="form-control rounded-0"  wire:model="montant">
+                            @error('montant')
+                            <span class="error text-danger">{{ $message }}</span>
+                            @enderror
 
-				<div class="form-group col-md-6">
-					<label for="">MONTANT</label>
-						<input type="number" class="form-control rounded-0"  wire:model="montant">
-						@error('montant')
-						<span class="error text-danger">{{ $message }}</span>
-						@enderror
-
-				</div>
-				<div class="form-group col-md-12">
-					<label  for="">DESCRIPTION</label>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label  for="">DESCRIPTION</label>
 
 
-						<textarea name="" id="" wire:model="description" class="form-control rounded-0"></textarea>
+                            <textarea name="" id="" wire:model="description" class="form-control rounded-0"></textarea>
 
-						@error('description')
-						<span class="error text-danger">{{ $message }}</span>
-						@enderror
+                            @error('description')
+                            <span class="error text-danger">{{ $message }}</span>
+                            @enderror
 
-				</div>
-				<button type="submit" class="btn btn-sm but offset-8 col-md-4">Enregistrer</button>
-			</div>
+                    </div>
+                    <button type="submit" class="btn btn-sm but offset-8 col-md-4">Enregistrer</button>
+                </div>
 
-		</div>
-	</form>
+            </div>
+        </form>
+    </div>
+
 
 	@endif
 
 	@if(!$ShowForm)
-	<div class="row">
+	<div class="row mt-4">
 
 		<div class="row col-md-12">
 			<h4 class="col-md-1">Liste</h4>
@@ -77,7 +79,7 @@
 		</div>
 
 
-		<table class="table-sm table">
+		<table class="table-sm table mt-4">
 			<thead>
 				<tr>
 					<td>Numéro</td>

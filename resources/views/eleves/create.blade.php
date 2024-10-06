@@ -1,31 +1,36 @@
 @extends('layouts.base')
 @section('content')
-<div class="container">
-	<h5 class="text-center">Ajouter un élève en <b> {{ $classe->name ?? "" }} </b></h5>
+<div class="container pt-5 border px-5 py-5  border-dark bg-white">
+	<h2 class="text-center">Ajouter un élève en <b> {{ $classe->name ?? "" }} </b></h2>
+    <div class="col-md-12">
 	<form action="{{ route('eleves.store') }}" method="POST" enctype="multipart/form-data">
 		@csrf
 		@method('POST')
 		@include('eleves._form',['btn_name' => 'Enregistrer'])
 	</form>
-
-	<div class="col-md-8 offset-md-2">
-		<div class="">
-
-			<h5 class="text-center">Ajouter la liste des élèves   <b> {{ $classe->name ?? "" }} </b> à partir du fichier excel </h5>
-
-			<p>
-			1. Télécharger le Modèle <button onclick="downloadModel({{$classe->id}},'{{$classe->name  }}')" class="ml-4"><i class="fa fa-arrow-down" style="font-size:24px"></i></button>
-			</p>
-
-			<p class="d-flex">
-				2. Charger le Modèle
+</div>
+	<div class="container d-flex mt-4">
+        {{-- <h5 class="text-center">Ajouter <b> {{ $classe->name ?? "" }} </b> à partir du fichier excel </h5> --}}
+		<div class="col-md-6">
+            <h5>1. Télécharger le Modèle </h5>
+			<button onclick="downloadModel({{$classe->id}},'{{$classe->name  }}')" class="ml-4"><i class="fa fa-arrow-down" style="font-size:24px"></i></button>
+        </div>
+        <div class="col-md-6">
+            <h5>2. Charger le Modèle</h5>
 				<form action="">
-					<input type="file" id="input_file" accept=".csv">
-					<button id="save"> <i class="fa fa-upload" style="font-size:24px"></i></button>
-					<img src="{{ asset('images/loader.gif') }}" width="200" alt="" id="loader" style="display: none;" >
+                    <div class="row">
+                        <div>
+                            <input type="file" id="input_file" accept=".csv">
+                        </div>
+                        <div class="mt-3">
+                            <button id="save"> <i class="fa fa-upload" style="font-size:24px"></i></button>
+					{{-- <img src="{{ asset('images/loader.gif') }}" width="200" alt="" id="loader" style="display: none;" > --}}
+                        </div>
+                    </div>
+
+
 				</form>
 
-			</p>
 			<p id="responseGet">
 
 			</p>
@@ -134,7 +139,7 @@ $("#save").on('click', function(event) {
 
 function formateDate(date){
 	const givenDate = new Date(date);
-	
+
 	return givenDate.getFullYear() +"-"+(givenDate.getMonth() + 1)+"-"+givenDate.getDate();
 }
 

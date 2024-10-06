@@ -56,7 +56,7 @@ class ClassementLivewire extends Component
             'etagere_id' => $this->etagere_id,
 
         ]);
-
+        $this->dispatchBrowserEvent('success', ['message' => 'Nouveau classement enregister avec succès']);
         }
 
     	session()->flash('message', "Réussi");

@@ -14,7 +14,7 @@ class StockLivewire extends Component
 	public $identifiant;
 	public $name;
 	private $stocks;
-	
+
 
 	public function render()
 	{
@@ -43,7 +43,7 @@ class StockLivewire extends Component
 			Stock::create([
 				'name' => $this->name
 			]);
-
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 		}else{
 
 			$stock = Stock::find($this->identifiant);
@@ -51,7 +51,7 @@ class StockLivewire extends Component
 				'name' => $this->name
 
 			]);
-
+            $this->dispatchBrowserEvent('success', ['message' => 'Modification effectué avec succès']);
 		}
 
 		$this->name = "";

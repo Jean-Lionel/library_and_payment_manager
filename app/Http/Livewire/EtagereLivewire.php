@@ -48,7 +48,7 @@ class EtagereLivewire extends Component
             'name' => $this->name,
             'description' => $this->description
         ]);
-
+        $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
         }
         session()->flash('message', 'Réussi');
 

@@ -21,7 +21,7 @@ class PaiementLivewire extends Component
 	public $eleve;
 	public $search;
 
-	//Les attributs 
+	//Les attributs
 
 	public $montant;
 	public $anneScolaire;
@@ -37,7 +37,7 @@ class PaiementLivewire extends Component
 	public function mount()
 	{
 		 // $this->paiements = Paiment::sortable()->latest()->paginate(20);
-		
+
 	}
 
 	public function showEnOrdre()
@@ -45,7 +45,7 @@ class PaiementLivewire extends Component
 		$this->ordre=!$this->ordre;
 		$this->showFormulaire = false;
 	}
-	
+
 	public function render()
 	{
 		$s = $this->search;
@@ -61,10 +61,10 @@ class PaiementLivewire extends Component
 		[
 			'paiements' => $this->paiements
 			]
-			
+
 		);
 	}
-	
+
 	public function showForm(){
 		$this->showFormulaire = !$this->showFormulaire;
 		$this->ordre=false;
@@ -95,7 +95,7 @@ class PaiementLivewire extends Component
         'trimestre' => 'required|min:2',
         'compteName' => 'required',
         'type_paiement' => 'required',
-        
+
     ];
 
 	public function savePaiement(){
@@ -130,15 +130,15 @@ class PaiementLivewire extends Component
 
 			$compte->save();
 			DB::commit();
-
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 			$this->resetInput();
-			
+
 		} catch (\Exception $e) {
 
 			DB::rollback();
 
 			dump($e);
-			
+
 		}
 
 
@@ -163,5 +163,5 @@ class PaiementLivewire extends Component
 		$this->number_letter = $number_letter . " FBU";
 	}
 
-	
+
 }

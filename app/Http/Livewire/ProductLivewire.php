@@ -43,7 +43,7 @@ class ProductLivewire extends Component
 	public function updated($propertyName)
 	{
 		$this->validateOnly($propertyName);
-		
+
 	}
 
 	public function saveProduct(){
@@ -70,7 +70,7 @@ class ProductLivewire extends Component
 				'price' => $this->price,
 				'category_id' => $this->category_id,
 			]);
-
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 		}
 
 

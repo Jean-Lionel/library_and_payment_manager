@@ -47,7 +47,7 @@ class DepenseLivewire extends Component
     		'description' => $this->description,
 
     	]);
-
+        $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
     	$this->reset();
     }
 
