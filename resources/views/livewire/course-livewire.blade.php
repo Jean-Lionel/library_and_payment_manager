@@ -3,8 +3,10 @@
 
     @if ($showForm)
         {{-- expr --}}
+<div class="container container pt-5 border px-5 py-5 mt-3 border-dark bg-white">
 
-    <div class="offset-2 col-md-6">
+
+    <div class="col-md-12">
     	<h5 class="text-center">Nouveau un cours</h5>
     	<form action="" wire:submit.prevent="saveCourse" class="row">
 
@@ -104,7 +106,7 @@
     	</form>
 
     </div>
-
+</div>
     @else
 
     <div class="col-md-12">

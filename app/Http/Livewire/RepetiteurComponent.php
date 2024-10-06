@@ -84,7 +84,6 @@ class RepetiteurComponent extends Component
         }
         elseif ($this->currentStep == 3) {
             $this->validate([
-                'cv_repetiteur' => 'required',
                 'photo_repetiteur' => 'required',
                 'cours' => 'required|array|min:2|max:4',
                 'experience' => 'required',
@@ -96,44 +95,43 @@ class RepetiteurComponent extends Component
     public function SaveRepetiteur()
     {
         $this->resetErrorBag();
-        if ($this->currentStep == 4) {
-            $this->validate([
-                'cv_repetiteur' => 'required|mimes:doc,docx,pdf|max:1024',
-                'photo_repetiteur' => 'required|mimes:png,jpg,jpeg',
-            ]);
-        }
-        $cv_name = $this->cv_repetiteur->getClientOriginalName();
-        $uploads = $this->cv_repetiteur->storeAs('repetiteurs_cvs', $cv_name);
-        $filename = $this->photo_repetiteur->getClientOriginalName();
-        $load = $this->photo_repetiteur->storeAs('photo_cvs', $filename);
+        // if ($this->currentStep == 3) {
+        //     $this->validate([
+        //         'photo_repetiteur' => 'required|mimes:png,jpg,jpeg',
+        //     ]);
+        // }
+        // $filename = $this->photo_repetiteur->getClientOriginalName();
+        // $load = $this->photo_repetiteur->storeAs('photo_cvs', $filename);
         try {
-    Repetiteur::create([
-    'nom_repetiteur' => $this->nom_repetiteur,
-    'prenom_repetiteur' => $this->prenom_repetiteur,
-    'postnom_repetiteur' => $this->postnom_repetiteur,
-    'territoire' => $this->territoire,
-    'quartier' => $this->quartier,
-    'avenue' => $this->avenue,
-    'sexe_repetiteur' => $this->sexe_repetiteur,
-    'telephone_repetiteur' => $this->telephone_repetiteur,
-    'date_naissance_repetiteur' => $this->date_naissance_repetiteur,
-    'carte_identite_repetiteur' => $this->carte_identite_repetiteur,
-    'photo_repetiteur' => $filename,
-    'cv_repetiteur' => $cv_name,
-    'experience' => $this->experience,
-    'description_repetiteur' => $this->description_repetiteur,
-    'email_repetiteur' => $this->email_repetiteur,
-    'cours' => json_encode($this->cours),
-    'user_id' => Auth::user()->id,
-    'ecole_id' => auth()->user()->ecole_id,
-    ]);
-    $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
-    // session()->flash('success', 'Repetiteur Created Successfully.');
-    }
-     catch (\Exception $ex)
-     {
-        session()->flash('error','Something goes wrong!!');
-     }
+            Repetiteur::create([
+                'nom_repetiteur' => $this->nom_repetiteur,
+                'prenom_repetiteur' => $this->prenom_repetiteur,
+                'postnom_repetiteur' => $this->postnom_repetiteur,
+                'territoire' => $this->territoire,
+                'quartier' => $this->quartier,
+                'avenue' => $this->avenue,
+                'sexe_repetiteur' => $this->sexe_repetiteur,
+                'telephone_repetiteur' => $this->telephone_repetiteur,
+                'date_naissance_repetiteur' => $this->date_naissance_repetiteur,
+                'carte_identite_repetiteur' => $this->carte_identite_repetiteur,
+                // 'photo_repetiteur' => $filename,
+                'experience' => $this->experience,
+                'description_repetiteur' => $this->description_repetiteur,
+                'email_repetiteur' => $this->email_repetiteur,
+                'cours' => json_encode($this->cours),
+                'user_id' => Auth::user()->id,
+                'ecole_id' => auth()->user()->ecole_id,
+            ]);
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
+            // session()->flash('success', 'Repetiteur Created Successfully.');
+            dd('Good');
+        }
+        catch (\Exception $ex)
+        {
+
+            session()->flash('error',$ex->getMessage());
+            dd($ex);
+        }
 
     }
 }

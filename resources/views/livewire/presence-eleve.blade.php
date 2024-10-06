@@ -1,81 +1,61 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 
-    <div class="row">
-        <div class="col-md-3">
-            <select name="" wire:model="selectedSection" id="" class="form-control">
-                <option value="">Choisissez une section</option>
 
-                @foreach($sections as $section)
-
-                <option value="{{ $section->id }}">{{ $section->name }}</option>
+    <style>
+        .but
+        {
+            background: #1A5684;
+            color: #ffffff;
+        }
+    </style>
+    <div class="container align-items-center justify-content-center">
+        <div class="col-md-12">
+            <h2 class="text-center ">LISTE DE PRESENCE DU {{now()->format('d-m-Y')}}</h2>
+            <select wire:model='by_classe' id="by_classe" class="form-control rounded-0">
+                <option value="0">--Selectionner--</option>
+                @foreach ($classes as $classe)
+                    <option value="{{ $classe->id }}">{{ $classe->name .' '.$classe->section->name }}</option>
                 @endforeach
+
             </select>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-
-                <select name="" wire:model="selectedClasse" id="" class="form-control">
-                    <option value="">Choisissez une classe</option>
-
-                    @foreach($classes as $classe)
-
-                    <option value="{{ $classe->id }}">{{ $classe->name }}</option>
+            <table class="table table-striped">
+                <thead class="but">
+                    <tr>
+                        <th>ID</th>
+                        <th>Photo</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Status</th>
+                        <th>Classe</th>
+                        <th>Section</th>
+                        <th>Jour</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{$i = 1 }}
+                    @foreach ($listePresence as $presence)
+                    <tr>
+                        <td>{{ $i ++ }}</td>
+                        <td><img src="{{ asset('uploads/eleve/' .$presence->eleve->image_eleve) }}" alt="image" style="width: 44px; height: 44px; border-radius: 100%;"/></td>
+                        <td>{{ $presence->eleve->first_name }}</td>
+                        <td>{{ $presence->eleve->last_name }}</td>
+                        <td>
+                            {{$presence->status_presence == 1 ? 'P' : 'A'}}
+                        </td>
+                        <td>{{$presence->classe->name}}</td>
+                        <td>{{$presence->classe->section->name}}</td>
+                        <td>{{date('d-m-Y', strtotime($presence->created_at));}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info"><i class="fa fa-eye text-white"></i></button>
+                        </td>
+                    </tr>
                     @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control">
-        </div>
 
-
-        @if($selectedClasse)
-        <div class="col-md-3">
-            <a class="btn-primary btn btn-block" href="{{ route('eleves.create', ['id' => $selectedClasse]) }}">Nouveau</a>
+                </tbody>
+            </table>
         </div>
-        @endif
-
     </div>
-
-<div class="tabledata mt-3 card--container">
-    <form>
-    <table class="table table-bordered table-sm ">
-    	<thead>
-    		<tr>
-    			<th>#</th>
-                <th>Photo</th>
-                {{-- <th>Section</th>
-                <th>Classe</th> --}}
-                <th>Numéro de compte</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Sexe</th>
-                <th>Adresse</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach($eleves as $key =>$eleve)
-          <tr>
-            <td><input type="checkbox" value="{{ $eleve->id }}" name="eleve_id[]"/></td>
-             {{-- <td>{{ ++$key }}</td> --}}
-             <td><img src="{{ asset('uploads/eleve/' .$eleve->image_eleve) }}" alt="image" style="width: 44px; height: 44px; border-radius: 100%;"/></td>
-             {{-- <td>{{ $eleve->classe->section->name }}</td>
-              <td>{{ $eleve->classe->name }}</td> --}}
-             <td>{{ $eleve->compte->name ?? "" }}</td>
-
-             <td>{{ $eleve->first_name }}</td>
-             <td>{{ $eleve->last_name }}</td>
-             <td>{{ $eleve->sexe }}</td>
-             <td>{{ $eleve->address }}</td>
-         </tr>
-
-         @endforeach
-     </tbody>
- </table>
-</form>
- {{ $eleves->links()}}
-</div>
 </div>
 

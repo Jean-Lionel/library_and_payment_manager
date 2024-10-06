@@ -25,7 +25,6 @@ class CreateRepetiteursTable extends Migration
             $table->string('date_naissance_repetiteur');
             $table->text('description_repetiteur');
             $table->string('telephone_repetiteur');
-            $table->string('cv_repetiteur');
             $table->string('territoire');
             $table->string('quartier');
             $table->string('avenue');

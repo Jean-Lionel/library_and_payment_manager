@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Classe extends Model
 {
-   
+
     use HasFactory;
     use SoftDeletes;
 
@@ -19,11 +19,11 @@ class Classe extends Model
 
     public function section()
     {
-    	return $this->belongsTo('App\Models\Section'); 	
-    } 
+    	return $this->belongsTo('App\Models\Section');
+    }
     public function level()
     {
-        return $this->belongsTo('App\Models\Level');  
+        return $this->belongsTo('App\Models\Level');
     }
 
     public function courses(){
@@ -34,6 +34,11 @@ class Classe extends Model
     	return $this->hasMany('App\Models\Eleve');
     }
 
+    public function presences()
+    {
+        return $this->hasMany(Presence::class);
+    }
+
     public function getEleveByAnneScolaireId($anne_scolaire_id){
         $eleves = Eleve::where('anne_scolaire_id', $anne_scolaire_id)
                         ->where('classe_id', $this->id)->get();
@@ -41,11 +46,11 @@ class Classe extends Model
     }
 
     public function getEffectifParClasse($anne_scolaire_id){
-       
+
         $garcons = 0;
         $filles = 0;
         $total = 0;
-        
+
         foreach($this->getEleveByAnneScolaireId($anne_scolaire_id) as $eleve){
             if($eleve->is_a_girl())
                 $filles++;
@@ -56,8 +61,8 @@ class Classe extends Model
 
         return [
             "name" => $this->name ,
-            "g" => $garcons, 
-            "p_g" => getPourcentage($garcons , $total ), 
+            "g" => $garcons,
+            "p_g" => getPourcentage($garcons , $total ),
             "f" => $filles,
             "p_f" => getPourcentage($filles , $total ),
             "total" =>  $total
@@ -68,7 +73,7 @@ class Classe extends Model
         return count($this->eleves ?? 0);
     }
 
-  
+
     public function courseCategories(){
         return $this->categories();
     }
@@ -78,19 +83,19 @@ class Classe extends Model
     }
 
     public function categories(){
-        // SELECT DISTINCT CATEGORIE ID , ORDRE FROM CATEGORIES WHERE 
+        // SELECT DISTINCT CATEGORIE ID , ORDRE FROM CATEGORIES WHERE
         $categories = array_unique($this->courses()->map->category_id->toArray());
         //sort($categories);
 
 
         //Recuperation des category groupe par leur ordre
-        $coursCategories = CourseCategory::whereIn('id',$categories)->orderBy('ordre')->get(); 
+        $coursCategories = CourseCategory::whereIn('id',$categories)->orderBy('ordre')->get();
 
         //dd($coursCategories->map->ordre);
         $coursCategorie = [];
 
         foreach ($coursCategories as $key =>  $category ) {
-           
+
             $courses = Cour::where('category_id',$category->id)
                             ->where('level_id', $this->level->id)->get();
             // Selectionner les catégories à afficher
@@ -101,12 +106,12 @@ class Classe extends Model
              }else{
                 $coursCategorie[$key] = $courses;
              }
-             
+
 
         }
        // dd($coursCategorie);
         return   $coursCategorie ?? [];
-       
+
     }
 
     public function ponderation(){
@@ -117,7 +122,7 @@ class Classe extends Model
 
         foreach ($this->courses() as $key => $course) {
             // code...
-            
+
             $total_credit += $course->credit;
             $total_examen +=  $course->ponderation_examen;
             $ponderation_compentance += $course->ponderation_compentance ;

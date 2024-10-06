@@ -16,4 +16,14 @@ class Presence extends Model
 
         return $this->hasMany(Eleve::class , 'eleve_id');
     }
+    public function eleve(){
+        // presences
+
+        return $this->belongsTo(Eleve::class , 'eleve_id');
+    }
+
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class, 'classe_id');
+    }
 }

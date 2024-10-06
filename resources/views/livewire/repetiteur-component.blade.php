@@ -10,12 +10,12 @@
             {{ session()->get('error') }}
         </div>
     @endif
-    <form wire:submit.prevent="SaveRepetiteur">
+    <form wire:submit.prevent="SaveRepetiteur" enctype="multipart/form-data">
         {{-- stepone --}}
         @if ($currentStep == 1)
             <div class="step-one">
                 <div class="card">
-                    <div class="card-header bg-secondary text-white">STEP 1/4 - Personal Details</div>
+                    <div class="card-header bg-info text-white">STEP 1/4 - Personal Details</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -111,7 +111,7 @@
         @if ($currentStep == 2)
             <div class="step-two mt-2">
                 <div class="card">
-                    <div class="card-header bg-secondary text-white">STEP 2/4 - Adresse Details</div>
+                    <div class="card-header bg-info text-white">STEP 2/4 - Adresse Details</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -184,7 +184,7 @@
         @if ($currentStep == 3)
             <div class="step-free mt-2">
                 <div class="card">
-                    <div class="card-header bg-secondary text-white">STEP 3/4 - Framework</div>
+                    <div class="card-header bg-info text-white">STEP 3/4 - Framework</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -194,18 +194,6 @@
                                         wire:model='photo_repetiteur' />
                                     <span class="text-danger">
                                         @error('photo_repetiteur')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Cv</label>
-                                    <input type="file" class="form-control rounded-0"
-                                        wire:model='cv_repetiteur' />
-                                    <span class="text-danger">
-                                        @error('cv_repetiteur')
                                             {{ $message }}
                                         @enderror
                                     </span>

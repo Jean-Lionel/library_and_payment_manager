@@ -21,6 +21,14 @@
 			<a href="{{ route('classes.index') }}"><span class="fa fa-home mr-3 text-black"></span> Classes</a>
 		</li>
 		@endcanany
+
+		@canany(['is-admin','is-prefet'])
+		<li class=" {{ setActiveRoute('presences.index') }} text-light">
+			<a href="{{ route('presences.index') }}"><span class="fa fa-home mr-3 text-black"></span> Liste des presence</a>
+		</li>
+		@endcanany
+
+
 	</ul>
 
 </div>

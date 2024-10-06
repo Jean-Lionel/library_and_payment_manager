@@ -18,6 +18,7 @@ class CreatePresencesTable extends Migration
             $table->integer('status_presence')->default(0);
             $table->foreignId('eleve_id');
             $table->foreignId('user_id');
+            $table->foreignId('classe_id')->nullable();
             $table->string('motif')->nullable();
             $table->timestamps();
         });
