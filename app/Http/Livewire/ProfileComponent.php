@@ -24,7 +24,7 @@ class ProfileComponent extends Component
             $eleves = $parent->enfant;
 
             foreach ($eleves as $key => $value) {
-                
+
                $paiements[] = $value->paiements;
             }
 
@@ -53,7 +53,8 @@ class ProfileComponent extends Component
              $user = auth()->user();
              $user->password = bcrypt($this->currentPassword);
              $user->save();
-             session()->flash("success","Password successfully changed!");
+             $this->dispatchBrowserEvent('success', ['message' => 'Modification effectué avec succès']);
+            //  session()->flash("success","Password successfully changed!");
              $this->showForm = false;
          }
        }
@@ -64,9 +65,9 @@ class ProfileComponent extends Component
         ]);*/
 
         //Change Password
-        
+
 
        // dump($this->oldPassword, $this->currentPassword, $this->newPassword);
-        
+
     }
 }

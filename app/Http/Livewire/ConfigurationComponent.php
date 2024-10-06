@@ -41,7 +41,7 @@ class ConfigurationComponent extends Component
         ];
 
         Configuration::create($data);
-
+        $this->dispatchBrowserEvent('success', ['message' => 'Nouveau configuration effectuée avec succès']);
         $this->reset();
     }
 }

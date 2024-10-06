@@ -127,7 +127,8 @@ class RepetiteurComponent extends Component
     'user_id' => Auth::user()->id,
     'ecole_id' => auth()->user()->ecole_id,
     ]);
-    session()->flash('success', 'Repetiteur Created Successfully.');
+    $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
+    // session()->flash('success', 'Repetiteur Created Successfully.');
     }
      catch (\Exception $ex)
      {

@@ -45,7 +45,7 @@ class EvaluationComponent extends Component
 			$this->classes = Classe::all();
 			$this->cours = [];
 		}
-		
+
 		$this->start_date = Carbon::now()->subDays(30);
 		$this->trimestres = Trimestre::all();
 		$this->trimestre = Trimestre::current();
@@ -125,6 +125,7 @@ class EvaluationComponent extends Component
 			Evaluation::find($this->identification)->update($data);
 		}else{
 			Evaluation::create($data);
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 		}
 		$this->resetData();
 	}
@@ -138,9 +139,9 @@ class EvaluationComponent extends Component
 			$this->type_evaluation = null;
 			$this->identification = null;
 			$this->showForm = false;
-		
+
 	}
- 
+
 	public function modifierEvaluation($id){
 
 		$evalution = Evaluation::find($id);
@@ -158,17 +159,17 @@ class EvaluationComponent extends Component
 
 		$trimestre = Trimestre::current();
 		$annee_scolaire = AnneScolaire::current();
-		
+
 		$evaluation = Evaluation::find($id);
 		if (($evaluation->user_id == auth()->user()->id) and ($evaluation->trimestre == $trimestre->id) and ($annee_scolaire->anne_scolaire_id == $evaluation->anne_scolaire_id) ) {
 			//Verfier l'année scolaire
-			// Vérifier si c'est le trimestre actuel 
+			// Vérifier si c'est le trimestre actuel
 			$evaluation->delete();
 				session()->flash('error',"L'evaluation a été annulé avec success");
 		}else{
 			session()->flash('error',"Impossible d'annuler l'evaluation");
 		}
-		
+
 	}
 
 	public function ajoutPoint($id){

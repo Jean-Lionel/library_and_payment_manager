@@ -10,7 +10,7 @@ class CourseCategoryComponent extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme ='bootstrap'; 
+    protected $paginationTheme ='bootstrap';
     public string $name = "";
     public string $ordre = "";
     public string $search = "";
@@ -19,7 +19,7 @@ class CourseCategoryComponent extends Component
     public int $selectId = 0;
     public  $showForm;
 
-  
+
     public function render()
     {
 
@@ -46,6 +46,7 @@ class CourseCategoryComponent extends Component
           CourseCategory::findOrFail($this->identifiant)->update($data);
         }else{
             CourseCategory::create($data);
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
         }
 
         $this->reset();

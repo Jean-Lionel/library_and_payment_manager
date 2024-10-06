@@ -63,6 +63,7 @@ public function saveProffesseur()
       'email' => $this->email,
 
   ]);
+  $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 }
 
 $this->showForm = false;
@@ -103,13 +104,13 @@ public function setAsUser($id){
             $user->roles()->sync([3]);
             $prof->user_id =  $user->id;
             $prof->save();
-            DB::commit(); 
+            DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
            // dd($e->getMessage());
             //$this->errorMessage = $e->getMessage();
             session()->flash('message', "Vérifier les informations du professeur");
-            
+
         }
 
     }

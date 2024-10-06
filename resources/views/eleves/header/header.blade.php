@@ -7,7 +7,7 @@
 <div class="header">
 	<ul>
 		@canany(['is-admin','is-prefet'])
-		<li class=" {{ setActiveRoute('sections.index') }} text-light">
+		<li class=" {{ setActiveRoute('sections.index') }} text-info">
 			<a href="{{ route('sections.index') }}"><span class="fa fa-home mr-3 text-black"></span> Section</a>
 		</li>
 		@endcanany

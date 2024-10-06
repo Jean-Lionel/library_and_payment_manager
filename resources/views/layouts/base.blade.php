@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 		@livewireStyles
 
 		<style type="text/css">
@@ -46,17 +47,17 @@
 				<div class="p-4 ">
 					<h1><a href="#" class="logo">{{configuration()->etablimssement ?? ""}} </a></h1>
 					<ul class="list-unstyled components mb-5 text-light">
-                        @can(['is-admin'])
+                        @canany(['is-admin','is-prefet','is-professeur'])
                         <li class="{{ setActiveRoute('accueil') }}">
 							<a href="{{ route('accueil') }}"><span class="fa-solid fa-school mr-3 text-light"></span>Accueil</a>
 						</li>
-                        @endcan
+                        @endcanany
                         @can(['is-admin'])
                         <li class="{{ setActiveRoute('ecoles.create') }}">
 							<a href="{{ route('ecoles.create') }}"><span class="fa-solid fa-school mr-3 text-light"></span> Ecoles</a>
 						</li>
                         @endcan
-						@canany(['is-admin','is-prefet'])
+						@canany(['is-admin','is-prefet','is-professeur'])
 						<li class="{{ setActiveRoute('eleves.index') }}">
 							<a href="{{ route('eleves.index') }}"><span class="fas fa-child mr-3 text-light"></span> Eleve</a>
 						</li>
@@ -93,8 +94,7 @@
 						<li class="{{ setActiveRoute('stoks.index') }}">
 							<a href="{{ route('stoks.index') }}"><span class="fa fa-suitcase mr-3 text-light"></span> Stock</a>
 						</li>
-						@endcanany
-						@canany(['is-admin','is-cantine','is-comptable'])
+
 						<li class="{{ setActiveRoute('ventes.index') }}">
 							<a href="{{ route('ventes.index') }}"><span class="fa fa-cogs mr-3 text-light"></span> Cantine</a>
 						</li>
@@ -182,10 +182,30 @@
 		<script src="{{ asset('datatable/jquery.dataTables.min.js') }}"></script>
 		<script src="{{ asset('datatable/datatables.min.js') }}"></script>
 		<script src="{{ asset('datatable/pdfmake.min.js') }}"></script>
-
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 		@livewireScripts
 		@yield('javascript')
+        <script>
+            $(document).ready(function() {
+                toastr.options = {
+                    "progressBar": true,
+                    "positisionClass": "tost-top-right",
+                    "closeButton": true,
+                    "onclick": null,
+                    "debug": false,
+                }
+            });
+            window.addEventListener('success', event => {
+                toastr.success(event.detail.message);
+            });
+            window.addEventListener('warning', event => {
+                toastr.warning(event.detail.message);
+            });
+            window.addEventListener('error', event => {
+                toastr.error(event.detail.message);
+            });
+        </script>
 		@stack('scripts')
 
 	</body>

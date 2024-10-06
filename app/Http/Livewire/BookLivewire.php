@@ -36,7 +36,7 @@ class BookLivewire extends Component
 		$this->classements = Classement::all();
 		$this->authors = Auteur::all();
 	}
-	
+
     public function render()
     {
     	$books = Book::latest()->paginate(10);
@@ -66,6 +66,7 @@ class BookLivewire extends Component
     		$book->update($data);
     	}else{
     		Book::create($data);
+            $this->dispatchBrowserEvent('success', ['message' => 'Nouveau Livre enregister avec succès']);
     	}
     	$this->reset();
 

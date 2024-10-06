@@ -36,7 +36,7 @@ class PointComponent extends Component
 	];
 	protected $rules = [
 		"point_obentu" => 'required|min:0',
-		
+
 	];
 	public function startId(int $id){
 		$this->editId = $id;
@@ -53,7 +53,7 @@ class PointComponent extends Component
 		$this->evaluation_id = $request->id;
 		$this->evaluation = Evaluation::where('id','=',$request->id)->firstOrFail();
 		$this->classe_id = $this->evaluation->classe_id;
-		
+
 	}
 	public function savePoint(){
 
@@ -77,7 +77,7 @@ class PointComponent extends Component
 				'anne_scolaire_id' => $this->evaluation->anne_scolaire_id,
 			];
 
-			//$res = PointEvaluation::create(); 
+			//$res = PointEvaluation::create();
 
 			// dd($data);
 
@@ -85,6 +85,7 @@ class PointComponent extends Component
 				$check->update(	$data);
 			}else{
 				PointEvaluation::create($data);
+                $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
 			}
 
 		}
@@ -94,7 +95,7 @@ class PointComponent extends Component
 	public function render()
 	{
 		$this->courId = $this->evaluation->cour_id;
-		$eleves = 
+		$eleves =
 		Eleve::where('classe_id','=',$this->evaluation->classe_id )
 		->where('anne_scolaire_id','=',$this->evaluation->anne_scolaire_id )
 		->where('first_name','LIKE','%'.$this->search.'%')
@@ -126,7 +127,7 @@ class PointComponent extends Component
 		try {
 			DB::beginTransaction();
 			foreach($data as $entry){
-			//VERFICATION QUE LA LIGNE N'EXISTE PAS 
+			//VERFICATION QUE LA LIGNE N'EXISTE PAS
 
 				if(isset($entry['evaluation_id']) and isset($entry['eleve_id'])){
 
@@ -151,7 +152,7 @@ class PointComponent extends Component
 						}else{
 							PointEvaluation::create($entry);
 						}
-						
+
 					}else{
 						$entry['point_obtenu'] = NULL;
 						if($check){
@@ -160,18 +161,18 @@ class PointComponent extends Component
 							PointEvaluation::create($entry);
 						}
 					}
-					
+
 
 				}
-				
+
 
 			}
 			DB::commit();
-			
+
 		} catch (\Exception $e) {
 			dd($e->getMessage());
 			DB::rollback();
-			
+
 		}
 	}
 }

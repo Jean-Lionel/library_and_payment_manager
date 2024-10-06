@@ -36,13 +36,19 @@
             <input type="text" wire:model="searchKey" placeholder="Rechercher ici " class="form-control">
         </div>
 
-
+        @canany(['is-admin','is-prefet'])
         @if($selectedClasse)
         <div class="col-md-3">
             <a class="btn-primary btn btn-block" href="{{ route('eleves.create', ['id' => $selectedClasse]) }}">Nouveau</a>
         </div>
         @endif
+        @endcanany
 
+        @canany(['is-admin','is-professeur'])
+        <div class="col-md-3">
+            <a class="btn-primary btn btn-block" href="3">Mes eleves</a>
+        </div>
+        @endcanany
     </div>
 
 <div class="tabledata mt-3 card--container">

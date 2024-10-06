@@ -78,6 +78,7 @@ class UtilisateurComponent extends Component
         if(!$this->identifiant){
 
               User::create($data);
+              $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
         }else{
 
             $user = User::find($this->identifiant);

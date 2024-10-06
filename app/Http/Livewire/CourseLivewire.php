@@ -36,7 +36,7 @@ class CourseLivewire extends Component
         $classes = Classe::all();
         $levels = Level::all();
         $categories = CourseCategory::all();
-        
+
 
         if(auth()->user()->isProfesseur()){
 
@@ -45,7 +45,7 @@ class CourseLivewire extends Component
             $courses =  Cour::where('name', 'like', '%'. $this->search .'%')
                             ->where('professeur_id',  $prof->id ?? 0 )->latest()->paginate(10);
         }else{
-           $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10); 
+           $courses = Cour::where('name', 'like', '%'. $this->search .'%')->latest()->paginate(10);
         }
 
         return view('livewire.course-livewire',[
@@ -88,6 +88,7 @@ class CourseLivewire extends Component
 
         }else{
             Cour::create($data);
+            $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
         }
         $this->showForm = false;
 
