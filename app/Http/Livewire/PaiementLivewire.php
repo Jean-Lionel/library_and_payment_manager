@@ -49,9 +49,13 @@ class PaiementLivewire extends Component
 	public function render()
 	{
 		$s = $this->search;
-		$this->paiements = Paiment::where(function($q) use ($s){
+		$this->paiements = Paiment::with('eleve')
+        ->where(function($q) use ($s){
 			if($s != ""){
-				$q->where('eleve_id', $s);
+				// $q->where('eleve_id', $s);
+                $q->where('compte_name', 'like', '%'. $s .'%');
+                $q->orwhere('type_paiement', 'like', '%'. $s .'%');
+                $q->orwhere('bordereau', 'like', '%'. $s .'%');
 			}
 		})->sortable()->latest()->paginate(20);
 		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
@@ -88,6 +92,14 @@ class PaiementLivewire extends Component
         // // $this->paiements = Paiment::sortable()->latest()->paginate();
         // $this->render();
     }
+ // La fonction pour fixer l'erreur de recherche dans la deuxieme page de la pagination
+    public function updating($key): void
+    {
+        if ($key === 'search') {
+            $this->resetPage();
+        }
+    }
+
 
 	protected $rules = [
         'montant' => 'required',

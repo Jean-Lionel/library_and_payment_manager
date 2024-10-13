@@ -60,6 +60,10 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('is-cantine', function ($user) {
            return $user->isCantine();
-        });    
+        });
+
+        Gate::define('is-dd', function($user){
+            return $user->isDirecteurDispline();
+        });
     }
 }

@@ -33,6 +33,10 @@ class Classe extends Model
     public function eleves(){
     	return $this->hasMany('App\Models\Eleve');
     }
+    public function horaires()
+    {
+        return $this->hasMany('App\Models\Classe');
+    }
 
     public function presences()
     {

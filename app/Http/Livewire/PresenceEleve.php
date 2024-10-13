@@ -13,6 +13,10 @@ class PresenceEleve extends Component
     {
      return view('livewire.presence-eleve', [
         'classes' => Classe::all(),
+        'countpresence' => Presence::where('status_presence', 1)
+                        ->where('created_at', 'like', date('Y-m-d') . '%')->count(),
+        'countabsence' => Presence::where('status_presence', 0)
+                        ->where('created_at', 'like', date('Y-m-d') . '%')->count(),
         'listePresence' => Presence::with('eleve')
         ->when($this->by_classe, function ($query) {
             $query->where('classe_id', $this->by_classe);

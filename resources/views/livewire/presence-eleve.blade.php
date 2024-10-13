@@ -11,13 +11,17 @@
     </style>
     <div class="container align-items-center justify-content-center">
         <div class="col-md-12">
+
             <h2 class="text-center ">LISTE DE PRESENCE DU {{now()->format('d-m-Y')}}</h2>
-            <select wire:model='by_classe' id="by_classe" class="form-control rounded-0">
+            <div class="d-flex justify-content-center"  wire:stream wire:poll.5s>
+                <button class="btn btn-sm btn-info mr-2">{{$countpresence}}</button>
+                <button class="btn btn-sm btn-danger">{{$countabsence}}</button>
+            </div>
+            <select wire:model='by_classe' id="by_classe" class="form-control rounded-0 mt-2">
                 <option value="0">--Selectionner--</option>
                 @foreach ($classes as $classe)
                     <option value="{{ $classe->id }}">{{ $classe->name .' '.$classe->section->name }}</option>
                 @endforeach
-
             </select>
             <table class="table table-striped">
                 <thead class="but">

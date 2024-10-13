@@ -95,5 +95,10 @@ class User extends Authenticatable
         return $this->roles()->where('name','GERANT QUANTINE')->first();
     }
 
+    public function isDirecteurDispline()
+    {
+        return $this->roles()->where('name', 'DIRECTEUR-DISIPLINE')->first();
+    }
+
 
 }

@@ -41,6 +41,14 @@
                             @enderror
 
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Quantité</label>
+                            <input type="number" class="form-control rounded-0"  wire:model="montant">
+                            @error('montant')
+                            <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+
+                    </div>
                     <div class="form-group col-md-12">
                         <label  for="">DESCRIPTION</label>
 

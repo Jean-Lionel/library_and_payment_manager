@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateElevesTable extends Migration
 {
     /**
-     * 
+     *
      * Run the migrations.
      *
      * @return void
@@ -25,6 +25,7 @@ class CreateElevesTable extends Migration
             $table->string('anne_scolaire');
             $table->foreignId('anne_scolaire_id');
             $table->foreignId('parent_id')->nullable();
+            $table->foreignId('ecole_id')->nullable();
             $table->text('description')->nullable();
             //Region  Burundi Code ZIP
             $table->text('region')->nullable();

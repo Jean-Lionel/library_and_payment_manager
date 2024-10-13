@@ -76,8 +76,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="compte_name">COMPTE</label>
-                            <input class="form-control form-controlborder-dark" type="text"
-                                wire:model="compteName">
+                            <input class="form-control form-controlborder-dark" type="text" wire:model="compteName">
                             @if ($eleve and $compteName)
                                 <div class="col-md-12 mt-2 ">
                                     <ul class="list-group">
@@ -100,92 +99,93 @@
 
 
 
-                            <div class="form-group col-md-6">
-                                <label for="montant">Montant</label>
-                                <div class="col-sm-8">
-                                    <input type="number" min="0" wire:model="montant"
-                                        class=" border-dark form-control" id="montant" placeholder="Montant">
+                        <div class="form-group col-md-6">
+                            <label for="montant">Montant</label>
+                            <div class="col-sm-8">
+                                <input type="number" min="0" wire:model="montant"
+                                    class=" border-dark form-control" id="montant" placeholder="Montant">
 
-                                    @error('montant')
+                                @error('montant')
+                                    <span class="error text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-6">
+                            <label for="montant">Bordereau N°</label>
+
+                            <input wire:model="bordereau" type="text" class="form-control border-dark" id="bordereau"
+                                placeholder="">
+
+                            @error('bordereau')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label" for="">Periode</label>
+
+                                    <select wire:model="trimestre" name="" id=""
+                                        class="form-control col-sm-8 border-dark">
+                                        <option value="">Choisissez ici le trimestre</option>
+
+                                        <option value="PREMIER TRIMESTRE">
+                                            PREMIER TRIMESTRE
+                                        </option>
+                                        <option value="DEUXIEME TRIMESTRE">
+                                            DEUXIEME TRIMESTRE
+                                        </option>
+                                        <option value="TROISIEME TRIMESTRE">
+                                            TROISIEME TRIMESTRE
+                                        </option>
+
+
+                                    </select>
+
+                                    @error('trimestre')
                                         <span class="error text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
+                            <div class="col-md-4">
+                                <div class="form-group row">
 
+                                    <label for="" class="col-sm-6">PAIEMENT</label>
 
+                                    <select class="col-md-6 form-control border-dark" wire:model="type_paiement"
+                                        id="">
+                                        <option value="">CHOISISSEZ ....</option>
+                                        <option value="MINERVAL">MINERVAL</option>
+                                        <option value="TRANSPORT">TRANSPORT</option>
+                                        <option value="CONTRIBUTION">CONTRIBUTION</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex justify-content-between">
+                                    <label for="">ANNE SCOLAIRE</label>
+                                    <label for=""> <b>{{ $anneScolaire->name ?? '' }}</b> </label>
 
-                            <div class="form-group col-md-6">
-                                <label for="montant">Bordereau N°</label>
-
-                                <input wire:model="bordereau" type="text" class="form-control border-dark"
-                                    id="bordereau" placeholder="">
-
-                                @error('bordereau')
-                                    <span class="error text-danger">{{ $message }}</span>
-                                @enderror
-
+                                </div>
                             </div>
 
-                            <div class="row">
 
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label" for="">Periode</label>
-
-                                        <select wire:model="trimestre" name="" id=""
-                                            class="form-control col-sm-8 border-dark">
-                                            <option value="">Choisissez ici le trimestre</option>
-
-                                            <option value="PREMIER TRIMESTRE">
-                                                PREMIER TRIMESTRE
-                                            </option>
-                                            <option value="DEUXIEME TRIMESTRE">
-                                                DEUXIEME TRIMESTRE
-                                            </option>
-                                            <option value="TROISIEME TRIMESTRE">
-                                                TROISIEME TRIMESTRE
-                                            </option>
-
-
-                                        </select>
-
-                                        @error('trimestre')
-                                            <span class="error text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-
-                                        <label for="" class="col-sm-6">PAIEMENT</label>
-
-                                        <select class="col-md-6 form-control border-dark" wire:model="type_paiement"
-                                            id="">
-                                            <option value="">CHOISISSEZ ....</option>
-                                            <option value="MINERVAL">MINERVAL</option>
-                                            <option value="CONTRIBUTION">CONTRIBUTION</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex justify-content-between">
-                                        <label for="">ANNE SCOLAIRE</label>
-                                        <label for=""> <b>{{ $anneScolaire->name ?? '' }}</b> </label>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-md-3 mt-3">
-                                @if ($eleve and $compteName)
-                                    <button type="submit" class="btn btn-primary btn-block p-1">💰 Payer</button>
-                                @endif
-                            </div>
                         </div>
+
+                        <div class="col-md-3 mt-3">
+                            @if ($eleve and $compteName)
+                                <button type="submit" class="btn btn-primary btn-block p-1">💰 Payer</button>
+                            @endif
+                        </div>
+                    </div>
 
 
 
@@ -201,7 +201,7 @@
 
         <div>
             <div class="col-md-4">
-                <input type="text" wire:model="search" placeholder="Rechercher" class="form-control form-control-sm">
+                <input type="text" wire:model.live="search" placeholder="Rechercher" class="form-control form-control-sm">
             </div>
 
         </div>
@@ -213,9 +213,11 @@
                     <th>COMPTE</th>
                     <th>NOM ET PRENOM</th>
                     <th>CLASSE</th>
+                    <th>SECTION</th>
                     <th>MONTANT</th>
                     <th>PERIODE</th>
                     <th>BORDEREAU N° </th>
+                    <th>MOTIF</th>
                     <th>DATE</th>
                     <th>Action</th>
 
@@ -229,14 +231,13 @@
                         <td>{{ $paiment->compte_name }}</td>
                         <td>{{ $paiment->eleve->fullName }}</td>
                         <td>{{ $paiment->eleve->classe->name }}</td>
+                        <td>{{ $paiment->eleve->classe->section->name }}</td>
                         <td>{{ $paiment->amount }}</td>
                         <td>{{ $paiment->trimestre }}</td>
                         <td>{{ $paiment->bordereau }}</td>
+                        <td>{{ $paiment->type_paiement }}</td>
                         <td>{{ $paiment->created_at }}</td>
                         <td>
-
-
-
                             <button class="btn btn-sm btn-info"
                                 wire:click="$emit('printBill',{{ $paiment }})">Imprimer</button>
 

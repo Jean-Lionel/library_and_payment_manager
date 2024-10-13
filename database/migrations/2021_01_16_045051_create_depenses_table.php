@@ -17,9 +17,11 @@ class CreateDepensesTable extends Migration
             $table->id();
             $table->string('action');
             $table->double('montant',64,2);
+            $table->double('quantite',64,2);
             $table->text('description')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('ecole_id')->nullable();
+            $table->double('total',64,2);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -38,6 +38,7 @@ class CourseLivewire extends Component
         $categories = CourseCategory::all();
 
 
+
         if(auth()->user()->isProfesseur()){
 
            $prof = auth()->user()->professeur;

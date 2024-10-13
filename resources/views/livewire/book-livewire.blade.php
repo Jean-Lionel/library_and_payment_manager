@@ -19,15 +19,15 @@
             </div>
     @endif
 
-    <div class="row">
+    <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-4">
 
         @if($showForm)
-    	 <div class="col-md-4 offset-md-3">
-    		<h4>Ajouter un livre</h4>
+    	 <div class="col-md-12">
+    		<h3 class="text-center">Ajouter un livre</h4>
     		<form action="" wire:submit.prevent="saveBook()">
     			<div class="form-group">
     				<label for=""> TITLE </label>
-    				<input class="form-control form-control-sm" type="text" wire:model="title" name="">
+    				<input class="form-control form-control-sm rounded-0" type="text" wire:model="title" name="">
     				@error('title')
     						<span class="error text-danger">{{ $message }}</span>
     						@enderror
@@ -35,7 +35,7 @@
 
     			<div class="form-group">
     				<label for="">CLASSEMENT</label>
-    				<select wire:model="classement_id" class="form-control form-control-sm">
+    				<select wire:model="classement_id" class="form-control form-control-sm rounded-0">
     					<option value="">Choisissez ...</option>
 
     					@forelse($classements as $classement)
@@ -52,7 +52,7 @@
 
     			<div class="form-group">
     				<label for="">AUTEUR</label>
-    				<select wire:model="auteur_id" class="form-control form-control-sm">
+    				<select wire:model="auteur_id" class="form-control form-control-sm rounded-0">
     					<option value="">Choisissez ...</option>
 
     					@forelse($authors as $author)
@@ -70,11 +70,11 @@
 
     			<div class="form-group">
     				<label for="">EDITION</label>
-    				<input type="" wire:model="edition" class="form-control form-control-sm" name="">
+    				<input type="" wire:model="edition" class="form-control form-control-sm rounded-0" name="">
     			</div>
     			<div class="form-group">
     				    <label for=""> NOMBRE D'EXEMPLAIRE </label>
-    				<input class="form-control form-control-sm" type="number" wire:model="nombre_exemplaire" name="">
+    				<input class="form-control form-control-sm rounded-0" type="number" wire:model="nombre_exemplaire" name="">
 
     				@error('nombre_exemplaire')
     						<span class="error text-danger">{{ $message }}</span>

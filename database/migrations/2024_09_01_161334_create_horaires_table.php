@@ -16,6 +16,7 @@ class CreateHorairesTable extends Migration
         Schema::create('horaires', function (Blueprint $table) {
             $table->id();
             $table->string('jour');
+            $table->string('intervalle');
             $table->foreignId('classe_id');
             $table->string('cours');
             $table->foreignId('enseignant_id');
