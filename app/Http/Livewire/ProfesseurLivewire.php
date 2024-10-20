@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class ProfesseurLivewire extends Component
 {
     use WithPagination;
-    
+
     protected $paginationTheme ='bootstrap';
     public $name;
     public $telephone;
@@ -23,30 +23,30 @@ class ProfesseurLivewire extends Component
     public $identification;
     public $showForm = false;
     public $errorMessage;
-    
-    
+
+
     public function render()
     {
         $proffesseurs = Professeur::latest()
         ->where('name' , 'like', '%'.$this->search.'%')->paginate();
-        
+
         return view(
             'livewire.professeur-livewire',
             [ 'proffesseurs' => $proffesseurs ]
         );
     }
-    
+
     public $rules = [
         'name' => 'required',
         'telephone' => 'required|min:8',
         'email' => 'required|email|unique:professeurs',
     ];
-    
+
     public function saveProffesseur()
     {
         $this->validate();
         if($this->identification){
-            
+
             Professeur::find($this->identification)->update([
                 'name' => $this->name,
                 'telephone' => $this->telephone,
@@ -58,8 +58,8 @@ class ProfesseurLivewire extends Component
                 //code...
                 DB::beginTransaction();
                 $user =  User::create([
-                    'name' => $this->name,,
-                    'email'  => $this->email,,
+                    'name' => $this->name,
+                    'email'  => $this->email,
                     'password'  => bcrypt( $this->password),
                     'telephone'  => $this->telephone,
                     'ecole_id' => auth()->user()->ecole_id ?? 1,
@@ -71,7 +71,7 @@ class ProfesseurLivewire extends Component
                     'email' => $this->email,
                     'utilisateur_id' => $user->id,
                 ]);
-                
+
                 $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
                 DB::commit();
             } catch (\Throwable $th) {
@@ -79,26 +79,26 @@ class ProfesseurLivewire extends Component
                 DB::rollBack();
                 dd($th->getMessage());
             }
-            
+
         }
-        
+
         $this->showForm = false;
-        
+
         $this->reset();
-        
+
     }
-    
+
     public function updateProfesseur($id)
     {
         $prof = Professeur::find($id);
-        
+
         $this->name = $prof->name;
         $this->telephone = $prof->telephone;
         $this->identification = $prof->id;
         $this->email = $prof->email;
         $this->showForm = true;
     }
-    
+
     public function setAsUser($id){
         $prof = Professeur::find($id);
         // Le système generer par defaut un Mot de passe qui sera modifier par le professeur lui même
@@ -126,10 +126,10 @@ class ProfesseurLivewire extends Component
                 // dd($e->getMessage());
                 //$this->errorMessage = $e->getMessage();
                 session()->flash('message', "Vérifier les informations du professeur");
-                
+
             }
-            
+
         }
-        
+
     }
 }

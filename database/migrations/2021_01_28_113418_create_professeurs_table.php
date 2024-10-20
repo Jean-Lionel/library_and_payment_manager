@@ -18,6 +18,7 @@ class CreateProfesseursTable extends Migration
             $table->string('name');
             $table->foreignId('user_id')->nullable();
             $table->string('telephone');
+            $table->string('email');
             $table->foreignId('ecole_id')->nullable();
             $table->foreignId('utilisateur_id')->nullable();
             $table->timestamps();
