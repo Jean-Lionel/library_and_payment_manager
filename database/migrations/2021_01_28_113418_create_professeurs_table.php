@@ -19,6 +19,7 @@ class CreateProfesseursTable extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('telephone');
             $table->foreignId('ecole_id')->nullable();
+            $table->foreignId('utilisateur_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

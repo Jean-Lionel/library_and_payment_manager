@@ -46,6 +46,13 @@
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
 				</div>
+				<div class="form-group">
+					<label for="">Mot de passe </label>
+					<input class="form-control" type="password" wire:model="password" name="">
+					@error('password')
+					<span class="error text-danger">{{ $message }}</span>
+					@enderror
+				</div>
 
 				<div class="form-group">
 					<button class="btn btn-info">Enregistrer</button>
