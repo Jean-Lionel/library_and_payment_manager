@@ -77,8 +77,13 @@
                 <tbody>
                     @foreach ($eleves as $key => $eleve)
                         <tr>
-
-                            <td><input type="checkbox" value="{{ $eleve->id }}" name="eleve_id[]" /></td>
+                            <td>
+                            
+                            @if (!$eleve->isPresentToday())
+                            <input type="checkbox" value="{{ $eleve->id }}" name="eleve_id[]" />
+                            @endif
+                                
+                            </td>
                             {{-- <td>{{ ++$key }}</td> --}}
                             <td><img src="{{ asset('uploads/eleve/' . $eleve->image_eleve) }}" alt="image"
                                     style="width: 44px; height: 44px; border-radius: 100%;" /></td>

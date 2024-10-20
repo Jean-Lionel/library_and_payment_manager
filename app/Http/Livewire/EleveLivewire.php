@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Livewire;
 
-use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Section;
 use Livewire\Component;

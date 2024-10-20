@@ -37,6 +37,12 @@ class Eleve extends Model
         return $this->sexe == "M" || $this->sexe == "H";
     }
 
+    // Function retourenera true all False
+    public function isPresentToday(){
+        return Presence::whereDate('created_at', date('Y-m-d'))
+            ->where(column: 'eleve_id', '=', $this->id)->first();       
+    }
+
     public function compte(){
     	return $this->belongsTo('App\Models\Compte','id','eleve_id');
     }
