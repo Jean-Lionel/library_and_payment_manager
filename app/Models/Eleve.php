@@ -40,7 +40,7 @@ class Eleve extends Model
     // Function retourenera true all False
     public function isPresentToday(){
         return Presence::whereDate('created_at', date('Y-m-d'))
-            ->where(column: 'eleve_id', '=', $this->id)->first();       
+            ->where( 'eleve_id', '=', $this->id)->first();       
     }
 
     public function compte(){

@@ -21,9 +21,8 @@ class HoraireComponent extends Component
     {
         $users = User::select('id','name','email')->get();
         $selecthoraire = Horaire::with('classe')
-        ->when($this->by_day, function ($query) {
-            $query->where('jour', $this->by_day);
-        })->where('enseignant_id', auth()->user()->id)
+        ->where('jour', $this->by_day)
+        ->where('enseignant_id', auth()->user()->id)
         ->get();
         $classes = Classe::select('id','name')->get();
         return view('livewire.horaire-component', [
