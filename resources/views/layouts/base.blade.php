@@ -127,6 +127,9 @@
 						<li class="{{ setActiveRoute('parents') }}">
 							<a href="{{ route('parents') }}"><span class="fas fa-restroom mr-3 text-light"></span> Parents</a>
 						</li>
+                        <li class="{{ setActiveRoute('disciplines') }}">
+							<a href="{{ route('discipline') }}"><span class="fas fa-restroom mr-3 text-light"></span> Discipline</a>
+						</li>
 						@endcanany
 
 						<li class="{{ setActiveRoute('profiles') }}">

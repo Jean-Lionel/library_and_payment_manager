@@ -587,8 +587,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="col-md-12 d-flex" style="overflow: hidden;">
-                    {{-- {{ $ecoles->links() }} --}}
+                <div class="d-flex float-right" style="overflow: hidden;">
+                    {{ $ecoles->links() }}
                 </div>
             </div>
         @endcan

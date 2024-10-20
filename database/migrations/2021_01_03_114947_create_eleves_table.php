@@ -32,8 +32,6 @@ class CreateElevesTable extends Migration
             $table->text('district')->nullable();
             $table->text('city')->nullable();
             $table->text('zipcode')->nullable();
-
-
             $table->unsignedBigInteger('classe_id');
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();

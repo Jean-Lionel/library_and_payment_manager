@@ -1,6 +1,7 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
     <div class="row">
+        <h3>Veiller configurer la calendrier de cette année scolaire</h3>
         <div class="col-md-12">
             <a href="{{ route('configurations_component') }}">
                 configuration des paramètres essentiels
@@ -19,7 +20,7 @@
 
     		<ul class="list-group">
     			<li class="list-group-item">
-    			<h3>ANNEE SCOLAIRE : {{ $currentAnneScolaire ? $currentAnneScolaire->name : ""}}</h3> 
+    			<h3>ANNEE SCOLAIRE : {{ $currentAnneScolaire ? $currentAnneScolaire->name : ""}}</h3>
     			</li>
     		</ul>
     	</div>
@@ -34,7 +35,7 @@
 
                         @if ($trim->is_current == 1)
                             {{-- expr --}}
-                            selected 
+                            selected
                         @endif
 
                         >{{$trim->name }}</option>
@@ -42,9 +43,13 @@
             </select>
 
             <h5>{{$curreTrimestre ?  $curreTrimestre->name : ""}}</h5>
-            
+
         </div>
-    	<div class="col"></div>
-    	<div class="col"></div>
+    	<div class="col">
+            <h3>La 1ére période débute de ... jusqu'au ....</h3>
+        </div>
+    	<div class="col">
+            <h3>La 2ére période ... jusqu'au ....</h3>
+        </div>
     </div>
 </div>

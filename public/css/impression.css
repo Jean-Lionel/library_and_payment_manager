@@ -1,0 +1,334 @@
+@import url("https://fonts.google.com/share?selection.family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900");
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body
+{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #808080;
+}
+.wrapper
+{
+    width: 550px;
+    height: 600px;
+    background: #fff;
+    position: relative;
+    padding: 30px 40px;
+}
+
+.border-design
+{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.border-design .c1,
+.border-design .c2,
+.border-design .c3,
+.border-design .c4,
+.border-design .c5
+{
+    width: 30px;
+    height: 10px;
+}
+
+.c1, .c5
+{
+    background: #ec8e1d;
+}
+
+.c2
+{
+    background: #27aae2;
+}
+.c3
+{
+    background: #d25a29;
+}
+
+.c4
+{
+    background: #fef200;
+}
+
+.border-design.top
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.border-design.bottom
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    flex-direction: row-reverse;
+}
+.invoice-header
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+.logo
+{
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+.logo span
+{
+    font-weight: 400;
+}
+
+.title
+{
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.inv-number, .inv-date
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.inv-number
+{
+    padding: 10px 45px 0 0;
+}
+.inv-date
+{
+    padding: 10px 0 0 45px;
+}
+
+.inv-number h4, .inv-date h4
+{
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.inv-number h5, .inv-date h5
+{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.billing-detail
+{
+    margin-top: 15px;
+}
+
+.billing-detail p:nth-child(1),
+.billing-detail p:nth-child(2)
+{
+    text-transform: uppercase;
+}
+
+.billing-detail p:nth-child(1)
+{
+    font-size: 10px;
+}
+
+.billing-detail p:nth-child(2)
+{
+    font-size: 12px;
+    font-weight: 700;
+    width: 150px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+}
+
+.billing-detail p:nth-child(3),
+.billing-detail p:nth-child(4),
+.billing-detail p:nth-child(5)
+{
+    font-size: 10px;
+    line-height: 12px;
+}
+.billing-detail p span
+{
+    font-weight: 600;
+}
+.info_invoice
+{
+    display: flex;
+    margin-top: 15px;
+}
+.bloc-image
+{
+    position: absolute;
+   right: 40px;
+}
+
+hr
+{
+    margin-top: 10px;
+    border: 1px solid #000;
+}
+
+table
+{
+    border-collapse: collapse;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+table caption
+{
+    font-size: 16px;
+    font-weight: 700;
+    align-items: flex-start;
+}
+
+table thead tr td
+{
+    text-align: center;
+    font-weight: 600;
+    padding: 8px 5px;
+}
+
+table tbody td{
+    padding: 7px 5px;
+    text-align: center;
+}
+
+.l-col
+{
+    text-align: left;
+}
+
+.r-col
+{
+    text-align: right;
+}
+
+table tbody tr:nth-child(odd)
+{
+    background: #f0f0f0;
+}
+
+table tbody tr:nth-child(even)
+{
+    background: #fcfcfc;
+    border-bottom: 1px solid #b4b4b4;
+    border-top: 1px solid #b4b4b4;
+}
+
+.total-section{
+    position: absolute;
+    right: 40px;
+    font-size: 12px;
+    width: 160px;
+    margin-top: 5px;
+    padding-right: 5px;
+}
+
+.sub, .tax, .total
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.total
+{
+    border-top: 1px solid #646464;
+    padding-top: 5px;
+}
+
+.sub p:nth-child(1),
+.tax p:nth-child(1),
+.total p
+{
+    font-weight: 600;
+}
+
+.payment-terms
+{
+    position: absolute;
+    bottom: 30px;
+    width: 45%;
+}
+
+.payment-detail
+{
+    margin-bottom: 8px;
+}
+
+.payment-detail p:nth-child(1)
+{
+    font-size: 12px;
+    font-weight: 700;
+    width: 150px;
+}
+
+.payment-detail p:nth-child(2),
+.payment-detail p:nth-child(3),
+.payment-detail p:nth-child(4)
+{
+    font-size: 10px;
+}
+
+.payment-detail p span
+{
+    font-weight: 600;
+}
+
+.terms
+{
+    margin-bottom: 20px;
+}
+.terms p:nth-child(1)
+{
+    font-size: 12px;
+    font-weight: 700;
+    width: 150px;
+}
+
+.terms p:nth-child(2)
+{
+    font-size: 10px;
+}
+
+.message p
+{
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.signature p
+{
+    font-size: 12px;
+    font-weight: 700;
+    position: absolute;
+    right: 40px;
+    bottom: 30px;
+    border-top: 1px solid #262626;
+}
+
+.situation
+{
+    margin-top: 12px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.situation p{
+    font-size: 12px;
+    font-weight: 100;
+}

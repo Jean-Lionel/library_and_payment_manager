@@ -174,6 +174,8 @@
     </table>
 
     @endif
-
+    <div class="float-right">
+        {{ $users->links() }}
+    </div>
 
 </div>

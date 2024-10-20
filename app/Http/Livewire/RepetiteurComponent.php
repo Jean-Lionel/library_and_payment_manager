@@ -7,6 +7,7 @@ use App\Models\Repetiteur;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class RepetiteurComponent extends Component
 {
@@ -28,6 +29,7 @@ class RepetiteurComponent extends Component
     public $email_repetiteur;
     public $enseignant_id;
     public $cours = [];
+    public $search = '';
 
     public $totalSteps = 4;
     public $currentStep = 1;
@@ -37,9 +39,11 @@ class RepetiteurComponent extends Component
         $this->currentStep = 1;
     }
 
+
     public function render()
     {
-        return view('livewire.repetiteur-component')->layout('layouts.base');
+        $repetiteur = Repetiteur::where('nom_repetiteur', 'like', '%'.$this->search.'%')->paginate(10);
+        return view('livewire.repetiteur-component', compact('repetiteur'))->layout('layouts.base');
     }
 
     public function increaseSted()
@@ -95,13 +99,14 @@ class RepetiteurComponent extends Component
     public function SaveRepetiteur()
     {
         $this->resetErrorBag();
-        // if ($this->currentStep == 3) {
-        //     $this->validate([
-        //         'photo_repetiteur' => 'required|mimes:png,jpg,jpeg',
-        //     ]);
-        // }
+        if ($this->currentStep == 3) {
+           $valid_data =  $this->validate([
+                'photo_repetiteur' => 'required|mimes:png,jpg,jpeg|image|max:1024',
+            ]);
+        }
         // $filename = $this->photo_repetiteur->getClientOriginalName();
-        // $load = $this->photo_repetiteur->storeAs('photo_cvs', $filename);
+        // $load = $this->photo_repetiteur->store('photo_cvs', $filename);
+
         try {
             Repetiteur::create([
                 'nom_repetiteur' => $this->nom_repetiteur,

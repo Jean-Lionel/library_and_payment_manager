@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
+use Livewire\WithPagination;
 
 class UtilisateurComponent extends Component
 {
@@ -46,7 +47,7 @@ class UtilisateurComponent extends Component
                 $query->where('name','LIKE', '%'.$s.'%')
                         ->orWhere('email','like','%'.$s.'%');
             }
-        })->latest()->paginate();
+        })->latest()->paginate(5);
         $roles = Role::all();
         $ecoles = Ecole::select('id','nom_ecole')->get();
 

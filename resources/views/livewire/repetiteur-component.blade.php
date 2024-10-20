@@ -278,4 +278,52 @@
 
         </div>
     </form>
-</div>
+    @canany(['is-admin', 'is-prefet'])
+        <div class="container mt-5">
+            <div class="col-md-12">
+                <input type="text" placeholder="rechercher" class="form-control rounded-0" wire:model="search">
+                <table class="table table-striped mt-2">
+                    <thead class="bg-info text-white">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Sexe</th>
+                            <th>Email</th>
+                            <th>Telephone</th>
+                            <th>Territoire</th>
+                            <th>Quartier</th>
+                            <th>Avenue</th>
+                            <th>Experience</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($repetiteur as $key => $repe)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $repe->nom_repetiteur }}</td>
+                                <td>{{ $repe->prenom_repetiteur }}</td>
+                                <td>{{ $repe->sexe_repetiteur }}</td>
+                                <td>{{ $repe->email_repetiteur }}</td>
+                                <td>{{ $repe->telephone_repetiteur }}</td>
+                                <td>{{ $repe->territoire }}</td>
+                                <td>{{ $repe->quartier }}</td>
+                                <td>{{ $repe->avenue }}</td>
+                                <td>{{ $repe->experience }}</td>
+                                <td>
+                                    <button class="btn-sm btn-primary"><i class="fa fa-pencil text-white"></i></button>
+                                    <button class="btn-sm btn-danger"><i class="fa fa-trash text-white"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="float-right">
+                {{ $repetiteur->links() }}
+            </div>
+        </div>
+        @endcanany
+    </div>

@@ -19,7 +19,7 @@ class WelcomeComponent extends Component
     {
 
         return view('livewire.welcome-component', [
-            'ecoles' => Ecole::all(),
+            'ecoles' => Ecole::paginate(10),
             'count_ecole' => Ecole::count(),
             'classes' => Classe::all()->count(),
             'books' => Book::all()->count(),
