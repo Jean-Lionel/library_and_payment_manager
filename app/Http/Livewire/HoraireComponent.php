@@ -14,6 +14,7 @@ class HoraireComponent extends Component
     public $cours;
     public $classe;
     public $heure;
+    public $intervalle;
     public $enseignant;
     public $by_day;
 

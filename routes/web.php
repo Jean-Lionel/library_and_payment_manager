@@ -120,6 +120,8 @@ Route::middleware('auth')->group(function(){
     Route::post('addhoraire', [HoraireController::class, 'store'])->name('horaire.create');
     Route::view('repetiteur', 'repetiteur.create')->name('repetiteur');
     Route::view('discipline', 'discipline.create')->name('discipline');
+    Route::view('communique', 'communiquer.create')->name('communiquer');
+    Route::view('/students', 'pdf.students')->name('students');
 
 });
 

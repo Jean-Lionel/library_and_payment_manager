@@ -19,7 +19,7 @@ class EleveLivewire extends Component
     public $selectedClasse=null;
 
 	public function mount(){
-		
+
         $this->sections = Section::all();
         $this->classes = collect();
 	}
@@ -36,8 +36,8 @@ class EleveLivewire extends Component
                             if($q){
                                 $query->where('first_name','LIKE','%'.$q.'%')
                                       ->orWhere('last_name','like', '%'.$q.'%')
-                                   ; 
-                            } 
+                                   ;
+                            }
 
                         })
                         ->paginate();
@@ -55,11 +55,11 @@ class EleveLivewire extends Component
     {
         $section = Section::find($section_id);
         $this->classes = $section->classes ?? collect();
-        
+
         $this->render();
 
     }
 
-   
-   
+
+
 }

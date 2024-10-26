@@ -12,6 +12,7 @@ use App\Models\Paiement;
 use App\Models\Book;
 use App\Models\Repetiteur;
 
+
 class WelcomeComponent extends Component
 {
 

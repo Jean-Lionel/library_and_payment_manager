@@ -129,7 +129,7 @@ class RepetiteurComponent extends Component
             ]);
             $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
             // session()->flash('success', 'Repetiteur Created Successfully.');
-            dd('Good');
+            // dd('Good');
         }
         catch (\Exception $ex)
         {

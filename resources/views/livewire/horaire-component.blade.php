@@ -31,7 +31,7 @@
                         <select wire:model="classe" id="classe" class="form-control rounded-0">
                             <option value="null">--Selectionner--</option>
                             @foreach ($classes as $class)
-                                <option value="{{ $class->id . '#' . $class->name }}">{{ $class->name }}</option>
+                                <option value="{{ $class->id . '#' . $class->name }}">{{ $class->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -39,6 +39,10 @@
                         <div class="form-group col-md-4">
                             <label for="heure">Heure</label>
                             <input type="number" wire:model="heure" class="form-control rounded-0" id="heure" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="heure">Intervalle</label>
+                            <input type="text" wire:model="intervalle" class="form-control rounded-0" id="intervalle" />
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cours">Cours</label>
@@ -68,8 +72,10 @@
                         <th> Jour </th>
                         <th> Heure </th>
                         <th> Classe </th>
+                        <th> Intervalle </th>
                         <th> Cours </th>
                         <th> Enseignant </th>
+
                     </tr>
                 </thead>
                 <tbody id="body_table">
@@ -166,8 +172,8 @@
             </table>
         </div>  --}}
         <div class="container bg-white mt-2">
-            <h2 class="text-center ">Vos cours du {{now()->format('d-m-Y')}}</h2>
-            <select wire:model='by_day' id="by_day" class="form-control rounded-0 mt-2">
+            <h2 class="text-center ">Horaire du {{now()->format('d-m-Y')}}</h2>
+            <select wire:model.lazy='by_day' id="by_day" class="form-control rounded-0 mt-2">
                 <option value="0">--Selectionner classe--</option>
                 <option value="lundi">lundi</option>
                 <option value="mardi">mardi</option>
@@ -190,7 +196,7 @@
                             <tr>
                                 <td class="head">{{ $horaire->heure }} <small>ieme Heure</small></td>
                                 <td>{{$horaire->intervalle}}</td>
-                                <td>{{ $horaire->classe->name }}</td>
+                                <td>{{ $horaire->classe->name}}</td>
                                 <td>{{ $horaire->classe->section->name }}</td>
                                 <td>{{ $horaire->cours }}</td>
                             </tr>
@@ -217,6 +223,7 @@
                     classe: $('#classe').val().split('#')[0],
                     nom_classe: $('#classe').val().split('#')[1],
                     heure: $('#heure').val(),
+                    intervalle: $('#intervalle'),
                     cours: $('#cours').val(),
                     teacher: $('#teacher').val().split('#')[0],
                     nom_teacher: $('#teacher').val(),
@@ -231,6 +238,8 @@
                                     <td>${el.jour}</td>
                                     <td>${el.classe}</td>
                                      <td>${el.classe}</td>
+                                     <td>${el.heure}</td>
+                                     <td>${el.intervalle}</td>
                                     <td>${el.cours}</td>
                                     <td>${el.nom_teacher.split('#')[1]} </td>
 
@@ -258,6 +267,7 @@
                         console.log(data)
                         $('#cours').val('')
                         $('#heure').val('')
+                        $('#intervalle').val('')
                         $('#teacher').val('')
                         $('#classe').val('')
                         $('#jour').val('')

@@ -27,7 +27,7 @@ class PaiementLivewire extends Component
 	public $anneScolaire;
 	public $bordereau;
 	public $trimestre;
-	public $type_paiement;
+	public $type_paiement = [];
 	public $number_letter  = "";
 
 	public $facture;
@@ -106,7 +106,7 @@ class PaiementLivewire extends Component
         'bordereau' => 'required|min:2',
         'trimestre' => 'required|min:2',
         'compteName' => 'required',
-        'type_paiement' => 'required',
+        'type_paiement.*' => 'required',
 
     ];
 
@@ -131,7 +131,7 @@ class PaiementLivewire extends Component
 				'compte_name' => $this->eleve->compte->name,
 				'eleve_id' => $this->eleve->id,
 				'user_id' => 1,
-				'type_paiement' => $this->type_paiement,
+				'type_paiement' => json_encode($this->type_paiement),
 				'trimestre' => $this->trimestre,
 				'annee_scolaire' => $this->anneScolaire->name,
 			]);

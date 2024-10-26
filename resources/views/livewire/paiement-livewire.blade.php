@@ -160,7 +160,7 @@
 
                                     <label for="" class="col-sm-6">PAIEMENT</label>
 
-                                    <select class="col-md-6 form-control border-dark" wire:model="type_paiement"
+                                    <select multiple class="col-md-6 form-control border-dark" wire:model.lazy="type_paiement"
                                         id="">
                                         <option value="">CHOISISSEZ ....</option>
                                         <option value="MINERVAL">MINERVAL</option>

@@ -25,6 +25,7 @@ class HoraireController extends Controller
                'jour' =>  $horaire->jour,
                'classe_id' => $horaire->classe,
                'heure' => $horaire->heure,
+               'intervalle' => $horaire->intervalle,
                'cours' => $horaire->cours,
                'enseignant_id' => $horaire->teacher,
                'user_id' => Auth::user()->id,
