@@ -14,4 +14,9 @@ class Horaire extends Model
     {
         return $this->belongsTo(Classe::class , 'classe_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

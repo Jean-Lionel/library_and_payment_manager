@@ -8,14 +8,14 @@
 	@endif
 
     @if($showForm)
-	    <div>
-	    	<h3>Ajout d'une evaluation</h3>
-	    	<form action="" class="col-md-6" wire:submit.prevent="saveEvalution">
+	    <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-3">
+	    	<h4 class="text-center text-uppercase">Ajout d'une evaluation</h4>
+	    	<form  wire:submit.prevent="saveEvalution">
 	    		<div class="row">
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">Classe</label><br>
-	    					<select name="" id="" wire:model="classeId" class="form-control">
+	    					<select name="" id="" wire:model="classeId" class="form-control rounded-0">
 	    						<option value=""></option>
 	    						@foreach ($classes as $classe)
 	    							{{-- expr --}}
@@ -30,8 +30,8 @@
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">Cours</label><br>
-	    		
-	    					<select name="" id="" wire:model="courId" class="form-control">
+
+	    					<select name="" id="" wire:model="courId" class="form-control rounded-0">
 	    						<option value=""></option>
 	    						@foreach ($cours as $cour)
 	    							{{-- expr --}}
@@ -49,22 +49,23 @@
 	    				<div class="form-group">
 	    					<label for="">TRIMESTRE</label><br>
 	    					<h4>{{ $trimestre->name }}</h4>
-	    					
+
 
 	    					@error('trimestre')
 	    					<span class="text-danger">{{ $message }}</span>
 	    					@enderror
-	    					
+
 	    				</div>
 	    			</div>
 
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">TYPE D'EVALUATION</label><br>
-	    					<select name="" wire:model="type_evaluation" id="" class="form-control">
+	    					<select name="" wire:model="type_evaluation" id="" class="form-control rounded-0">
 	    						<option value=""></option>
 	    						<option value="INTERROGATION">INTERROGATION</option>
-	    						<option value="EXAMEN">EXAMEN / RESSOURCE</option>
+	    						<option value="EXAMEN">EXAMEN</option>
+                                <option value="DEVOIR">DEVOIR</option>
 	    						<option value="COMPENTENCE">COMPENTENCE</option>
 	    					</select>
 
@@ -76,7 +77,7 @@
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">DATE DE PASSASSION</label><br>
-	    					<input type="date" wire:model="date_evaluation">
+	    					<input type="date" wire:model="date_evaluation" class="form-control rounded-0">
 	    					@error('date_evaluation')
 	    					<span class="text-danger">{{ $message }}</span>
 	    					@enderror
@@ -85,7 +86,7 @@
 	    			<div class="col-md-6">
 	    				<div class="form-group">
 	    					<label for="">Max</label><br>
-	    					<input class="form-control" min="0" type="number" wire:model="ponderation">
+	    					<input class="form-control rounded-0" min="0" type="number" wire:model="ponderation">
 	    					@error('ponderation')
 	    					<span class="text-danger">{{ $message }}</span>
 	    					@enderror
@@ -99,17 +100,16 @@
 	    			</div>
 	    			<div class="col-md-6">
 	    				<div class="form-group">
-	    					<br>
-	    					<button class="btn btn-block btn-outline-dark">Valider</button>
+	    					<button class="btn btn-info text-white w-100">Valider</button>
 	    				</div>
 	    			</div>
 	    		</div>
-	    		
+
 	    	</form>
 	    </div>
     @else
     <div>
-  
+
     	<div class="row">
     		<div class="col-md-1">
     			<button wire:click="toogleForm" class="btn btn-primary" title="Nouvelle Evaluation"><i class="fa fa-plus"></i></button>
@@ -131,7 +131,7 @@
     				<th>DATE</th>
     				<th>ACTION</th>
     			</tr>
-    			
+
     		</thead>
     		<tbody>
     			@foreach ($evaluations as $evaluation)
@@ -144,10 +144,10 @@
     					<td>{{ $evaluation->ponderation }}</td>
 	    					<td>{{ $evaluation->trimestre }}</td>
     					<td>{{ $evaluation->date_evaluation }}</td>
-    					
+
     					<td>{{ $evaluation->date_evaluation }}</td>
     					<td>
-    						
+
     						<button class="btn-danger" wire:click="$emit('triggerDelete',{{ $evaluation->id }})">
     							<i class="fa fa-remove"></i>
     						</button>
@@ -157,7 +157,7 @@
     						<a href="{{ route('add_point',$evaluation->id ) }}" class="btn btn-primary" title="Ajout des points des élèves">
     							<i class="fa fa-plus"></i>
     						</a>
-    		
+
     					</td>
     				</tr>
     			@endforeach
@@ -167,7 +167,7 @@
     	<div>
     		{{$evaluations->links()}}
     	</div>
-    	
+
     </div>
     @endif
 </div>
@@ -193,7 +193,7 @@
                     @this.call('annulerEvalution',orderId)
 		    // success response
                     responseAlert({title: session('message'), type: 'success'});
-                    
+
                 } else {
                     responseAlert({
                         title: 'Operation Cancelled!',

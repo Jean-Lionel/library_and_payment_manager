@@ -8,7 +8,7 @@
         }
     </style>
     <div class="row mb-3">
-        <div class="col-md-12 d-flex justify-content-center align-items-center mt-4">
+        <div class="container d-flex justify-content-center align-items-center mt-4">
             <div class="col-md-4">
                 <a href="{{ route('paiements.create') }}" class="btn btn-lg">Rapport des paimements </a>
             </div>
@@ -71,12 +71,13 @@
 
         @if ($showFormulaire)
             <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-3">
+                <h4 class="text-center text-uppercase">Nouveau paiement</h4>
                 <form wire:submit.prevent="savePaiement">
                     <div class="row">
 
                         <div class="form-group col-md-6">
                             <label for="compte_name">COMPTE</label>
-                            <input class="form-control form-controlborder-dark" type="text" wire:model="compteName">
+                            <input class="form-control rounded-0" type="text" wire:model="compteName">
                             @if ($eleve and $compteName)
                                 <div class="col-md-12 mt-2 ">
                                     <ul class="list-group">
@@ -101,76 +102,68 @@
 
                         <div class="form-group col-md-6">
                             <label for="montant">Montant</label>
-                            <div class="col-sm-8">
-                                <input type="number" min="0" wire:model="montant"
-                                    class=" border-dark form-control" id="montant" placeholder="Montant">
+
+                                <input type="number" min="0" wire:model="montant" class="form-control rounded-0"
+                                    id="montant" placeholder="Montant">
 
                                 @error('montant')
                                     <span class="error text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+
                         </div>
-
-
-
-
-                        <div class="form-group col-md-6">
+                        {{-- <div class="form-group col-md-6">
                             <label for="montant">Bordereau N°</label>
 
-                            <input wire:model="bordereau" type="text" class="form-control border-dark" id="bordereau"
+                            <input wire:model="bordereau" type="text" class="form-control rounded-0" id="bordereau"
                                 placeholder="">
 
                             @error('bordereau')
                                 <span class="error text-danger">{{ $message }}</span>
                             @enderror
 
-                        </div>
+                        </div> --}}
+                            <div class="form-group col-md-6">
+                                <label for="">Periode</label>
 
-                        <div class="row">
+                                <select wire:model="trimestre" name="" id=""
+                                    class="form-control rounded-0">
+                                    <option value="">Choisissez ici le trimestre</option>
 
-                            <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label" for="">Periode</label>
-
-                                    <select wire:model="trimestre" name="" id=""
-                                        class="form-control col-sm-8 border-dark">
-                                        <option value="">Choisissez ici le trimestre</option>
-
-                                        <option value="PREMIER TRIMESTRE">
-                                            PREMIER TRIMESTRE
-                                        </option>
-                                        <option value="DEUXIEME TRIMESTRE">
-                                            DEUXIEME TRIMESTRE
-                                        </option>
-                                        <option value="TROISIEME TRIMESTRE">
-                                            TROISIEME TRIMESTRE
-                                        </option>
+                                    <option value="PREMIER TRIMESTRE">
+                                        PREMIER TRIMESTRE
+                                    </option>
+                                    <option value="DEUXIEME TRIMESTRE">
+                                        DEUXIEME TRIMESTRE
+                                    </option>
+                                    <option value="TROISIEME TRIMESTRE">
+                                        TROISIEME TRIMESTRE
+                                    </option>
 
 
-                                    </select>
+                                </select>
 
-                                    @error('trimestre')
-                                        <span class="error text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                @error('trimestre')
+                                    <span class="error text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group row">
 
-                                    <label for="" class="col-sm-6">PAIEMENT</label>
 
-                                    <select multiple class="col-md-6 form-control border-dark" wire:model.lazy="type_paiement"
-                                        id="">
-                                        <option value="">CHOISISSEZ ....</option>
-                                        <option value="MINERVAL">MINERVAL</option>
-                                        <option value="TRANSPORT">TRANSPORT</option>
-                                        <option value="CONTRIBUTION">CONTRIBUTION</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-md-6">
+
+                                <label for="">PAIEMENT</label>
+
+                                <select multiple class="form-control rounded-0" wire:model.lazy="type_paiement"
+                                    id="">
+                                    <option value="">CHOISISSEZ ....</option>
+                                    <option value="MINERVAL">MINERVAL</option>
+                                    <option value="TRANSPORT">TRANSPORT</option>
+                                    <option value="CONTRIBUTION">CONTRIBUTION</option>
+                                </select>
                             </div>
-                            <div class="col-md-4">
-                                <div class="d-flex justify-content-between">
+
+                            <div class="col-md-6">
+                                <div class="">
                                     <label for="">ANNE SCOLAIRE</label>
                                     <label for=""> <b>{{ $anneScolaire->name ?? '' }}</b> </label>
 
@@ -178,7 +171,6 @@
                             </div>
 
 
-                        </div>
 
                         <div class="col-md-3 mt-3">
                             @if ($eleve and $compteName)
@@ -201,7 +193,8 @@
 
         <div>
             <div class="col-md-4">
-                <input type="text" wire:model.live="search" placeholder="Rechercher" class="form-control form-control-sm">
+                <input type="text" wire:model.live="search" placeholder="Rechercher"
+                    class="form-control form-control-sm">
             </div>
 
         </div>

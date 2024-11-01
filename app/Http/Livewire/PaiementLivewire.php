@@ -103,7 +103,7 @@ class PaiementLivewire extends Component
 
 	protected $rules = [
         'montant' => 'required',
-        'bordereau' => 'required|min:2',
+        // 'bordereau' => 'required|min:2',
         'trimestre' => 'required|min:2',
         'compteName' => 'required',
         'type_paiement.*' => 'required',
@@ -123,6 +123,8 @@ class PaiementLivewire extends Component
 		$validatedData = $this->validate();
 		try {
 			DB::beginTransaction();
+            $number = mt_rand(1000000000,9999999999);
+            $this->bordereau = $number;
 
 			Paiment::create([
 				'amount' => $this->montant,

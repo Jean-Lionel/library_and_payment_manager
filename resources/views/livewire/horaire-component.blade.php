@@ -10,12 +10,138 @@
             color: #ffffff;
         }
     </style>
-    @canany(['is-admin', 'is-prefet'])
+
+    @can('is-admin')
         <div class="container pt-5 border px-5 py-5  border-dark bg-white">
-            <h3>Ajouter horaire</h3>
-            <div class="row">
-                <form action="" wire:submit.prevent="saveHoraire">
-                    <div class="form-group">
+            <button class="btn btn-sm text-white float-right" wire:click="$toggle('showDiv')">Nouveau Horaire</button>
+            <input type="search" placeholder="Rechercher par le nom" wire:model.live.debounce.300ms="search"/>
+
+            <table class="table table-striped w-100 mt-2">
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Heure</th>
+                        <th>Cours</th>
+                        {{-- <th>Enseignant</th> --}}
+                        <th>Classe</th>
+                        <th>Section</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($getHoraire as $horaire)
+                        <tr>
+                            <td>{{ $horaire->jour }}</td>
+                            <td>{{ $horaire->heure }}</td>
+                            <td>{{ $horaire->cours }}</td>
+                            {{-- <td>{{ $horaire->user->name }}</td> --}}
+                            <td>{{ $horaire->classe->name }}</td>
+                            <td>{{ $horaire->classe->section->name }}</td>
+                            <td>
+                                <button type="button" data-toggle="modal" data-target="#updatemodal" wire:click.prevent="edit({{ $horaire->id }})" class="btn btn-sm btn-info" ><i class="fa fa-pencil"></i></button>
+                                <button type="button" class="btn-sm btn-danger text-white" wire:click="deleteId({{ $horaire->id }})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash"></i></button>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="float-right">
+                {{ $getHoraire->links() }}
+            </div>
+
+            {{-- modal to confirm delete --}}
+            <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirm</h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                                 <span aria-hidden="true close-btn">×</span>
+
+                            </button>
+
+                        </div>
+
+                       <div class="modal-body">
+
+                            <p>Are you sure want to delete?</p>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+
+                            <button type="button" wire:click.prevent="delete()" class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {{-- fin modal confirm --}}
+
+            {{-- start update modal --}}
+            <div>
+                <div class="modal fade" id="updatemodal" tabindex="-1" aria-labelledby="updatemodalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="updatemodalLabel">Modification Horaire</h5>
+                                <button type="button" class="btn-close bc" data-bs-dismiss="modal"
+                                    aria-label="Close">X</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <input type="hidden" wire:model='horaire_id'>
+                                    <div class="form-group">
+                                        <label for="jour">Durée</label>
+                                        <input type="text" wire:model="jour" id="jour" placeholder="jour"
+                                            class="form-control rounded-0" wire:model="eleve_id" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="heure">Durée</label>
+                                        <input type="text" wire:model="heure" id="duree" placeholder="heure"
+                                            class="form-control rounded-0"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cours">Cours</label>
+                                        <input type="text" cours placeholder="cours" id="cours"
+                                            class="form-control rounded-0" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger text-white"
+                                    data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Modifier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- end update modal --}}
+
+        </div>
+        </div>
+    @endcan
+    @if ($showDiv)
+    @canany(['is-admin', 'is-prefet'])
+        <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-2">
+            <h3 class="text-center text-uppercase">Ajouter horaire</h3>
+
+            <form action="" wire:submit.prevent="saveHoraire">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label for="classe">Jour</label>
                         <select wire:mode="jour" class="form-control rounded-0" id="jour">
                             <option value="null">--Selectionner--</option>
@@ -26,46 +152,46 @@
                             <option value="vendredi">Vendredi</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-4">
                         <label for="classe">Classe</label>
                         <select wire:model="classe" id="classe" class="form-control rounded-0">
                             <option value="null">--Selectionner--</option>
                             @foreach ($classes as $class)
-                                <option value="{{ $class->id . '#' . $class->name }}">{{ $class->name}}</option>
+                                <option value="{{ $class->id . '#' . $class->name }}">{{ $class->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="heure">Heure</label>
-                            <input type="number" wire:model="heure" class="form-control rounded-0" id="heure" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="heure">Intervalle</label>
-                            <input type="text" wire:model="intervalle" class="form-control rounded-0" id="intervalle" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="cours">Cours</label>
-                            <input type="text" wire:model="cours" class="form-control rounded-0" id="cours" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="teacher">Enseignant</label>
-                            <select class="form-control rounded-0" wire:model="teacher" id="teacher">
-                                <option value="null">--Selectionner--</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id . '#' . $user->name }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="heure">Heure</label>
+                        <input type="number" wire:model="heure" class="form-control rounded-0" id="heure" />
                     </div>
-                    <button id="btn_save" type="button" class="btn btn-sm float-right w-100">Ajouter</button>
-                </form>
-            </div>
+                    <div class="form-group col-md-4">
+                        <label for="heure">Intervalle</label>
+                        <input type="text" wire:model="intervalle" class="form-control rounded-0" id="intervalle" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cours">Cours</label>
+                        <input type="text" wire:model="cours" class="form-control rounded-0" id="cours" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="teacher">Enseignant</label>
+                        <select class="form-control rounded-0" wire:model="teacher" id="teacher">
+                            <option value="null">--Selectionner--</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id . '#' . $user->name }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <button id="btn_save" type="button" class="btn btn-sm float-right w-100">Ajouter</button>
+            </form>
+
 
         </div>
 
 
-        <div class="tabledata mt-3 card--container">
+        <div class="container tabledata mt-3 card--container">
             <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
@@ -88,6 +214,7 @@
                     </div> --}}
         </div>
     @endcanany
+    @endif
     @canany(['is-prefet', 'is-professeur'])
         {{-- <div class="mt-2 horaire-table">
             <h3 class="text-center">Horaire</h3>
@@ -172,7 +299,7 @@
             </table>
         </div>  --}}
         <div class="container bg-white mt-2">
-            <h2 class="text-center ">Horaire du {{now()->format('d-m-Y')}}</h2>
+            <h2 class="text-center ">Horaire du {{ now()->format('d-m-Y') }}</h2>
             <select wire:model.lazy='by_day' id="by_day" class="form-control rounded-0 mt-2">
                 <option value="0">--Selectionner classe--</option>
                 <option value="lundi">lundi</option>
@@ -181,28 +308,28 @@
                 <option value="jeudi">jeudi</option>
                 <option value="vendredi">vendredi</option>
             </select>
-                <table class="table table-striped w-100 mt-2">
-                    <thead class="head">
+            <table class="table table-striped w-100 mt-2">
+                <thead class="head">
+                    <tr>
+                        <th>Heure</th>
+                        <th>Intervalle</th>
+                        <th>Classe</th>
+                        <th>Section</th>
+                        <th>Cours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($selecthoraire as $horaire)
                         <tr>
-                            <th>Heure</th>
-                            <th>Intervalle</th>
-                            <th>Classe</th>
-                            <th>Section</th>
-                            <th>Cours</th>
+                            <td class="head">{{ $horaire->heure }} <small>ieme Heure</small></td>
+                            <td>{{ $horaire->intervalle }}</td>
+                            <td>{{ $horaire->classe->name }}</td>
+                            <td>{{ $horaire->classe->section->name }}</td>
+                            <td>{{ $horaire->cours }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($selecthoraire as $horaire)
-                            <tr>
-                                <td class="head">{{ $horaire->heure }} <small>ieme Heure</small></td>
-                                <td>{{$horaire->intervalle}}</td>
-                                <td>{{ $horaire->classe->name}}</td>
-                                <td>{{ $horaire->classe->section->name }}</td>
-                                <td>{{ $horaire->cours }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     @endcanany
 </div>

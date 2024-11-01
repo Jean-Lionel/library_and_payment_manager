@@ -1,18 +1,23 @@
 <style>
-.course_header{
-	background: #FFF;
+.container{
+	background: #1A5684;
 }
-.course_header a{
+.container a{
 	display: inline-block;
-	padding-left: 25px;
+	padding-left: 30px;
 	font-size: 1.2rem;
+    color: #fff
 }
-	
+.container a:hover{
+    background: #1A5684;
+    color: #fff;
+}
 </style>
 
-<div class="course_header">
-	
-	<a class="btn btn-sm btn-primary text-white {{ setActiveRoute('cours.index') }}"  href="{{ route('cours.index') }}"><i class="fa fa-plus text-white"></i> Cours</a>
+<div class="container">
+    <div class="row">
+
+	<a class="btn btn-sm text-white {{ setActiveRoute('cours.index') }}"  href="{{ route('cours.index') }}"><i class="fa fa-plus text-white"></i> Cours</a>
 	<a class=" {{ setActiveRoute('evaluations') }}" href="{{ route('evaluations') }}">Evaluation</a>
 	@canany(['is-admin','is-prefet'])
 	<a class=" {{ setActiveRoute('course_categories') }}" href="{{ route('course_categories') }}">Catégorie</a>
@@ -21,7 +26,8 @@
 
 	<a class=" {{ setActiveRoute('bullettin') }}" href="{{ route('bullettin') }}">Bullettin</a>
 	<a class=" {{ setActiveRoute('palmares') }}" href="{{ route('palmares') }}">Palmarès</a>
-	@canany(['is-admin','is-prefetro'])
+	@canany(['is-admin','is-prefet'])
 	<a class="{{ setActiveRoute('professeurs') }}" href="{{ route('professeurs') }}"><i class=" 	fa fa-user-md mr-2"></i>Professeur</a>
 	@endcanany
+</div>
 </div>

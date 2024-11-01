@@ -100,5 +100,8 @@ class User extends Authenticatable
         return $this->roles()->where('name', 'DIRECTEUR-DISIPLINE')->first();
     }
 
-
+    public function horaires()
+    {
+        return $this->hasMany(Horaire::class);
+    }
 }

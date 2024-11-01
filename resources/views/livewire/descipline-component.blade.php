@@ -102,17 +102,17 @@
                             <form wire:submit.prevent='exclure'>
                                 <div class="form-group">
                                     <label for="duree">Durée</label>
-                                    <input type="hidden" wire:model="duree" id="duree" placeholder="durée"
+                                    <input type="hidden" id="duree" placeholder="durée"
                                         class="form-control rounded-0" wire:model="eleve_id" />
                                 </div>
                                 <div class="form-group">
                                     <label for="duree">Durée</label>
                                     <input type="number" wire:model="duree" id="duree" placeholder="durée"
-                                        class="form-control rounded-0" wire:model="duree" />
+                                        class="form-control rounded-0" />
                                 </div>
                                 <div class="form-group">
                                     <label for="motif">Motif</label>
-                                    <input type="text" placeholder="motif exclusion" id="motif"
+                                    <input type="text" placeholder="motif exclusion" id="motif" wire:model="motif"
                                         class="form-control rounded-0" />
                                 </div>
                             </form>

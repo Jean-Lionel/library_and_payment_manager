@@ -22,7 +22,7 @@
                     <option value="{{ $classe->id }}">{{ $classe->name . ' ' . $classe->section->name }}</option>
                 @endforeach
             </select>
-            <table class="table table-striped">
+            <table class="table table-striped mt-2">
                 <thead class="but">
                     <tr>
                         <th>ID</th>
@@ -37,10 +37,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ $i = 1 }}
-                    @foreach ($listePresence as $presence)
+                    @foreach ($listePresence as $key => $presence)
                         <tr>
-                            <td>{{ $i++ }}</td>
+                            <td>{{ ++$key }}</td>
                             <td><img src="{{ asset('uploads/eleve/' . $presence->eleve->image_eleve) }}" alt="image"
                                     style="width: 44px; height: 44px; border-radius: 100%;" /></td>
                             <td>{{ $presence->eleve->first_name }}</td>
@@ -52,7 +51,8 @@
                             <td>{{ $presence->classe->section->name }}</td>
                             <td>{{ date('d-m-Y', strtotime($presence->created_at)) }}</td>
                             <td>
-                                <button class="btn btn-sm btn-info" wire:click="$toggle('showDiv')"><i class="fa fa-eye text-white"></i></button>
+                                <button class="btn btn-sm btn-info" wire:click="$toggle('showDiv')"><i
+                                        class="fa fa-eye text-white"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -61,32 +61,80 @@
             </table>
         </div>
         @if ($showDiv)
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Rapport Eleve</h1>
-                    <div class="row d-flex">
-                    <div class="col-3">
-                        Presence
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Mensuel</h1>
+                        <div class="row d-flex">
+                            <div class="col-3">
+                                Presence
+                                <div class="bg-success text-white text-center">
+                                    <span>6</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                Absence
+                                <div class="bg-danger text-white text-center">
+                                    <span>6</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-3">
-                        Absence
+                    <div class="col-md-6">
+                        <h1>Semestriel</h1>
+                        <div class="row d-flex">
+                            <div class="col-3">
+                                <span> Justifiés</span>
+                                <div class="bg-success text-white text-center">
+                                    <span class="text-center">2</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <span> Non justifiés</span>
+                                <div class="bg-danger text-white text-center">
+                                    <span>4</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-                <div class="col-md-6">
-                    <h1>Details ponctualités</h1>
-                    <div class="row d-flex">
-                    <div class="col-3">
-                        Justifiés
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row d-flex">
+                            <div class="col-3">
+                                <span>Derangement</span>
+                                <div class="bg-secondary text-white text-center">
+                                    <span>3</span>
+                                </div>
+                            </div>
+
+                        <div class="col-3">
+                            <span>Impolitesse</span>
+                            <div class="bg-info text-white text-center">
+                                <span>3</span>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-3">
-                        Non justifiés
                     </div>
-                </div>
+                    <div class="col-md-6">
+                        <div class="row d-flex">
+                            <div class="col-3">
+                                <span>Tricherie</span>
+                                <div class="bg-primary text-white text-center">
+                                    <span>3</span>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <span>Exclusion</span>
+                                <div class="bg-danger text-white text-center">
+                                    <span>3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
 </div>

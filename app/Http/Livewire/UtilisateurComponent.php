@@ -34,7 +34,7 @@ class UtilisateurComponent extends Component
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users,id'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'ecole_id' => ['numeric'],
-        'image_user' => ['required', 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']
+        'image_user' => ['required', 'max:2048']
     ];
 
     public function render()

@@ -7,13 +7,13 @@
 
 
     <div class="col-md-12">
-    	<h5 class="text-center">Nouveau un cours</h5>
+    	<h4 class="text-center text-uppercase">Nouveau un cours</h4>
     	<form action="" wire:submit.prevent="saveCourse" class="row">
 
     		<div class="form-group col-md-6">
     			<label for="">TITLE DU COURS
                 </label>
-    			<input type="text" wire:model="name" class="form-control form-control-sm">
+    			<input type="text" wire:model="name" class="form-control form-control-sm rounded-0">
 
                 <label for="principale">
                     Marque comme un cours Principal
@@ -29,7 +29,7 @@
 
              <div class="form-group col-md-6">
                 <label for="">CATEGORIE</label>
-                <select name="" id="" wire:model="category_id" class="form-control form-control-sm">
+                <select name="" id="" wire:model="category_id" class="form-control form-control-sm rounded-0">
                     <option value="">...........</option>
                     @foreach ($categories as $category)
                         {{-- expr --}}
@@ -43,21 +43,21 @@
 
     		<div class="form-group col-md-6">
     			<label for="">PONDERATION TJ TRIMESTRIELLE</label>
-    			<input type="number" min="0" wire:model="ponderation" class="form-control form-control-sm">
+    			<input type="number" min="0" wire:model="ponderation" class="form-control form-control-sm rounded-0">
                 @error('ponderation')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
     		</div>
             <div class="form-group col-md-6">
                 <label for="">PONDERATION COMPÉTENCE </label>
-                <input type="number" min="0" wire:model="ponderation_compentance" class="form-control form-control-sm">
+                <input type="number" min="0" wire:model="ponderation_compentance" class="form-control form-control-sm rounded-0">
                 @error('ponderation_compentance')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group col-md-6">
                 <label for="">PODERATION RESSOURCE / EXAMEN </label>
-                <input type="number" min="0" wire:model="ponderation_examen" class="form-control form-control-sm">
+                <input type="number" min="0" wire:model="ponderation_examen" class="form-control form-control-sm rounded-0">
                 @error('ponderation_examen')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -66,7 +66,7 @@
 
             <div class="form-group col-md-6">
                 <label for="credit">CREDIT / HS</label>
-                <input type="number" id="credit" wire:model="credit" value="0" class="form-control form-control-sm">
+                <input type="number" id="credit" wire:model="credit" value="0" class="form-control form-control-sm rounded-0">
                 @error('credit')
                 <p class="text-danger text-center"> {{ $message }}</p>
                 @enderror
@@ -74,7 +74,7 @@
 
     		<div class="form-group col-md-6">
     			<label for="">PROFESSEUR</label>
-    			<select name="" id="" wire:model="professeur_id" class="form-control form-control-sm">
+    			<select name="" id="" wire:model="professeur_id" class="form-control form-control-sm rounded-0">
     				<option value="">...........</option>
     				@foreach ($professeurs as $element)
     					{{-- expr --}}
@@ -88,7 +88,7 @@
     		</div>
     		<div class="form-group col-md-6">
     			<label for="">SECTION | NIVEAU</label>
-    			<select name="" id="" wire:model="level_id" class="form-control form-control-sm">
+    			<select name="" id="" wire:model="level_id" class="form-control form-control-sm rounded-0">
     				<option value="">...........</option>
     				@foreach ($levels as $element)
     					{{-- expr --}}

@@ -19,13 +19,13 @@
 
 		@if ($showForm)
 		{{-- expr --}}
-		<div class="offset-4 col-md-4">
+		<div class="container pt-5 border px-5 py-5  border-dark bg-white">
 
-			<h4>Ajouter un proffesseur</h4>
+			<h4 class="text-center text-uppercase">Ajouter un proffesseur</h4>
 			<form action="" wire:submit.prevent="saveProffesseur()">
 				<div class="form-group">
 					<label for="">Nom et prénom</label>
-					<input type="text" class="form-control" wire:model="name" name="">
+					<input type="text" class="form-control rounded-0" wire:model="name" name="">
 					@error('name')
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
@@ -33,7 +33,7 @@
 
 				<div class="form-group">
 					<label for="">Téléphone</label>
-					<input class="form-control" type="text" wire:model="telephone" name="">
+					<input class="form-control rounded-0" type="text" wire:model="telephone" name="">
 					@error('telephone')
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
@@ -41,21 +41,21 @@
 				</div>
 				<div class="form-group">
 					<label for="">Email</label>
-					<input class="form-control" type="email" wire:model="email" name="">
+					<input class="form-control rounded-0" type="email" wire:model="email" name="">
 					@error('email')
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
 				</div>
 				<div class="form-group">
 					<label for="">Mot de passe </label>
-					<input class="form-control" type="password" wire:model="password" name="">
+					<input class="form-control rounded-0" type="password" wire:model="password" name="">
 					@error('password')
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
 				</div>
 
 				<div class="form-group">
-					<button class="btn btn-info">Enregistrer</button>
+					<button class="btn btn-info w-100">Enregistrer</button>
 				</div>
 
 			</form>
