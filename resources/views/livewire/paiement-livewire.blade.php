@@ -7,17 +7,21 @@
             border: none
         }
     </style>
+    <h2 class="text-uppercase text-center">Cliquer sur l'opération à effectuer ou consulter</h2>
     <div class="row mb-3">
-        <div class="container d-flex justify-content-center align-items-center mt-4">
-            <div class="col-md-4">
-                <a href="{{ route('paiements.create') }}" class="btn btn-lg">Rapport des paimements </a>
-            </div>
-            <div class="col-md-4">
-                <button wire:click="showForm" class="btn btn-primary btn-lg"> Nouveau Paiement</button>
-            </div>
 
-            <div class="col-md-4">
-                <button wire:click="showEnOrdre" class="btn btn-primary btn-lg"> Historique de paiements</button>
+        <div class="container d-flex justify-content-center align-items-center mt-4">
+            <div class="col-md-3">
+                <a href="{{ route('paiements.create') }}" class="btn btn-lg">Rapport Paiement</a>
+            </div>
+            <div class="col-md-3">
+                <button wire:click="showForm" class="btn  btn-lg"> Nouveau Paiement</button>
+            </div>
+            <div class="col-md-3">
+                <button wire:click="$toggle('echeanceToggle')" class="btn btn-lg">Echéances Paiement</button>
+            </div>
+            <div class="col-md-3">
+                <button wire:click="showEnOrdre" class="btn btn-lg"> Historique Paiement</button>
             </div>
 
         </div>
@@ -228,7 +232,18 @@
                         <td>{{ $paiment->amount }}</td>
                         <td>{{ $paiment->trimestre }}</td>
                         <td>{{ $paiment->bordereau }}</td>
-                        <td>{{ $paiment->type_paiement }}</td>
+                        <td>
+                            @php
+                                 $type = json_decode($paiment->type_paiement)
+                            @endphp
+                            @if (!empty($type))
+
+                            @foreach ($type as $key => $typepaiement)
+                            {{ $typepaiement}}
+                            @endforeach
+
+                            @endif
+                        </td>
                         <td>{{ $paiment->created_at }}</td>
                         <td>
                             <button class="btn btn-sm btn-info"
@@ -241,11 +256,57 @@
             </tbody>
 
         </table>
-
+        <div class="d-flex float-right">
+            {{ $paiements->links() }}
+        </div>
     @endif
-    <div>
-        {{ $paiements->links() }}
+
+
+{{-- Debut echeance paiement --}}
+@if ($echeanceToggle)
+<div>
+    <div class="container pt-5 border px-5 py-5  border-dark bg-white mt-3">
+        <h4 class="text-center">Nouvelle écheance</h4>
+        <form wire:submit.prevent="saveEcheance">
+            <div class="form-group ">
+                <label for="section"> <strong> Section </strong></label>
+                <select class="form-control" wire:model="section_id">
+                    <option value="">--Selectionner--</option>
+                    @foreach ($sections as $section)
+                    <option value="{{$section->id}}">{{$section->name}}</option>
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="section"><strong>Nom écheance</strong></label>
+                <select class="form-control" wire:model="nom_echeance">
+                    <option value="">--Selectionner--</option>
+                    <option value="PREMIERE_TRIMESTRE">PREMIERE TRIMESTRE</option>
+                    <option value="DEUXIEME_TRIMESTRE">DEUXIEME TRIMESTRE</option>
+                    <option value="TROISIEME_TRIMESTRE">TROISIEME TRIMESTRE</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startdate"><strong>Date debut</strong></label>
+               <input type="date" class="form-control" wire:model="startDate">
+            </div>
+            <div class="form-group">
+                <label for="endDate"><strong>Date Fin</strong></label>
+               <input type="date" class="form-control" wire:model="endDate">
+            </div>
+            <div class="form-group">
+                <label for="amount"><strong>Montant</strong></label>
+                <input type="number" class="form-control" wire:model="amount">
+            </div>
+            <button class="btn btn-sm btn-info">Enregistrer</button>
+        </form>
+
     </div>
+</div>
+@endif
+{{-- Fin echeance paiement --}}
+
 
 
 </div>

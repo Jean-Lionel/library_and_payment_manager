@@ -118,7 +118,7 @@
                 <tbody>
                     @foreach ($paiements as $key => $paiement)
                         {{-- expr --}}
-                        @if ( $paiement[0])
+                        @if ( isset($paiement[0]))
                             {{-- expr --}}
                              <tr>
                             <td colspan="5" class="bg-info text-center">

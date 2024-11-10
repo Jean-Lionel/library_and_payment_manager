@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\AnneScolaire;
 use App\Models\Compte;
 use App\Models\Paiment;
+use App\Models\Section;
+use App\Models\EcheancePaiement;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -33,6 +35,14 @@ class PaiementLivewire extends Component
 	public $facture;
 	public $ordre=false;
 	public $showFacture = false;
+    public $echeanceToggle = false;
+
+    public $section_id;
+    public $nom_echeance;
+    public $startDate;
+    public $endDate;
+    public $amount;
+
 
 	public function mount()
 	{
@@ -49,6 +59,7 @@ class PaiementLivewire extends Component
 	public function render()
 	{
 		$s = $this->search;
+        $sections = Section::all();
 		$this->paiements = Paiment::with('eleve')
         ->where(function($q) use ($s){
 			if($s != ""){
@@ -57,13 +68,14 @@ class PaiementLivewire extends Component
                 $q->orwhere('type_paiement', 'like', '%'. $s .'%');
                 $q->orwhere('bordereau', 'like', '%'. $s .'%');
 			}
-		})->sortable()->latest()->paginate(20);
+		})->sortable()->latest()->paginate(10);
 		$this->anneScolaire = AnneScolaire::latest()->take(1)->first();
 
 
 		return view('livewire.paiement-livewire',
 		[
-			'paiements' => $this->paiements
+			'paiements' => $this->paiements,
+            'sections' => $sections
 			]
 
 		);
@@ -73,6 +85,27 @@ class PaiementLivewire extends Component
 		$this->showFormulaire = !$this->showFormulaire;
 		$this->ordre=false;
 	}
+
+    public function openEcheance()
+    {
+        $this->echeanceToggle =! $this->echeanceToggle;
+    }
+
+    public function saveEcheance()
+    {
+        // dd('good');
+        EcheancePaiement::create([
+            'section_id' => $this->section_id,
+            'nom_echeance' => $this->nom_echeance,
+            'startDate' => $this->startDate,
+            'endDate' => $this->endDate,
+            'amount' => $this->amount,
+            'user_id' => auth()->user()->id,
+            'ecole_id' => auth()->user()->ecole_id
+        ]);
+        $this->dispatchBrowserEvent('success', ['message' => 'Enregistrement effectué avec succès']);
+		$this->resetInput();
+    }
 
 	public function updatedCompteName($compte){
 

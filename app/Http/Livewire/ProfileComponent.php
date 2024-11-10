@@ -22,12 +22,9 @@ class ProfileComponent extends Component
         if ($user->isParent()) {
             // code...
             $eleves = $parent->enfant;
-
             foreach ($eleves as $key => $value) {
-
                $paiements[] = $value->paiements;
             }
-
         }
 
         return view('livewire.profile-component',[

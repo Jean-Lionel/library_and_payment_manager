@@ -18,6 +18,7 @@ class CreateComptesTable extends Migration
             $table->foreignId('eleve_id');
             $table->string('name');
             $table->double('montant', 64,2);
+            $table->integer('account_number');
             $table->timestamps();
         });
     }

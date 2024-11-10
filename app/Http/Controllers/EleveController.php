@@ -79,6 +79,9 @@ class EleveController extends Controller
         try {
             DB::beginTransaction();
              $anne_scolaire = AnneScolaire::latest()->firstOrFail();
+
+             $number = mt_rand(10000,99999);
+            $random = $number;
            //  dd($anne_scolaire);
              $eleve = Eleve::create(
                 [
@@ -96,14 +99,24 @@ class EleveController extends Controller
                 'name' => 'SE-'.$eleve->id,
                 'eleve_id' => $eleve->id,
                 'montant' => 0,
+               'account_number' => $random
 
              ]);
-
-            Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
-
+             $notification = array(
+                'message' => 'Enregistrement effecté avec succes',
+                'alert-type' => 'success'
+            );
+            // Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
+            return redirect()->back()->with($notification);
             DB::commit();
 
         } catch (\Exception $e) {
+            $notification = array(
+                'message' => 'Opération échouée',
+                'alert-type' => 'error'
+            );
+            // Session::flash('success', 'Enregistrement réussi  COMPTE NUMERO :  '. $compte->name ?? "");
+            return redirect()->back()->with($notification);
             dd($e->getMessage());
             DB::rollback();
         }
