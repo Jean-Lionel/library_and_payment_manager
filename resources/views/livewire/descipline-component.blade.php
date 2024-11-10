@@ -69,7 +69,9 @@
                         <td>{{ $eleve->sexe }}</td>
                         <td>{{ $eleve->address }}</td>
                         <td class="d-flex ">
-                            <button wire:click.prevent="Retard({{ $eleve->id }})"
+                            <a href="{{ route('punition_create', $eleve->id)}}" class="btn btn-link"  > Punition</a>
+                           
+                            <!-- <button wire:click.prevent="Retard({{ $eleve->id }})"
                                 class="btn-sm btn-info mr-2">Retard</button>
                             <button wire:click.prevent="Derangement({{ $eleve->id }})"
                                 class="btn-primary btn-sm mr-2">Derangeur</button>
@@ -82,7 +84,7 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exclusion" wire:click.prevent='getEleveById({{$eleve->id}})'>
                                 Exclusion
-                            </button>
+                            </button> -->
                         </td>
                     </tr>
                 @endforeach

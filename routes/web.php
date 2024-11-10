@@ -33,7 +33,9 @@ use App\Http\Livewire\HoraireComponent;
 use App\Http\Livewire\RepetiteurComponent;
 use App\Http\Livewire\DesciplineComponent;
 use App\Http\Controllers\HoraireController;
+use App\Http\Controllers\PunitionController;
 use App\Http\Controllers\RepetiteurController;
+use App\Models\Punition;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +124,7 @@ Route::middleware('auth')->group(function(){
     Route::view('discipline', 'discipline.create')->name('discipline');
     Route::view('communique', 'communiquer.create')->name('communiquer');
     Route::view('/students', 'pdf.students')->name('students');
+    Route::get('punition_create/{id}', [PunitionController::class , 'create'])->name('punition_create');
 
 });
 
