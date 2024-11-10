@@ -1,10 +1,29 @@
 models:
-  TypeEvaluation:
-    name: string:200
-    
-controllers:
-  TypeEvaluation:
-    index:
-      query: all
-    
+  TypePunition:
+    nom: string unique
+    description: text nullable
+    point: double nullable
+    autre_pinution : string nullable
+    timestamps: true
+
+  Punition:
+    type_punition_id: foreignId:type_punitions
+    description: text nullable
+    date_punition: date
+    statut: string default:en_cours
+    eleve_id: foreignId:eleves
+    enseignant_id: foreignId:users nullable
+    user_id: foreignId:users
+    timestamps: true
+
+relations:
+  Punition:
+    belongsTo:
+      type_punition: TypePunition
+      eleve: Eleve
+      enseignant: User
+
+  TypePunition:
+    hasMany:
+      punitions: Punition
 

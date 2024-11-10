@@ -1,11 +1,10 @@
 created:
-    - app/Http/Controllers/TypeEvaluationController.php
-    - database/factories/TypeEvaluationFactory.php
-    - database/migrations/2022_01_27_164811_create_type_evaluations_table.php
-    - app/Models/TypeEvaluation.php
-    - tests/Feature/Http/Controllers/TypeEvaluationControllerTest.php
-updated:
-    - routes/web.php
+    - database/factories/TypePunitionFactory.php
+    - database/factories/PunitionFactory.php
+    - database/migrations/2024_11_10_094838_create_type_punitions_table.php
+    - database/migrations/2024_11_10_094839_create_punitions_table.php
+    - app/Models/TypePunition.php
+    - app/Models/Punition.php
 models:
     AnneScolaire: { name: string }
     Auteur: { name: string, pay_orgine: 'string nullable' }
@@ -44,3 +43,5 @@ models:
     Level: { name: 'string:400', section_id: 'id foreign:sections' }
     Vainquer: { firstName: 'string:400', lastName: 'string:400', age: integer }
     TypeEvaluation: { name: 'string:200' }
+    TypePunition: { nom: 'string unique', description: 'text nullable', point: 'double nullable', autre_pinution: 'string nullable', timestamps: timestamps }
+    Punition: { type_punition_id: 'foreignId:type_punitions', description: 'text nullable', date_punition: date, statut: 'string default:en_cours', eleve_id: 'foreignId:eleves', enseignant_id: 'foreignId:users nullable', user_id: 'foreignId:users', timestamps: timestamps }
